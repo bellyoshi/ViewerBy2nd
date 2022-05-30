@@ -21,7 +21,7 @@ namespace ClassLibrary1
 
         public void setImage(System.Drawing.Bitmap image)
         {
-            throw new NotImplementedException();
+            pictureBox1.Image = image;
         }
     }
 }
