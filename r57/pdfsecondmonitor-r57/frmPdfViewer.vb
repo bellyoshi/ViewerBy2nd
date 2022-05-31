@@ -112,8 +112,10 @@ Public Class frmPdfViewer
 
     Private _image As Image
     Public Function GetImage() As Bitmap
+        If _image Is Nothing Then
+            Return New Bitmap(0, 0)
+        End If
         Dim img As New Bitmap(_image)
-
         Return img
     End Function
     Private Sub DisplayPage()
@@ -145,11 +147,13 @@ Public Class frmPdfViewer
     End Function
 
     Private Sub Render(renderSize As Size)
-        _image = GetImage(renderSize)
-        DispImage(_image)
+        Dim img = GetImage(renderSize)
+
+        DispImage(img)
     End Sub
 
     Private Sub DispImage(img As Image)
+        _image = img
         Dim oldImage = PictureBox1.Image
         PictureBox1.Image = img
         If oldImage IsNot Nothing Then

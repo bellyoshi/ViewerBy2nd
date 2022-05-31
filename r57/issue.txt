@@ -1,0 +1,134 @@
+﻿半ページごとに移動した後
+ウインドウ幅設定にしたときに落ちる。
+
+Just-In-Time (JIT) デバッグを呼び出すための詳細については、
+ダイアログ ボックスではなく、このメッセージの最後を参照してください。
+
+************** 例外テキスト **************
+System.ArgumentException: 使用されたパラメーターが有効ではありません。
+   場所 System.Drawing.Image.get_Width()
+   場所 System.Drawing.Bitmap..ctor(Image original)
+   場所 pdfsecondmonitor.frmPdfViewer.GetImage() 場所 C:\Users\bellm\source\repos\ViewerBy2nd\r57\pdfsecondmonitor-r57\frmPdfViewer.vb:行 115
+   場所 pdfsecondmonitor.ctlPdf.VScrollBar1Init() 場所 C:\Users\bellm\source\repos\ViewerBy2nd\r57\pdfsecondmonitor-r57\ctlPdf.vb:行 103
+   場所 pdfsecondmonitor.ctlPdf.btnSetWindow_Click(Object sender, EventArgs e) 場所 C:\Users\bellm\source\repos\ViewerBy2nd\r57\pdfsecondmonitor-r57\ctlPdf.vb:行 107
+   場所 System.Windows.Forms.Control.OnClick(EventArgs e)
+   場所 System.Windows.Forms.Button.OnClick(EventArgs e)
+   場所 System.Windows.Forms.Button.OnMouseUp(MouseEventArgs mevent)
+   場所 System.Windows.Forms.Control.WmMouseUp(Message& m, MouseButtons button, Int32 clicks)
+   場所 System.Windows.Forms.Control.WndProc(Message& m)
+   場所 System.Windows.Forms.ButtonBase.WndProc(Message& m)
+   場所 System.Windows.Forms.Button.WndProc(Message& m)
+   場所 System.Windows.Forms.Control.ControlNativeWindow.OnMessage(Message& m)
+   場所 System.Windows.Forms.Control.ControlNativeWindow.WndProc(Message& m)
+   場所 System.Windows.Forms.NativeWindow.Callback(IntPtr hWnd, Int32 msg, IntPtr wparam, IntPtr lparam)
+
+
+************** 読み込まれたアセンブリ **************
+mscorlib
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4510.0 built by: NET48REL1LAST_B
+    コードベース:file:///C:/Windows/Microsoft.NET/Framework/v4.0.30319/mscorlib.dll
+----------------------------------------
+pdfsecondmonitor
+    アセンブリ バージョン:1.0.0.0
+    Win32 バージョン:1.0.0.0
+    コードベース:file:///C:/Users/bellm/Downloads/pdfsecondmonitor.1.08%20(1)/pdfsecondmonitor.exe
+----------------------------------------
+Microsoft.VisualBasic
+    アセンブリ バージョン:10.0.0.0
+    Win32 バージョン:14.8.4161.0 built by: NET48REL1
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/Microsoft.VisualBasic/v4.0_10.0.0.0__b03f5f7f11d50a3a/Microsoft.VisualBasic.dll
+----------------------------------------
+System.Windows.Forms
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4488.0 built by: NET48REL1LAST_C
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms/v4.0_4.0.0.0__b77a5c561934e089/System.Windows.Forms.dll
+----------------------------------------
+System
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4488.0 built by: NET48REL1LAST_C
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System/v4.0_4.0.0.0__b77a5c561934e089/System.dll
+----------------------------------------
+System.Drawing
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4395.0 built by: NET48REL1LAST_B
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Drawing/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Drawing.dll
+----------------------------------------
+System.Configuration
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4341.0 built by: NET48REL1LAST_C
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Configuration/v4.0_4.0.0.0__b03f5f7f11d50a3a/System.Configuration.dll
+----------------------------------------
+System.Core
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4470.0 built by: NET48REL1LAST_C
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Core/v4.0_4.0.0.0__b77a5c561934e089/System.Core.dll
+----------------------------------------
+System.Xml
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4161.0 built by: NET48REL1
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Xml/v4.0_4.0.0.0__b77a5c561934e089/System.Xml.dll
+----------------------------------------
+System.Runtime.Remoting
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4161.0 built by: NET48REL1
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Runtime.Remoting/v4.0_4.0.0.0__b77a5c561934e089/System.Runtime.Remoting.dll
+----------------------------------------
+Accessibility
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4161.0 built by: NET48REL1
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/Accessibility/v4.0_4.0.0.0__b03f5f7f11d50a3a/Accessibility.dll
+----------------------------------------
+Microsoft.GeneratedCode
+    アセンブリ バージョン:1.0.0.0
+    Win32 バージョン:4.8.4161.0 built by: NET48REL1
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Xml/v4.0_4.0.0.0__b77a5c561934e089/System.Xml.dll
+----------------------------------------
+AxInterop.WMPLib
+    アセンブリ バージョン:1.0.0.0
+    Win32 バージョン:1.0.0.0
+    コードベース:file:///C:/Users/bellm/Downloads/pdfsecondmonitor.1.08%20(1)/AxInterop.WMPLib.DLL
+----------------------------------------
+Interop.WMPLib
+    アセンブリ バージョン:1.0.0.0
+    Win32 バージョン:1.0.0.0
+    コードベース:file:///C:/Users/bellm/Downloads/pdfsecondmonitor.1.08%20(1)/Interop.WMPLib.DLL
+----------------------------------------
+PdfiumViewer
+    アセンブリ バージョン:2.13.0.0
+    Win32 バージョン:2.13.0.0
+    コードベース:file:///C:/Users/bellm/Downloads/pdfsecondmonitor.1.08%20(1)/PdfiumViewer.DLL
+----------------------------------------
+System.Drawing.resources
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4161.0 built by: NET48REL1
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Drawing.resources/v4.0_4.0.0.0_ja_b03f5f7f11d50a3a/System.Drawing.resources.dll
+----------------------------------------
+System.Windows.Forms.resources
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4161.0 built by: NET48REL1
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System.Windows.Forms.resources/v4.0_4.0.0.0_ja_b77a5c561934e089/System.Windows.Forms.resources.dll
+----------------------------------------
+mscorlib.resources
+    アセンブリ バージョン:4.0.0.0
+    Win32 バージョン:4.8.4161.0 built by: NET48REL1
+    コードベース:file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/mscorlib.resources/v4.0_4.0.0.0_ja_b77a5c561934e089/mscorlib.resources.dll
+----------------------------------------
+
+************** JIT デバッグ **************
+Just-In-Time (JIT) デバッグを有効にするには、このアプリケーション、
+またはコンピューター (machine.config) の構成ファイルの jitDebugging 
+値を system.windows.forms セクションで設定しなければなりません。
+アプリケーションはまた、デバッグを有効にしてコンパイルされなければ
+なりません。
+
+例:
+
+<configuration>
+    <system.windows.forms jitDebugging="true" />
+</configuration>
+
+JIT デバッグが有効なときは、このダイアログ ボックスで処理するよりも、
+ハンドルされていない例外はすべてコンピューターに登録された
+JIT デバッガーに設定されなければなりません。
+
