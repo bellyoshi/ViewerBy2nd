@@ -31,15 +31,9 @@
         Image = bmp
         If flip = RotateFlipType.Rotate180FlipNone OrElse
                 flip = RotateFlipType.RotateNoneFlipNone Then
-            imageH = bmp.Height
-            ImageW = bmp.Width
-        Else
-            imageH = bmp.Height
-            ImageW = bmp.Width
         End If
     End Sub
-    Private imageH As Integer
-    Private ImageW As Integer
+
 
 
 
@@ -101,7 +95,7 @@
 
     Private Function GetSetWinImageHeight() As Double
         Dim pbSize = _pictureBox.Size
-        Return pbSize.Height / pbSize.Width * ImageW
+        Return pbSize.Height / pbSize.Width * Image.Width
     End Function
 
     Private Sub DispSetWindow()
@@ -109,12 +103,12 @@
             Exit Sub
         End If
         Dim ImageY As Integer
-        If VScrollBar1.Value + GetSetWinImageHeight() > imageH Then
-            ImageY = imageH - GetSetWinImageHeight()
+        If VScrollBar1.Value + GetSetWinImageHeight() > Image.Height Then
+            ImageY = Image.Height - GetSetWinImageHeight()
         Else
             ImageY = VScrollBar1.Value
         End If
-        Dim rect = New Rectangle(0, ImageY, ImageW, GetSetWinImageHeight())
+        Dim rect = New Rectangle(0, ImageY, Image.Width, GetSetWinImageHeight())
         Dim bmpNew As Bitmap = Image.Clone(rect, Image.PixelFormat)
         _pictureBox.Image = bmpNew
 
