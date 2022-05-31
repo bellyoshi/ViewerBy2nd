@@ -28,13 +28,14 @@ Partial Class CtlImage
         Me.btnRotate0 = New System.Windows.Forms.Button()
         Me.btnSetWindow = New System.Windows.Forms.Button()
         Me.pbThumbnail = New System.Windows.Forms.PictureBox()
+        Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnRotate180
         '
         Me.btnRotate180.Location = New System.Drawing.Point(66, 63)
-        Me.btnRotate180.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnRotate180.Margin = New System.Windows.Forms.Padding(2)
         Me.btnRotate180.Name = "btnRotate180"
         Me.btnRotate180.Size = New System.Drawing.Size(68, 41)
         Me.btnRotate180.TabIndex = 0
@@ -44,7 +45,7 @@ Partial Class CtlImage
         'btnRotateM90
         '
         Me.btnRotateM90.Location = New System.Drawing.Point(3, 45)
-        Me.btnRotateM90.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnRotateM90.Margin = New System.Windows.Forms.Padding(2)
         Me.btnRotateM90.Name = "btnRotateM90"
         Me.btnRotateM90.Size = New System.Drawing.Size(59, 41)
         Me.btnRotateM90.TabIndex = 0
@@ -54,7 +55,7 @@ Partial Class CtlImage
         'btnRotate90
         '
         Me.btnRotate90.Location = New System.Drawing.Point(138, 45)
-        Me.btnRotate90.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnRotate90.Margin = New System.Windows.Forms.Padding(2)
         Me.btnRotate90.Name = "btnRotate90"
         Me.btnRotate90.Size = New System.Drawing.Size(60, 41)
         Me.btnRotate90.TabIndex = 0
@@ -64,7 +65,7 @@ Partial Class CtlImage
         'btnRotate0
         '
         Me.btnRotate0.Location = New System.Drawing.Point(66, 17)
-        Me.btnRotate0.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnRotate0.Margin = New System.Windows.Forms.Padding(2)
         Me.btnRotate0.Name = "btnRotate0"
         Me.btnRotate0.Size = New System.Drawing.Size(68, 41)
         Me.btnRotate0.TabIndex = 0
@@ -81,26 +82,34 @@ Partial Class CtlImage
         Me.btnSetWindow.Text = "ウィンドウ幅に合わせる"
         Me.btnSetWindow.UseVisualStyleBackColor = True
         '
-        'PictureBox1
+        'pbThumbnail
         '
         Me.pbThumbnail.Location = New System.Drawing.Point(202, 17)
         Me.pbThumbnail.Margin = New System.Windows.Forms.Padding(2)
-        Me.pbThumbnail.Name = "PictureBox1"
+        Me.pbThumbnail.Name = "pbThumbnail"
         Me.pbThumbnail.Size = New System.Drawing.Size(320, 240)
         Me.pbThumbnail.TabIndex = 30
         Me.pbThumbnail.TabStop = False
+        '
+        'VScrollBar1
+        '
+        Me.VScrollBar1.Location = New System.Drawing.Point(524, 17)
+        Me.VScrollBar1.Name = "VScrollBar1"
+        Me.VScrollBar1.Size = New System.Drawing.Size(23, 240)
+        Me.VScrollBar1.TabIndex = 31
         '
         'CtlImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.VScrollBar1)
         Me.Controls.Add(Me.pbThumbnail)
         Me.Controls.Add(Me.btnSetWindow)
         Me.Controls.Add(Me.btnRotate90)
         Me.Controls.Add(Me.btnRotate0)
         Me.Controls.Add(Me.btnRotateM90)
         Me.Controls.Add(Me.btnRotate180)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "CtlImage"
         Me.Size = New System.Drawing.Size(558, 341)
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).EndInit()
@@ -114,4 +123,5 @@ Partial Class CtlImage
     Friend WithEvents btnRotate0 As Button
     Friend WithEvents btnSetWindow As Button
     Friend WithEvents pbThumbnail As PictureBox
+    Friend WithEvents VScrollBar1 As VScrollBar
 End Class

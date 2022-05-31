@@ -63,4 +63,22 @@
 
     End Sub
 
+    Private isSetWindow = False
+    Private ImageY = 0
+
+    Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
+        isSetWindow = True
+        ImageY = 0
+        DispSetWindow()
+    End Sub
+
+    Private Sub DispSetWindow()
+        Dim pbSize = _pictureBox.Size
+        Dim rect = New Rectangle(0, ImageY, Image.Width, pbSize.Height / pbSize.Width * Image.Width)
+        Dim bmpNew As Bitmap = Image.Clone(rect, Image.PixelFormat)
+        _pictureBox.Image = bmpNew
+
+    End Sub
+
+
 End Class
