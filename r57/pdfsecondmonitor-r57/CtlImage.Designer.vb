@@ -111,7 +111,7 @@ Partial Class CtlImage
         Me.Controls.Add(Me.btnRotate180)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "CtlImage"
-        Me.Size = New System.Drawing.Size(558, 341)
+        Me.Size = New System.Drawing.Size(601, 341)
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
