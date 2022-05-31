@@ -54,7 +54,7 @@
         player.Ctlcontrols.pause()
     End Sub
 
-    Private trackBarSeek_Scrolled = False
+    Private trackBarSeek_Scrolled As Boolean = False
     Private Sub Seek(sender As Object, e As EventArgs) Handles Timer1.Tick
         If player Is Nothing Then
             Exit Sub
@@ -69,8 +69,8 @@
                 End If
                 trackBarSeek_Scrolled = False
             Else
-                trackBarSeek.Maximum = player.Ctlcontrols.currentItem.duration * 100
-                trackBarSeek.Value = player.Ctlcontrols.currentPosition * 100
+                trackBarSeek.Maximum = CType(player.Ctlcontrols.currentItem.duration * 100, Integer)
+                trackBarSeek.Value = CType(player.Ctlcontrols.currentPosition * 100, Integer)
             End If
 
         Catch ex As Exception

@@ -4,17 +4,17 @@
     ''' <summary>
     ''' 開ける動画の拡張子
     ''' </summary>
-    Private movieExts = {"avi", "mpeg", "mp4", "wmv", "mov"}
+    Private movieExts As String() = {"avi", "mpeg", "mp4", "wmv", "mov"}
 
     ''' <summary>
     ''' 開ける画像の拡張子
     ''' </summary>
-    Private ImageExts = {"jpeg", "jpg", "bmp", "png", "gif", "tiff", "tif"}
+    Private ImageExts As String() = {"jpeg", "jpg", "bmp", "png", "gif", "tiff", "tif"}
 
     ''' <summary>
     ''' PDFの拡張子
     ''' </summary>
-    Private PDFExts = {"pdf"}
+    Private PDFExts As String() = {"pdf"}
 #End Region
 
 #Region "初期処理"
@@ -84,7 +84,7 @@
         My.Settings.Save()
 
         Dim fvinfos As New List(Of FileViewParam)
-        For Each info In lstPDFFiles.Items
+        For Each info As FileViewParam In lstPDFFiles.Items
             fvinfos.Add(info)
         Next
         Dim serializer As New System.Xml.Serialization.XmlSerializer(
@@ -164,7 +164,7 @@
             Exit Sub
         End If
         Dim fileviewinfo As FileViewParam
-        fileviewinfo = lstPDFFiles.SelectedItem
+        fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
         lstPDFFiles.Items.Remove(fileviewinfo)
     End Sub
 
@@ -174,7 +174,7 @@
 
     Private Sub lstFiles_Click(sender As Object, e As EventArgs) Handles lstPDFFiles.Click
         Dim fileviewinfo As FileViewParam
-        fileviewinfo = lstPDFFiles.SelectedItem
+        fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
         If fileviewinfo Is Nothing Then
             Exit Sub
         End If
@@ -218,15 +218,15 @@
     End Function
 
 
-    Private Function IsPDFExt(ext) As Boolean
+    Private Function IsPDFExt(ext As String) As Boolean
         Return IsContain(ext, PDFExts)
     End Function
 
-    Private Function IsImageExt(ext) As Boolean
+    Private Function IsImageExt(ext As String) As Boolean
         Return IsContain(ext, ImageExts)
     End Function
 
-    Private Function IsMovieExt(ext) As Boolean
+    Private Function IsMovieExt(ext As String) As Boolean
         Return IsContain(ext, movieExts)
     End Function
 

@@ -77,10 +77,9 @@
 
     End Sub
 
-    Private isSetWindow = False
 
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
-        isSetWindow = True
+
         VScrollBar1Init()
         DispSetWindow()
     End Sub
@@ -93,9 +92,9 @@
     End Sub
 
 
-    Private Function GetSetWinImageHeight() As Double
+    Private Function GetSetWinImageHeight() As Integer
         Dim pbSize = _pictureBox.Size
-        Return pbSize.Height / pbSize.Width * Image.Width
+        Return CType(pbSize.Height / pbSize.Width * Image.Width, Integer)
     End Function
 
     Private Sub DispSetWindow()
@@ -104,7 +103,7 @@
         End If
         Dim ImageY As Integer
         If VScrollBar1.Value + GetSetWinImageHeight() > Image.Height Then
-            ImageY = Image.Height - GetSetWinImageHeight()
+            ImageY = CType(Image.Height - GetSetWinImageHeight(), Integer)
         Else
             ImageY = VScrollBar1.Value
         End If

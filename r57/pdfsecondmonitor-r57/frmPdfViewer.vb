@@ -38,7 +38,7 @@ Public Class frmPdfViewer
         Set(value As Boolean)
             _isHalf = value
             If Not _isHalf Then
-                buttomInPage = 0.0
+                buttomInPage = 0.0D
             End If
         End Set
         Get
@@ -49,10 +49,10 @@ Public Class frmPdfViewer
 
 
 
-        buttomInPage += 0.5
-        If buttomInPage = 1.5 Then
+        buttomInPage += 0.5D
+        If buttomInPage = 1.5D Then
             NextPage()
-            buttomInPage = 0.5
+            buttomInPage = 0.5D
         End If
         isHalf = True
         DisplayHalfPage()
@@ -63,12 +63,12 @@ Public Class frmPdfViewer
         'If Not isHalf Then
         '    page -= 1
         'End If
-        If page = 0 AndAlso buttomInPage <= 0.5 Then
+        If page = 0D AndAlso buttomInPage <= 0.5D Then
             Exit Sub
         End If
-        buttomInPage -= 0.5
-        If buttomInPage <= 0.0 Then
-            buttomInPage = 1.0
+        buttomInPage -= 0.5D
+        If buttomInPage <= 0.0D Then
+            buttomInPage = 1D
             page -= 1
 
         End If
@@ -99,15 +99,22 @@ Public Class frmPdfViewer
         Dim canvas As New Bitmap(width, height)
         Using g As Graphics = Graphics.FromImage(canvas)
             Dim img = GetImage(renderSize)
-            Dim y = renderSize.Height * (buttomInPage - 0.5)
+            Dim y = CType(renderSize.Height * (buttomInPage - 0.5), Integer)
             Dim srcRect As New Rectangle(0, y, width, height)
             Dim desRect As New Rectangle(0, 0, srcRect.Width, srcRect.Height)
             g.DrawImage(img, desRect, srcRect, GraphicsUnit.Pixel)
         End Using
         DispImage(canvas)
     End Sub
-    Private Function GetImage(renderSize As Size)
+    Private Function GetImage(renderSize As Size) As Image
         Return pdfDoc.Render(page, renderSize.Width, renderSize.Height, 96, 96, False)
+    End Function
+
+    Private _image As Image
+    Public Function GetImage() As Bitmap
+        Dim img As New Bitmap(_image)
+
+        Return img
     End Function
     Private Sub DisplayPage()
         If (page >= pdfDoc.PageCount) Then
@@ -118,11 +125,11 @@ Public Class frmPdfViewer
         If renderSize Is Nothing Then
             Return
         End If
-        Render(renderSize)
+        Render(renderSize.Value)
     End Sub
 
     Private Function GetRenderSize(pdfSize As SizeF) As Size?
-        Dim renderSize = New Size(PictureBox1.Size)
+        Dim renderSize = New Size(PictureBox1.Size.Width, PictureBox1.Size.Height)
         Dim pdfWdivH = pdfSize.Width / pdfSize.Height ' // pdfの縦横比
         Dim boxWdivH = PictureBox1.Width / PictureBox1.Height '  // コントロールの縦横比
         If (boxWdivH > 10) Then ' 落ちないよう
@@ -130,16 +137,16 @@ Public Class frmPdfViewer
         End If
         If (pdfWdivH < boxWdivH) Then
             ' フォーム内にImageを当てはめる判定                    {
-            renderSize.Width = PictureBox1.Height * pdfWdivH
+            renderSize.Width = CType(PictureBox1.Height * pdfWdivH, Integer)
         Else
-            renderSize.Height = PictureBox1.Width / pdfWdivH
+            renderSize.Height = CType(PictureBox1.Width / pdfWdivH, Integer)
         End If
         Return renderSize
     End Function
 
     Private Sub Render(renderSize As Size)
-        Dim img = GetImage(renderSize)
-        DispImage(img)
+        _image = GetImage(renderSize)
+        DispImage(_image)
     End Sub
 
     Private Sub DispImage(img As Image)
