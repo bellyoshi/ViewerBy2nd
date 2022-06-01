@@ -105,7 +105,7 @@
         If Image Is Nothing Then
             Exit Sub
         End If
-        If Not ImageModule.CanSetWindowWidthRate(Image.Size, _pictureBox.Size) Then
+        If Not SetWinWidthModule.CanSetWindowWidthRate(Image.Size, _pictureBox.Size) Then
             Exit Sub
         End If
 

@@ -1,4 +1,5 @@
-﻿Public Module ImageModule
+﻿'ウインドウ幅に合わせる機能の提供
+Public Module SetWinWidthModule
     Public Function CanSetWindowWidthRate(imageSize, pictureBoxSize) As Boolean
         Dim imageRate = GetWidthHeightRate(imageSize)
         Dim pbRate = GetWidthHeightRate(pictureBoxSize)
