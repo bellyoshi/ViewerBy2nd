@@ -97,10 +97,18 @@
         Return CType(pbSize.Height / pbSize.Width * Image.Width, Integer)
     End Function
 
+
+
+
+
     Private Sub DispSetWindow()
         If Image Is Nothing Then
             Exit Sub
         End If
+        If Not ImageModule.CanSetWindowWidthRate(Image.Size, _pictureBox.Size) Then
+            Exit Sub
+        End If
+
         Dim ImageY As Integer
         If VScrollBar1.Value + GetSetWinImageHeight() > Image.Height Then
             ImageY = CType(Image.Height - GetSetWinImageHeight(), Integer)

@@ -79,6 +79,9 @@
         If GetImage() Is Nothing Then
             Exit Sub
         End If
+        If Not ImageModule.CanSetWindowWidthRate(GetImage().Size, _picturebox.Size) Then
+            Exit Sub
+        End If
         Dim ImageY As Integer
         If VScrollBar1.Value + GetSetWinImageHeight() > GetImage().Height Then
             ImageY = GetImage.Height - GetSetWinImageHeight()
