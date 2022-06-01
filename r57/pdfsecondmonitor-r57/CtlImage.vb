@@ -68,7 +68,7 @@
         Rotate(RotateFlipType.RotateNoneFlipNone)
         _pictureBox.SizeMode = PictureBoxSizeMode.Zoom 'サイズ調整
 
-
+        SetWinWidthModule = New SetWinWidthModule(_pictureBox, pbThumbnail, VScrollBar1)
     End Sub
 
     Public Sub ControlEnabled()
@@ -81,7 +81,7 @@
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
 
         VScrollBar1Init()
-        DispSetWindow()
+        SetWinWidthModule.DispSetWindow()
     End Sub
 
     Private Sub VScrollBar1Init()
@@ -92,41 +92,19 @@
     End Sub
 
 
-    Private Function GetSetWinImageHeight() As Integer
-        Dim pbSize = _pictureBox.Size
-        Return CType(pbSize.Height / pbSize.Width * Image.Width, Integer)
-    End Function
 
 
 
 
 
-    Private Sub DispSetWindow()
-        If Image Is Nothing Then
-            Exit Sub
-        End If
-        If Not SetWinWidthModule.CanSetWindowWidthRate(Image.Size, _pictureBox.Size) Then
-            Exit Sub
-        End If
-
-        Dim ImageY As Integer
-        If VScrollBar1.Value + GetSetWinImageHeight() > Image.Height Then
-            ImageY = CType(Image.Height - GetSetWinImageHeight(), Integer)
-        Else
-            ImageY = VScrollBar1.Value
-        End If
-        Dim rect = New Rectangle(0, ImageY, Image.Width, GetSetWinImageHeight())
-        Dim bmpNew As Bitmap = Image.Clone(rect, Image.PixelFormat)
-        _pictureBox.Image = bmpNew
 
 
-
-
-    End Sub
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
 
-
-        DispSetWindow()
+        SetWinWidthModule.DispSetWindow()
     End Sub
+
+    Private SetWinWidthModule As SetWinWidthModule
+
 End Class

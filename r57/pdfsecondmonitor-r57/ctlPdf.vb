@@ -59,6 +59,7 @@
         End If
         _viewer = _dispacher.ShowPdfViewer()
         _picturebox = _viewer.PictureBox1
+        _setwinWidth = New SetWinWidthModule(_picturebox, pbThumbnail, VScrollBar1)
         _viewer.OpenFile(f.FileName)
         SetImage()
     End Sub
@@ -75,30 +76,12 @@
         Dim pbSize = _picturebox.Size
         Return CType(pbSize.Height / pbSize.Width * GetImage().Width, Integer)
     End Function
-    Private Sub DispSetWindow()
-        If GetImage() Is Nothing Then
-            Exit Sub
-        End If
-        If Not SetWinWidthModule.CanSetWindowWidthRate(GetImage().Size, _picturebox.Size) Then
-            Exit Sub
-        End If
-        Dim ImageY As Integer
-        If VScrollBar1.Value + GetSetWinImageHeight() > GetImage().Height Then
-            ImageY = GetImage.Height - GetSetWinImageHeight()
-        Else
-            ImageY = VScrollBar1.Value
-        End If
-        Dim rect = New Rectangle(0, ImageY, GetImage.Width, GetSetWinImageHeight())
-        Dim bmpNew As Bitmap = GetImage().Clone(rect, GetImage().PixelFormat)
-        _picturebox.Image = bmpNew
-        _picturebox.SizeMode = PictureBoxSizeMode.Zoom
 
-    End Sub
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
 
 
-        DispSetWindow()
+        _setwinWidth.DispSetWindow()
     End Sub
     Private Sub VScrollBar1Init()
         VScrollBar1.Value = 0
@@ -108,6 +91,9 @@
     End Sub
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
         VScrollBar1Init()
-        DispSetWindow()
+        _setwinWidth.DispSetWindow()
     End Sub
+
+    Private _setwinWidth As SetWinWidthModule
+
 End Class
