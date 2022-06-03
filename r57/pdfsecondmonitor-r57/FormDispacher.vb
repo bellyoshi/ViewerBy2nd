@@ -85,6 +85,7 @@
     Dim _frmPdfViewer As frmPdfViewer
     Public Function ShowPdfViewer() As frmPdfViewer
         Show(_frmPdfViewer, GetType(frmPdfViewer))
+        _frmPdfViewer.Hide()
         Return _frmPdfViewer
     End Function
 

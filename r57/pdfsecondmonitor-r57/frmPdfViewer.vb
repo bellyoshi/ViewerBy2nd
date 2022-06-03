@@ -104,7 +104,7 @@ Public Class frmPdfViewer
             Dim desRect As New Rectangle(0, 0, srcRect.Width, srcRect.Height)
             g.DrawImage(img, desRect, srcRect, GraphicsUnit.Pixel)
         End Using
-        DispImage(canvas)
+        _image = canvas
     End Sub
     Private Function GetImage(renderSize As Size) As Image
         Return pdfDoc.Render(page, renderSize.Width, renderSize.Height, 96, 96, False)
@@ -131,17 +131,17 @@ Public Class frmPdfViewer
     End Sub
 
     Private Function GetRenderSize(pdfSize As SizeF) As Size?
-        Dim renderSize = New Size(PictureBox1.Size.Width, PictureBox1.Size.Height)
+        Dim renderSize = New Size(Size.Width, Size.Height)
         Dim pdfWdivH = pdfSize.Width / pdfSize.Height ' // pdfの縦横比
-        Dim boxWdivH = PictureBox1.Width / PictureBox1.Height '  // コントロールの縦横比
+        Dim boxWdivH = Width / Height '  // コントロールの縦横比
         If (boxWdivH > 10) Then ' 落ちないよう
             Return Nothing
         End If
         If (pdfWdivH < boxWdivH) Then
             ' フォーム内にImageを当てはめる判定                    {
-            renderSize.Width = CType(PictureBox1.Height * pdfWdivH, Integer)
+            renderSize.Width = CType(Height * pdfWdivH, Integer)
         Else
-            renderSize.Height = CType(PictureBox1.Width / pdfWdivH, Integer)
+            renderSize.Height = CType(Width / pdfWdivH, Integer)
         End If
         Return renderSize
     End Function
@@ -149,17 +149,17 @@ Public Class frmPdfViewer
     Private Sub Render(renderSize As Size)
         Dim img = GetImage(renderSize)
 
-        DispImage(img)
-    End Sub
-
-    Private Sub DispImage(img As Image)
         _image = img
-        Dim oldImage = PictureBox1.Image
-        PictureBox1.Image = img
-        If oldImage IsNot Nothing Then
-            oldImage.Dispose() ';  // メモリー節約
-        End If
-
     End Sub
+
+    'Private Sub DispImage(img As Image)
+    '    
+    '    Dim oldImage = PictureBox1.Image
+    '    PictureBox1.Image = img
+    '    If oldImage IsNot Nothing Then
+    '        oldImage.Dispose() ';  // メモリー節約
+    '    End If
+
+    'End Sub
 
 End Class
