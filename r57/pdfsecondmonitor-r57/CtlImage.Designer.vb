@@ -102,7 +102,7 @@ Partial Class CtlImage
         '
         'pbBack
         '
-        Me.pbBack.Location = New System.Drawing.Point(12, 335)
+        Me.pbBack.Location = New System.Drawing.Point(23, 379)
         Me.pbBack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pbBack.Name = "pbBack"
         Me.pbBack.Size = New System.Drawing.Size(427, 300)

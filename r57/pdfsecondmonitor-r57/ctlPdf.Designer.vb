@@ -114,7 +114,7 @@ Partial Class ctlPdf
         '
         'pbBack
         '
-        Me.pbBack.Location = New System.Drawing.Point(31, 330)
+        Me.pbBack.Location = New System.Drawing.Point(19, 419)
         Me.pbBack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pbBack.Name = "pbBack"
         Me.pbBack.Size = New System.Drawing.Size(427, 300)
@@ -136,7 +136,7 @@ Partial Class ctlPdf
         Me.Controls.Add(Me.btnPDFFirst)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "ctlPdf"
-        Me.Size = New System.Drawing.Size(796, 408)
+        Me.Size = New System.Drawing.Size(796, 501)
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbBack, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

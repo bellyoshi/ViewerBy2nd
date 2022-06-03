@@ -208,10 +208,19 @@
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim fileviewinfo As FileViewParam
+        fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
+        Dim ext = IO.Path.GetExtension(fileviewinfo.FileName)
+        If IsPDFExt(ext) Then
+            CtlPdf1.SetView()
+        ElseIf IsImageExt(ext) Then
+            CtlImage1.SetView()
+        ElseIf IsMovieExt(ext) Then
+            'CtlMovie1.SetView()
+        End If
 
-        CtlImage1.SetView()
-        'CtlMovie1.SetView()
-        CtlPdf1.SetView()
+
+
 
 
     End Sub
