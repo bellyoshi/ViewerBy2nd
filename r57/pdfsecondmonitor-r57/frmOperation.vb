@@ -9,7 +9,7 @@
     ''' <summary>
     ''' 開ける画像の拡張子
     ''' </summary>
-    Private ImageExts As String() = {"jpeg", "jpg", "bmp", "png", "gif", "tiff", "tif"}
+    Private ImageExts As String() = {"jpeg", "jpg", "bmp", "png", "gif", "tiff", "tif", "svg"}
 
     ''' <summary>
     ''' PDFの拡張子

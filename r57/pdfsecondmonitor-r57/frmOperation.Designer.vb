@@ -60,19 +60,18 @@ Partial Class frmOperation
         '
         Me.cmbDisplay.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbDisplay.FormattingEnabled = True
-        Me.cmbDisplay.Location = New System.Drawing.Point(164, 10)
-        Me.cmbDisplay.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmbDisplay.Location = New System.Drawing.Point(198, 19)
+        Me.cmbDisplay.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cmbDisplay.Name = "cmbDisplay"
-        Me.cmbDisplay.Size = New System.Drawing.Size(123, 20)
+        Me.cmbDisplay.Size = New System.Drawing.Size(163, 23)
         Me.cmbDisplay.TabIndex = 6
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(65, 10)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Location = New System.Drawing.Point(37, 24)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(101, 12)
+        Me.Label1.Size = New System.Drawing.Size(125, 15)
         Me.Label1.TabIndex = 7
         Me.Label1.Text = "表示するディスプレイ"
         '
@@ -82,11 +81,11 @@ Partial Class frmOperation
         Me.GroupBox1.Controls.Add(Me.btnColorChange)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.cmbDisplay)
-        Me.GroupBox1.Location = New System.Drawing.Point(13, 10)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(2)
+        Me.GroupBox1.Location = New System.Drawing.Point(17, 12)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox1.Size = New System.Drawing.Size(496, 43)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.GroupBox1.Size = New System.Drawing.Size(661, 54)
         Me.GroupBox1.TabIndex = 11
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "設定"
@@ -94,19 +93,18 @@ Partial Class frmOperation
         'lblFormColor
         '
         Me.lblFormColor.AutoSize = True
-        Me.lblFormColor.Location = New System.Drawing.Point(425, 20)
-        Me.lblFormColor.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lblFormColor.Location = New System.Drawing.Point(567, 25)
         Me.lblFormColor.Name = "lblFormColor"
-        Me.lblFormColor.Size = New System.Drawing.Size(21, 12)
+        Me.lblFormColor.Size = New System.Drawing.Size(27, 15)
         Me.lblFormColor.TabIndex = 9
         Me.lblFormColor.Text = "　　"
         '
         'btnColorChange
         '
-        Me.btnColorChange.Location = New System.Drawing.Point(337, 14)
-        Me.btnColorChange.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnColorChange.Location = New System.Drawing.Point(445, 17)
+        Me.btnColorChange.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnColorChange.Name = "btnColorChange"
-        Me.btnColorChange.Size = New System.Drawing.Size(70, 25)
+        Me.btnColorChange.Size = New System.Drawing.Size(93, 31)
         Me.btnColorChange.TabIndex = 8
         Me.btnColorChange.Text = "背景色変更"
         Me.btnColorChange.UseVisualStyleBackColor = True
@@ -117,11 +115,11 @@ Partial Class frmOperation
         'tpMediaPlayer
         '
         Me.tpMediaPlayer.Controls.Add(Me.CtlMovie1)
-        Me.tpMediaPlayer.Location = New System.Drawing.Point(4, 22)
-        Me.tpMediaPlayer.Margin = New System.Windows.Forms.Padding(2)
+        Me.tpMediaPlayer.Location = New System.Drawing.Point(4, 25)
+        Me.tpMediaPlayer.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.tpMediaPlayer.Name = "tpMediaPlayer"
-        Me.tpMediaPlayer.Padding = New System.Windows.Forms.Padding(2)
-        Me.tpMediaPlayer.Size = New System.Drawing.Size(602, 330)
+        Me.tpMediaPlayer.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tpMediaPlayer.Size = New System.Drawing.Size(805, 416)
         Me.tpMediaPlayer.TabIndex = 1
         Me.tpMediaPlayer.Text = "動画"
         Me.tpMediaPlayer.UseVisualStyleBackColor = True
@@ -131,21 +129,21 @@ Partial Class frmOperation
         Me.tbcFileOpes.Controls.Add(Me.tpAdobePDF)
         Me.tbcFileOpes.Controls.Add(Me.tpMediaPlayer)
         Me.tbcFileOpes.Controls.Add(Me.tpImage)
-        Me.tbcFileOpes.Location = New System.Drawing.Point(261, 91)
-        Me.tbcFileOpes.Margin = New System.Windows.Forms.Padding(2)
+        Me.tbcFileOpes.Location = New System.Drawing.Point(348, 114)
+        Me.tbcFileOpes.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.tbcFileOpes.Name = "tbcFileOpes"
         Me.tbcFileOpes.SelectedIndex = 0
-        Me.tbcFileOpes.Size = New System.Drawing.Size(610, 356)
+        Me.tbcFileOpes.Size = New System.Drawing.Size(813, 445)
         Me.tbcFileOpes.TabIndex = 12
         '
         'tpAdobePDF
         '
         Me.tpAdobePDF.Controls.Add(Me.CtlPdf1)
-        Me.tpAdobePDF.Location = New System.Drawing.Point(4, 22)
-        Me.tpAdobePDF.Margin = New System.Windows.Forms.Padding(2)
+        Me.tpAdobePDF.Location = New System.Drawing.Point(4, 25)
+        Me.tpAdobePDF.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.tpAdobePDF.Name = "tpAdobePDF"
-        Me.tpAdobePDF.Padding = New System.Windows.Forms.Padding(2)
-        Me.tpAdobePDF.Size = New System.Drawing.Size(602, 330)
+        Me.tpAdobePDF.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tpAdobePDF.Size = New System.Drawing.Size(805, 416)
         Me.tpAdobePDF.TabIndex = 0
         Me.tpAdobePDF.Text = "PDFの表示"
         Me.tpAdobePDF.UseVisualStyleBackColor = True
@@ -153,11 +151,11 @@ Partial Class frmOperation
         'tpImage
         '
         Me.tpImage.Controls.Add(Me.CtlImage1)
-        Me.tpImage.Location = New System.Drawing.Point(4, 22)
-        Me.tpImage.Margin = New System.Windows.Forms.Padding(2)
+        Me.tpImage.Location = New System.Drawing.Point(4, 25)
+        Me.tpImage.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.tpImage.Name = "tpImage"
-        Me.tpImage.Padding = New System.Windows.Forms.Padding(2)
-        Me.tpImage.Size = New System.Drawing.Size(602, 330)
+        Me.tpImage.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tpImage.Size = New System.Drawing.Size(805, 416)
         Me.tpImage.TabIndex = 2
         Me.tpImage.Text = "画像"
         Me.tpImage.UseVisualStyleBackColor = True
@@ -165,28 +163,27 @@ Partial Class frmOperation
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(276, 55)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Location = New System.Drawing.Point(368, 69)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(63, 12)
+        Me.Label6.Size = New System.Drawing.Size(79, 15)
         Me.Label6.TabIndex = 24
         Me.Label6.Text = "ファイル情報"
         '
         'txtPDFFileName
         '
-        Me.txtPDFFileName.Location = New System.Drawing.Point(272, 69)
-        Me.txtPDFFileName.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtPDFFileName.Location = New System.Drawing.Point(363, 86)
+        Me.txtPDFFileName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtPDFFileName.Name = "txtPDFFileName"
         Me.txtPDFFileName.ReadOnly = True
-        Me.txtPDFFileName.Size = New System.Drawing.Size(492, 19)
+        Me.txtPDFFileName.Size = New System.Drawing.Size(655, 22)
         Me.txtPDFFileName.TabIndex = 4
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(76, 429)
-        Me.btnDelete.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnDelete.Location = New System.Drawing.Point(101, 536)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(79, 18)
+        Me.btnDelete.Size = New System.Drawing.Size(105, 31)
         Me.btnDelete.TabIndex = 21
         Me.btnDelete.Text = "削除"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -195,63 +192,63 @@ Partial Class frmOperation
         '
         Me.lstPDFFiles.AllowDrop = True
         Me.lstPDFFiles.FormattingEnabled = True
-        Me.lstPDFFiles.ItemHeight = 12
-        Me.lstPDFFiles.Location = New System.Drawing.Point(26, 136)
-        Me.lstPDFFiles.Margin = New System.Windows.Forms.Padding(2)
+        Me.lstPDFFiles.ItemHeight = 15
+        Me.lstPDFFiles.Location = New System.Drawing.Point(35, 170)
+        Me.lstPDFFiles.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.lstPDFFiles.Name = "lstPDFFiles"
-        Me.lstPDFFiles.Size = New System.Drawing.Size(232, 280)
+        Me.lstPDFFiles.Size = New System.Drawing.Size(308, 349)
         Me.lstPDFFiles.TabIndex = 19
         '
         'btnUnSelect
         '
-        Me.btnUnSelect.Location = New System.Drawing.Point(40, 101)
-        Me.btnUnSelect.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnUnSelect.Location = New System.Drawing.Point(57, 114)
+        Me.btnUnSelect.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnUnSelect.Name = "btnUnSelect"
-        Me.btnUnSelect.Size = New System.Drawing.Size(200, 18)
+        Me.btnUnSelect.Size = New System.Drawing.Size(267, 40)
         Me.btnUnSelect.TabIndex = 20
         Me.btnUnSelect.Text = "選択解除"
         Me.btnUnSelect.UseVisualStyleBackColor = True
         '
         'btnFileAdd
         '
-        Me.btnFileAdd.Location = New System.Drawing.Point(159, 429)
-        Me.btnFileAdd.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnFileAdd.Location = New System.Drawing.Point(212, 536)
+        Me.btnFileAdd.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnFileAdd.Name = "btnFileAdd"
-        Me.btnFileAdd.Size = New System.Drawing.Size(98, 18)
+        Me.btnFileAdd.Size = New System.Drawing.Size(131, 31)
         Me.btnFileAdd.TabIndex = 21
-        Me.btnFileAdd.Text = "ファイルを追加する"
+        Me.btnFileAdd.Text = "ファイルを追加"
         Me.btnFileAdd.UseVisualStyleBackColor = True
         '
         'CtlPdf1
         '
-        Me.CtlPdf1.Location = New System.Drawing.Point(4, 23)
-        Me.CtlPdf1.Margin = New System.Windows.Forms.Padding(2)
+        Me.CtlPdf1.Location = New System.Drawing.Point(5, 29)
+        Me.CtlPdf1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CtlPdf1.Name = "CtlPdf1"
-        Me.CtlPdf1.Size = New System.Drawing.Size(594, 287)
+        Me.CtlPdf1.Size = New System.Drawing.Size(792, 359)
         Me.CtlPdf1.TabIndex = 0
         '
         'CtlMovie1
         '
-        Me.CtlMovie1.Location = New System.Drawing.Point(28, 25)
-        Me.CtlMovie1.Margin = New System.Windows.Forms.Padding(2)
+        Me.CtlMovie1.Location = New System.Drawing.Point(37, 31)
+        Me.CtlMovie1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CtlMovie1.Name = "CtlMovie1"
-        Me.CtlMovie1.Size = New System.Drawing.Size(350, 133)
+        Me.CtlMovie1.Size = New System.Drawing.Size(467, 166)
         Me.CtlMovie1.TabIndex = 0
         '
         'CtlImage1
         '
         Me.CtlImage1.Image = Nothing
-        Me.CtlImage1.Location = New System.Drawing.Point(21, 25)
-        Me.CtlImage1.Margin = New System.Windows.Forms.Padding(2)
+        Me.CtlImage1.Location = New System.Drawing.Point(28, 31)
+        Me.CtlImage1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.CtlImage1.Name = "CtlImage1"
-        Me.CtlImage1.Size = New System.Drawing.Size(577, 289)
+        Me.CtlImage1.Size = New System.Drawing.Size(769, 361)
         Me.CtlImage1.TabIndex = 0
         '
         'frmOperation
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(876, 519)
+        Me.ClientSize = New System.Drawing.Size(1168, 649)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.btnFileAdd)
         Me.Controls.Add(Me.btnUnSelect)
@@ -260,7 +257,7 @@ Partial Class frmOperation
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.lstPDFFiles)
         Me.Controls.Add(Me.txtPDFFileName)
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "frmOperation"
         Me.Text = "Form2"
         Me.GroupBox1.ResumeLayout(False)

@@ -29,9 +29,6 @@
         Dim bmp As Bitmap = New Bitmap(_fileViewParam.FileName)
         bmp.RotateFlip(flip)
         Image = bmp
-        If flip = RotateFlipType.Rotate180FlipNone OrElse
-                flip = RotateFlipType.RotateNoneFlipNone Then
-        End If
     End Sub
 
 
