@@ -28,11 +28,10 @@
     Public Function LoadImage(filename As String) As Bitmap
         If System.IO.Path.GetExtension(filename) = ".svg" Then
             Dim doc = Svg.SvgDocument.Open(filename)
-            Dim bbmp = doc.Draw()
+            Dim bbmp = doc.Draw(_pictureBox.Height, _pictureBox.Height)
             Return bbmp
         End If
-        Dim bmp As Bitmap = New Bitmap(filename)
-        Return bmp
+        Return New Bitmap(filename)
     End Function
 
 
