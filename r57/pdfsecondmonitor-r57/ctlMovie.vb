@@ -16,12 +16,11 @@
         player.URL = _fileViewParam.FileName
         player.uiMode = "none"
         player.stretchToFit = True
-
     End Sub
 
 #Region "Media Playerの処理"
 
-    Private inPlay As Boolean = False
+
 
 
     Private Sub btnStartStop_Click(sender As Object, e As EventArgs) Handles btnStartStop.Click
@@ -62,7 +61,7 @@
         Try
             If trackBarSeek_Scrolled Then
                 player.Ctlcontrols.currentPosition = trackBarSeek.Value / 100
-                If Not inPlay Then
+                If Not player.playState = WMPLib.WMPPlayState.wmppsPlaying Then
                     player.Ctlcontrols.play()
                     player.Ctlcontrols.pause()
 
