@@ -25,8 +25,19 @@
         pbThumbnail.BackColor = My.Settings.formColor
     End Sub
 
+    Public Function LoadImage(filename As String) As Bitmap
+        If System.IO.Path.GetExtension(filename) = ".svg" Then
+            Dim doc = Svg.SvgDocument.Open(filename)
+            Dim bbmp = doc.Draw()
+            Return bbmp
+        End If
+        Dim bmp As Bitmap = New Bitmap(filename)
+        Return bmp
+    End Function
+
+
     Private Sub Rotate(flip As RotateFlipType)
-        Dim bmp As Bitmap = New Bitmap(_fileViewParam.FileName)
+        Dim bmp = LoadImage(_fileViewParam.FileName)
         bmp.RotateFlip(flip)
         Image = bmp
     End Sub
