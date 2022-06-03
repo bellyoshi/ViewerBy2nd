@@ -18,7 +18,7 @@ Public Class frmPdfViewer
 
     Public Sub NextPage()
         isHalf = False
-        If page < pdfDoc.PageCount Then
+        If page < pdfDoc.PageCount - 1 Then
             page += 1
             DisplayPage()
         End If

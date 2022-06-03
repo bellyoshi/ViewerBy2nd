@@ -42,6 +42,7 @@ Partial Class frmOperation
         Me.btnUnSelect = New System.Windows.Forms.Button()
         Me.btnFileAdd = New System.Windows.Forms.Button()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.CtlPdf1 = New pdfsecondmonitor.ctlPdf()
         Me.CtlMovie1 = New pdfsecondmonitor.ctlMovie()
         Me.CtlImage1 = New pdfsecondmonitor.CtlImage()
@@ -201,12 +202,12 @@ Partial Class frmOperation
         '
         'btnUnSelect
         '
-        Me.btnUnSelect.Location = New System.Drawing.Point(57, 114)
+        Me.btnUnSelect.Location = New System.Drawing.Point(205, 114)
         Me.btnUnSelect.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnUnSelect.Name = "btnUnSelect"
-        Me.btnUnSelect.Size = New System.Drawing.Size(267, 40)
+        Me.btnUnSelect.Size = New System.Drawing.Size(119, 40)
         Me.btnUnSelect.TabIndex = 20
-        Me.btnUnSelect.Text = "選択解除"
+        Me.btnUnSelect.Text = "表示終了"
         Me.btnUnSelect.UseVisualStyleBackColor = True
         '
         'btnFileAdd
@@ -218,6 +219,16 @@ Partial Class frmOperation
         Me.btnFileAdd.TabIndex = 21
         Me.btnFileAdd.Text = "ファイルを追加"
         Me.btnFileAdd.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(60, 114)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(119, 40)
+        Me.Button1.TabIndex = 20
+        Me.Button1.Text = "表示"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'CtlPdf1
         '
@@ -251,6 +262,7 @@ Partial Class frmOperation
         Me.ClientSize = New System.Drawing.Size(1168, 649)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.btnFileAdd)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnUnSelect)
         Me.Controls.Add(Me.tbcFileOpes)
         Me.Controls.Add(Me.GroupBox1)
@@ -292,4 +304,5 @@ Partial Class frmOperation
     Friend WithEvents btnColorChange As Button
     Friend WithEvents ColorDialog1 As ColorDialog
     Friend WithEvents lblFormColor As Label
+    Friend WithEvents Button1 As Button
 End Class

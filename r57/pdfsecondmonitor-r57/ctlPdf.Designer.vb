@@ -31,90 +31,102 @@ Partial Class ctlPdf
         Me.btnSetWindow = New System.Windows.Forms.Button()
         Me.btnPreviousHalf = New System.Windows.Forms.Button()
         Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
+        Me.pbBack = New System.Windows.Forms.PictureBox()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbBack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'btnPDFNext
         '
-        Me.btnPDFNext.Location = New System.Drawing.Point(125, 21)
-        Me.btnPDFNext.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnPDFNext.Location = New System.Drawing.Point(173, 26)
+        Me.btnPDFNext.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPDFNext.Name = "btnPDFNext"
-        Me.btnPDFNext.Size = New System.Drawing.Size(66, 33)
+        Me.btnPDFNext.Size = New System.Drawing.Size(88, 41)
         Me.btnPDFNext.TabIndex = 24
         Me.btnPDFNext.Text = "次へ"
         Me.btnPDFNext.UseVisualStyleBackColor = True
         '
         'btnPDFBack
         '
-        Me.btnPDFBack.Location = New System.Drawing.Point(65, 21)
-        Me.btnPDFBack.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnPDFBack.Location = New System.Drawing.Point(91, 26)
+        Me.btnPDFBack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPDFBack.Name = "btnPDFBack"
-        Me.btnPDFBack.Size = New System.Drawing.Size(66, 33)
+        Me.btnPDFBack.Size = New System.Drawing.Size(80, 41)
         Me.btnPDFBack.TabIndex = 25
         Me.btnPDFBack.Text = "前へ"
         Me.btnPDFBack.UseVisualStyleBackColor = True
         '
         'btnPDFFirst
         '
-        Me.btnPDFFirst.Location = New System.Drawing.Point(1, 21)
-        Me.btnPDFFirst.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnPDFFirst.Location = New System.Drawing.Point(1, 26)
+        Me.btnPDFFirst.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPDFFirst.Name = "btnPDFFirst"
-        Me.btnPDFFirst.Size = New System.Drawing.Size(66, 33)
+        Me.btnPDFFirst.Size = New System.Drawing.Size(88, 41)
         Me.btnPDFFirst.TabIndex = 27
         Me.btnPDFFirst.Text = "最初へ"
         Me.btnPDFFirst.UseVisualStyleBackColor = True
         '
         'btnNextHalf
         '
-        Me.btnNextHalf.Location = New System.Drawing.Point(99, 91)
-        Me.btnNextHalf.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnNextHalf.Location = New System.Drawing.Point(132, 114)
+        Me.btnNextHalf.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnNextHalf.Name = "btnNextHalf"
-        Me.btnNextHalf.Size = New System.Drawing.Size(92, 31)
+        Me.btnNextHalf.Size = New System.Drawing.Size(123, 39)
         Me.btnNextHalf.TabIndex = 28
         Me.btnNextHalf.Text = "0.5ページ先へ"
         Me.btnNextHalf.UseVisualStyleBackColor = True
         '
         'pbThumbnail
         '
-        Me.pbThumbnail.Location = New System.Drawing.Point(195, 21)
-        Me.pbThumbnail.Margin = New System.Windows.Forms.Padding(2)
+        Me.pbThumbnail.Location = New System.Drawing.Point(267, 26)
+        Me.pbThumbnail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pbThumbnail.Name = "pbThumbnail"
-        Me.pbThumbnail.Size = New System.Drawing.Size(320, 240)
+        Me.pbThumbnail.Size = New System.Drawing.Size(427, 300)
         Me.pbThumbnail.TabIndex = 29
         Me.pbThumbnail.TabStop = False
         '
         'btnSetWindow
         '
-        Me.btnSetWindow.Location = New System.Drawing.Point(2, 58)
-        Me.btnSetWindow.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSetWindow.Location = New System.Drawing.Point(3, 72)
+        Me.btnSetWindow.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSetWindow.Name = "btnSetWindow"
-        Me.btnSetWindow.Size = New System.Drawing.Size(189, 29)
+        Me.btnSetWindow.Size = New System.Drawing.Size(258, 36)
         Me.btnSetWindow.TabIndex = 28
         Me.btnSetWindow.Text = "ウィンドウ幅に合わせる"
         Me.btnSetWindow.UseVisualStyleBackColor = True
         '
         'btnPreviousHalf
         '
-        Me.btnPreviousHalf.Location = New System.Drawing.Point(2, 91)
-        Me.btnPreviousHalf.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnPreviousHalf.Location = New System.Drawing.Point(3, 114)
+        Me.btnPreviousHalf.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPreviousHalf.Name = "btnPreviousHalf"
-        Me.btnPreviousHalf.Size = New System.Drawing.Size(93, 31)
+        Me.btnPreviousHalf.Size = New System.Drawing.Size(124, 39)
         Me.btnPreviousHalf.TabIndex = 28
         Me.btnPreviousHalf.Text = "0.5ページ前へ"
         Me.btnPreviousHalf.UseVisualStyleBackColor = True
         '
         'VScrollBar1
         '
-        Me.VScrollBar1.Location = New System.Drawing.Point(517, 21)
+        Me.VScrollBar1.Location = New System.Drawing.Point(696, 26)
         Me.VScrollBar1.Name = "VScrollBar1"
-        Me.VScrollBar1.Size = New System.Drawing.Size(23, 240)
+        Me.VScrollBar1.Size = New System.Drawing.Size(23, 300)
         Me.VScrollBar1.TabIndex = 32
+        '
+        'pbBack
+        '
+        Me.pbBack.Location = New System.Drawing.Point(31, 330)
+        Me.pbBack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.pbBack.Name = "pbBack"
+        Me.pbBack.Size = New System.Drawing.Size(427, 300)
+        Me.pbBack.TabIndex = 29
+        Me.pbBack.TabStop = False
         '
         'ctlPdf
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.VScrollBar1)
+        Me.Controls.Add(Me.pbBack)
         Me.Controls.Add(Me.pbThumbnail)
         Me.Controls.Add(Me.btnSetWindow)
         Me.Controls.Add(Me.btnPreviousHalf)
@@ -122,10 +134,11 @@ Partial Class ctlPdf
         Me.Controls.Add(Me.btnPDFNext)
         Me.Controls.Add(Me.btnPDFBack)
         Me.Controls.Add(Me.btnPDFFirst)
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "ctlPdf"
-        Me.Size = New System.Drawing.Size(597, 326)
+        Me.Size = New System.Drawing.Size(796, 408)
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbBack, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -138,4 +151,5 @@ Partial Class ctlPdf
     Friend WithEvents btnSetWindow As Button
     Friend WithEvents btnPreviousHalf As Button
     Friend WithEvents VScrollBar1 As VScrollBar
+    Friend WithEvents pbBack As PictureBox
 End Class

@@ -1,6 +1,9 @@
 ﻿Public Class FormDispacher
 
     Private _secondScreen As Screen
+    Public Function GetScreen() As Screen
+        Return _secondScreen
+    End Function
     Public Sub SetSecondScreen(ByVal screen As Screen)
         _secondScreen = screen
         For Each frm In _secondMonitorWindows
@@ -35,10 +38,11 @@
         Return instance
     End Function
 
-    Public Function ShowImage() As PictureBox
+    Public Sub ShowImage(image As Image)
         Show(_frmImageViewer, GetType(frmImageViewer))
-        Return _frmImageViewer.PictureBox1
-    End Function
+        _frmImageViewer.PictureBox1.Image = image
+        _frmImageViewer.PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+    End Sub
     Private _frmImageViewer As frmImageViewer
 
     Private _frmMovieViewer As frmMovieViewer

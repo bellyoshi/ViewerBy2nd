@@ -170,9 +170,8 @@
 
 
 
-
-
     Private Sub lstFiles_Click(sender As Object, e As EventArgs) Handles lstPDFFiles.Click
+
         Dim fileviewinfo As FileViewParam
         fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
         If fileviewinfo Is Nothing Then
@@ -205,6 +204,16 @@
         CtlMovie1.SetFileInfo(movieFileViewInfo)
         CtlPdf1.SetFileInfo(pdfFileViewInfo)
         ControlEnable()
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        CtlImage1.SetView()
+        'CtlMovie1.SetView()
+        CtlPdf1.SetView()
+
+
     End Sub
 
 
@@ -254,7 +263,7 @@
         Return buf.ToString()
     End Function
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnFileAdd.Click
+    Private Sub btnFileAdd_Click(sender As Object, e As EventArgs) Handles btnFileAdd.Click
         OpenFileDialog1.Multiselect = True
         OpenFileDialog1.Filter = CreateFilter()
         OpenFileDialog1.FileName = txtPDFFileName.Text
@@ -300,6 +309,8 @@
             items.Add(New FileViewParam(f))
         Next
     End Sub
+
+
 
 
 #End Region

@@ -11,14 +11,17 @@
 
     Private Sub btnFirst_Click(sender As Object, e As EventArgs) Handles btnPDFFirst.Click
         _viewer.FirstPage()
+        SetImage()
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnPDFNext.Click
         _viewer.NextPage()
+        SetImage()
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnPDFBack.Click
         _viewer.PrePage()
+        SetImage()
     End Sub
 
     Private Sub btnLast_Click(sender As Object, e As EventArgs) 
@@ -44,8 +47,8 @@
             Exit Sub
 
         End If
-        pbThumbnail.Image = img
-        pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
+        pbBack.Image = img
+        'todo:pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
     End Sub
 
 
@@ -58,8 +61,9 @@
             Return
         End If
         _viewer = _dispacher.ShowPdfViewer()
-        _picturebox = _viewer.PictureBox1
-        _setwinWidth = New SetWinWidthModule(_picturebox, pbThumbnail, VScrollBar1)
+        '_picturebox = _viewer.PictureBox1
+        Dim sc = _dispacher.GetScreen().Bounds
+        _setwinWidth = New SetWinWidthModule(sc, pbThumbnail, pbBack, VScrollBar1)
         _viewer.OpenFile(f.FileName)
         SetImage()
     End Sub
@@ -96,4 +100,10 @@
 
     Private _setwinWidth As SetWinWidthModule
 
+    Friend Sub SetView()
+        If pbThumbnail.Image Is Nothing Then
+            Exit Sub
+        End If
+        _dispacher.ShowImage(pbThumbnail.Image)
+    End Sub
 End Class

@@ -89,6 +89,10 @@
 
     End Sub
 
+    Friend Sub SetView()
+        Throw New NotImplementedException()
+    End Sub
+
 
 
 
