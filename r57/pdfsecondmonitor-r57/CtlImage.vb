@@ -40,6 +40,7 @@
         Dim bmp = LoadImage(_fileViewParam.FileName)
         bmp.RotateFlip(flip)
         Image = bmp
+        pbBack.Image = bmp
     End Sub
 
 
@@ -73,10 +74,9 @@
         If f Is Nothing Then
             Return
         End If
-        '        _pictureBox = _dispacher.GetPictureBox()
+
 
         Rotate(RotateFlipType.RotateNoneFlipNone)
-        '       _pictureBox.SizeMode = PictureBoxSizeMode.Zoom 'サイズ調整
         Dim sc = _dispacher.GetScreen().Bounds
         SetWinWidthModule = New SetWinWidthModule(sc, pbThumbnail, pbBack, VScrollBar1)
     End Sub

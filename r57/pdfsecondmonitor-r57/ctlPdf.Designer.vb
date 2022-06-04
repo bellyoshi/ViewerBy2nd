@@ -33,6 +33,7 @@ Partial Class ctlPdf
         Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
         Me.pbBack = New System.Windows.Forms.PictureBox()
         Me.lblPage = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbBack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -79,7 +80,7 @@ Partial Class ctlPdf
         '
         'pbThumbnail
         '
-        Me.pbThumbnail.Location = New System.Drawing.Point(267, 26)
+        Me.pbThumbnail.Location = New System.Drawing.Point(267, 30)
         Me.pbThumbnail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pbThumbnail.Name = "pbThumbnail"
         Me.pbThumbnail.Size = New System.Drawing.Size(427, 300)
@@ -125,16 +126,26 @@ Partial Class ctlPdf
         'lblPage
         '
         Me.lblPage.AutoSize = True
-        Me.lblPage.Location = New System.Drawing.Point(457, 341)
+        Me.lblPage.Location = New System.Drawing.Point(457, 332)
         Me.lblPage.Name = "lblPage"
         Me.lblPage.Size = New System.Drawing.Size(43, 15)
         Me.lblPage.TabIndex = 33
         Me.lblPage.Text = "ページ"
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(439, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(92, 15)
+        Me.Label1.TabIndex = 34
+        Me.Label1.Text = "表示プレビュー"
+        '
         'ctlPdf
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblPage)
         Me.Controls.Add(Me.VScrollBar1)
         Me.Controls.Add(Me.pbBack)
@@ -165,4 +176,5 @@ Partial Class ctlPdf
     Friend WithEvents VScrollBar1 As VScrollBar
     Friend WithEvents pbBack As PictureBox
     Friend WithEvents lblPage As Label
+    Friend WithEvents Label1 As Label
 End Class

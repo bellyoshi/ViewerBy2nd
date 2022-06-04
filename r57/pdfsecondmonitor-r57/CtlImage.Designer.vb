@@ -30,6 +30,7 @@ Partial Class CtlImage
         Me.pbThumbnail = New System.Windows.Forms.PictureBox()
         Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
         Me.pbBack = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbBack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -86,7 +87,7 @@ Partial Class CtlImage
         '
         'pbThumbnail
         '
-        Me.pbThumbnail.Location = New System.Drawing.Point(269, 21)
+        Me.pbThumbnail.Location = New System.Drawing.Point(269, 35)
         Me.pbThumbnail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pbThumbnail.Name = "pbThumbnail"
         Me.pbThumbnail.Size = New System.Drawing.Size(427, 300)
@@ -109,10 +110,20 @@ Partial Class CtlImage
         Me.pbBack.TabIndex = 30
         Me.pbBack.TabStop = False
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(432, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(92, 15)
+        Me.Label1.TabIndex = 32
+        Me.Label1.Text = "表示プレビュー"
+        '
         'CtlImage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.VScrollBar1)
         Me.Controls.Add(Me.pbBack)
         Me.Controls.Add(Me.pbThumbnail)
@@ -127,6 +138,7 @@ Partial Class CtlImage
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbBack, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -138,4 +150,5 @@ Partial Class CtlImage
     Friend WithEvents pbThumbnail As PictureBox
     Friend WithEvents VScrollBar1 As VScrollBar
     Friend WithEvents pbBack As PictureBox
+    Friend WithEvents Label1 As Label
 End Class
