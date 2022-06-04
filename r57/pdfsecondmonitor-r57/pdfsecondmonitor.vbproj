@@ -148,12 +148,6 @@
     <Compile Include="frmOperation.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmPdfViewer.Designer.vb">
-      <DependentUpon>frmPdfViewer.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmPdfViewer.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmViewer.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -204,9 +198,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmOperation.resx">
       <DependentUpon>frmOperation.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmPdfViewer.resx">
-      <DependentUpon>frmPdfViewer.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmViewer.resx">
       <DependentUpon>frmViewer.vb</DependentUpon>

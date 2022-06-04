@@ -32,6 +32,7 @@ Partial Class ctlPdf
         Me.btnPreviousHalf = New System.Windows.Forms.Button()
         Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
         Me.pbBack = New System.Windows.Forms.PictureBox()
+        Me.lblPage = New System.Windows.Forms.Label()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pbBack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -114,17 +115,27 @@ Partial Class ctlPdf
         '
         'pbBack
         '
-        Me.pbBack.Location = New System.Drawing.Point(34, 330)
+        Me.pbBack.Location = New System.Drawing.Point(28, 424)
         Me.pbBack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pbBack.Name = "pbBack"
         Me.pbBack.Size = New System.Drawing.Size(427, 300)
         Me.pbBack.TabIndex = 29
         Me.pbBack.TabStop = False
         '
+        'lblPage
+        '
+        Me.lblPage.AutoSize = True
+        Me.lblPage.Location = New System.Drawing.Point(457, 341)
+        Me.lblPage.Name = "lblPage"
+        Me.lblPage.Size = New System.Drawing.Size(43, 15)
+        Me.lblPage.TabIndex = 33
+        Me.lblPage.Text = "ページ"
+        '
         'ctlPdf
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblPage)
         Me.Controls.Add(Me.VScrollBar1)
         Me.Controls.Add(Me.pbBack)
         Me.Controls.Add(Me.pbThumbnail)
@@ -140,6 +151,7 @@ Partial Class ctlPdf
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pbBack, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnPDFNext As Button
@@ -152,4 +164,5 @@ Partial Class ctlPdf
     Friend WithEvents btnPreviousHalf As Button
     Friend WithEvents VScrollBar1 As VScrollBar
     Friend WithEvents pbBack As PictureBox
+    Friend WithEvents lblPage As Label
 End Class

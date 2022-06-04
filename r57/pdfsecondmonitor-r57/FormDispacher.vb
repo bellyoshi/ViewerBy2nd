@@ -82,12 +82,6 @@
         targetForm.Show()
     End Sub
 
-    Dim _frmPdfViewer As frmPdfViewer
-    Public Function ShowPdfViewer() As frmPdfViewer
-        Show(_frmPdfViewer, GetType(frmPdfViewer))
-        _frmPdfViewer.Hide()
-        Return _frmPdfViewer
-    End Function
 
     Private color As Color
     Public Sub SetColor(color As Color)

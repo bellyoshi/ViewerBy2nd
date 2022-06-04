@@ -5,7 +5,6 @@ Public Class ctlPdf
 
     Private _dispacher As FormDispacher = FormDispacher.GetInstance
 
-    Private _viewer As frmPdfViewer
 
     Dim pdfDoc As PdfDocument
     Dim page As Integer = 0
@@ -198,6 +197,7 @@ Public Class ctlPdf
         pbBack.Image = img
         pbThumbnail.Image = pbBack.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
+        lblPage.Text = "ページ" & page + 1 & "/" & pdfDoc.PageCount
     End Sub
 
 
@@ -209,7 +209,7 @@ Public Class ctlPdf
         If _fileViewParam Is Nothing Then
             Return
         End If
-        _viewer = _dispacher.ShowPdfViewer()
+
         '_picturebox = _viewer.PictureBox1
         Dim sc = _dispacher.GetScreen().Bounds
         _setwinWidth = New SetWinWidthModule(sc, pbThumbnail, pbBack, VScrollBar1)
