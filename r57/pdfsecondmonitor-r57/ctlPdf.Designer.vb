@@ -114,7 +114,7 @@ Partial Class ctlPdf
         '
         'pbBack
         '
-        Me.pbBack.Location = New System.Drawing.Point(19, 419)
+        Me.pbBack.Location = New System.Drawing.Point(34, 330)
         Me.pbBack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pbBack.Name = "pbBack"
         Me.pbBack.Size = New System.Drawing.Size(427, 300)

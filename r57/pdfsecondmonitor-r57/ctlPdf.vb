@@ -124,6 +124,7 @@ Public Class ctlPdf
         Dim img As New Bitmap(_image)
         Return img
     End Function
+
     Private Sub DisplayPage()
         If (page >= pdfDoc.PageCount) Then
             Return
@@ -133,30 +134,28 @@ Public Class ctlPdf
         If renderSize Is Nothing Then
             Return
         End If
-        Render(renderSize.Value)
+        _image = GetImage(renderSize.Value)
     End Sub
 
+
+
     Private Function GetRenderSize(pdfSize As SizeF) As Size?
-        Dim renderSize = New Size(Size.Width, Size.Height)
+        Dim bound = _dispacher.GetScreen().Bounds
+        Dim renderSize = New Size(bound.Size)
         Dim pdfWdivH = pdfSize.Width / pdfSize.Height ' // pdfの縦横比
-        Dim boxWdivH = Width / Height '  // コントロールの縦横比
+        Dim boxWdivH = bound.Width / bound.Height '  // コントロールの縦横比
         If (boxWdivH > 10) Then ' 落ちないよう
             Return Nothing
         End If
         If (pdfWdivH < boxWdivH) Then
             ' フォーム内にImageを当てはめる判定                    {
-            renderSize.Width = CType(Height * pdfWdivH, Integer)
+            renderSize.Width = bound.Height * pdfWdivH
         Else
-            renderSize.Height = CType(Width / pdfWdivH, Integer)
+            renderSize.Height = bound.Width / pdfWdivH
         End If
         Return renderSize
     End Function
 
-    Private Sub Render(renderSize As Size)
-        Dim img = GetImage(renderSize)
-
-        _image = img
-    End Sub
 
 
 
@@ -197,7 +196,8 @@ Public Class ctlPdf
 
         End If
         pbBack.Image = img
-        'todo:pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
+        pbThumbnail.Image = pbBack.Image
+        pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
     End Sub
 
 
@@ -219,16 +219,14 @@ Public Class ctlPdf
 
     Private Sub btnNextHalf_Click(sender As Object, e As EventArgs) Handles btnNextHalf.Click
         NextHalfPage()
+        SetImage()
     End Sub
 
     Private Sub btnPreviousHalf_Click(sender As Object, e As EventArgs) Handles btnPreviousHalf.Click
         PreviousHalfPage()
+        SetImage()
     End Sub
 
-    Private Function GetSetWinImageHeight() As Integer
-        Dim pbSize = _picturebox.Size
-        Return CType(pbSize.Height / pbSize.Width * GetImage().Width, Integer)
-    End Function
 
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
