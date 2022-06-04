@@ -193,16 +193,25 @@
         If IsPDFExt(ext) Then
             tbcFileOpes.SelectTab(tpAdobePDF.TabIndex)
             pdfFileViewInfo = fileviewinfo
+            CtlImage1.SetFileInfo(Nothing)
+            CtlMovie1.SetFileInfo(Nothing)
+            CtlPdf1.SetFileInfo(pdfFileViewInfo)
+            CtlPdf1.UpdateImage()
         ElseIf IsImageExt(ext) Then
             tbcFileOpes.SelectTab(tpImage.TabIndex)
             imageFileViewInfo = fileviewinfo
+            CtlImage1.SetFileInfo(imageFileViewInfo)
+            CtlImage1.UpdateImage()
+            CtlMovie1.SetFileInfo(Nothing)
+            CtlPdf1.SetFileInfo(Nothing)
         ElseIf IsMovieExt(ext) Then
             tbcFileOpes.SelectTab(tpMediaPlayer.TabIndex)
             movieFileViewInfo = fileviewinfo
+            CtlImage1.SetFileInfo(Nothing)
+            CtlMovie1.SetFileInfo(movieFileViewInfo)
+            CtlPdf1.SetFileInfo(Nothing)
         End If
-        CtlImage1.SetFileInfo(imageFileViewInfo)
-        CtlMovie1.SetFileInfo(movieFileViewInfo)
-        CtlPdf1.SetFileInfo(pdfFileViewInfo)
+
         ControlEnable()
 
     End Sub
@@ -317,6 +326,11 @@
         For Each f In fileName
             items.Add(New FileViewParam(f))
         Next
+    End Sub
+
+    Private Sub chkUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkUpdate.CheckedChanged
+        CtlPdf1.chkUpdate = chkUpdate.Checked
+        CtlImage1.chkUpdate = chkUpdate.Checked
     End Sub
 
 

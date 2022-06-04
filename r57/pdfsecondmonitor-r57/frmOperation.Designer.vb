@@ -46,6 +46,7 @@ Partial Class frmOperation
         Me.btnFileAdd = New System.Windows.Forms.Button()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.chkUpdate = New System.Windows.Forms.CheckBox()
         Me.GroupBox1.SuspendLayout()
         Me.tpMediaPlayer.SuspendLayout()
         Me.tbcFileOpes.SuspendLayout()
@@ -256,11 +257,22 @@ Partial Class frmOperation
         Me.Button1.Text = "表示"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'chkUpdate
+        '
+        Me.chkUpdate.AutoSize = True
+        Me.chkUpdate.Location = New System.Drawing.Point(60, 88)
+        Me.chkUpdate.Name = "chkUpdate"
+        Me.chkUpdate.Size = New System.Drawing.Size(195, 19)
+        Me.chkUpdate.TabIndex = 25
+        Me.chkUpdate.Text = "操作中にモニターを更新する"
+        Me.chkUpdate.UseVisualStyleBackColor = True
+        '
         'frmOperation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1168, 649)
+        Me.Controls.Add(Me.chkUpdate)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.btnFileAdd)
         Me.Controls.Add(Me.Button1)
@@ -306,4 +318,5 @@ Partial Class frmOperation
     Friend WithEvents ColorDialog1 As ColorDialog
     Friend WithEvents lblFormColor As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents chkUpdate As CheckBox
 End Class

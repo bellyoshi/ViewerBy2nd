@@ -5,6 +5,22 @@ Public Class ctlPdf
 
     Private _dispacher As FormDispacher = FormDispacher.GetInstance
 
+    Private _chkupdate As Boolean
+    Public Property chkUpdate As Boolean
+        Get
+            Return _chkupdate
+        End Get
+        Set(value As Boolean)
+            _chkupdate = value
+            UpdateImage()
+        End Set
+    End Property
+
+    Public Sub UpdateImage()
+        If _chkupdate Then
+            SetView()
+        End If
+    End Sub
 
     Dim pdfDoc As PdfDocument
     Dim page As Integer = 0
@@ -109,18 +125,30 @@ Public Class ctlPdf
             Dim desRect As New Rectangle(0, 0, srcRect.Width, srcRect.Height)
             g.DrawImage(img, desRect, srcRect, GraphicsUnit.Pixel)
         End Using
-        _image = canvas
+        Image = canvas
     End Sub
     Private Function GetImage(renderSize As Size) As Image
         Return pdfDoc.Render(page, renderSize.Width, renderSize.Height, 96, 96, False)
     End Function
 
     Private _image As Image
-    Public Function GetImage() As Bitmap
-        If _image Is Nothing Then
+    Public Property Image As Image
+        Get
+            Return _image
+        End Get
+        Set(value As Image)
+            _image = value
+            pbThumbnail.Image = _image
+            pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
+            UpdateImage()
+        End Set
+    End Property
+
+    Public Function GetBmp() As Bitmap
+        If Image Is Nothing Then
             Return New Bitmap(0, 0)
         End If
-        Dim img As New Bitmap(_image)
+        Dim img As New Bitmap(Image)
         Return img
     End Function
 
@@ -133,7 +161,7 @@ Public Class ctlPdf
         If renderSize Is Nothing Then
             Return
         End If
-        _image = GetImage(renderSize.Value)
+        Image = GetImage(renderSize.Value)
     End Sub
 
 
@@ -185,11 +213,11 @@ Public Class ctlPdf
         Me.Enabled = Not (_fileViewParam Is Nothing)
 
     End Sub
-    Private _picturebox As PictureBox
+
 
 
     Private Sub SetImage()
-        Dim img = GetImage()
+        Dim img = GetBmp()
         If img Is Nothing Then
             Exit Sub
 
@@ -210,11 +238,12 @@ Public Class ctlPdf
             Return
         End If
 
-        '_picturebox = _viewer.PictureBox1
         Dim sc = _dispacher.GetScreen().Bounds
-        _setwinWidth = New SetWinWidthModule(sc, pbThumbnail, pbBack, VScrollBar1)
+
         OpenFile(f.FileName)
         SetImage()
+        _setwinWidth = New SetWinWidthModule(sc, pbThumbnail, pbBack, VScrollBar1)
+        UpdateImage()
     End Sub
 
     Private Sub btnNextHalf_Click(sender As Object, e As EventArgs) Handles btnNextHalf.Click
@@ -233,16 +262,18 @@ Public Class ctlPdf
 
 
         _setwinWidth.DispSetWindow()
+        UpdateImage()
     End Sub
     Private Sub VScrollBar1Init()
         VScrollBar1.Value = 0
         VScrollBar1.Minimum = 0
-        VScrollBar1.Maximum = GetImage().Height
+        VScrollBar1.Maximum = GetBmp().Height
 
     End Sub
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
         VScrollBar1Init()
         _setwinWidth.DispSetWindow()
+        UpdateImage()
     End Sub
 
     Private _setwinWidth As SetWinWidthModule

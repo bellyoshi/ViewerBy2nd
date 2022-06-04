@@ -2,7 +2,22 @@
 
     Private _dispacher As FormDispacher = FormDispacher.GetInstance
 
+    Private _chkupdate As Boolean
+    Public Property chkUpdate As Boolean
+        Get
+            Return _chkupdate
+        End Get
+        Set(value As Boolean)
+            _chkupdate = value
+            UpdateImage()
+        End Set
+    End Property
 
+    Public Sub UpdateImage()
+        If _chkupdate Then
+            SetView()
+        End If
+    End Sub
 
     Private _image As Bitmap
     Property Image As Bitmap
@@ -49,21 +64,25 @@
     Private Sub btnRotate_Click(sender As Object, e As EventArgs) Handles btnRotate180.Click
         Rotate(RotateFlipType.Rotate180FlipNone)
         VScrollBar1Init()
+        UpdateImage()
     End Sub
 
     Private Sub btnRotate90_Click(sender As Object, e As EventArgs) Handles btnRotate90.Click
         Rotate(RotateFlipType.Rotate90FlipNone)
         VScrollBar1Init()
+        UpdateImage()
     End Sub
 
     Private Sub btnRotate0_Click(sender As Object, e As EventArgs) Handles btnRotate0.Click
         Rotate(RotateFlipType.RotateNoneFlipNone)
         VScrollBar1Init()
+        UpdateImage()
     End Sub
 
     Private Sub btnRotate270_Click(sender As Object, e As EventArgs) Handles btnRotateM90.Click
         Rotate(RotateFlipType.Rotate270FlipNone)
         VScrollBar1Init()
+        UpdateImage()
     End Sub
 
     Private _fileViewParam As FileViewParam
@@ -79,6 +98,7 @@
         Rotate(RotateFlipType.RotateNoneFlipNone)
         Dim sc = _dispacher.GetScreen().Bounds
         SetWinWidthModule = New SetWinWidthModule(sc, pbThumbnail, pbBack, VScrollBar1)
+        UpdateImage()
     End Sub
 
     Public Sub ControlEnabled()
@@ -92,6 +112,7 @@
 
         VScrollBar1Init()
         SetWinWidthModule.DispSetWindow()
+        UpdateImage()
     End Sub
 
     Private Sub VScrollBar1Init()
@@ -113,6 +134,7 @@
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
 
         SetWinWidthModule.DispSetWindow()
+        UpdateImage()
     End Sub
 
     Private SetWinWidthModule As SetWinWidthModule
