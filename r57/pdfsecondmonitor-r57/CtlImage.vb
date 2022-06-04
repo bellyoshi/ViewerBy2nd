@@ -2,7 +2,7 @@
 
     Private _dispacher As FormDispacher = FormDispacher.GetInstance
 
-    'Private _pictureBox As PictureBox
+
 
     Private _image As Bitmap
     Property Image As Bitmap

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmOperation
     Inherits System.Windows.Forms.Form
 
     'フォームがコンポーネントの一覧をクリーンアップするために dispose をオーバーライドします。
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmOperation
     'メモ: 以下のプロシージャは Windows フォーム デザイナーで必要です。
     'Windows フォーム デザイナーを使用して変更できます。  
     'コード エディターを使って変更しないでください。
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
@@ -31,9 +31,12 @@ Partial Class frmOperation
         Me.btnColorChange = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.tpMediaPlayer = New System.Windows.Forms.TabPage()
+        Me.CtlMovie1 = New pdfsecondmonitor.ctlMovie()
         Me.tbcFileOpes = New System.Windows.Forms.TabControl()
         Me.tpAdobePDF = New System.Windows.Forms.TabPage()
+        Me.CtlPdf1 = New pdfsecondmonitor.ctlPdf()
         Me.tpImage = New System.Windows.Forms.TabPage()
+        Me.CtlImage1 = New pdfsecondmonitor.CtlImage()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtPDFFileName = New System.Windows.Forms.TextBox()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -43,9 +46,6 @@ Partial Class frmOperation
         Me.btnFileAdd = New System.Windows.Forms.Button()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.CtlPdf1 = New pdfsecondmonitor.ctlPdf()
-        Me.CtlMovie1 = New pdfsecondmonitor.ctlMovie()
-        Me.CtlImage1 = New pdfsecondmonitor.CtlImage()
         Me.GroupBox1.SuspendLayout()
         Me.tpMediaPlayer.SuspendLayout()
         Me.tbcFileOpes.SuspendLayout()
@@ -125,6 +125,14 @@ Partial Class frmOperation
         Me.tpMediaPlayer.Text = "動画"
         Me.tpMediaPlayer.UseVisualStyleBackColor = True
         '
+        'CtlMovie1
+        '
+        Me.CtlMovie1.Location = New System.Drawing.Point(37, 31)
+        Me.CtlMovie1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtlMovie1.Name = "CtlMovie1"
+        Me.CtlMovie1.Size = New System.Drawing.Size(467, 166)
+        Me.CtlMovie1.TabIndex = 0
+        '
         'tbcFileOpes
         '
         Me.tbcFileOpes.Controls.Add(Me.tpAdobePDF)
@@ -149,6 +157,15 @@ Partial Class frmOperation
         Me.tpAdobePDF.Text = "PDFの表示"
         Me.tpAdobePDF.UseVisualStyleBackColor = True
         '
+        'CtlPdf1
+        '
+        Me.CtlPdf1.isHalf = False
+        Me.CtlPdf1.Location = New System.Drawing.Point(5, 29)
+        Me.CtlPdf1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtlPdf1.Name = "CtlPdf1"
+        Me.CtlPdf1.Size = New System.Drawing.Size(792, 359)
+        Me.CtlPdf1.TabIndex = 0
+        '
         'tpImage
         '
         Me.tpImage.Controls.Add(Me.CtlImage1)
@@ -160,6 +177,15 @@ Partial Class frmOperation
         Me.tpImage.TabIndex = 2
         Me.tpImage.Text = "画像"
         Me.tpImage.UseVisualStyleBackColor = True
+        '
+        'CtlImage1
+        '
+        Me.CtlImage1.Image = Nothing
+        Me.CtlImage1.Location = New System.Drawing.Point(28, 31)
+        Me.CtlImage1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CtlImage1.Name = "CtlImage1"
+        Me.CtlImage1.Size = New System.Drawing.Size(769, 361)
+        Me.CtlImage1.TabIndex = 0
         '
         'Label6
         '
@@ -229,31 +255,6 @@ Partial Class frmOperation
         Me.Button1.TabIndex = 20
         Me.Button1.Text = "表示"
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'CtlPdf1
-        '
-        Me.CtlPdf1.Location = New System.Drawing.Point(5, 29)
-        Me.CtlPdf1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtlPdf1.Name = "CtlPdf1"
-        Me.CtlPdf1.Size = New System.Drawing.Size(792, 359)
-        Me.CtlPdf1.TabIndex = 0
-        '
-        'CtlMovie1
-        '
-        Me.CtlMovie1.Location = New System.Drawing.Point(37, 31)
-        Me.CtlMovie1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtlMovie1.Name = "CtlMovie1"
-        Me.CtlMovie1.Size = New System.Drawing.Size(467, 166)
-        Me.CtlMovie1.TabIndex = 0
-        '
-        'CtlImage1
-        '
-        Me.CtlImage1.Image = Nothing
-        Me.CtlImage1.Location = New System.Drawing.Point(28, 31)
-        Me.CtlImage1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtlImage1.Name = "CtlImage1"
-        Me.CtlImage1.Size = New System.Drawing.Size(769, 361)
-        Me.CtlImage1.TabIndex = 0
         '
         'frmOperation
         '
