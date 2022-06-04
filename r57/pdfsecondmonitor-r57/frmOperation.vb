@@ -218,6 +218,9 @@
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim fileviewinfo As FileViewParam
+        If lstPDFFiles.SelectedItem Is Nothing Then
+            Exit Sub
+        End If
         fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
         Dim ext = IO.Path.GetExtension(fileviewinfo.FileName)
         If IsPDFExt(ext) Then
