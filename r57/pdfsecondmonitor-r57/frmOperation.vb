@@ -1,11 +1,7 @@
 ﻿Imports ViewerBy2ndLib
 
 Public Class frmOperation
-#Region "サポートするファイルの種類"
 
-
-
-#End Region
 
 #Region "初期処理"
 
@@ -52,22 +48,12 @@ Public Class frmOperation
     Private Sub frmOperation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         screenDetect()
         AppSettingLoad()
-        'ActivateForm()
         ControlEnable()
         Timer1.Interval = 100
         Timer1.Start()
     End Sub
 
-    'Private Sub ActivateForm()
 
-    '    Timer1.Interval = 100
-    '    Timer1.Start()
-    'End Sub
-
-    'Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-    '    Me.Activate()
-    '    Timer1.Stop()
-    'End Sub
 
 #Region "設定値"
     Private loading As Boolean
@@ -238,14 +224,6 @@ Public Class frmOperation
 
     End Sub
 
-
-
-
-
-
-
-
-
     Private Sub btnFileAdd_Click(sender As Object, e As EventArgs) Handles btnFileAdd.Click
         OpenFileDialog1.Multiselect = True
         OpenFileDialog1.Filter = FileType.CreateFilter()
@@ -320,21 +298,6 @@ Public Class frmOperation
 
 
     Private _image As Bitmap
-    'Property Image As Bitmap
-    '    Get
-    '        Return _image
-    '    End Get
-    '    Set(value As Bitmap)
-    '        If value Is Nothing Then
-    '            Exit Property
-
-    '        End If
-    '        _image = value
-    '        '         _pictureBox.Image = _image
-    '        pbThumbnail.Image = _image
-    '        pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
-    '    End Set
-    'End Property
 
 
 
@@ -384,20 +347,6 @@ Public Class frmOperation
     End Sub
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     Private SetWinWidthModule As SetWinWidthModule
 
 
@@ -435,6 +384,7 @@ Public Class frmOperation
 
     Public Sub NextPage()
         isHalf = False
+
         If page < pdfDoc.PageCount - 1 Then
             page += 1
             DisplayPage()
@@ -530,7 +480,6 @@ Public Class frmOperation
         Return pdfDoc.Render(page, renderSize.Width, renderSize.Height, 96, 96, False)
     End Function
 
-    'Private _image As Image
     Public Property Image As Image
         Get
             Return _image
@@ -607,7 +556,7 @@ Public Class frmOperation
         SetImage()
     End Sub
 
-    Private Sub btnLast_Click(sender As Object, e As EventArgs)
+    Private Sub btnLast_Click(sender As Object, e As EventArgs) Handles btnPDFLast.Click
         'todo
     End Sub
 #End Region
@@ -771,6 +720,8 @@ Public Class frmOperation
         trackBarSeek_Scrolled = True
 
     End Sub
+
+
 
 
 #End Region

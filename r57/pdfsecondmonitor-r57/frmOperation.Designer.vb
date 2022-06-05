@@ -66,6 +66,7 @@ Partial Class frmOperation
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pbBack = New System.Windows.Forms.PictureBox()
         Me.btnWhole = New System.Windows.Forms.Button()
+        Me.btnPDFLast = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -300,10 +301,10 @@ Partial Class frmOperation
         'AxWindowsMediaPlayer1
         '
         Me.AxWindowsMediaPlayer1.Enabled = True
-        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(690, 157)
+        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(690, 168)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(466, 222)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(427, 311)
         Me.AxWindowsMediaPlayer1.TabIndex = 47
         Me.AxWindowsMediaPlayer1.Visible = False
         '
@@ -399,20 +400,20 @@ Partial Class frmOperation
         '
         'btnPDFNext
         '
-        Me.btnPDFNext.Location = New System.Drawing.Point(553, 168)
+        Me.btnPDFNext.Location = New System.Drawing.Point(514, 168)
         Me.btnPDFNext.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPDFNext.Name = "btnPDFNext"
-        Me.btnPDFNext.Size = New System.Drawing.Size(88, 41)
+        Me.btnPDFNext.Size = New System.Drawing.Size(54, 41)
         Me.btnPDFNext.TabIndex = 48
         Me.btnPDFNext.Text = "次へ"
         Me.btnPDFNext.UseVisualStyleBackColor = True
         '
         'btnPDFBack
         '
-        Me.btnPDFBack.Location = New System.Drawing.Point(471, 168)
+        Me.btnPDFBack.Location = New System.Drawing.Point(452, 168)
         Me.btnPDFBack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPDFBack.Name = "btnPDFBack"
-        Me.btnPDFBack.Size = New System.Drawing.Size(80, 41)
+        Me.btnPDFBack.Size = New System.Drawing.Size(56, 41)
         Me.btnPDFBack.TabIndex = 49
         Me.btnPDFBack.Text = "前へ"
         Me.btnPDFBack.UseVisualStyleBackColor = True
@@ -422,7 +423,7 @@ Partial Class frmOperation
         Me.btnPDFFirst.Location = New System.Drawing.Point(381, 168)
         Me.btnPDFFirst.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPDFFirst.Name = "btnPDFFirst"
-        Me.btnPDFFirst.Size = New System.Drawing.Size(88, 41)
+        Me.btnPDFFirst.Size = New System.Drawing.Size(65, 41)
         Me.btnPDFFirst.TabIndex = 50
         Me.btnPDFFirst.Text = "最初へ"
         Me.btnPDFFirst.UseVisualStyleBackColor = True
@@ -454,11 +455,22 @@ Partial Class frmOperation
         Me.btnWhole.Text = "全体を表示"
         Me.btnWhole.UseVisualStyleBackColor = True
         '
+        'btnPDFLast
+        '
+        Me.btnPDFLast.Location = New System.Drawing.Point(574, 168)
+        Me.btnPDFLast.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnPDFLast.Name = "btnPDFLast"
+        Me.btnPDFLast.Size = New System.Drawing.Size(66, 41)
+        Me.btnPDFLast.TabIndex = 60
+        Me.btnPDFLast.Text = "最後へ"
+        Me.btnPDFLast.UseVisualStyleBackColor = True
+        '
         'frmOperation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1168, 649)
+        Me.Controls.Add(Me.btnPDFLast)
         Me.Controls.Add(Me.btnWhole)
         Me.Controls.Add(Me.pbBack)
         Me.Controls.Add(Me.Label3)
@@ -548,4 +560,5 @@ Partial Class frmOperation
     Friend WithEvents Label3 As Label
     Friend WithEvents pbBack As PictureBox
     Friend WithEvents btnWhole As Button
+    Friend WithEvents btnPDFLast As Button
 End Class

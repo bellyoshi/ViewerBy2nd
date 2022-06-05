@@ -13,6 +13,8 @@ namespace ViewerBy2ndLib
     //    PDF = 3,
     //    SVG = 4,
     //}
+
+    //サポートするファイルの種類
     public class FileType
     {
 
