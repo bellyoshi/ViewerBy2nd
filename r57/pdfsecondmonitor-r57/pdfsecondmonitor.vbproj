@@ -110,7 +110,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileViewParam.vb" />
     <Compile Include="FormDispacher.vb" />
     <Compile Include="frmImageViewer.Designer.vb">
       <DependentUpon>frmImageViewer.vb</DependentUpon>
