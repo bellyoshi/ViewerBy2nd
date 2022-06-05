@@ -111,12 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FormDispacher.vb" />
-    <Compile Include="frmImageViewer.Designer.vb">
-      <DependentUpon>frmImageViewer.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmImageViewer.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmOperation.Designer.vb">
       <DependentUpon>frmOperation.vb</DependentUpon>
     </Compile>
@@ -149,9 +143,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="frmImageViewer.resx">
-      <DependentUpon>frmImageViewer.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmOperation.resx">
       <DependentUpon>frmOperation.vb</DependentUpon>
     </EmbeddedResource>
