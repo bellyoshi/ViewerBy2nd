@@ -219,9 +219,10 @@
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnDisp.Click
         Dim fileviewinfo As FileViewParam
         If lstPDFFiles.SelectedItem Is Nothing Then
+            _dispacher.ShowImage(Nothing)
             Exit Sub
         End If
         fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
@@ -307,8 +308,13 @@
 
     Private Sub btnUnSelect_Click(sender As Object, e As EventArgs) Handles btnUnSelect.Click
         lstPDFFiles.SelectedItem = Nothing
-        _dispacher.CloseViewers()
+        CtlImage1.pbThumbnail.Image = Nothing
+        CtlPdf1.pbThumbnail.Image = Nothing
         ControlEnable()
+    End Sub
+
+    Private Sub btnUnDisp_Click(sender As Object, e As EventArgs) Handles btnUnDisp.Click
+        _dispacher.CloseViewers()
     End Sub
 
 #Region "ドラッグアンドドロップ"

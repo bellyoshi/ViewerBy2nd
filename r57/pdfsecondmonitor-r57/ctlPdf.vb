@@ -151,7 +151,7 @@ Public Class ctlPdf
 
     Public Function GetBmp() As Bitmap
         If Image Is Nothing Then
-            Return New Bitmap(0, 0)
+            Return New Bitmap(1, 1)
         End If
         Dim img As New Bitmap(Image)
         Return img
@@ -230,6 +230,9 @@ Public Class ctlPdf
         pbBack.Image = img
         pbThumbnail.Image = pbBack.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
+        If pdfDoc Is Nothing Then
+            Exit Sub
+        End If
         lblPage.Text = "ページ" & page + 1 & "/" & pdfDoc.PageCount
     End Sub
 
@@ -240,6 +243,7 @@ Public Class ctlPdf
     Public Sub SetFileInfo(f As FileViewParam)
         Me._fileViewParam = f
         If _fileViewParam Is Nothing Then
+            SetImage()
             Return
         End If
 
