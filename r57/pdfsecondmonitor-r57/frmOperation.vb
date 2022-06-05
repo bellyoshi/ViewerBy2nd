@@ -48,6 +48,9 @@
         loading = True
         cmbDisplay.SelectedIndex = My.Settings.cmbDisplaySelectedIndex
         lblFormColor.BackColor = My.Settings.formColor
+        _dispacher.SetColor(My.Settings.formColor)
+        CtlImage1.SetColor()
+        CtlPdf1.SetColor()
         Try
             Dim fvinfos As New List(Of FileViewParam)
 
@@ -114,8 +117,8 @@
         Me.lblFormColor.BackColor = ColorDialog1.Color
         My.Settings.formColor = ColorDialog1.Color
         CtlImage1.SetColor()
-        _dispacher.SetColor(ColorDialog1.Color
-                            )
+        CtlPdf1.SetColor()
+        _dispacher.SetColor(ColorDialog1.Color)
     End Sub
 
 #End Region

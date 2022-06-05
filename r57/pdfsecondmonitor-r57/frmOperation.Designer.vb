@@ -160,6 +160,8 @@ Partial Class frmOperation
         '
         'CtlPdf1
         '
+        Me.CtlPdf1.chkUpdate = False
+        Me.CtlPdf1.Image = Nothing
         Me.CtlPdf1.isHalf = False
         Me.CtlPdf1.Location = New System.Drawing.Point(5, 29)
         Me.CtlPdf1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -181,6 +183,7 @@ Partial Class frmOperation
         '
         'CtlImage1
         '
+        Me.CtlImage1.chkUpdate = False
         Me.CtlImage1.Image = Nothing
         Me.CtlImage1.Location = New System.Drawing.Point(28, 31)
         Me.CtlImage1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
@@ -232,9 +235,9 @@ Partial Class frmOperation
         Me.btnUnSelect.Location = New System.Drawing.Point(205, 114)
         Me.btnUnSelect.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnUnSelect.Name = "btnUnSelect"
-        Me.btnUnSelect.Size = New System.Drawing.Size(119, 40)
+        Me.btnUnSelect.Size = New System.Drawing.Size(116, 40)
         Me.btnUnSelect.TabIndex = 20
-        Me.btnUnSelect.Text = "表示終了"
+        Me.btnUnSelect.Text = "表示終了 (選択解除)"
         Me.btnUnSelect.UseVisualStyleBackColor = True
         '
         'btnFileAdd

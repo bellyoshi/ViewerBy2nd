@@ -144,6 +144,11 @@ Public Class ctlPdf
         End Set
     End Property
 
+    Public Sub SetColor()
+        pbThumbnail.BackColor = My.Settings.formColor
+    End Sub
+
+
     Public Function GetBmp() As Bitmap
         If Image Is Nothing Then
             Return New Bitmap(0, 0)
