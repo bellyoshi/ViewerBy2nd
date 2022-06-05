@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ViewerBy2ndLib
 {
-    public enum FileTypeEnum
-    {
-        MOVIE = 1,
-        IMAGE = 2,
-        PDF = 3,
-        SVG = 4,
-    }
+    //public enum FileTypeEnum
+    //{
+    //    MOVIE = 1,
+    //    IMAGE = 2,
+    //    PDF = 3,
+    //    SVG = 4,
+    //}
     public class FileType
     {
 
@@ -27,7 +27,7 @@ namespace ViewerBy2ndLib
         // PDFの拡張子
         static string[] PDFExts = { "pdf" };
 
-        FileTypeEnum fileType;
+        //FileTypeEnum fileType;
 
         public string extention;
         bool IsPDFExt(String ext)

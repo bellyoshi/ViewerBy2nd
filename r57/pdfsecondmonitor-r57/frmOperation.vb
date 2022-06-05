@@ -52,20 +52,22 @@ Public Class frmOperation
     Private Sub frmOperation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         screenDetect()
         AppSettingLoad()
-        ActivateForm()
+        'ActivateForm()
         ControlEnable()
-    End Sub
-
-    Private Sub ActivateForm()
-
         Timer1.Interval = 100
         Timer1.Start()
     End Sub
 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        Me.Activate()
-        Timer1.Stop()
-    End Sub
+    'Private Sub ActivateForm()
+
+    '    Timer1.Interval = 100
+    '    Timer1.Start()
+    'End Sub
+
+    'Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    '    Me.Activate()
+    '    Timer1.Stop()
+    'End Sub
 
 #Region "設定値"
     Private loading As Boolean
@@ -763,11 +765,7 @@ Public Class frmOperation
 
     End Sub
 
-    Private Sub ctlMovie_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Timer1.Interval = 100
-        Timer1.Start()
 
-    End Sub
 
     Private Sub trackBarSeek_ValueChanged(sender As Object, e As EventArgs) Handles trackBarSeek.Scroll
         trackBarSeek_Scrolled = True
