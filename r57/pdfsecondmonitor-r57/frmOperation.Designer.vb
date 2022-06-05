@@ -65,6 +65,7 @@ Partial Class frmOperation
         Me.btnPDFFirst = New System.Windows.Forms.Button()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pbBack = New System.Windows.Forms.PictureBox()
+        Me.btnWhole = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -248,10 +249,10 @@ Partial Class frmOperation
         '
         'btnSetWindow
         '
-        Me.btnSetWindow.Location = New System.Drawing.Point(384, 379)
+        Me.btnSetWindow.Location = New System.Drawing.Point(365, 378)
         Me.btnSetWindow.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSetWindow.Name = "btnSetWindow"
-        Me.btnSetWindow.Size = New System.Drawing.Size(252, 36)
+        Me.btnSetWindow.Size = New System.Drawing.Size(167, 36)
         Me.btnSetWindow.TabIndex = 37
         Me.btnSetWindow.Text = "ウィンドウ幅に合わせる"
         Me.btnSetWindow.UseVisualStyleBackColor = True
@@ -444,11 +445,21 @@ Partial Class frmOperation
         Me.pbBack.TabIndex = 58
         Me.pbBack.TabStop = False
         '
+        'btnWhole
+        '
+        Me.btnWhole.Location = New System.Drawing.Point(538, 381)
+        Me.btnWhole.Name = "btnWhole"
+        Me.btnWhole.Size = New System.Drawing.Size(140, 31)
+        Me.btnWhole.TabIndex = 59
+        Me.btnWhole.Text = "全体を表示"
+        Me.btnWhole.UseVisualStyleBackColor = True
+        '
         'frmOperation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1168, 649)
+        Me.Controls.Add(Me.btnWhole)
         Me.Controls.Add(Me.pbBack)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.lblPage)
@@ -536,4 +547,5 @@ Partial Class frmOperation
     Friend WithEvents btnPDFFirst As Button
     Friend WithEvents Label3 As Label
     Friend WithEvents pbBack As PictureBox
+    Friend WithEvents btnWhole As Button
 End Class

@@ -14,6 +14,41 @@ Public Class frmOperation
         CtlMovie1ControlEnabled()
         CtlImage1ControlEnabled()
     End Sub
+
+    Public Sub CtlPdf1ControlEnabled()
+
+        Dim isEnabled = MyFileType.IsPDFExt()
+        btnPDFFirst.Enabled = isEnabled
+        btnPDFBack.Enabled = isEnabled
+        btnPDFNext.Enabled = isEnabled
+
+        btnPreviousHalf.Enabled = isEnabled
+        btnNextHalf.Enabled = isEnabled
+
+        Dim setwin As Boolean = MyFileType.IsPDFExt OrElse MyFileType.IsImageExt OrElse MyFileType.IsSVGExt
+        btnSetWindow.Enabled = isEnabled
+        btnWhole.Enabled = isEnabled
+    End Sub
+    Public Sub CtlMovie1ControlEnabled()
+        Dim isEnabled = MyFileType.IsMovieExt()
+        GotoFirst.Enabled = isEnabled
+        btnFastReverse.Enabled = isEnabled
+        btnStartStop.Enabled = isEnabled
+        btnStop.Enabled = isEnabled
+        btnFastForward.Enabled = isEnabled
+
+    End Sub
+
+    Public Sub CtlImage1ControlEnabled()
+        Dim isEnabled = MyFileType.IsMovieExt() Or MyFileType.IsSVGExt
+
+        btnRotateM90.Enabled = isEnabled
+        btnRotate90.Enabled = isEnabled
+        btnRotate180.Enabled = isEnabled
+        btnRotate0.Enabled = isEnabled
+
+    End Sub
+
     Private Sub frmOperation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         screenDetect()
         AppSettingLoad()
@@ -351,11 +386,6 @@ Public Class frmOperation
 
 
 
-    Public Sub CtlImage1ControlEnabled()
-
-        Me.Enabled = Not (_fileViewParam Is Nothing)
-
-    End Sub
 
 
 
@@ -575,13 +605,7 @@ Public Class frmOperation
     End Sub
 #End Region
 
-    Public Sub CtlPdf1ControlEnabled()
 
-        If MyFileType.IsPDFExt Then
-
-        End If
-
-    End Sub
 
 
 
@@ -604,7 +628,7 @@ Public Class frmOperation
 
     Private _backFileName As String
     Private _fileViewParam As FileViewParam
-    Private MyFileType As FileType
+    Private MyFileType As FileType = New FileType("")
     Public Sub SetFileInfo(f As FileViewParam)
         Me._fileViewParam = f
         MyFileType = New FileType(f.FileName)
@@ -702,11 +726,6 @@ Public Class frmOperation
     End Sub
 
 
-    Public Sub CtlMovie1ControlEnabled()
-
-        Me.Enabled = Not (_fileViewParam Is Nothing)
-
-    End Sub
 
     Private Sub GotoFirst_Click(sender As Object, e As EventArgs) Handles GotoFirst.Click
         player.Ctlcontrols.stop()
