@@ -25,9 +25,9 @@ Public Class frmOperation
         btnPreviousHalf.Enabled = isEnabled
         btnNextHalf.Enabled = isEnabled
 
-        Dim setwin As Boolean = MyFileType.IsPDFExt OrElse MyFileType.IsImageExt OrElse MyFileType.IsSVGExt
-        btnSetWindow.Enabled = isEnabled
-        btnWhole.Enabled = isEnabled
+        Dim setwin As Boolean = MyFileType.IsPDFExt() OrElse MyFileType.IsImageExt() OrElse MyFileType.IsSVGExt()
+        btnSetWindow.Enabled = setwin
+        btnWhole.Enabled = setwin
     End Sub
     Public Sub CtlMovie1ControlEnabled()
         Dim isEnabled = MyFileType.IsMovieExt()
@@ -40,7 +40,7 @@ Public Class frmOperation
     End Sub
 
     Public Sub CtlImage1ControlEnabled()
-        Dim isEnabled = MyFileType.IsMovieExt() Or MyFileType.IsSVGExt
+        Dim isEnabled = MyFileType.IsImageExt() OrElse MyFileType.IsSVGExt()
 
         btnRotateM90.Enabled = isEnabled
         btnRotate90.Enabled = isEnabled
@@ -401,7 +401,12 @@ Public Class frmOperation
 
 #End Region
 #Region "Public Class ctlPdf"
-
+    Friend Sub SetView()
+        If pbThumbnail.Image Is Nothing Then
+            Exit Sub
+        End If
+        _dispacher.ShowImage(pbThumbnail.Image)
+    End Sub
 
 
 
@@ -769,9 +774,7 @@ Public Class frmOperation
 
     End Sub
 
-    Friend Sub SetView()
-        Throw New NotImplementedException()
-    End Sub
+
 #End Region
 
 #End Region

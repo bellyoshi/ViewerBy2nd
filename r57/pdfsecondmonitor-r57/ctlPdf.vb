@@ -290,10 +290,5 @@ Public Class ctlPdf
 
     Private _setwinWidth As SetWinWidthModule
 
-    Friend Sub SetView()
-        If pbThumbnail.Image Is Nothing Then
-            Exit Sub
-        End If
-        _dispacher.ShowImage(pbThumbnail.Image)
-    End Sub
+
 End Class
