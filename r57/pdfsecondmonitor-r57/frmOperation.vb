@@ -1,28 +1,18 @@
-﻿Public Class frmOperation
+﻿Imports ViewerBy2ndLib
+
+Public Class frmOperation
 #Region "サポートするファイルの種類"
 
-    ''' <summary>
-    ''' 開ける動画の拡張子
-    ''' </summary>
-    Private movieExts As String() = {"avi", "mpeg", "mp4", "wmv", "mov"}
 
-    ''' <summary>
-    ''' 開ける画像の拡張子
-    ''' </summary>
-    Private ImageExts As String() = {"jpeg", "jpg", "bmp", "png", "gif", "tiff", "tif", "svg"}
 
-    ''' <summary>
-    ''' PDFの拡張子
-    ''' </summary>
-    Private PDFExts As String() = {"pdf"}
 #End Region
 
 #Region "初期処理"
 
     Private Sub ControlEnable()
-        CtlPdf1.ControlEnabled()
-        CtlMovie1.ControlEnabled()
-        CtlImage1.ControlEnabled()
+        CtlPdf1ControlEnabled()
+        CtlMovie1ControlEnabled()
+        CtlImage1ControlEnabled()
     End Sub
     Private Sub frmOperation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         screenDetect()
@@ -49,8 +39,7 @@
         cmbDisplay.SelectedIndex = My.Settings.cmbDisplaySelectedIndex
         lblFormColor.BackColor = My.Settings.formColor
         _dispacher.SetColor(My.Settings.formColor)
-        CtlImage1.SetColor()
-        CtlPdf1.SetColor()
+        SetColor()
         Try
             Dim fvinfos As New List(Of FileViewParam)
 
@@ -116,8 +105,7 @@
         End If
         Me.lblFormColor.BackColor = ColorDialog1.Color
         My.Settings.formColor = ColorDialog1.Color
-        CtlImage1.SetColor()
-        CtlPdf1.SetColor()
+        SetColor()
         _dispacher.SetColor(ColorDialog1.Color)
     End Sub
 
@@ -190,30 +178,9 @@
         End If
         txtPDFFileName.Text = fileviewinfo.FileName
         Dim ext = IO.Path.GetExtension(fileviewinfo.FileName)
-        Dim imageFileViewInfo As FileViewParam = Nothing
-        Dim pdfFileViewInfo As FileViewParam = Nothing
-        Dim movieFileViewInfo As FileViewParam = Nothing
-        If IsPDFExt(ext) Then
-            tbcFileOpes.SelectTab(tpAdobePDF.TabIndex)
-            pdfFileViewInfo = fileviewinfo
-            CtlImage1.SetFileInfo(Nothing)
-            CtlMovie1.SetFileInfo(Nothing)
-            CtlPdf1.SetFileInfo(pdfFileViewInfo)
-            CtlPdf1.UpdateImage()
-        ElseIf IsImageExt(ext) Then
-            tbcFileOpes.SelectTab(tpImage.TabIndex)
-            imageFileViewInfo = fileviewinfo
-            CtlImage1.SetFileInfo(imageFileViewInfo)
-            CtlImage1.UpdateImage()
-            CtlMovie1.SetFileInfo(Nothing)
-            CtlPdf1.SetFileInfo(Nothing)
-        ElseIf IsMovieExt(ext) Then
-            tbcFileOpes.SelectTab(tpMediaPlayer.TabIndex)
-            movieFileViewInfo = fileviewinfo
-            CtlImage1.SetFileInfo(Nothing)
-            CtlMovie1.SetFileInfo(movieFileViewInfo)
-            CtlPdf1.SetFileInfo(Nothing)
-        End If
+
+        UpdateImage()
+        SetFileInfo(fileviewinfo)
 
         ControlEnable()
 
@@ -227,14 +194,7 @@
         End If
         fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
         Dim ext = IO.Path.GetExtension(fileviewinfo.FileName)
-        If IsPDFExt(ext) Then
-            CtlPdf1.SetView()
-        ElseIf IsImageExt(ext) Then
-            CtlImage1.SetView()
-        ElseIf IsMovieExt(ext) Then
-            'CtlMovie1.SetView()
-        End If
-
+        SetView()
 
 
 
@@ -242,55 +202,16 @@
     End Sub
 
 
-    Private Function IsContain(ext As String, exts As String()) As Boolean
-        For Each target In exts
-            If String.Compare($".{target}", ext, True) = 0 Then
-                Return True
-            End If
-        Next
-        Return False
-    End Function
 
 
-    Private Function IsPDFExt(ext As String) As Boolean
-        Return IsContain(ext, PDFExts)
-    End Function
 
-    Private Function IsImageExt(ext As String) As Boolean
-        Return IsContain(ext, ImageExts)
-    End Function
 
-    Private Function IsMovieExt(ext As String) As Boolean
-        Return IsContain(ext, movieExts)
-    End Function
 
-    Private Function CreateFilter() As String
-        Dim buf As New System.Text.StringBuilder
-        buf.Append("画像、動画、PDFファイル")
-        buf.Append("|")
-        buf.Append(CreateExtsOfFilter(PDFExts))
-        buf.Append(CreateExtsOfFilter(ImageExts))
-        buf.Append(CreateExtsOfFilter(movieExts))
-        buf.Append("|")
-        buf.Append("All Files(*.*)")
-        buf.Append("|")
-        buf.Append("*.*")
-        Return buf.ToString()
-    End Function
 
-    Private Function CreateExtsOfFilter(ByVal exts As String()) As String
-        Dim buf = New System.Text.StringBuilder
-        For Each ext In exts
-            buf.Append("*.")
-            buf.Append(ext)
-            buf.Append(";")
-        Next
-        Return buf.ToString()
-    End Function
 
     Private Sub btnFileAdd_Click(sender As Object, e As EventArgs) Handles btnFileAdd.Click
         OpenFileDialog1.Multiselect = True
-        OpenFileDialog1.Filter = CreateFilter()
+        OpenFileDialog1.Filter = FileType.CreateFilter()
         OpenFileDialog1.FileName = txtPDFFileName.Text
         Dim ret = OpenFileDialog1.ShowDialog()
         If ret = Windows.Forms.DialogResult.Cancel Then
@@ -308,8 +229,7 @@
 
     Private Sub btnUnSelect_Click(sender As Object, e As EventArgs) Handles btnUnSelect.Click
         lstPDFFiles.SelectedItem = Nothing
-        CtlImage1.pbThumbnail.Image = Nothing
-        CtlPdf1.pbThumbnail.Image = Nothing
+        pbThumbnail.Image = Nothing
         ControlEnable()
     End Sub
 
@@ -341,8 +261,7 @@
     End Sub
 
     Private Sub chkUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkUpdate.CheckedChanged
-        CtlPdf1.chkUpdate = chkUpdate.Checked
-        CtlImage1.chkUpdate = chkUpdate.Checked
+        UpdateImage()
     End Sub
 
 
@@ -359,5 +278,484 @@
 
 
 #End Region
+#Region "ctlImage"
+
+
+
+    Private _image As Bitmap
+    'Property Image As Bitmap
+    '    Get
+    '        Return _image
+    '    End Get
+    '    Set(value As Bitmap)
+    '        If value Is Nothing Then
+    '            Exit Property
+
+    '        End If
+    '        _image = value
+    '        '         _pictureBox.Image = _image
+    '        pbThumbnail.Image = _image
+    '        pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
+    '    End Set
+    'End Property
+
+
+
+    Public Function LoadImage(filename As String) As Bitmap
+        If System.IO.Path.GetExtension(filename) = ".svg" Then
+            Dim doc = Svg.SvgDocument.Open(filename)
+            Dim sc = _dispacher.GetScreen().Bounds
+            Dim bbmp = doc.Draw(sc.Height, sc.Height)
+            Return bbmp
+        End If
+        Return New Bitmap(filename)
+    End Function
+
+
+    Private Sub Rotate(flip As RotateFlipType)
+        Dim bmp = LoadImage(_fileViewParam.FileName)
+        bmp.RotateFlip(flip)
+        Image = bmp
+        pbBack.Image = bmp
+    End Sub
+
+
+
+
+    Private Sub btnRotate_Click(sender As Object, e As EventArgs) Handles btnRotate180.Click
+        Rotate(RotateFlipType.Rotate180FlipNone)
+        VScrollBar1Init()
+        UpdateImage()
+    End Sub
+
+    Private Sub btnRotate90_Click(sender As Object, e As EventArgs) Handles btnRotate90.Click
+        Rotate(RotateFlipType.Rotate90FlipNone)
+        VScrollBar1Init()
+        UpdateImage()
+    End Sub
+
+    Private Sub btnRotate0_Click(sender As Object, e As EventArgs) Handles btnRotate0.Click
+        Rotate(RotateFlipType.RotateNoneFlipNone)
+        VScrollBar1Init()
+        UpdateImage()
+    End Sub
+
+    Private Sub btnRotate270_Click(sender As Object, e As EventArgs) Handles btnRotateM90.Click
+        Rotate(RotateFlipType.Rotate270FlipNone)
+        VScrollBar1Init()
+        UpdateImage()
+    End Sub
+
+
+
+
+
+
+    Public Sub CtlImage1ControlEnabled()
+
+        Me.Enabled = Not (_fileViewParam Is Nothing)
+
+    End Sub
+
+
+
+
+
+
+
+
+
+
+    Private SetWinWidthModule As SetWinWidthModule
+
+
+#End Region
+#Region "Public Class ctlPdf"
+
+
+
+
+    Public Sub UpdateImage()
+        If chkUpdate.Checked Then
+            SetView()
+        End If
+    End Sub
+
+    Dim pdfDoc As PdfiumViewer.PdfDocument
+    Dim page As Integer = 0
+    Public Sub OpenFile(fileName As String)
+        isHalf = False
+        pdfDoc = PdfiumViewer.PdfDocument.Load(fileName)
+        FirstPage()
+    End Sub
+
+    Public Sub FirstPage()
+
+        isHalf = False
+        page = 0
+        DisplayPage()
+    End Sub
+
+    Public Sub NextPage()
+        isHalf = False
+        If page < pdfDoc.PageCount - 1 Then
+            page += 1
+            DisplayPage()
+        End If
+    End Sub
+
+    Public Sub PrePage()
+        isHalf = False
+        If 0 < page Then
+            page -= 1
+            DisplayPage()
+        End If
+    End Sub
+
+    Private buttomInPage As Decimal
+    Private _isHalf As Boolean
+    Public Property isHalf As Boolean
+        Set(value As Boolean)
+            _isHalf = value
+            If Not _isHalf Then
+                buttomInPage = 0.0D
+            End If
+        End Set
+        Get
+            Return _isHalf
+        End Get
+    End Property
+    Public Sub NextHalfPage()
+        If buttomInPage = 1.0 AndAlso page = pdfDoc.PageCount - 1 Then
+            Exit Sub
+        End If
+
+
+        buttomInPage += 0.5D
+        If buttomInPage = 1.5D Then
+            NextPage()
+            buttomInPage = 0.5D
+        End If
+
+        isHalf = True
+        DisplayHalfPage()
+    End Sub
+
+    Public Sub PreviousHalfPage()
+
+        'If Not isHalf Then
+        '    page -= 1
+        'End If
+        If page = 0D AndAlso buttomInPage <= 0.5D Then
+            Exit Sub
+        End If
+        buttomInPage -= 0.5D
+        If buttomInPage <= 0.0D Then
+            buttomInPage = 1D
+            page -= 1
+
+        End If
+        isHalf = True
+        DisplayHalfPage()
+    End Sub
+
+    Private Sub DisplayHalfPage()
+        If (page >= pdfDoc.PageCount) OrElse (page < 0) Then
+            Return
+        End If
+        Dim pdfSize = pdfDoc.PageSizes(page)
+        Dim sourceSize As New SizeF
+        sourceSize.Height = pdfSize.Height / 2
+        sourceSize.Width = pdfSize.Width
+        Dim renderSize As Size? = GetRenderSize(sourceSize)
+        If renderSize Is Nothing Then
+            Return
+        End If
+        Dim r = renderSize.Value
+        r.Height *= 2
+        RenderHalf(r)
+    End Sub
+
+    Private Sub RenderHalf(renderSize As Size)
+        Dim height = renderSize.Height \ 2
+        Dim width = renderSize.Width
+        Dim canvas As New Bitmap(width, height)
+        Using g As Graphics = Graphics.FromImage(canvas)
+            Dim img = GetImage(renderSize)
+            Dim y = CType(renderSize.Height * (buttomInPage - 0.5), Integer)
+            Dim srcRect As New Rectangle(0, y, width, height)
+            Dim desRect As New Rectangle(0, 0, srcRect.Width, srcRect.Height)
+            g.DrawImage(img, desRect, srcRect, GraphicsUnit.Pixel)
+        End Using
+        Image = canvas
+    End Sub
+    Private Function GetImage(renderSize As Size) As Image
+        Return pdfDoc.Render(page, renderSize.Width, renderSize.Height, 96, 96, False)
+    End Function
+
+    'Private _image As Image
+    Public Property Image As Image
+        Get
+            Return _image
+        End Get
+        Set(value As Image)
+            _image = value
+            pbThumbnail.Image = _image
+            pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
+            UpdateImage()
+        End Set
+    End Property
+
+    Public Sub SetColor()
+        pbThumbnail.BackColor = My.Settings.formColor
+    End Sub
+
+
+    Public Function GetBmp() As Bitmap
+        If Image Is Nothing Then
+            Return New Bitmap(1, 1)
+        End If
+        Dim img As New Bitmap(Image)
+        Return img
+    End Function
+
+    Private Sub DisplayPage()
+        If (page >= pdfDoc.PageCount) Then
+            Return
+        End If
+        Dim sourceSize = pdfDoc.PageSizes(page)
+        Dim renderSize As Size? = GetRenderSize(sourceSize)
+        If renderSize Is Nothing Then
+            Return
+        End If
+        Image = GetImage(renderSize.Value)
+    End Sub
+
+
+
+    Private Function GetRenderSize(pdfSize As SizeF) As Size?
+        Dim bound = _dispacher.GetScreen().Bounds
+        Dim renderSize = New Size(bound.Size)
+        Dim pdfWdivH = pdfSize.Width / pdfSize.Height ' // pdfの縦横比
+        Dim boxWdivH = bound.Width / bound.Height '  // コントロールの縦横比
+        If (boxWdivH > 10) Then ' 落ちないよう
+            Return Nothing
+        End If
+        If (pdfWdivH < boxWdivH) Then
+            ' フォーム内にImageを当てはめる判定                    {
+            renderSize.Width = bound.Height * pdfWdivH
+        Else
+            renderSize.Height = bound.Width / pdfWdivH
+        End If
+        Return renderSize
+    End Function
+
+
+
+
+#Region "ページ移動"
+
+    Private Sub btnFirst_Click(sender As Object, e As EventArgs) Handles btnPDFFirst.Click
+        FirstPage()
+        SetImage()
+    End Sub
+
+    Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnPDFNext.Click
+        NextPage()
+        SetImage()
+    End Sub
+
+    Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnPDFBack.Click
+        PrePage()
+        SetImage()
+    End Sub
+
+    Private Sub btnLast_Click(sender As Object, e As EventArgs)
+        'todo
+    End Sub
+#End Region
+
+    Public Sub CtlPdf1ControlEnabled()
+
+        If MyFileType.IsPDFExt Then
+
+        End If
+
+    End Sub
+
+
+
+    Private Sub SetImage()
+        Dim img = GetBmp()
+        If img Is Nothing Then
+            Exit Sub
+
+        End If
+        pbBack.Image = img
+        pbThumbnail.Image = pbBack.Image
+        pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
+        If pdfDoc Is Nothing Then
+            Exit Sub
+        End If
+        lblPage.Text = "ページ" & page + 1 & "/" & pdfDoc.PageCount
+    End Sub
+
+
+
+    Private _backFileName As String
+    Private _fileViewParam As FileViewParam
+    Private MyFileType As FileType
+    Public Sub SetFileInfo(f As FileViewParam)
+        Me._fileViewParam = f
+        MyFileType = New FileType(f.FileName)
+        If _fileViewParam Is Nothing Then
+            SetImage()
+            Return
+        End If
+
+        Dim sc = _dispacher.GetScreen().Bounds
+
+        If MyFileType.IsPDFExt() Then
+            OpenFile(f.FileName)
+            SetImage()
+        ElseIf MyFileType.IsImageExt() Then
+            Rotate(RotateFlipType.RotateNoneFlipNone)
+        ElseIf MyFileType.IsMovieExt() Then
+            player = _dispacher.ShowMovie()
+
+            player.URL = _fileViewParam.FileName
+            player.uiMode = "none"
+            player.stretchToFit = True
+
+        End If
+
+        _setwinWidth = New SetWinWidthModule(sc, pbThumbnail, pbBack, VScrollBar1)
+        UpdateImage()
+    End Sub
+
+
+
+    Private Sub btnNextHalf_Click(sender As Object, e As EventArgs) Handles btnNextHalf.Click
+        NextHalfPage()
+        SetImage()
+    End Sub
+
+    Private Sub btnPreviousHalf_Click(sender As Object, e As EventArgs) Handles btnPreviousHalf.Click
+        PreviousHalfPage()
+        SetImage()
+    End Sub
+
+
+
+    Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
+
+
+        _setwinWidth.DispSetWindow()
+        UpdateImage()
+    End Sub
+    Private Sub VScrollBar1Init()
+        VScrollBar1.Value = 0
+        VScrollBar1.Minimum = 0
+        VScrollBar1.Maximum = GetBmp().Height
+
+    End Sub
+    Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
+        VScrollBar1Init()
+        _setwinWidth.DispSetWindow()
+        UpdateImage()
+    End Sub
+
+    Private _setwinWidth As SetWinWidthModule
+
+
+
+#End Region
+#Region "douga"
+
+
+
+    Private player As AxWMPLib.AxWindowsMediaPlayer
+
+
+
+
+#Region "Media Playerの処理"
+
+
+
+
+    Private Sub btnStartStop_Click(sender As Object, e As EventArgs) Handles btnStartStop.Click
+        player.Ctlcontrols.play()
+    End Sub
+
+    Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
+        player.Ctlcontrols.pause()
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles btnFastForward.Click
+        player.Ctlcontrols.fastForward()
+    End Sub
+
+    Private Sub btnFastReverse_Click(sender As Object, e As EventArgs) Handles btnFastReverse.Click
+        player.Ctlcontrols.fastReverse()
+
+    End Sub
+
+
+    Public Sub CtlMovie1ControlEnabled()
+
+        Me.Enabled = Not (_fileViewParam Is Nothing)
+
+    End Sub
+
+    Private Sub GotoFirst_Click(sender As Object, e As EventArgs) Handles GotoFirst.Click
+        player.Ctlcontrols.stop()
+        player.Ctlcontrols.play()
+        player.Ctlcontrols.pause()
+    End Sub
+
+    Private trackBarSeek_Scrolled As Boolean = False
+    Private Sub Seek(sender As Object, e As EventArgs) Handles Timer1.Tick
+        If player Is Nothing Then
+            Exit Sub
+        End If
+        Try
+            If trackBarSeek_Scrolled Then
+                player.Ctlcontrols.currentPosition = trackBarSeek.Value / 100
+                If Not player.playState = WMPLib.WMPPlayState.wmppsPlaying Then
+                    player.Ctlcontrols.play()
+                    player.Ctlcontrols.pause()
+
+                End If
+                trackBarSeek_Scrolled = False
+            Else
+                trackBarSeek.Maximum = CType(player.Ctlcontrols.currentItem.duration * 100, Integer)
+                trackBarSeek.Value = CType(player.Ctlcontrols.currentPosition * 100, Integer)
+            End If
+
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
+
+    Private Sub ctlMovie_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Timer1.Interval = 100
+        Timer1.Start()
+
+    End Sub
+
+    Private Sub trackBarSeek_ValueChanged(sender As Object, e As EventArgs) Handles trackBarSeek.Scroll
+        trackBarSeek_Scrolled = True
+
+    End Sub
+
+    Friend Sub SetView()
+        Throw New NotImplementedException()
+    End Sub
+#End Region
+
+#End Region
+
 
 End Class

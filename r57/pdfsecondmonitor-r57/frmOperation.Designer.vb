@@ -23,6 +23,7 @@ Partial Class frmOperation
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOperation))
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.cmbDisplay = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -30,10 +31,6 @@ Partial Class frmOperation
         Me.lblFormColor = New System.Windows.Forms.Label()
         Me.btnColorChange = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.tpMediaPlayer = New System.Windows.Forms.TabPage()
-        Me.tbcFileOpes = New System.Windows.Forms.TabControl()
-        Me.tpAdobePDF = New System.Windows.Forms.TabPage()
-        Me.tpImage = New System.Windows.Forms.TabPage()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtPDFFileName = New System.Windows.Forms.TextBox()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -45,14 +42,34 @@ Partial Class frmOperation
         Me.btnDisp = New System.Windows.Forms.Button()
         Me.chkUpdate = New System.Windows.Forms.CheckBox()
         Me.btnUnDisp = New System.Windows.Forms.Button()
-        Me.CtlPdf1 = New pdfsecondmonitor.ctlPdf()
-        Me.CtlMovie1 = New pdfsecondmonitor.ctlMovie()
-        Me.CtlImage1 = New pdfsecondmonitor.CtlImage()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
+        Me.pbThumbnail = New System.Windows.Forms.PictureBox()
+        Me.btnSetWindow = New System.Windows.Forms.Button()
+        Me.btnRotate90 = New System.Windows.Forms.Button()
+        Me.btnRotate0 = New System.Windows.Forms.Button()
+        Me.btnRotateM90 = New System.Windows.Forms.Button()
+        Me.btnRotate180 = New System.Windows.Forms.Button()
+        Me.AxWindowsMediaPlayer1 = New AxWMPLib.AxWindowsMediaPlayer()
+        Me.trackBarSeek = New System.Windows.Forms.TrackBar()
+        Me.GotoFirst = New System.Windows.Forms.Button()
+        Me.btnStop = New System.Windows.Forms.Button()
+        Me.btnFastReverse = New System.Windows.Forms.Button()
+        Me.btnFastForward = New System.Windows.Forms.Button()
+        Me.btnStartStop = New System.Windows.Forms.Button()
+        Me.lblPage = New System.Windows.Forms.Label()
+        Me.btnPreviousHalf = New System.Windows.Forms.Button()
+        Me.btnNextHalf = New System.Windows.Forms.Button()
+        Me.btnPDFNext = New System.Windows.Forms.Button()
+        Me.btnPDFBack = New System.Windows.Forms.Button()
+        Me.btnPDFFirst = New System.Windows.Forms.Button()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.pbBack = New System.Windows.Forms.PictureBox()
         Me.GroupBox1.SuspendLayout()
-        Me.tpMediaPlayer.SuspendLayout()
-        Me.tbcFileOpes.SuspendLayout()
-        Me.tpAdobePDF.SuspendLayout()
-        Me.tpImage.SuspendLayout()
+        CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.trackBarSeek, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pbBack, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -114,54 +131,6 @@ Partial Class frmOperation
         '
         'Timer1
         '
-        '
-        'tpMediaPlayer
-        '
-        Me.tpMediaPlayer.Controls.Add(Me.CtlMovie1)
-        Me.tpMediaPlayer.Location = New System.Drawing.Point(4, 25)
-        Me.tpMediaPlayer.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tpMediaPlayer.Name = "tpMediaPlayer"
-        Me.tpMediaPlayer.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tpMediaPlayer.Size = New System.Drawing.Size(805, 416)
-        Me.tpMediaPlayer.TabIndex = 1
-        Me.tpMediaPlayer.Text = "動画"
-        Me.tpMediaPlayer.UseVisualStyleBackColor = True
-        '
-        'tbcFileOpes
-        '
-        Me.tbcFileOpes.Controls.Add(Me.tpAdobePDF)
-        Me.tbcFileOpes.Controls.Add(Me.tpMediaPlayer)
-        Me.tbcFileOpes.Controls.Add(Me.tpImage)
-        Me.tbcFileOpes.Location = New System.Drawing.Point(348, 114)
-        Me.tbcFileOpes.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tbcFileOpes.Name = "tbcFileOpes"
-        Me.tbcFileOpes.SelectedIndex = 0
-        Me.tbcFileOpes.Size = New System.Drawing.Size(813, 445)
-        Me.tbcFileOpes.TabIndex = 12
-        '
-        'tpAdobePDF
-        '
-        Me.tpAdobePDF.Controls.Add(Me.CtlPdf1)
-        Me.tpAdobePDF.Location = New System.Drawing.Point(4, 25)
-        Me.tpAdobePDF.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tpAdobePDF.Name = "tpAdobePDF"
-        Me.tpAdobePDF.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tpAdobePDF.Size = New System.Drawing.Size(805, 416)
-        Me.tpAdobePDF.TabIndex = 0
-        Me.tpAdobePDF.Text = "PDFの表示"
-        Me.tpAdobePDF.UseVisualStyleBackColor = True
-        '
-        'tpImage
-        '
-        Me.tpImage.Controls.Add(Me.CtlImage1)
-        Me.tpImage.Location = New System.Drawing.Point(4, 25)
-        Me.tpImage.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tpImage.Name = "tpImage"
-        Me.tpImage.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.tpImage.Size = New System.Drawing.Size(805, 416)
-        Me.tpImage.TabIndex = 2
-        Me.tpImage.Text = "画像"
-        Me.tpImage.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -252,60 +221,276 @@ Partial Class frmOperation
         Me.btnUnDisp.Text = "表示終了"
         Me.btnUnDisp.UseVisualStyleBackColor = True
         '
-        'CtlPdf1
+        'Label2
         '
-        Me.CtlPdf1.chkUpdate = False
-        Me.CtlPdf1.Image = Nothing
-        Me.CtlPdf1.isHalf = False
-        Me.CtlPdf1.Location = New System.Drawing.Point(5, 29)
-        Me.CtlPdf1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtlPdf1.Name = "CtlPdf1"
-        Me.CtlPdf1.Size = New System.Drawing.Size(792, 359)
-        Me.CtlPdf1.TabIndex = 0
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(832, 139)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(92, 15)
+        Me.Label2.TabIndex = 40
+        Me.Label2.Text = "表示プレビュー"
         '
-        'CtlMovie1
+        'VScrollBar1
         '
-        Me.CtlMovie1.Location = New System.Drawing.Point(37, 31)
-        Me.CtlMovie1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtlMovie1.Name = "CtlMovie1"
-        Me.CtlMovie1.Size = New System.Drawing.Size(467, 166)
-        Me.CtlMovie1.TabIndex = 0
+        Me.VScrollBar1.Location = New System.Drawing.Point(1120, 168)
+        Me.VScrollBar1.Name = "VScrollBar1"
+        Me.VScrollBar1.Size = New System.Drawing.Size(23, 300)
+        Me.VScrollBar1.TabIndex = 39
         '
-        'CtlImage1
+        'pbThumbnail
         '
-        Me.CtlImage1.chkUpdate = False
-        Me.CtlImage1.Image = Nothing
-        Me.CtlImage1.Location = New System.Drawing.Point(28, 31)
-        Me.CtlImage1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.CtlImage1.Name = "CtlImage1"
-        Me.CtlImage1.Size = New System.Drawing.Size(769, 361)
-        Me.CtlImage1.TabIndex = 0
+        Me.pbThumbnail.Location = New System.Drawing.Point(690, 168)
+        Me.pbThumbnail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.pbThumbnail.Name = "pbThumbnail"
+        Me.pbThumbnail.Size = New System.Drawing.Size(427, 300)
+        Me.pbThumbnail.TabIndex = 38
+        Me.pbThumbnail.TabStop = False
+        '
+        'btnSetWindow
+        '
+        Me.btnSetWindow.Location = New System.Drawing.Point(384, 379)
+        Me.btnSetWindow.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnSetWindow.Name = "btnSetWindow"
+        Me.btnSetWindow.Size = New System.Drawing.Size(252, 36)
+        Me.btnSetWindow.TabIndex = 37
+        Me.btnSetWindow.Text = "ウィンドウ幅に合わせる"
+        Me.btnSetWindow.UseVisualStyleBackColor = True
+        '
+        'btnRotate90
+        '
+        Me.btnRotate90.Location = New System.Drawing.Point(556, 300)
+        Me.btnRotate90.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnRotate90.Name = "btnRotate90"
+        Me.btnRotate90.Size = New System.Drawing.Size(80, 51)
+        Me.btnRotate90.TabIndex = 33
+        Me.btnRotate90.Text = "右90度"
+        Me.btnRotate90.UseVisualStyleBackColor = True
+        '
+        'btnRotate0
+        '
+        Me.btnRotate0.Location = New System.Drawing.Point(460, 265)
+        Me.btnRotate0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnRotate0.Name = "btnRotate0"
+        Me.btnRotate0.Size = New System.Drawing.Size(91, 51)
+        Me.btnRotate0.TabIndex = 34
+        Me.btnRotate0.Text = "０度"
+        Me.btnRotate0.UseVisualStyleBackColor = True
+        '
+        'btnRotateM90
+        '
+        Me.btnRotateM90.Location = New System.Drawing.Point(376, 300)
+        Me.btnRotateM90.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnRotateM90.Name = "btnRotateM90"
+        Me.btnRotateM90.Size = New System.Drawing.Size(79, 51)
+        Me.btnRotateM90.TabIndex = 35
+        Me.btnRotateM90.Text = "左90度"
+        Me.btnRotateM90.UseVisualStyleBackColor = True
+        '
+        'btnRotate180
+        '
+        Me.btnRotate180.Location = New System.Drawing.Point(460, 323)
+        Me.btnRotate180.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnRotate180.Name = "btnRotate180"
+        Me.btnRotate180.Size = New System.Drawing.Size(91, 51)
+        Me.btnRotate180.TabIndex = 36
+        Me.btnRotate180.Text = "180度回転"
+        Me.btnRotate180.UseVisualStyleBackColor = True
+        '
+        'AxWindowsMediaPlayer1
+        '
+        Me.AxWindowsMediaPlayer1.Enabled = True
+        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(690, 157)
+        Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
+        Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(466, 222)
+        Me.AxWindowsMediaPlayer1.TabIndex = 47
+        Me.AxWindowsMediaPlayer1.Visible = False
+        '
+        'trackBarSeek
+        '
+        Me.trackBarSeek.Location = New System.Drawing.Point(369, 509)
+        Me.trackBarSeek.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.trackBarSeek.Name = "trackBarSeek"
+        Me.trackBarSeek.Size = New System.Drawing.Size(317, 56)
+        Me.trackBarSeek.TabIndex = 46
+        '
+        'GotoFirst
+        '
+        Me.GotoFirst.Location = New System.Drawing.Point(362, 455)
+        Me.GotoFirst.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.GotoFirst.Name = "GotoFirst"
+        Me.GotoFirst.Size = New System.Drawing.Size(51, 50)
+        Me.GotoFirst.TabIndex = 41
+        Me.GotoFirst.Text = "先頭"
+        Me.GotoFirst.UseVisualStyleBackColor = True
+        '
+        'btnStop
+        '
+        Me.btnStop.Location = New System.Drawing.Point(550, 455)
+        Me.btnStop.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnStop.Name = "btnStop"
+        Me.btnStop.Size = New System.Drawing.Size(51, 50)
+        Me.btnStop.TabIndex = 42
+        Me.btnStop.Text = "||"
+        Me.btnStop.UseVisualStyleBackColor = True
+        '
+        'btnFastReverse
+        '
+        Me.btnFastReverse.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnFastReverse.Location = New System.Drawing.Point(425, 455)
+        Me.btnFastReverse.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnFastReverse.Name = "btnFastReverse"
+        Me.btnFastReverse.Size = New System.Drawing.Size(51, 50)
+        Me.btnFastReverse.TabIndex = 43
+        Me.btnFastReverse.Text = "◀◀"
+        Me.btnFastReverse.UseVisualStyleBackColor = True
+        '
+        'btnFastForward
+        '
+        Me.btnFastForward.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnFastForward.Location = New System.Drawing.Point(629, 455)
+        Me.btnFastForward.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnFastForward.Name = "btnFastForward"
+        Me.btnFastForward.Size = New System.Drawing.Size(51, 50)
+        Me.btnFastForward.TabIndex = 44
+        Me.btnFastForward.Text = "▶▶"
+        Me.btnFastForward.UseVisualStyleBackColor = True
+        '
+        'btnStartStop
+        '
+        Me.btnStartStop.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnStartStop.Location = New System.Drawing.Point(481, 455)
+        Me.btnStartStop.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnStartStop.Name = "btnStartStop"
+        Me.btnStartStop.Size = New System.Drawing.Size(51, 50)
+        Me.btnStartStop.TabIndex = 45
+        Me.btnStartStop.Text = "▶"
+        Me.btnStartStop.UseVisualStyleBackColor = True
+        '
+        'lblPage
+        '
+        Me.lblPage.AutoSize = True
+        Me.lblPage.Location = New System.Drawing.Point(837, 691)
+        Me.lblPage.Name = "lblPage"
+        Me.lblPage.Size = New System.Drawing.Size(43, 15)
+        Me.lblPage.TabIndex = 56
+        Me.lblPage.Text = "ページ"
+        '
+        'btnPreviousHalf
+        '
+        Me.btnPreviousHalf.Location = New System.Drawing.Point(384, 213)
+        Me.btnPreviousHalf.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnPreviousHalf.Name = "btnPreviousHalf"
+        Me.btnPreviousHalf.Size = New System.Drawing.Size(124, 39)
+        Me.btnPreviousHalf.TabIndex = 52
+        Me.btnPreviousHalf.Text = "0.5ページ前へ"
+        Me.btnPreviousHalf.UseVisualStyleBackColor = True
+        '
+        'btnNextHalf
+        '
+        Me.btnNextHalf.Location = New System.Drawing.Point(513, 213)
+        Me.btnNextHalf.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnNextHalf.Name = "btnNextHalf"
+        Me.btnNextHalf.Size = New System.Drawing.Size(123, 39)
+        Me.btnNextHalf.TabIndex = 53
+        Me.btnNextHalf.Text = "0.5ページ先へ"
+        Me.btnNextHalf.UseVisualStyleBackColor = True
+        '
+        'btnPDFNext
+        '
+        Me.btnPDFNext.Location = New System.Drawing.Point(553, 168)
+        Me.btnPDFNext.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnPDFNext.Name = "btnPDFNext"
+        Me.btnPDFNext.Size = New System.Drawing.Size(88, 41)
+        Me.btnPDFNext.TabIndex = 48
+        Me.btnPDFNext.Text = "次へ"
+        Me.btnPDFNext.UseVisualStyleBackColor = True
+        '
+        'btnPDFBack
+        '
+        Me.btnPDFBack.Location = New System.Drawing.Point(471, 168)
+        Me.btnPDFBack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnPDFBack.Name = "btnPDFBack"
+        Me.btnPDFBack.Size = New System.Drawing.Size(80, 41)
+        Me.btnPDFBack.TabIndex = 49
+        Me.btnPDFBack.Text = "前へ"
+        Me.btnPDFBack.UseVisualStyleBackColor = True
+        '
+        'btnPDFFirst
+        '
+        Me.btnPDFFirst.Location = New System.Drawing.Point(381, 168)
+        Me.btnPDFFirst.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnPDFFirst.Name = "btnPDFFirst"
+        Me.btnPDFFirst.Size = New System.Drawing.Size(88, 41)
+        Me.btnPDFFirst.TabIndex = 50
+        Me.btnPDFFirst.Text = "最初へ"
+        Me.btnPDFFirst.UseVisualStyleBackColor = True
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(902, 490)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(43, 15)
+        Me.Label3.TabIndex = 57
+        Me.Label3.Text = "ページ"
+        '
+        'pbBack
+        '
+        Me.pbBack.Location = New System.Drawing.Point(690, 519)
+        Me.pbBack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.pbBack.Name = "pbBack"
+        Me.pbBack.Size = New System.Drawing.Size(427, 300)
+        Me.pbBack.TabIndex = 58
+        Me.pbBack.TabStop = False
         '
         'frmOperation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1168, 649)
+        Me.Controls.Add(Me.pbBack)
+        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.lblPage)
+        Me.Controls.Add(Me.btnPreviousHalf)
+        Me.Controls.Add(Me.btnNextHalf)
+        Me.Controls.Add(Me.btnPDFNext)
+        Me.Controls.Add(Me.btnPDFBack)
+        Me.Controls.Add(Me.btnPDFFirst)
+        Me.Controls.Add(Me.AxWindowsMediaPlayer1)
+        Me.Controls.Add(Me.trackBarSeek)
+        Me.Controls.Add(Me.GotoFirst)
+        Me.Controls.Add(Me.btnStop)
+        Me.Controls.Add(Me.btnFastReverse)
+        Me.Controls.Add(Me.btnFastForward)
+        Me.Controls.Add(Me.btnStartStop)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.VScrollBar1)
+        Me.Controls.Add(Me.pbThumbnail)
+        Me.Controls.Add(Me.btnSetWindow)
+        Me.Controls.Add(Me.btnRotate90)
+        Me.Controls.Add(Me.btnRotate0)
+        Me.Controls.Add(Me.btnRotateM90)
+        Me.Controls.Add(Me.btnRotate180)
         Me.Controls.Add(Me.chkUpdate)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.btnFileAdd)
         Me.Controls.Add(Me.btnDisp)
         Me.Controls.Add(Me.btnUnDisp)
         Me.Controls.Add(Me.btnUnSelect)
-        Me.Controls.Add(Me.tbcFileOpes)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.lstPDFFiles)
         Me.Controls.Add(Me.txtPDFFileName)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "frmOperation"
-        Me.Text = "Form2"
+        Me.Text = "PDF Second Monitor"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.tpMediaPlayer.ResumeLayout(False)
-        Me.tbcFileOpes.ResumeLayout(False)
-        Me.tpAdobePDF.ResumeLayout(False)
-        Me.tpImage.ResumeLayout(False)
+        CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.trackBarSeek, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbBack, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -315,9 +500,6 @@ Partial Class frmOperation
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents GroupBox1 As Windows.Forms.GroupBox
     Friend WithEvents Timer1 As Windows.Forms.Timer
-    Friend WithEvents tpMediaPlayer As TabPage
-    Friend WithEvents tbcFileOpes As TabControl
-    Friend WithEvents tpAdobePDF As TabPage
     Friend WithEvents txtPDFFileName As TextBox
     Friend WithEvents lstPDFFiles As ListBox
     Friend WithEvents btnDelete As Button
@@ -325,14 +507,33 @@ Partial Class frmOperation
     Friend WithEvents btnUnSelect As Button
     Friend WithEvents Label6 As Label
     Friend WithEvents btnFileAdd As Button
-    Friend WithEvents tpImage As TabPage
-    Friend WithEvents CtlPdf1 As ctlPdf
-    Friend WithEvents CtlImage1 As CtlImage
-    Friend WithEvents CtlMovie1 As ctlMovie
     Friend WithEvents btnColorChange As Button
     Friend WithEvents ColorDialog1 As ColorDialog
     Friend WithEvents lblFormColor As Label
     Friend WithEvents btnDisp As Button
     Friend WithEvents chkUpdate As CheckBox
     Friend WithEvents btnUnDisp As Button
+    Friend WithEvents Label2 As Label
+    Friend WithEvents VScrollBar1 As VScrollBar
+    Friend WithEvents pbThumbnail As PictureBox
+    Friend WithEvents btnSetWindow As Button
+    Friend WithEvents btnRotate90 As Button
+    Friend WithEvents btnRotate0 As Button
+    Friend WithEvents btnRotateM90 As Button
+    Friend WithEvents btnRotate180 As Button
+    Friend WithEvents AxWindowsMediaPlayer1 As AxWMPLib.AxWindowsMediaPlayer
+    Friend WithEvents trackBarSeek As TrackBar
+    Friend WithEvents GotoFirst As Button
+    Friend WithEvents btnStop As Button
+    Friend WithEvents btnFastReverse As Button
+    Friend WithEvents btnFastForward As Button
+    Friend WithEvents btnStartStop As Button
+    Friend WithEvents lblPage As Label
+    Friend WithEvents btnPreviousHalf As Button
+    Friend WithEvents btnNextHalf As Button
+    Friend WithEvents btnPDFNext As Button
+    Friend WithEvents btnPDFBack As Button
+    Friend WithEvents btnPDFFirst As Button
+    Friend WithEvents Label3 As Label
+    Friend WithEvents pbBack As PictureBox
 End Class

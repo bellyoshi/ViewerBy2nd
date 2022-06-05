@@ -110,24 +110,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CtlImage.Designer.vb">
-      <DependentUpon>CtlImage.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CtlImage.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ctlMovie.Designer.vb">
-      <DependentUpon>ctlMovie.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ctlMovie.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ctlPdf.Designer.vb">
-      <DependentUpon>ctlPdf.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ctlPdf.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="FileViewParam.vb" />
     <Compile Include="frmMovieViewer.Designer.vb">
       <DependentUpon>frmMovieViewer.vb</DependentUpon>
@@ -181,15 +163,6 @@
     <Compile Include="TextViewParam.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CtlImage.resx">
-      <DependentUpon>CtlImage.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ctlMovie.resx">
-      <DependentUpon>ctlMovie.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ctlPdf.resx">
-      <DependentUpon>ctlPdf.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmImageViewer.resx">
       <DependentUpon>frmImageViewer.vb</DependentUpon>
     </EmbeddedResource>
@@ -243,6 +216,12 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ViewerBy2ndLib\ViewerBy2ndLib.csproj">
+      <Project>{0451af46-f9e1-4449-aa8b-1436b46ca87c}</Project>
+      <Name>ViewerBy2ndLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

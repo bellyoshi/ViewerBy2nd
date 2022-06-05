@@ -6,17 +6,7 @@
 
     Private _fileViewParam As FileViewParam
 
-    Public Sub SetFileInfo(f As FileViewParam)
-        Me._fileViewParam = f
-        If _fileViewParam Is Nothing Then
-            Return
-        End If
-        player = _dispacher.ShowMovie()
 
-        player.URL = _fileViewParam.FileName
-        player.uiMode = "none"
-        player.stretchToFit = True
-    End Sub
 
 #Region "Media Playerの処理"
 
