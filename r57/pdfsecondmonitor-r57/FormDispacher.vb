@@ -41,14 +41,18 @@
     Public Sub ShowImage(image As Image)
         Show(_frmImageViewer, GetType(frmImageViewer))
         _frmImageViewer.PictureBox1.Image = image
+        _frmImageViewer.PictureBox1.Visible = True
+        _frmImageViewer.AxWindowsMediaPlayer1.Visible = False
         _frmImageViewer.PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
     End Sub
     Private _frmImageViewer As frmImageViewer
 
-    Private _frmMovieViewer As frmMovieViewer
+
     Public Function ShowMovie() As AxWMPLib.AxWindowsMediaPlayer
-        Show(_frmMovieViewer, GetType(frmMovieViewer))
-        Return _frmMovieViewer.AxWindowsMediaPlayer1
+        Show(_frmImageViewer, GetType(frmImageViewer))
+        _frmImageViewer.PictureBox1.Visible = False
+        _frmImageViewer.AxWindowsMediaPlayer1.Visible = True
+        Return _frmImageViewer.AxWindowsMediaPlayer1
     End Function
 
     Public Sub Create(ByRef form As Form, ByVal formType As Type)
