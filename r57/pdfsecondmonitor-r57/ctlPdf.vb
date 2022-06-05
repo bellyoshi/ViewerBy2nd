@@ -67,7 +67,9 @@ Public Class ctlPdf
         End Get
     End Property
     Public Sub NextHalfPage()
-
+        If buttomInPage = 1.0 AndAlso page = pdfDoc.PageCount - 1 Then
+            Exit Sub
+        End If
 
 
         buttomInPage += 0.5D
@@ -75,6 +77,7 @@ Public Class ctlPdf
             NextPage()
             buttomInPage = 0.5D
         End If
+
         isHalf = True
         DisplayHalfPage()
     End Sub

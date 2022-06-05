@@ -44,10 +44,10 @@ Partial Class frmOperation
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
         Me.btnDisp = New System.Windows.Forms.Button()
         Me.chkUpdate = New System.Windows.Forms.CheckBox()
+        Me.btnUnDisp = New System.Windows.Forms.Button()
         Me.CtlPdf1 = New pdfsecondmonitor.ctlPdf()
         Me.CtlMovie1 = New pdfsecondmonitor.ctlMovie()
         Me.CtlImage1 = New pdfsecondmonitor.CtlImage()
-        Me.btnUnDisp = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         Me.tpMediaPlayer.SuspendLayout()
         Me.tbcFileOpes.SuspendLayout()
@@ -242,6 +242,16 @@ Partial Class frmOperation
         Me.chkUpdate.Text = "操作中にモニターを更新する"
         Me.chkUpdate.UseVisualStyleBackColor = True
         '
+        'btnUnDisp
+        '
+        Me.btnUnDisp.Location = New System.Drawing.Point(145, 114)
+        Me.btnUnDisp.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnUnDisp.Name = "btnUnDisp"
+        Me.btnUnDisp.Size = New System.Drawing.Size(90, 40)
+        Me.btnUnDisp.TabIndex = 20
+        Me.btnUnDisp.Text = "表示終了"
+        Me.btnUnDisp.UseVisualStyleBackColor = True
+        '
         'CtlPdf1
         '
         Me.CtlPdf1.chkUpdate = False
@@ -270,16 +280,6 @@ Partial Class frmOperation
         Me.CtlImage1.Name = "CtlImage1"
         Me.CtlImage1.Size = New System.Drawing.Size(769, 361)
         Me.CtlImage1.TabIndex = 0
-        '
-        'btnUnDisp
-        '
-        Me.btnUnDisp.Location = New System.Drawing.Point(145, 114)
-        Me.btnUnDisp.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.btnUnDisp.Name = "btnUnDisp"
-        Me.btnUnDisp.Size = New System.Drawing.Size(90, 40)
-        Me.btnUnDisp.TabIndex = 20
-        Me.btnUnDisp.Text = "表示終了"
-        Me.btnUnDisp.UseVisualStyleBackColor = True
         '
         'frmOperation
         '
