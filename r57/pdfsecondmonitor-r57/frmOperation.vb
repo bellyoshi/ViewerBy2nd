@@ -186,22 +186,17 @@ Public Class frmOperation
 
     Private Sub lstFiles_Click(sender As Object, e As EventArgs) Handles lstPDFFiles.Click
 
-        Dim fileviewinfo As FileViewParam
-        fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
-        If fileviewinfo Is Nothing Then
-            Exit Sub
-        End If
-        Dim path = fileviewinfo.FileName
+        Dim path = Me.fileViewParam.FileName
         If Not IO.File.Exists(path) Then
             Dim ret = MessageBox.Show("ファイルが見つかりません。リストから削除しますか？", "ファイルがありません", MessageBoxButtons.YesNo)
             If ret = DialogResult.Yes Then
-                lstPDFFiles.Items.Remove(fileviewinfo)
+                lstPDFFiles.Items.Remove(fileViewParam)
             End If
             Exit Sub
         End If
-        txtPDFFileName.Text = fileviewinfo.FileName
+        txtPDFFileName.Text = fileViewParam.FileName
 
-        SetFileInfo(fileviewinfo)
+        SetFileInfo(fileViewParam)
 
         UpdateViewIfChecked()
 

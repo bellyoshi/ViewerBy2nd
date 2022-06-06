@@ -28,6 +28,10 @@ namespace ViewerBy2ndLib
         }
         System.Drawing.Size? GetRenderSize(SizeF pdfSize) {
             var bound = this.FileViewParam.Bound;
+            if (bound.Width == 0 || bound.Height == 0)
+            {
+                return null;
+            }
             var renderSize = new Size(bound.Width, bound.Height);
             var pdfWdivH = pdfSize.Width / pdfSize.Height;
             var boxWdivH = bound.Width / bound.Height;
