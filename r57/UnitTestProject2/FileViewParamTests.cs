@@ -14,7 +14,7 @@ namespace ViewerBy2ndLib.Tests
         [TestMethod()]
         public void ToStringTest()
         { 
-             var sut = new FileViewParam(@"c:\test.txt");
+             var sut = new FileViewParam(@"c:\test.txt", new System.Drawing.Size(100,100));
             Assert.AreEqual("test.txt",sut.ToString());
         }
     }

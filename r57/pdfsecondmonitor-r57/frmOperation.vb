@@ -200,21 +200,16 @@ Public Class frmOperation
             Exit Sub
         End If
         txtPDFFileName.Text = fileviewinfo.FileName
-        Dim ext = IO.Path.GetExtension(fileviewinfo.FileName)
 
-        UpdateView()
         SetFileInfo(fileviewinfo)
+
+        UpdateViewIfChecked()
 
         ControlEnable()
 
     End Sub
 
     Private Sub btnDisp_Click(sender As Object, e As EventArgs) Handles btnDisp.Click
-        Dim fileviewinfo As FileViewParam
-        If lstPDFFiles.SelectedItem Is Nothing Then
-            _dispacher.ShowImage(Nothing)
-            Exit Sub
-        End If
         UpdateView()
     End Sub
 
@@ -230,7 +225,7 @@ Public Class frmOperation
         Dim items = lstPDFFiles.Items
 
         For Each filename In OpenFileDialog1.FileNames
-            items.Add(New FileViewParam(filename))
+            items.Add(New FileViewParam(filename, _dispacher.GetViewScreen.Bounds.Size))
         Next
 
 
@@ -265,12 +260,12 @@ Public Class frmOperation
                 String())
 
         For Each f In fileName
-            items.Add(New FileViewParam(f))
+            items.Add(New FileViewParam(f, _dispacher.GetViewScreen.Bounds.Size))
         Next
     End Sub
 
     Private Sub chkUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkUpdate.CheckedChanged
-        UpdateView()
+        UpdateViewIfChecked()
     End Sub
 
 
@@ -298,7 +293,7 @@ Public Class frmOperation
     Public Function LoadImage(filename As String) As Bitmap
         If System.IO.Path.GetExtension(filename) = ".svg" Then
             Dim doc = Svg.SvgDocument.Open(filename)
-            Dim sc = _dispacher.GetScreen().Bounds
+            Dim sc = _dispacher.GetViewScreen().Bounds
             Dim bbmp = doc.Draw(sc.Height, sc.Height)
             Return bbmp
         End If
@@ -318,25 +313,25 @@ Public Class frmOperation
     Private Sub btnRotate_Click(sender As Object, e As EventArgs) Handles btnRotate180.Click
         Rotate(RotateFlipType.Rotate180FlipNone)
         VScrollBar1Init()
-        UpdateView()
+        UpdateViewIfChecked()
     End Sub
 
     Private Sub btnRotate90_Click(sender As Object, e As EventArgs) Handles btnRotate90.Click
         Rotate(RotateFlipType.Rotate90FlipNone)
         VScrollBar1Init()
-        UpdateView()
+        UpdateViewIfChecked()
     End Sub
 
     Private Sub btnRotate0_Click(sender As Object, e As EventArgs) Handles btnRotate0.Click
         Rotate(RotateFlipType.RotateNoneFlipNone)
         VScrollBar1Init()
-        UpdateView()
+        UpdateViewIfChecked()
     End Sub
 
     Private Sub btnRotate270_Click(sender As Object, e As EventArgs) Handles btnRotateM90.Click
         Rotate(RotateFlipType.Rotate270FlipNone)
         VScrollBar1Init()
-        UpdateView()
+        UpdateViewIfChecked()
     End Sub
 
 
@@ -348,134 +343,34 @@ Public Class frmOperation
 
 
 
-    Public Sub UpdateView()
+    Public Sub UpdateViewIfChecked()
+        SetPreview()
         If chkUpdate.Checked Then
-            _dispacher.ShowImage(pbThumbnail.Image)
+            UpdateView()
         End If
     End Sub
 
-    Dim pdfDoc As PdfiumViewer.PdfDocument
+    Public Sub UpdateView()
+        _dispacher.ShowImage(pbThumbnail.Image)
+    End Sub
 
-    Public Property page As Integer
+    Private ReadOnly Property fileViewParam As FileViewParam
         Get
-            Return _document.page
-        End Get
-        Set(value As Integer)
-            _document.page = value
-        End Set
-    End Property
-    Private _document As New Document(New FileViewParam)
-
-    Public Sub OpenFile(fileName As String)
-        isHalf = False
-        pdfDoc = PdfiumViewer.PdfDocument.Load(fileName)
-        FirstPage()
-    End Sub
-
-    Public Sub FirstPage()
-
-        isHalf = False
-        page = 0
-        DisplayPage()
-    End Sub
-
-    Public Sub NextPage()
-        isHalf = False
-
-        If page < pdfDoc.PageCount - 1 Then
-            page += 1
-            DisplayPage()
-        End If
-    End Sub
-
-    Public Sub PrePage()
-        isHalf = False
-        If 0 < page Then
-            page -= 1
-            DisplayPage()
-        End If
-    End Sub
-
-    Private buttomInPage As Decimal
-    Private _isHalf As Boolean
-    Public Property isHalf As Boolean
-        Set(value As Boolean)
-            _isHalf = value
-            If Not _isHalf Then
-                buttomInPage = 0.0D
+            If lstPDFFiles.SelectedItem Is Nothing Then
+                Return New FileViewParam
             End If
-        End Set
-        Get
-            Return _isHalf
+            Return DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
         End Get
     End Property
-    Public Sub NextHalfPage()
-        If buttomInPage = 1.0 AndAlso page = pdfDoc.PageCount - 1 Then
-            Exit Sub
-        End If
+
+    Private ReadOnly Property _document As ViewerBy2ndLib.Document
+        Get
+            Return fileViewParam.document
+        End Get
+    End Property
 
 
-        buttomInPage += 0.5D
-        If buttomInPage = 1.5D Then
-            NextPage()
-            buttomInPage = 0.5D
-        End If
 
-        isHalf = True
-        DisplayHalfPage()
-    End Sub
-
-    Public Sub PreviousHalfPage()
-
-        'If Not isHalf Then
-        '    page -= 1
-        'End If
-        If page = 0D AndAlso buttomInPage <= 0.5D Then
-            Exit Sub
-        End If
-        buttomInPage -= 0.5D
-        If buttomInPage <= 0.0D Then
-            buttomInPage = 1D
-            page -= 1
-
-        End If
-        isHalf = True
-        DisplayHalfPage()
-    End Sub
-
-    Private Sub DisplayHalfPage()
-        If (page >= pdfDoc.PageCount) OrElse (page < 0) Then
-            Return
-        End If
-        Dim pdfSize = pdfDoc.PageSizes(page)
-        Dim sourceSize As New SizeF
-        sourceSize.Height = pdfSize.Height / 2
-        sourceSize.Width = pdfSize.Width
-        Dim renderSize As Size? = GetRenderSize(sourceSize)
-        If renderSize Is Nothing Then
-            Return
-        End If
-        Dim r = renderSize.Value
-        r.Height *= 2
-        RenderHalf(r)
-    End Sub
-
-    Private Sub RenderHalf(renderSize As Size)
-        Dim height = renderSize.Height \ 2
-        Dim width = renderSize.Width
-        Dim canvas As New Bitmap(width, height)
-        Using g As Graphics = Graphics.FromImage(canvas)
-            Dim img = GetImage(renderSize)
-            Dim y = CType(renderSize.Height * (buttomInPage - 0.5), Integer)
-            Dim srcRect As New Rectangle(0, y, width, height)
-            Dim desRect As New Rectangle(0, 0, srcRect.Width, srcRect.Height)
-            g.DrawImage(img, desRect, srcRect, GraphicsUnit.Pixel)
-        End Using
-        _document.Image = canvas
-    End Sub
-    Private Function GetImage(renderSize As Size) As Image
-        Return pdfDoc.Render(page, renderSize.Width, renderSize.Height, 96, 96, False)
-    End Function
 
 
     Public Sub SetColor()
@@ -485,36 +380,11 @@ Public Class frmOperation
 
 
 
-    Private Sub DisplayPage()
-        If (page >= pdfDoc.PageCount) Then
-            Return
-        End If
-        Dim sourceSize = pdfDoc.PageSizes(page)
-        Dim renderSize As Size? = GetRenderSize(sourceSize)
-        If renderSize Is Nothing Then
-            Return
-        End If
-        _document.Image = GetImage(renderSize.Value)
-    End Sub
 
 
 
-    Private Function GetRenderSize(pdfSize As SizeF) As Size?
-        Dim bound = _dispacher.GetScreen().Bounds
-        Dim renderSize = New Size(bound.Size.Width, bound.Size.Height)
-        Dim pdfWdivH = pdfSize.Width / pdfSize.Height ' // pdfの縦横比
-        Dim boxWdivH = bound.Width / bound.Height '  // コントロールの縦横比
-        If (boxWdivH > 10) Then ' 落ちないよう
-            Return Nothing
-        End If
-        If (pdfWdivH < boxWdivH) Then
-            ' フォーム内にImageを当てはめる判定                    {
-            renderSize.Width = CType(bound.Height * pdfWdivH, Integer)
-        Else
-            renderSize.Height = CType(bound.Width / pdfWdivH, Integer)
-        End If
-        Return renderSize
-    End Function
+
+
 
 
 
@@ -522,18 +392,19 @@ Public Class frmOperation
 #Region "ページ移動"
 
     Private Sub btnFirst_Click(sender As Object, e As EventArgs) Handles btnPDFFirst.Click
-        FirstPage()
-        SetImage()
+        _document.FirstPage()
+
+        SetPreview()
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnPDFNext.Click
-        NextPage()
-        SetImage()
+        _document.NextPage()
+        SetPreview()
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnPDFBack.Click
-        PrePage()
-        SetImage()
+        _document.PrePage()
+        SetPreview()
     End Sub
 
     Private Sub btnLast_Click(sender As Object, e As EventArgs) Handles btnPDFLast.Click
@@ -545,14 +416,13 @@ Public Class frmOperation
 
 
 
-    Private Sub SetImage()
-
+    Private Sub SetPreview()
         pbThumbnail.Image = _document.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
-        If pdfDoc Is Nothing Then
-            Exit Sub
+        If _document.FileType.IsPDFExt Then
+            lblPage.Text = "ページ" & _document.page + 1 & "/" & _document.PageCount
         End If
-        lblPage.Text = "ページ" & page + 1 & "/" & pdfDoc.PageCount
+
     End Sub
 
 
@@ -561,43 +431,34 @@ Public Class frmOperation
     Private _fileViewParam As FileViewParam
     Private MyFileType As FileType = New FileType("")
     Public Sub SetFileInfo(f As FileViewParam)
-        Me._fileViewParam = f
-        MyFileType = New FileType(f.FileName)
-        If _fileViewParam Is Nothing Then
-            SetImage()
-            Return
-        End If
 
-        Dim sc = _dispacher.GetScreen().Bounds
 
-        If MyFileType.IsPDFExt() Then
-            OpenFile(f.FileName)
-            SetImage()
-        ElseIf MyFileType.IsImageExt() Then
-            Rotate(RotateFlipType.RotateNoneFlipNone)
-        ElseIf MyFileType.IsMovieExt() Then
+        Dim sc = _dispacher.GetViewScreen().Bounds
+
+        If _document.FileType.IsMovieExt() Then
             player = _dispacher.ShowMovie()
 
             player.URL = _fileViewParam.FileName
             player.uiMode = "none"
             player.stretchToFit = True
-
+        Else
+            SetPreview()
         End If
 
         _setwinWidth = New SetWinWidthModule(sc, pbThumbnail, _document, VScrollBar1)
-        UpdateView()
+        UpdateViewIfChecked()
     End Sub
 
 
 
     Private Sub btnNextHalf_Click(sender As Object, e As EventArgs) Handles btnNextHalf.Click
-        NextHalfPage()
-        SetImage()
+        _document.NextHalfPage()
+        SetPreview()
     End Sub
 
     Private Sub btnPreviousHalf_Click(sender As Object, e As EventArgs) Handles btnPreviousHalf.Click
-        PreviousHalfPage()
-        SetImage()
+        _document.PreviousHalfPage()
+        SetPreview()
     End Sub
 
 
@@ -606,7 +467,7 @@ Public Class frmOperation
 
 
         _setwinWidth.DispSetWindow()
-        UpdateView()
+        UpdateViewIfChecked()
     End Sub
     Private Sub VScrollBar1Init()
         VScrollBar1.Value = 0
@@ -616,8 +477,8 @@ Public Class frmOperation
     End Sub
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
         VScrollBar1Init()
-        _setwinWidth.DispSetWindow()
-        UpdateView()
+        _fileViewParam.IsWidthEqualWin = True
+        UpdateViewIfChecked()
     End Sub
 
     Private _setwinWidth As SetWinWidthModule
@@ -695,6 +556,13 @@ Public Class frmOperation
         trackBarSeek_Scrolled = True
 
     End Sub
+
+    Private Sub btnWhole_Click(sender As Object, e As EventArgs) Handles btnWhole.Click
+        _fileViewParam.IsWidthEqualWin = False
+        UpdateViewIfChecked()
+    End Sub
+
+
 
 
 

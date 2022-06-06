@@ -1,7 +1,7 @@
 ﻿Public Class FormDispacher
 
     Private _secondScreen As Screen
-    Public Function GetScreen() As Screen
+    Public Function GetViewScreen() As Screen
         Return _secondScreen
     End Function
     Public Sub SetSecondScreen(ByVal screen As Screen)

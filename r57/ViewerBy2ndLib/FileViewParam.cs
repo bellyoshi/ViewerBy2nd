@@ -8,6 +8,8 @@ namespace ViewerBy2ndLib
 {
     public class FileViewParam
     {
+     
+        public System.Drawing.Size Bound { get; set; }
         public string FileName { get; set; }
 
         public override string ToString()
@@ -15,9 +17,10 @@ namespace ViewerBy2ndLib
             return $"{System.IO.Path.GetFileName(FileName)}";
         }
 
-        public FileViewParam(string filename)
+        public FileViewParam(string filename, System.Drawing.Size bound)
         {
             this.FileName = filename;
+            this.Bound=bound;
         }
         public FileViewParam()
         {
@@ -32,6 +35,9 @@ namespace ViewerBy2ndLib
                     _document = new Document(this);
                 }
                 return _document;
-            }}
+            }
+        }
+
+        public bool IsWidthEqualWin { get; set; }
     }
 }
