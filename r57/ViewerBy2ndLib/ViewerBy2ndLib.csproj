@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitmapTool.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="FileType.cs" />
     <Compile Include="FileViewParam.cs" />

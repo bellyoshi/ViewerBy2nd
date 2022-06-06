@@ -1,23 +1,21 @@
-﻿'ウインドウ幅に合わせる機能の提供
+﻿Imports ViewerBy2ndLib
+
+'ウインドウ幅に合わせる機能の提供
 Public Class SetWinWidthModule
 
     Private pbThumb As PictureBox
     Private disp As Rectangle
-    Private pbBack As PictureBox
+    Private document As ViewerBy2ndLib.Document
     Private scrollBar As VScrollBar
 
-    Public Sub New(disp As Rectangle, thum As PictureBox, back As PictureBox, scroll As VScrollBar)
+    Public Sub New(disp As Rectangle, thum As PictureBox, back As ViewerBy2ndLib.Document, scroll As VScrollBar)
         pbThumb = thum
-        pbBack = back
+        document = back
         scrollBar = scroll
         Me.disp = disp
     End Sub
 
-    Private ReadOnly Property Image As Bitmap
-        Get
-            Return New Bitmap(pbBack.Image)
-        End Get
-    End Property
+
 
     Public Function CanSetWindowWidthRate(imageSize As Size, pictureBoxSize As Size) As Boolean
         Dim imageRate = GetWidthHeightRate(imageSize)
@@ -32,6 +30,7 @@ Public Class SetWinWidthModule
     End Function
 
     Public Sub DispSetWindow()
+        Dim image = document.Image
         If Image Is Nothing Then
             Exit Sub
         End If
@@ -46,13 +45,12 @@ Public Class SetWinWidthModule
             ImageY = scrollBar.Value
         End If
         Dim rect = New Rectangle(0, ImageY, Image.Width, GetSetWinImageHeight())
-        Dim bmpNew As Bitmap = Image.Clone(rect, Image.PixelFormat)
-        pbThumb.Image = bmpNew
+        pbThumb.Image = BitmapTool.ImageRoi(image, rect)
         pbThumb.SizeMode = PictureBoxSizeMode.Zoom
     End Sub
     Private Function GetSetWinImageHeight() As Integer
         Dim pbSize = disp.Size
-        Return CType(pbSize.Height / pbSize.Width * Image.Width, Integer)
+        Return CType(pbSize.Height / pbSize.Width * document.Image.Width, Integer)
     End Function
 
 End Class

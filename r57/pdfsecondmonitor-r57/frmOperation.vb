@@ -202,26 +202,20 @@ Public Class frmOperation
         txtPDFFileName.Text = fileviewinfo.FileName
         Dim ext = IO.Path.GetExtension(fileviewinfo.FileName)
 
-        UpdateImage()
+        UpdateView()
         SetFileInfo(fileviewinfo)
 
         ControlEnable()
 
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnDisp.Click
+    Private Sub btnDisp_Click(sender As Object, e As EventArgs) Handles btnDisp.Click
         Dim fileviewinfo As FileViewParam
         If lstPDFFiles.SelectedItem Is Nothing Then
             _dispacher.ShowImage(Nothing)
             Exit Sub
         End If
-        fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
-        Dim ext = IO.Path.GetExtension(fileviewinfo.FileName)
-        SetView()
-
-
-
-
+        UpdateView()
     End Sub
 
     Private Sub btnFileAdd_Click(sender As Object, e As EventArgs) Handles btnFileAdd.Click
@@ -276,7 +270,7 @@ Public Class frmOperation
     End Sub
 
     Private Sub chkUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkUpdate.CheckedChanged
-        UpdateImage()
+        UpdateView()
     End Sub
 
 
@@ -315,8 +309,7 @@ Public Class frmOperation
     Private Sub Rotate(flip As RotateFlipType)
         Dim bmp = LoadImage(_fileViewParam.FileName)
         bmp.RotateFlip(flip)
-        Image = bmp
-        pbBack.Image = bmp
+        _document.Image = bmp
     End Sub
 
 
@@ -325,25 +318,25 @@ Public Class frmOperation
     Private Sub btnRotate_Click(sender As Object, e As EventArgs) Handles btnRotate180.Click
         Rotate(RotateFlipType.Rotate180FlipNone)
         VScrollBar1Init()
-        UpdateImage()
+        UpdateView()
     End Sub
 
     Private Sub btnRotate90_Click(sender As Object, e As EventArgs) Handles btnRotate90.Click
         Rotate(RotateFlipType.Rotate90FlipNone)
         VScrollBar1Init()
-        UpdateImage()
+        UpdateView()
     End Sub
 
     Private Sub btnRotate0_Click(sender As Object, e As EventArgs) Handles btnRotate0.Click
         Rotate(RotateFlipType.RotateNoneFlipNone)
         VScrollBar1Init()
-        UpdateImage()
+        UpdateView()
     End Sub
 
     Private Sub btnRotate270_Click(sender As Object, e As EventArgs) Handles btnRotateM90.Click
         Rotate(RotateFlipType.Rotate270FlipNone)
         VScrollBar1Init()
-        UpdateImage()
+        UpdateView()
     End Sub
 
 
@@ -352,18 +345,12 @@ Public Class frmOperation
 
 #End Region
 #Region "Public Class ctlPdf"
-    Friend Sub SetView()
-        If pbThumbnail.Image Is Nothing Then
-            Exit Sub
-        End If
-        _dispacher.ShowImage(pbThumbnail.Image)
-    End Sub
 
 
 
-    Public Sub UpdateImage()
+    Public Sub UpdateView()
         If chkUpdate.Checked Then
-            SetView()
+            _dispacher.ShowImage(pbThumbnail.Image)
         End If
     End Sub
 
@@ -484,33 +471,19 @@ Public Class frmOperation
             Dim desRect As New Rectangle(0, 0, srcRect.Width, srcRect.Height)
             g.DrawImage(img, desRect, srcRect, GraphicsUnit.Pixel)
         End Using
-        Image = canvas
+        _document.Image = canvas
     End Sub
     Private Function GetImage(renderSize As Size) As Image
         Return pdfDoc.Render(page, renderSize.Width, renderSize.Height, 96, 96, False)
     End Function
 
-    Public Property Image As Image
-        Get
-            Return _image
-        End Get
-        Set(value As Image)
-            _document.Image = value
-        End Set
-    End Property
 
     Public Sub SetColor()
         pbThumbnail.BackColor = My.Settings.formColor
     End Sub
 
 
-    Public Function GetBmp() As Bitmap
-        If Image Is Nothing Then
-            Return New Bitmap(1, 1)
-        End If
-        Dim img As New Bitmap(Image)
-        Return img
-    End Function
+
 
     Private Sub DisplayPage()
         If (page >= pdfDoc.PageCount) Then
@@ -521,7 +494,7 @@ Public Class frmOperation
         If renderSize Is Nothing Then
             Return
         End If
-        Image = GetImage(renderSize.Value)
+        _document.Image = GetImage(renderSize.Value)
     End Sub
 
 
@@ -574,7 +547,6 @@ Public Class frmOperation
 
     Private Sub SetImage()
 
-        pbBack.Image = New Bitmap(_document.Image)
         pbThumbnail.Image = _document.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
         If pdfDoc Is Nothing Then
@@ -612,8 +584,8 @@ Public Class frmOperation
 
         End If
 
-        _setwinWidth = New SetWinWidthModule(sc, pbThumbnail, pbBack, VScrollBar1)
-        UpdateImage()
+        _setwinWidth = New SetWinWidthModule(sc, pbThumbnail, _document, VScrollBar1)
+        UpdateView()
     End Sub
 
 
@@ -634,18 +606,18 @@ Public Class frmOperation
 
 
         _setwinWidth.DispSetWindow()
-        UpdateImage()
+        UpdateView()
     End Sub
     Private Sub VScrollBar1Init()
         VScrollBar1.Value = 0
         VScrollBar1.Minimum = 0
-        VScrollBar1.Maximum = GetBmp().Height
+        VScrollBar1.Maximum = _document.Image.Height
 
     End Sub
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
         VScrollBar1Init()
         _setwinWidth.DispSetWindow()
-        UpdateImage()
+        UpdateView()
     End Sub
 
     Private _setwinWidth As SetWinWidthModule
