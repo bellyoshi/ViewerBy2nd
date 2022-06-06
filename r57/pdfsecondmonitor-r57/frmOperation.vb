@@ -285,46 +285,34 @@ Public Class frmOperation
 
 
 
-    Public Function LoadImage(filename As String) As Bitmap
-        If System.IO.Path.GetExtension(filename) = ".svg" Then
-            Dim doc = Svg.SvgDocument.Open(filename)
-            Dim sc = _dispacher.GetViewScreen().Bounds
-            Dim bbmp = doc.Draw(sc.Height, sc.Height)
-            Return bbmp
-        End If
-        Return New Bitmap(filename)
-    End Function
 
 
-    Private Sub Rotate(flip As RotateFlipType)
-        Dim bmp = LoadImage(fileViewParam.FileName)
-        bmp.RotateFlip(flip)
-        _document.Image = bmp
-    End Sub
+
+
 
 
 
 
     Private Sub btnRotate_Click(sender As Object, e As EventArgs) Handles btnRotate180.Click
-        Rotate(RotateFlipType.Rotate180FlipNone)
+        _document.Rotate(RotateFlipType.Rotate180FlipNone)
         VScrollBar1Init()
         UpdateViewIfChecked()
     End Sub
 
     Private Sub btnRotate90_Click(sender As Object, e As EventArgs) Handles btnRotate90.Click
-        Rotate(RotateFlipType.Rotate90FlipNone)
+        _document.Rotate(RotateFlipType.Rotate90FlipNone)
         VScrollBar1Init()
         UpdateViewIfChecked()
     End Sub
 
     Private Sub btnRotate0_Click(sender As Object, e As EventArgs) Handles btnRotate0.Click
-        Rotate(RotateFlipType.RotateNoneFlipNone)
+        _document.Rotate(RotateFlipType.RotateNoneFlipNone)
         VScrollBar1Init()
         UpdateViewIfChecked()
     End Sub
 
     Private Sub btnRotate270_Click(sender As Object, e As EventArgs) Handles btnRotateM90.Click
-        Rotate(RotateFlipType.Rotate270FlipNone)
+        _document.Rotate(RotateFlipType.Rotate270FlipNone)
         VScrollBar1Init()
         UpdateViewIfChecked()
     End Sub

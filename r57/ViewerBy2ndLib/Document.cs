@@ -24,9 +24,38 @@ namespace ViewerBy2ndLib
         {
             if (filename == null) return;
             isHalf = false;
-            pdfDoc = PdfDocument.Load(filename);
-            FirstPage();
+            if (FileType.IsPDFExt())
+            {
+                pdfDoc = PdfDocument.Load(filename);
+                FirstPage();
+            }
+            else if (FileType.IsImageExt())
+            {
+                LoadImage();
+
+            }
+            else if (FileType.IsSVGExt())
+            {
+                LoadSVGImage();
+            }
+
         }
+        public void LoadSVGImage() {
+            var doc = Svg.SvgDocument.Open(FileViewParam.FileName);
+           var sc = FileViewParam.Bound;
+            this.Image = doc.Draw(sc.Height, sc.Height);
+
+        }
+        public void Rotate(RotateFlipType flip) {
+            OpenFile(FileViewParam.FileName);
+            this.Image.RotateFlip(flip);
+        }
+        public void LoadImage()
+        {
+            this.Image = new Bitmap(FileViewParam.FileName);
+        }
+
+    
         System.Drawing.Size? GetRenderSize(SizeF pdfSize) {
             var bound = this.FileViewParam.Bound;
             if (bound.Width == 0 || bound.Height == 0)

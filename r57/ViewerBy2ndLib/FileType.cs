@@ -22,7 +22,7 @@ namespace ViewerBy2ndLib
         static string[] movieExts = { "avi", "mpeg", "mp4", "wmv", "mov" };
 
         // 開ける画像の拡張子
-        static string[] ImageExts = { "jpeg", "jpg", "bmp", "png", "gif", "tiff", "tif", "svg" };
+        static string[] ImageExts = { "jpeg", "jpg", "bmp", "png", "gif", "tiff", "tif" };
 
         static string[] SVGExts = { "svg" };
 
