@@ -368,7 +368,17 @@ Public Class frmOperation
     End Sub
 
     Dim pdfDoc As PdfiumViewer.PdfDocument
-    Dim page As Integer = 0
+
+    Public Property page As Integer
+        Get
+            Return _document.page
+        End Get
+        Set(value As Integer)
+            _document.page = value
+        End Set
+    End Property
+    Private _document As New Document(New FileViewParam)
+
     Public Sub OpenFile(fileName As String)
         isHalf = False
         pdfDoc = PdfiumViewer.PdfDocument.Load(fileName)
@@ -485,10 +495,7 @@ Public Class frmOperation
             Return _image
         End Get
         Set(value As Image)
-            _image = value
-            pbThumbnail.Image = _image
-            pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
-            UpdateImage()
+            _document.Image = value
         End Set
     End Property
 
@@ -521,7 +528,7 @@ Public Class frmOperation
 
     Private Function GetRenderSize(pdfSize As SizeF) As Size?
         Dim bound = _dispacher.GetScreen().Bounds
-        Dim renderSize = New Size(bound.Size)
+        Dim renderSize = New Size(bound.Size.Width, bound.Size.Height)
         Dim pdfWdivH = pdfSize.Width / pdfSize.Height ' // pdfの縦横比
         Dim boxWdivH = bound.Width / bound.Height '  // コントロールの縦横比
         If (boxWdivH > 10) Then ' 落ちないよう
@@ -529,9 +536,9 @@ Public Class frmOperation
         End If
         If (pdfWdivH < boxWdivH) Then
             ' フォーム内にImageを当てはめる判定                    {
-            renderSize.Width = bound.Height * pdfWdivH
+            renderSize.Width = CType(bound.Height * pdfWdivH, Integer)
         Else
-            renderSize.Height = bound.Width / pdfWdivH
+            renderSize.Height = CType(bound.Width / pdfWdivH, Integer)
         End If
         Return renderSize
     End Function
@@ -566,13 +573,9 @@ Public Class frmOperation
 
 
     Private Sub SetImage()
-        Dim img = GetBmp()
-        If img Is Nothing Then
-            Exit Sub
 
-        End If
-        pbBack.Image = img
-        pbThumbnail.Image = pbBack.Image
+        pbBack.Image = New Bitmap(_document.Image)
+        pbThumbnail.Image = _document.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
         If pdfDoc Is Nothing Then
             Exit Sub

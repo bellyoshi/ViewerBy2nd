@@ -15,11 +15,11 @@ Public Class SetWinWidthModule
 
     Private ReadOnly Property Image As Bitmap
         Get
-            Return pbBack.Image
+            Return New Bitmap(pbBack.Image)
         End Get
     End Property
 
-    Public Function CanSetWindowWidthRate(imageSize, pictureBoxSize) As Boolean
+    Public Function CanSetWindowWidthRate(imageSize As Size, pictureBoxSize As Size) As Boolean
         Dim imageRate = GetWidthHeightRate(imageSize)
         Dim pbRate = GetWidthHeightRate(pictureBoxSize)
         If imageRate > pbRate Then

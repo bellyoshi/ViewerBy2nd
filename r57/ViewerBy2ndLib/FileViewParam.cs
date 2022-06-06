@@ -23,5 +23,15 @@ namespace ViewerBy2ndLib
         {
             //シリアル化用
         }
+
+        private Document _document;
+        public Document document {
+            get {
+                if (_document == null)
+                {
+                    _document = new Document(this);
+                }
+                return _document;
+            }}
     }
 }

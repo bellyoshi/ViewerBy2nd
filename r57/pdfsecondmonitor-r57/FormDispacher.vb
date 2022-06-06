@@ -39,7 +39,7 @@
     End Function
 
     Public Sub ShowImage(image As Image)
-        Show(_frmImageViewer, GetType(frmViewer))
+        _frmImageViewer = DirectCast(Show(_frmImageViewer, GetType(frmViewer)), frmViewer)
         _frmImageViewer.PictureBox1.Image = image
         _frmImageViewer.PictureBox1.Visible = True
         _frmImageViewer.AxWindowsMediaPlayer1.Visible = False
@@ -59,7 +59,7 @@
     Public Sub Create(ByRef form As Form, ByVal formType As Type)
         If form Is Nothing OrElse
          Not _secondMonitorWindows.Contains(form) Then
-            form = Activator.CreateInstance(formType)
+            form = DirectCast(Activator.CreateInstance(formType), Form)
             form.BackColor = color
             AddHandler form.FormClosed, AddressOf from_Closed
         End If
@@ -80,12 +80,13 @@
         Next
     End Sub
 
-    Public Sub Show(ByRef targetForm As Form, ByVal formType As Type)
+    Public Function Show(targetForm As Form, ByVal formType As Type) As Form
         Create(targetForm, formType)
         registViewer(targetForm)
         HideOther(targetForm)
         targetForm.Show()
-    End Sub
+        Return targetForm
+    End Function
 
 
     Private color As Color
