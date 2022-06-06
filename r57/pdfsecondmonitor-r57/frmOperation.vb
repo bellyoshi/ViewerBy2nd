@@ -13,7 +13,7 @@ Public Class frmOperation
 
     Public Sub CtlPdf1ControlEnabled()
 
-        Dim isEnabled = MyFileType.IsPDFExt()
+        Dim isEnabled = _document.FileType.IsPDFExt()
         btnPDFFirst.Enabled = isEnabled
         btnPDFBack.Enabled = isEnabled
         btnPDFNext.Enabled = isEnabled
@@ -21,12 +21,12 @@ Public Class frmOperation
         btnPreviousHalf.Enabled = isEnabled
         btnNextHalf.Enabled = isEnabled
 
-        Dim setwin As Boolean = MyFileType.IsPDFExt() OrElse MyFileType.IsImageExt() OrElse MyFileType.IsSVGExt()
+        Dim setwin As Boolean = _document.FileType.IsPDFExt() OrElse _document.FileType.IsImageExt() OrElse _document.FileType.IsSVGExt()
         btnSetWindow.Enabled = setwin
         btnWhole.Enabled = setwin
     End Sub
     Public Sub CtlMovie1ControlEnabled()
-        Dim isEnabled = MyFileType.IsMovieExt()
+        Dim isEnabled = _document.FileType.IsMovieExt()
         GotoFirst.Enabled = isEnabled
         btnFastReverse.Enabled = isEnabled
         btnStartStop.Enabled = isEnabled
@@ -36,7 +36,7 @@ Public Class frmOperation
     End Sub
 
     Public Sub CtlImage1ControlEnabled()
-        Dim isEnabled = MyFileType.IsImageExt() OrElse MyFileType.IsSVGExt()
+        Dim isEnabled = _document.FileType.IsImageExt() OrElse _document.FileType.IsSVGExt()
 
         btnRotateM90.Enabled = isEnabled
         btnRotate90.Enabled = isEnabled
@@ -297,7 +297,7 @@ Public Class frmOperation
 
 
     Private Sub Rotate(flip As RotateFlipType)
-        Dim bmp = LoadImage(_fileViewParam.FileName)
+        Dim bmp = LoadImage(fileViewParam.FileName)
         bmp.RotateFlip(flip)
         _document.Image = bmp
     End Sub
@@ -354,7 +354,9 @@ Public Class frmOperation
             If lstPDFFiles.SelectedItem Is Nothing Then
                 Return New FileViewParam
             End If
-            Return DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
+            Dim p = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
+            p.Bound = _dispacher.GetViewScreen.Bounds.Size
+            Return p
         End Get
     End Property
 
@@ -423,8 +425,7 @@ Public Class frmOperation
 
 
     Private _backFileName As String
-    Private _fileViewParam As FileViewParam
-    Private MyFileType As FileType = New FileType("")
+
     Public Sub SetFileInfo(f As FileViewParam)
 
 
@@ -433,7 +434,7 @@ Public Class frmOperation
         If _document.FileType.IsMovieExt() Then
             player = _dispacher.ShowMovie()
 
-            player.URL = _fileViewParam.FileName
+            player.URL = fileViewParam.FileName
             player.uiMode = "none"
             player.stretchToFit = True
         Else
@@ -472,7 +473,7 @@ Public Class frmOperation
     End Sub
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
         VScrollBar1Init()
-        _fileViewParam.IsWidthEqualWin = True
+        fileViewParam.IsWidthEqualWin = True
         UpdateViewIfChecked()
     End Sub
 
@@ -553,8 +554,12 @@ Public Class frmOperation
     End Sub
 
     Private Sub btnWhole_Click(sender As Object, e As EventArgs) Handles btnWhole.Click
-        _fileViewParam.IsWidthEqualWin = False
+        fileViewParam.IsWidthEqualWin = False
         UpdateViewIfChecked()
+    End Sub
+
+    Private Sub lstPDFFiles_ChangeUICues(sender As Object, e As UICuesEventArgs) Handles lstPDFFiles.ChangeUICues
+
     End Sub
 
 

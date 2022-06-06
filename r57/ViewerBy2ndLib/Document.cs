@@ -22,6 +22,7 @@ namespace ViewerBy2ndLib
         public double page { get; set; }
         public void OpenFile(string filename)
         {
+            if (filename == null) return;
             isHalf = false;
             pdfDoc = PdfDocument.Load(filename);
             FirstPage();
