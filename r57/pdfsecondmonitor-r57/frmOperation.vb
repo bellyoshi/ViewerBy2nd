@@ -157,6 +157,10 @@ Public Class frmOperation
         '        'フォームの開始位置をディスプレイの左上座標に設定する
         _dispacher.SetSecondScreen(s)
 
+        Dim viewerSize = _dispacher.GetViewScreen().Bounds.Size
+
+        pbThumbnail.Height = pbThumbnail.Width * viewerSize.Height \ viewerSize.Width
+
     End Sub
 
     Private _dispacher As FormDispacher = FormDispacher.GetInstance

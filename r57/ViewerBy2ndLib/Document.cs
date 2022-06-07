@@ -46,8 +46,10 @@ namespace ViewerBy2ndLib
             this.Image = doc.Draw(sc.Height, sc.Height);
 
         }
+        private RotateFlipType flip;
         public void Rotate(RotateFlipType flip) {
             OpenFile(FileViewParam.FileName);
+            this.flip = flip;
             this.Image.RotateFlip(flip);
         }
         public void LoadImage()
@@ -259,7 +261,7 @@ namespace ViewerBy2ndLib
             }
             else
             {
-                OpenFile(FileViewParam.FileName);
+                Rotate(flip);
             }
                 if (Image == null) return;
 
