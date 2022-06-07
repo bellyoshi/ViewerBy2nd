@@ -154,10 +154,10 @@ Partial Class frmOperation
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(76, 429)
+        Me.btnDelete.Location = New System.Drawing.Point(96, 427)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(79, 25)
+        Me.btnDelete.Size = New System.Drawing.Size(81, 32)
         Me.btnDelete.TabIndex = 21
         Me.btnDelete.Text = "削除"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -170,12 +170,13 @@ Partial Class frmOperation
         Me.lstPDFFiles.Location = New System.Drawing.Point(26, 136)
         Me.lstPDFFiles.Margin = New System.Windows.Forms.Padding(2)
         Me.lstPDFFiles.Name = "lstPDFFiles"
+        Me.lstPDFFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
         Me.lstPDFFiles.Size = New System.Drawing.Size(232, 280)
         Me.lstPDFFiles.TabIndex = 19
         '
         'btnUnSelect
         '
-        Me.btnUnSelect.Location = New System.Drawing.Point(181, 91)
+        Me.btnUnSelect.Location = New System.Drawing.Point(24, 427)
         Me.btnUnSelect.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUnSelect.Name = "btnUnSelect"
         Me.btnUnSelect.Size = New System.Drawing.Size(68, 32)
@@ -185,10 +186,10 @@ Partial Class frmOperation
         '
         'btnFileAdd
         '
-        Me.btnFileAdd.Location = New System.Drawing.Point(159, 429)
+        Me.btnFileAdd.Location = New System.Drawing.Point(179, 426)
         Me.btnFileAdd.Margin = New System.Windows.Forms.Padding(2)
         Me.btnFileAdd.Name = "btnFileAdd"
-        Me.btnFileAdd.Size = New System.Drawing.Size(98, 25)
+        Me.btnFileAdd.Size = New System.Drawing.Size(83, 33)
         Me.btnFileAdd.TabIndex = 21
         Me.btnFileAdd.Text = "ファイルを追加"
         Me.btnFileAdd.UseVisualStyleBackColor = True

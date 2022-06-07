@@ -9,6 +9,13 @@ Public Class frmOperation
         CtlPdf1ControlEnabled()
         CtlMovie1ControlEnabled()
         CtlImage1ControlEnabled()
+        ListControlEnabled()
+    End Sub
+
+    Public Sub ListControlEnabled()
+        btnDelete.Enabled = 0 < lstPDFFiles.SelectedItems.Count
+        btnUnSelect.Enabled = 0 < lstPDFFiles.SelectedItems.Count
+
     End Sub
 
     Public Sub CtlPdf1ControlEnabled()
@@ -174,9 +181,12 @@ Public Class frmOperation
         If lstPDFFiles.SelectedItem Is Nothing Then
             Exit Sub
         End If
-        Dim fileviewinfo As FileViewParam
-        fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
-        lstPDFFiles.Items.Remove(fileviewinfo)
+        Dim a = lstPDFFiles.SelectedItems.Cast(Of Object)
+        Dim list = a.ToArray()
+        For Each i In list
+            lstPDFFiles.Items.Remove(i)
+        Next
+
     End Sub
 
     Private Sub lstFiles_Click(sender As Object, e As EventArgs) Handles lstPDFFiles.Click
@@ -500,6 +510,11 @@ Public Class frmOperation
 
     Private Sub lstPDFFiles_ChangeUICues(sender As Object, e As UICuesEventArgs) Handles lstPDFFiles.ChangeUICues
 
+    End Sub
+
+    Private Sub lstPDFFiles_SelectedValueChanged(sender As Object, e As EventArgs) Handles lstPDFFiles.SelectedValueChanged
+        ControlEnable()
+        UpdateViewIfChecked()
     End Sub
 
 
