@@ -376,22 +376,22 @@ Public Class frmOperation
 
     Private Sub btnFirst_Click(sender As Object, e As EventArgs) Handles btnPDFFirst.Click
         _document.FirstPage()
-
-        SetPreview()
+        UpdateViewIfChecked()
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnPDFNext.Click
         _document.NextPage()
-        SetPreview()
+        UpdateViewIfChecked()
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnPDFBack.Click
         _document.PrePage()
-        SetPreview()
+        UpdateViewIfChecked()
     End Sub
 
     Private Sub btnLast_Click(sender As Object, e As EventArgs) Handles btnPDFLast.Click
-        'todo
+        _document.PrePage()
+        UpdateViewIfChecked()
     End Sub
 #End Region
 
@@ -403,7 +403,9 @@ Public Class frmOperation
         pbThumbnail.Image = _document.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
         If _document.FileType.IsPDFExt Then
-            lblPage.Text = "ページ" & _document.page + 1 & "/" & _document.PageCount
+            lblPageDisp.Text = $"ページ{_document.page + 1}/{_document.PageCount}"
+        Else
+            lblPageDisp.Text = ""
         End If
 
     End Sub
@@ -423,8 +425,6 @@ Public Class frmOperation
             player.URL = fileViewParam.FileName
             player.uiMode = "none"
             player.stretchToFit = True
-        Else
-            SetPreview()
         End If
 
 
@@ -435,12 +435,12 @@ Public Class frmOperation
 
     Private Sub btnNextHalf_Click(sender As Object, e As EventArgs) Handles btnNextHalf.Click
         _document.NextHalfPage()
-        SetPreview()
+        UpdateViewIfChecked()
     End Sub
 
     Private Sub btnPreviousHalf_Click(sender As Object, e As EventArgs) Handles btnPreviousHalf.Click
         _document.PreviousHalfPage()
-        SetPreview()
+        UpdateViewIfChecked()
     End Sub
 
 
