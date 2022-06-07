@@ -17,7 +17,7 @@ Public Class frmOperation
         btnPDFFirst.Enabled = isEnabled
         btnPDFBack.Enabled = isEnabled
         btnPDFNext.Enabled = isEnabled
-
+        btnPDFLast.Enabled = isEnabled
         btnPreviousHalf.Enabled = isEnabled
         btnNextHalf.Enabled = isEnabled
 
@@ -390,7 +390,7 @@ Public Class frmOperation
     End Sub
 
     Private Sub btnLast_Click(sender As Object, e As EventArgs) Handles btnPDFLast.Click
-        _document.PrePage()
+        _document.LastPage()
         UpdateViewIfChecked()
     End Sub
 #End Region
@@ -460,8 +460,10 @@ Public Class frmOperation
 
     End Sub
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
-        VScrollBar1Init()
+        fileViewParam.scrollBarValue = 0
         fileViewParam.IsWidthEqualWin = True
+
+        VScrollBar1Init()
         UpdateViewIfChecked()
     End Sub
 

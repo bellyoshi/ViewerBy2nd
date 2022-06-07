@@ -99,12 +99,26 @@ namespace ViewerBy2ndLib
             {
                 return;
             }
+
             var sourceSize = pdfDoc.PageSizes[Convert.ToInt32(page)];
             var renderSize = GetRenderSize(sourceSize);
             if (renderSize == null) {
                 return;
             }
+            //if (FileViewParam.IsWidthEqualWin)
+            
+            renderSize = GetWinWidthRenderSize(renderSize.Value, FileViewParam.Bound);
+            
             this.Image = GetImage(renderSize.Value);
+
+
+
+
+        }
+
+        public static Size GetWinWidthRenderSize(Size originalRendeSize, Size bound)
+        {
+            return new Size(bound.Width , bound.Width * originalRendeSize.Height / originalRendeSize.Width );
         }
 
         public void FirstPage() {
@@ -129,6 +143,13 @@ namespace ViewerBy2ndLib
                 page -= 1;
                 Render();
             }
+        }
+        public void LastPage()
+        {
+            isHalf = false;
+            page = PageCount - 1;
+            Render();
+            
         }
 
 
@@ -218,8 +239,16 @@ namespace ViewerBy2ndLib
         }
 
 
-        public void DispSetWindow() { 
-            OpenFile(FileViewParam.FileName);
+        public void DispSetWindow() {
+            if (FileType.IsPDFExt())
+            {
+                Render();
+                //return;
+            }
+            else
+            {
+                OpenFile(FileViewParam.FileName);
+            }
                 if (Image == null) return;
 
             if (!CanSetWindowWidthRate()) return;
