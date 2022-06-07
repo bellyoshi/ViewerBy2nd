@@ -125,7 +125,19 @@ namespace ViewerBy2ndLib
 
             isHalf = false;
             page = 0.0;
-            Render();
+            docRender();
+        }
+        public void docRender()
+        {
+            if (FileViewParam.IsWidthEqualWin)
+            {
+                DispSetWindow();
+            }
+            else
+            {
+                Render();
+            }
+            
         }
 
         public void NextPage() {
@@ -133,7 +145,7 @@ namespace ViewerBy2ndLib
 
             if (page<pdfDoc.PageCount - 1) {
                 page += 1;
-                Render();
+                docRender();
             }
         }
 
@@ -141,15 +153,15 @@ namespace ViewerBy2ndLib
             isHalf = false;
             if (0 < page) {
                 page -= 1;
-                Render();
+                docRender();
             }
         }
         public void LastPage()
         {
             isHalf = false;
             page = PageCount - 1;
-            Render();
-            
+            docRender();
+
         }
 
 
