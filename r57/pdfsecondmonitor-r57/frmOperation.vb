@@ -201,7 +201,6 @@ Public Class frmOperation
         End If
         txtPDFFileName.Text = fileViewParam.FileName
 
-        SetFileInfo(fileViewParam)
 
         UpdateViewIfChecked()
 
@@ -308,6 +307,15 @@ Public Class frmOperation
 
     Public Sub UpdateView()
         _dispacher.ShowImage(pbThumbnail.Image)
+        If thumbnailPlayer.Visible Then
+            player = _dispacher.ShowMovie()
+            player.URL = fileViewParam.FileName
+            player.uiMode = "none"
+            player.stretchToFit = True
+            player.Ctlcontrols.currentPosition = thumbnailPlayer.Ctlcontrols.currentPosition
+
+        End If
+
     End Sub
 
     Private ReadOnly Property fileViewParam As FileViewParam
@@ -368,29 +376,20 @@ Public Class frmOperation
         Else
             lblPageDisp.Text = ""
         End If
-
-    End Sub
-
-
-
-    Private _backFileName As String
-
-    Public Sub SetFileInfo(f As FileViewParam)
-
-
-        Dim sc = _dispacher.GetViewScreen().Bounds
+        pbThumbnail.Visible = Not document.FileType.IsMovieExt
+        thumbnailPlayer.Visible = document.FileType.IsMovieExt
 
         If document.FileType.IsMovieExt() Then
-            player = _dispacher.ShowMovie()
 
-            player.URL = fileViewParam.FileName
-            player.uiMode = "none"
-            player.stretchToFit = True
+            player = thumbnailPlayer
+            thumbnailPlayer.URL = fileViewParam.FileName
+            thumbnailPlayer.uiMode = "none"
+            thumbnailPlayer.stretchToFit = True
         End If
-
-
-        UpdateViewIfChecked()
     End Sub
+
+
+
 
 
 

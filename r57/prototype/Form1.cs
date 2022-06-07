@@ -16,5 +16,10 @@ namespace prototype
         {
             InitializeComponent();
         }
+
+        private void vlcControlWrapper1_Resize(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
