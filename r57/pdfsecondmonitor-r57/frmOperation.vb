@@ -13,7 +13,7 @@ Public Class frmOperation
 
     Public Sub CtlPdf1ControlEnabled()
 
-        Dim isEnabled = _document.FileType.IsPDFExt()
+        Dim isEnabled = document.FileType.IsPDFExt()
         btnPDFFirst.Enabled = isEnabled
         btnPDFBack.Enabled = isEnabled
         btnPDFNext.Enabled = isEnabled
@@ -21,12 +21,12 @@ Public Class frmOperation
         btnPreviousHalf.Enabled = isEnabled
         btnNextHalf.Enabled = isEnabled
 
-        Dim setwin As Boolean = _document.FileType.IsPDFExt() OrElse _document.FileType.IsImageExt() OrElse _document.FileType.IsSVGExt()
+        Dim setwin As Boolean = document.FileType.IsPDFExt() OrElse document.FileType.IsImageExt() OrElse document.FileType.IsSVGExt()
         btnSetWindow.Enabled = setwin
         btnWhole.Enabled = setwin
     End Sub
     Public Sub CtlMovie1ControlEnabled()
-        Dim isEnabled = _document.FileType.IsMovieExt()
+        Dim isEnabled = document.FileType.IsMovieExt()
         GotoFirst.Enabled = isEnabled
         btnFastReverse.Enabled = isEnabled
         btnStartStop.Enabled = isEnabled
@@ -36,7 +36,7 @@ Public Class frmOperation
     End Sub
 
     Public Sub CtlImage1ControlEnabled()
-        Dim isEnabled = _document.FileType.IsImageExt() OrElse _document.FileType.IsSVGExt()
+        Dim isEnabled = document.FileType.IsImageExt() OrElse document.FileType.IsSVGExt()
 
         btnRotateM90.Enabled = isEnabled
         btnRotate90.Enabled = isEnabled
@@ -61,6 +61,7 @@ Public Class frmOperation
         loading = True
         cmbDisplay.SelectedIndex = My.Settings.cmbDisplaySelectedIndex
         lblFormColor.BackColor = My.Settings.formColor
+        chkUpdate.Checked = My.Settings.chkUpdate
         _dispacher.SetColor(My.Settings.formColor)
         SetColor()
         Try
@@ -96,6 +97,7 @@ Public Class frmOperation
 
         My.Settings.cmbDisplaySelectedIndex = cmbDisplay.SelectedIndex
         My.Settings.formColor = lblFormColor.BackColor
+        My.Settings.chkUpdate = chkUpdate.Checked
         My.Settings.Save()
 
         Dim fvinfos As New List(Of FileViewParam)
@@ -138,8 +140,6 @@ Public Class frmOperation
 
     Private Sub frmOperation_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
         AppSettingSave()
-
-
     End Sub
 #End Region
 
@@ -157,12 +157,7 @@ Public Class frmOperation
         '        'フォームの開始位置をディスプレイの左上座標に設定する
         _dispacher.SetSecondScreen(s)
 
-
-
-
     End Sub
-
-
 
     Private _dispacher As FormDispacher = FormDispacher.GetInstance
 
@@ -170,8 +165,6 @@ Public Class frmOperation
 #End Region
 
 #Region "リストボックス処理"
-
-
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If lstPDFFiles.SelectedItem Is Nothing Then
@@ -181,8 +174,6 @@ Public Class frmOperation
         fileviewinfo = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
         lstPDFFiles.Items.Remove(fileviewinfo)
     End Sub
-
-
 
     Private Sub lstFiles_Click(sender As Object, e As EventArgs) Handles lstPDFFiles.Click
 
@@ -207,7 +198,6 @@ Public Class frmOperation
     Private Sub btnDisp_Click(sender As Object, e As EventArgs) Handles btnDisp.Click
         UpdateView()
     End Sub
-
     Private Sub btnFileAdd_Click(sender As Object, e As EventArgs) Handles btnFileAdd.Click
         OpenFileDialog1.Multiselect = True
         OpenFileDialog1.Filter = FileType.CreateFilter()
@@ -222,7 +212,6 @@ Public Class frmOperation
         For Each filename In OpenFileDialog1.FileNames
             items.Add(New FileViewParam(filename, _dispacher.GetViewScreen.Bounds.Size))
         Next
-
 
     End Sub
 
@@ -263,66 +252,38 @@ Public Class frmOperation
         UpdateViewIfChecked()
     End Sub
 
-
-
-
-
-
 #End Region
-
-
-
-
-
-
 
 #End Region
 #Region "ctlImage"
 
 
-
-    Private _image As Bitmap
-
-
-
-
-
-
-
-
-
-
-
     Private Sub btnRotate_Click(sender As Object, e As EventArgs) Handles btnRotate180.Click
-        _document.Rotate(RotateFlipType.Rotate180FlipNone)
+        document.Rotate(RotateFlipType.Rotate180FlipNone)
         VScrollBar1Init()
         UpdateViewIfChecked()
     End Sub
 
     Private Sub btnRotate90_Click(sender As Object, e As EventArgs) Handles btnRotate90.Click
-        _document.Rotate(RotateFlipType.Rotate90FlipNone)
+        document.Rotate(RotateFlipType.Rotate90FlipNone)
         VScrollBar1Init()
         UpdateViewIfChecked()
     End Sub
 
     Private Sub btnRotate0_Click(sender As Object, e As EventArgs) Handles btnRotate0.Click
-        _document.Rotate(RotateFlipType.RotateNoneFlipNone)
+        document.Rotate(RotateFlipType.RotateNoneFlipNone)
         VScrollBar1Init()
         UpdateViewIfChecked()
     End Sub
 
     Private Sub btnRotate270_Click(sender As Object, e As EventArgs) Handles btnRotateM90.Click
-        _document.Rotate(RotateFlipType.Rotate270FlipNone)
+        document.Rotate(RotateFlipType.Rotate270FlipNone)
         VScrollBar1Init()
         UpdateViewIfChecked()
     End Sub
 
-
-
 #End Region
 #Region "Public Class ctlPdf"
-
-
 
     Public Sub UpdateViewIfChecked()
         SetPreview()
@@ -346,14 +307,11 @@ Public Class frmOperation
         End Get
     End Property
 
-    Private ReadOnly Property _document As ViewerBy2ndLib.Document
+    Private ReadOnly Property document As ViewerBy2ndLib.Document
         Get
             Return fileViewParam.document
         End Get
     End Property
-
-
-
 
 
     Public Sub SetColor()
@@ -361,36 +319,25 @@ Public Class frmOperation
     End Sub
 
 
-
-
-
-
-
-
-
-
-
-
-
 #Region "ページ移動"
 
     Private Sub btnFirst_Click(sender As Object, e As EventArgs) Handles btnPDFFirst.Click
-        _document.FirstPage()
+        document.FirstPage()
         UpdateViewIfChecked()
     End Sub
 
     Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnPDFNext.Click
-        _document.NextPage()
+        document.NextPage()
         UpdateViewIfChecked()
     End Sub
 
     Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnPDFBack.Click
-        _document.PrePage()
+        document.PrePage()
         UpdateViewIfChecked()
     End Sub
 
     Private Sub btnLast_Click(sender As Object, e As EventArgs) Handles btnPDFLast.Click
-        _document.LastPage()
+        document.LastPage()
         UpdateViewIfChecked()
     End Sub
 #End Region
@@ -400,10 +347,10 @@ Public Class frmOperation
 
 
     Private Sub SetPreview()
-        pbThumbnail.Image = _document.Image
+        pbThumbnail.Image = document.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
-        If _document.FileType.IsPDFExt Then
-            lblPageDisp.Text = $"ページ{_document.page + 1}/{_document.PageCount}"
+        If document.FileType.IsPDFExt Then
+            lblPageDisp.Text = $"ページ{document.page + 1}/{document.PageCount}"
         Else
             lblPageDisp.Text = ""
         End If
@@ -419,7 +366,7 @@ Public Class frmOperation
 
         Dim sc = _dispacher.GetViewScreen().Bounds
 
-        If _document.FileType.IsMovieExt() Then
+        If document.FileType.IsMovieExt() Then
             player = _dispacher.ShowMovie()
 
             player.URL = fileViewParam.FileName
@@ -434,12 +381,12 @@ Public Class frmOperation
 
 
     Private Sub btnNextHalf_Click(sender As Object, e As EventArgs) Handles btnNextHalf.Click
-        _document.NextHalfPage()
+        document.NextHalfPage()
         UpdateViewIfChecked()
     End Sub
 
     Private Sub btnPreviousHalf_Click(sender As Object, e As EventArgs) Handles btnPreviousHalf.Click
-        _document.PreviousHalfPage()
+        document.PreviousHalfPage()
         UpdateViewIfChecked()
     End Sub
 
@@ -448,7 +395,7 @@ Public Class frmOperation
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
 
         fileViewParam.scrollBarValue = VScrollBar1.Value
-        _document.DispSetWindow()
+        document.DispSetWindow()
 
 
         UpdateViewIfChecked()
@@ -456,7 +403,7 @@ Public Class frmOperation
     Private Sub VScrollBar1Init()
         VScrollBar1.Value = 0
         VScrollBar1.Minimum = 0
-        VScrollBar1.Maximum = _document.Image.Height
+        VScrollBar1.Maximum = document.Image.Height
 
     End Sub
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
