@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace VLCLib
+namespace ViewerBy2ndLib
 {
     public class VLCDirectoryGetter
     {

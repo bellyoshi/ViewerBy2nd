@@ -23,7 +23,6 @@ Partial Class frmOperation
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOperation))
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.cmbDisplay = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -50,7 +49,6 @@ Partial Class frmOperation
         Me.btnRotate0 = New System.Windows.Forms.Button()
         Me.btnRotateM90 = New System.Windows.Forms.Button()
         Me.btnRotate180 = New System.Windows.Forms.Button()
-        Me.thumbnailPlayer = New AxWMPLib.AxWindowsMediaPlayer()
         Me.trackBarSeek = New System.Windows.Forms.TrackBar()
         Me.GotoFirst = New System.Windows.Forms.Button()
         Me.btnStop = New System.Windows.Forms.Button()
@@ -66,10 +64,11 @@ Partial Class frmOperation
         Me.btnWhole = New System.Windows.Forms.Button()
         Me.btnPDFLast = New System.Windows.Forms.Button()
         Me.btnAllSelect = New System.Windows.Forms.Button()
+        Me.thumbnailPlayer = New Vlc.DotNet.Forms.VlcControl()
         Me.GroupBox1.SuspendLayout()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.thumbnailPlayer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.trackBarSeek, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.thumbnailPlayer, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -298,17 +297,6 @@ Partial Class frmOperation
         Me.btnRotate180.Text = "180度回転"
         Me.btnRotate180.UseVisualStyleBackColor = True
         '
-        'thumbnailPlayer
-        '
-        Me.thumbnailPlayer.Enabled = True
-        Me.thumbnailPlayer.Location = New System.Drawing.Point(690, -9)
-        Me.thumbnailPlayer.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.thumbnailPlayer.Name = "thumbnailPlayer"
-        Me.thumbnailPlayer.OcxState = CType(resources.GetObject("thumbnailPlayer.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.thumbnailPlayer.Size = New System.Drawing.Size(460, 298)
-        Me.thumbnailPlayer.TabIndex = 47
-        Me.thumbnailPlayer.Visible = False
-        '
         'trackBarSeek
         '
         Me.trackBarSeek.Location = New System.Drawing.Point(369, 509)
@@ -458,11 +446,24 @@ Partial Class frmOperation
         Me.btnAllSelect.Text = "全選択"
         Me.btnAllSelect.UseVisualStyleBackColor = True
         '
+        'thumbnailPlayer
+        '
+        Me.thumbnailPlayer.BackColor = System.Drawing.Color.Black
+        Me.thumbnailPlayer.Location = New System.Drawing.Point(692, 168)
+        Me.thumbnailPlayer.Name = "thumbnailPlayer"
+        Me.thumbnailPlayer.Size = New System.Drawing.Size(458, 301)
+        Me.thumbnailPlayer.Spu = -1
+        Me.thumbnailPlayer.TabIndex = 62
+        Me.thumbnailPlayer.Text = "VlcControl1"
+        Me.thumbnailPlayer.VlcLibDirectory = Nothing
+        Me.thumbnailPlayer.VlcMediaplayerOptions = Nothing
+        '
         'frmOperation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1199, 649)
+        Me.Controls.Add(Me.thumbnailPlayer)
         Me.Controls.Add(Me.btnAllSelect)
         Me.Controls.Add(Me.btnPDFLast)
         Me.Controls.Add(Me.btnWhole)
@@ -472,7 +473,6 @@ Partial Class frmOperation
         Me.Controls.Add(Me.btnPDFNext)
         Me.Controls.Add(Me.btnPDFBack)
         Me.Controls.Add(Me.btnPDFFirst)
-        Me.Controls.Add(Me.thumbnailPlayer)
         Me.Controls.Add(Me.trackBarSeek)
         Me.Controls.Add(Me.GotoFirst)
         Me.Controls.Add(Me.btnStop)
@@ -503,8 +503,8 @@ Partial Class frmOperation
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.thumbnailPlayer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.trackBarSeek, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.thumbnailPlayer, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -535,7 +535,6 @@ Partial Class frmOperation
     Friend WithEvents btnRotate0 As Button
     Friend WithEvents btnRotateM90 As Button
     Friend WithEvents btnRotate180 As Button
-    Friend WithEvents thumbnailPlayer As AxWMPLib.AxWindowsMediaPlayer
     Friend WithEvents trackBarSeek As TrackBar
     Friend WithEvents GotoFirst As Button
     Friend WithEvents btnStop As Button
@@ -551,4 +550,5 @@ Partial Class frmOperation
     Friend WithEvents btnWhole As Button
     Friend WithEvents btnPDFLast As Button
     Friend WithEvents btnAllSelect As Button
+    Friend WithEvents thumbnailPlayer As Vlc.DotNet.Forms.VlcControl
 End Class

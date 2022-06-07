@@ -312,7 +312,7 @@ Public Class frmOperation
             player.URL = fileViewParam.FileName
             player.uiMode = "none"
             player.stretchToFit = True
-            player.Ctlcontrols.currentPosition = thumbnailPlayer.Ctlcontrols.currentPosition
+            'player.Ctlcontrols.currentPosition = thumbnailPlayer.Ctlcontrols.currentPosition
 
         End If
 
@@ -381,10 +381,8 @@ Public Class frmOperation
 
         If document.FileType.IsMovieExt() Then
 
-            player = thumbnailPlayer
-            thumbnailPlayer.URL = fileViewParam.FileName
-            thumbnailPlayer.uiMode = "none"
-            thumbnailPlayer.stretchToFit = True
+            thumbnailPlayer.Play(New Uri("file://" & fileViewParam.FileName))
+
         End If
     End Sub
 
@@ -521,6 +519,10 @@ Public Class frmOperation
 
             lstPDFFiles.SetSelected(i, True)
         Next
+    End Sub
+
+    Private Sub thumbnailPlayer_VlcLibDirectoryNeeded(sender As Object, e As Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs) Handles thumbnailPlayer.VlcLibDirectoryNeeded
+        e.VlcLibDirectory = VLCDirectoryGetter.GetVlcLibDirectory()
     End Sub
 
 
