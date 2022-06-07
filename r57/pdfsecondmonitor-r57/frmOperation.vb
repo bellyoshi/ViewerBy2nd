@@ -318,8 +318,6 @@ Public Class frmOperation
     End Sub
 
 
-    Private SetWinWidthModule As SetWinWidthModule
-
 
 #End Region
 #Region "Public Class ctlPdf"
@@ -429,7 +427,7 @@ Public Class frmOperation
             SetPreview()
         End If
 
-        _setwinWidth = New SetWinWidthModule(sc, pbThumbnail, _document, VScrollBar1)
+
         UpdateViewIfChecked()
     End Sub
 
@@ -449,8 +447,7 @@ Public Class frmOperation
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
 
-
-        _setwinWidth.DispSetWindow()
+        fileViewParam.scrollBarValue = VScrollBar1.Value
         UpdateViewIfChecked()
     End Sub
     Private Sub VScrollBar1Init()
@@ -465,7 +462,6 @@ Public Class frmOperation
         UpdateViewIfChecked()
     End Sub
 
-    Private _setwinWidth As SetWinWidthModule
 
 
 

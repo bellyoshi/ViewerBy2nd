@@ -50,7 +50,7 @@
 
 
     Public Function ShowMovie() As AxWMPLib.AxWindowsMediaPlayer
-        Show(_frmImageViewer, GetType(frmViewer))
+        _frmImageViewer = DirectCast(Show(_frmImageViewer, GetType(frmViewer)), frmViewer)
         _frmImageViewer.PictureBox1.Visible = False
         _frmImageViewer.AxWindowsMediaPlayer1.Visible = True
         Return _frmImageViewer.AxWindowsMediaPlayer1

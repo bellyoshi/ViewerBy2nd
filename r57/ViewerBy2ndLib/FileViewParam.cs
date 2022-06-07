@@ -38,6 +38,25 @@ namespace ViewerBy2ndLib
             }
         }
 
-        public bool IsWidthEqualWin { get; set; }
+        bool _isWidthEqualWin;
+        public bool IsWidthEqualWin { 
+            get {
+                return _isWidthEqualWin;
+            }
+            set
+            {
+                _isWidthEqualWin = value;
+                if (IsWidthEqualWin == true)
+                {
+                    _document?.DispSetWindow();
+                }
+                else
+                {
+                    _document?.Disp();
+                }
+                
+            }
+        }
+        public int scrollBarValue { get;  set; }
     }
 }
