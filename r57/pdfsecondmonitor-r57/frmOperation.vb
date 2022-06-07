@@ -448,6 +448,9 @@ Public Class frmOperation
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
 
         fileViewParam.scrollBarValue = VScrollBar1.Value
+        _document.DispSetWindow()
+
+
         UpdateViewIfChecked()
     End Sub
     Private Sub VScrollBar1Init()
