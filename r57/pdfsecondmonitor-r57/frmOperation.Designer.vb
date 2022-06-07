@@ -65,6 +65,7 @@ Partial Class frmOperation
         Me.lblPageDisp = New System.Windows.Forms.Label()
         Me.btnWhole = New System.Windows.Forms.Button()
         Me.btnPDFLast = New System.Windows.Forms.Button()
+        Me.btnAllSelect = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -154,10 +155,10 @@ Partial Class frmOperation
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(96, 427)
+        Me.btnDelete.Location = New System.Drawing.Point(26, 463)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(2)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(81, 32)
+        Me.btnDelete.Size = New System.Drawing.Size(66, 32)
         Me.btnDelete.TabIndex = 21
         Me.btnDelete.Text = "削除"
         Me.btnDelete.UseVisualStyleBackColor = True
@@ -176,7 +177,7 @@ Partial Class frmOperation
         '
         'btnUnSelect
         '
-        Me.btnUnSelect.Location = New System.Drawing.Point(24, 427)
+        Me.btnUnSelect.Location = New System.Drawing.Point(96, 427)
         Me.btnUnSelect.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUnSelect.Name = "btnUnSelect"
         Me.btnUnSelect.Size = New System.Drawing.Size(68, 32)
@@ -186,10 +187,10 @@ Partial Class frmOperation
         '
         'btnFileAdd
         '
-        Me.btnFileAdd.Location = New System.Drawing.Point(179, 426)
+        Me.btnFileAdd.Location = New System.Drawing.Point(168, 426)
         Me.btnFileAdd.Margin = New System.Windows.Forms.Padding(2)
         Me.btnFileAdd.Name = "btnFileAdd"
-        Me.btnFileAdd.Size = New System.Drawing.Size(83, 33)
+        Me.btnFileAdd.Size = New System.Drawing.Size(94, 33)
         Me.btnFileAdd.TabIndex = 21
         Me.btnFileAdd.Text = "ファイルを追加"
         Me.btnFileAdd.UseVisualStyleBackColor = True
@@ -237,7 +238,7 @@ Partial Class frmOperation
         '
         'VScrollBar1
         '
-        Me.VScrollBar1.Location = New System.Drawing.Point(840, 134)
+        Me.VScrollBar1.Location = New System.Drawing.Point(865, 134)
         Me.VScrollBar1.Name = "VScrollBar1"
         Me.VScrollBar1.Size = New System.Drawing.Size(23, 240)
         Me.VScrollBar1.TabIndex = 39
@@ -247,7 +248,7 @@ Partial Class frmOperation
         Me.pbThumbnail.Location = New System.Drawing.Point(518, 134)
         Me.pbThumbnail.Margin = New System.Windows.Forms.Padding(2)
         Me.pbThumbnail.Name = "pbThumbnail"
-        Me.pbThumbnail.Size = New System.Drawing.Size(320, 240)
+        Me.pbThumbnail.Size = New System.Drawing.Size(345, 240)
         Me.pbThumbnail.TabIndex = 38
         Me.pbThumbnail.TabStop = False
         '
@@ -304,11 +305,11 @@ Partial Class frmOperation
         'AxWindowsMediaPlayer1
         '
         Me.AxWindowsMediaPlayer1.Enabled = True
-        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(590, 30)
+        Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(518, 134)
         Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(427, 311)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(345, 242)
         Me.AxWindowsMediaPlayer1.TabIndex = 47
         Me.AxWindowsMediaPlayer1.Visible = False
         '
@@ -452,11 +453,22 @@ Partial Class frmOperation
         Me.btnPDFLast.Text = "最後へ"
         Me.btnPDFLast.UseVisualStyleBackColor = True
         '
+        'btnAllSelect
+        '
+        Me.btnAllSelect.Location = New System.Drawing.Point(26, 427)
+        Me.btnAllSelect.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnAllSelect.Name = "btnAllSelect"
+        Me.btnAllSelect.Size = New System.Drawing.Size(66, 32)
+        Me.btnAllSelect.TabIndex = 61
+        Me.btnAllSelect.Text = "全選択"
+        Me.btnAllSelect.UseVisualStyleBackColor = True
+        '
         'frmOperation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(876, 519)
+        Me.ClientSize = New System.Drawing.Size(899, 519)
+        Me.Controls.Add(Me.btnAllSelect)
         Me.Controls.Add(Me.btnPDFLast)
         Me.Controls.Add(Me.btnWhole)
         Me.Controls.Add(Me.lblPageDisp)
@@ -543,4 +555,5 @@ Partial Class frmOperation
     Friend WithEvents lblPageDisp As Label
     Friend WithEvents btnWhole As Button
     Friend WithEvents btnPDFLast As Button
+    Friend WithEvents btnAllSelect As Button
 End Class

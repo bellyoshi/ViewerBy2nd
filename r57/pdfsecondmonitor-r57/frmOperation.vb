@@ -517,6 +517,13 @@ Public Class frmOperation
         UpdateViewIfChecked()
     End Sub
 
+    Private Sub btnAllSelect_Click(sender As Object, e As EventArgs) Handles btnAllSelect.Click
+        For i As Integer = 0 To lstPDFFiles.Items.Count - 1
+
+            lstPDFFiles.SetSelected(i, True)
+        Next
+    End Sub
+
 
 
 

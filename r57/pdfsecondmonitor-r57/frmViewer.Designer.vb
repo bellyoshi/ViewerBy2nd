@@ -34,31 +34,34 @@ Partial Class frmViewer
         Me.AxWindowsMediaPlayer1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.AxWindowsMediaPlayer1.Enabled = True
         Me.AxWindowsMediaPlayer1.Location = New System.Drawing.Point(0, 0)
+        Me.AxWindowsMediaPlayer1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.AxWindowsMediaPlayer1.Name = "AxWindowsMediaPlayer1"
         Me.AxWindowsMediaPlayer1.OcxState = CType(resources.GetObject("AxWindowsMediaPlayer1.OcxState"), System.Windows.Forms.AxHost.State)
-        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(478, 365)
+        Me.AxWindowsMediaPlayer1.Size = New System.Drawing.Size(358, 292)
         Me.AxWindowsMediaPlayer1.TabIndex = 3
         '
         'PictureBox1
         '
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PictureBox1.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(478, 365)
+        Me.PictureBox1.Size = New System.Drawing.Size(358, 292)
         Me.PictureBox1.TabIndex = 4
         Me.PictureBox1.TabStop = False
         '
         'frmViewer
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(478, 365)
+        Me.ClientSize = New System.Drawing.Size(358, 292)
         Me.ControlBox = False
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.AxWindowsMediaPlayer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "frmViewer"
-        Me.Text = "Form1"
+        Me.Text = "Viewer Screen"
         CType(Me.AxWindowsMediaPlayer1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
