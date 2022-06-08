@@ -62,6 +62,7 @@ Public Class frmOperation
     End Sub
 
     Private Sub frmOperation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        _dispacher.RegistfrmOperation(Me)
         screenDetect()
         AppSettingLoad()
         ControlEnable()
@@ -587,7 +588,7 @@ Public Class frmOperation
         Trackbar_Seek()
     End Sub
 
-    Private Sub frmOperation_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
+    Public Sub frmOperation_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
         If Not VScrollBar1.Enabled Then
             Return
         End If
@@ -596,10 +597,18 @@ Public Class frmOperation
         Dim expect As Integer = -Convert.ToInt32(numberOfTextLinesToMove) + VScrollBar1.Value
         If expect < 0 Then
             expect = 0
+            If document.CanPrePage() Then
+                expect = VScrollBar1.Maximum
+                document.PrePage()
+            End If
         End If
 
         If VScrollBar1.Maximum < expect Then
             expect = VScrollBar1.Maximum
+            If document.CanNextPage() Then
+                expect = 0
+                document.NextPage()
+            End If
         End If
         VScrollBar1.Value = expect
         VSctollUpdate()

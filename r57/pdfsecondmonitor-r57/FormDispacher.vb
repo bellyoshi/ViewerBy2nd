@@ -1,5 +1,6 @@
 ﻿Public Class FormDispacher
 
+    Private _frmOperation As frmOperation
     Private _secondScreen As Screen
     Public Function GetViewScreen() As Screen
         Return _secondScreen
@@ -9,6 +10,9 @@
         For Each frm In _secondMonitorWindows
             SetViewerBounds(frm)
         Next
+    End Sub
+    Public Sub frmOperation_MouseWheel(sender As Object, e As MouseEventArgs)
+        _frmOperation.frmOperation_MouseWheel(sender, e)
     End Sub
 
     Private Sub SetViewerBounds(ByVal frm As Form)
@@ -64,6 +68,10 @@
             AddHandler form.FormClosed, AddressOf from_Closed
         End If
 
+    End Sub
+
+    Friend Sub RegistfrmOperation(frmOperation As frmOperation)
+        _frmOperation = frmOperation
     End Sub
 
     Private Sub from_Closed(sender As Object, e As EventArgs)

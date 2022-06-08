@@ -142,18 +142,22 @@ namespace ViewerBy2ndLib
             
         }
 
+        public bool CanNextPage()
+        => (page<pdfDoc.PageCount - 1);
+
         public void NextPage() {
             isHalf = false;
 
-            if (page<pdfDoc.PageCount - 1) {
+            if (CanNextPage()) {
                 page += 1;
                 docRender();
             }
         }
-
+        public bool CanPrePage()
+            => 0 < page;
         public void PrePage() {
             isHalf = false;
-            if (0 < page) {
+            if (CanPrePage()) {
                 page -= 1;
                 docRender();
             }
