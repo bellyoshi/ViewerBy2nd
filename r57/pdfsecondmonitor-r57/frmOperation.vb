@@ -33,13 +33,18 @@ Public Class frmOperation
         btnWhole.Enabled = setwin
     End Sub
     Public Sub CtlMovie1ControlEnabled()
-        Dim isEnabled = document.FileType.IsMovieExt()
-        GotoFirst.Enabled = isEnabled
-        btnFastReverse.Enabled = isEnabled
-        btnStart.Enabled = isEnabled
-        btnStop.Enabled = isEnabled
-        btnFastForward.Enabled = isEnabled
-
+        Dim isMovie = document.FileType.IsMovieExt()
+        GotoFirst.Enabled = isMovie
+        btnFastReverse.Enabled = isMovie
+        btnStart.Enabled = isMovie
+        btnStop.Enabled = isMovie
+        btnFastForward.Enabled = isMovie
+        chkUpdate.Enabled = Not isMovie
+        If isMovie Then
+            btnDisp.Text = "再生"
+        Else
+            btnDisp.Text = "表示"
+        End If
     End Sub
 
     Public Sub CtlImage1ControlEnabled()
@@ -308,12 +313,10 @@ Public Class frmOperation
     Public Sub UpdateView()
         _dispacher.ShowImage(pbThumbnail.Image)
         If thumbnailPlayer.Visible Then
-            player = _dispacher.ShowMovie()
-            player.URL = fileViewParam.FileName
-            player.uiMode = "none"
-            player.stretchToFit = True
-            'player.Ctlcontrols.currentPosition = thumbnailPlayer.Ctlcontrols.currentPosition
-
+            Dim vlc = _dispacher.ShowMovie()
+            'todo:
+            Dim op = New String() {}
+            vlc.Play(New Uri("file://" & fileViewParam.FileName), op)
         End If
 
     End Sub
@@ -366,7 +369,7 @@ Public Class frmOperation
 
 
 
-
+    Private requirePouse As Boolean = False
 
     Private Sub SetPreview()
         pbThumbnail.Image = document.Image
@@ -382,7 +385,7 @@ Public Class frmOperation
         If document.FileType.IsMovieExt() Then
 
             thumbnailPlayer.Play((New Uri("file://" & fileViewParam.FileName)), New String() {})
-            thumbnailPlayer.Stop()
+            requirePouse = False
 
         End If
     End Sub
@@ -434,8 +437,6 @@ Public Class frmOperation
 
 
 
-    Private player As AxWMPLib.AxWindowsMediaPlayer
-
 
 
 
@@ -448,17 +449,12 @@ Public Class frmOperation
         thumbnailPlayer.Rate = 1
         btnFastForward.Text = "▶▶"
         thumbnailPlayer.Play()
-        If chkUpdate.Checked Then
-            player.Ctlcontrols.play()
-        End If
 
     End Sub
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
         thumbnailPlayer.Pause()
-        If chkUpdate.Checked Then
-            player.Ctlcontrols.pause()
-        End If
+
 
     End Sub
 
@@ -471,9 +467,7 @@ Public Class frmOperation
             thumbnailPlayer.Rate = 2.0
         End If
 
-        If chkUpdate.Checked Then
-            player.Ctlcontrols.fastForward()
-        End If
+
 
     End Sub
 
@@ -485,9 +479,7 @@ Public Class frmOperation
             thumbnailPlayer.Time = thumbnailPlayer.Time - 15000
         End If
 
-        If chkUpdate.Checked Then
-            player.Ctlcontrols.fastReverse()
-        End If
+
 
 
     End Sub
@@ -517,6 +509,14 @@ Public Class frmOperation
         Catch ex As Exception
 
         End Try
+        If requirePouse = False Then
+            If thumbnailPlayer.Time <> 0 Then
+                thumbnailPlayer.Pause()
+                requirePouse = True
+            End If
+
+
+        End If
         lbl_Update()
     End Sub
 

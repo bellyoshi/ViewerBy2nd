@@ -42,18 +42,18 @@
         _frmImageViewer = DirectCast(Show(_frmImageViewer, GetType(frmViewer)), frmViewer)
         _frmImageViewer.PictureBox1.Image = image
         _frmImageViewer.PictureBox1.Visible = True
-        _frmImageViewer.AxWindowsMediaPlayer1.Visible = False
-        _frmImageViewer.AxWindowsMediaPlayer1.Ctlcontrols.stop()
+        _frmImageViewer.VlcControl1.Visible = False
+        _frmImageViewer.VlcControl1.Stop()
         _frmImageViewer.PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
     End Sub
     Private _frmImageViewer As frmViewer
 
 
-    Public Function ShowMovie() As AxWMPLib.AxWindowsMediaPlayer
+    Public Function ShowMovie() As Vlc.DotNet.Forms.VlcControl
         _frmImageViewer = DirectCast(Show(_frmImageViewer, GetType(frmViewer)), frmViewer)
         _frmImageViewer.PictureBox1.Visible = False
-        _frmImageViewer.AxWindowsMediaPlayer1.Visible = True
-        Return _frmImageViewer.AxWindowsMediaPlayer1
+        _frmImageViewer.VlcControl1.Visible = True
+        Return _frmImageViewer.VlcControl1
     End Function
 
     Public Sub Create(ByRef form As Form, ByVal formType As Type)
