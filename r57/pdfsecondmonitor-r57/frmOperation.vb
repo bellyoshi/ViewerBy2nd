@@ -36,7 +36,7 @@ Public Class frmOperation
         Dim isEnabled = document.FileType.IsMovieExt()
         GotoFirst.Enabled = isEnabled
         btnFastReverse.Enabled = isEnabled
-        btnStartStop.Enabled = isEnabled
+        btnStart.Enabled = isEnabled
         btnStop.Enabled = isEnabled
         btnFastForward.Enabled = isEnabled
 
@@ -56,8 +56,8 @@ Public Class frmOperation
         screenDetect()
         AppSettingLoad()
         ControlEnable()
-        Timer1.Interval = 100
-        Timer1.Start()
+        SeekTimer.Interval = 100
+        SeekTimer.Start()
     End Sub
 
 
@@ -381,7 +381,8 @@ Public Class frmOperation
 
         If document.FileType.IsMovieExt() Then
 
-            thumbnailPlayer.Play(New Uri("file://" & fileViewParam.FileName))
+            thumbnailPlayer.Play((New Uri("file://" & fileViewParam.FileName)), New String() {})
+            thumbnailPlayer.Stop()
 
         End If
     End Sub
@@ -443,59 +444,89 @@ Public Class frmOperation
 
 
 
-    Private Sub btnStartStop_Click(sender As Object, e As EventArgs) Handles btnStartStop.Click
-        player.Ctlcontrols.play()
+    Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
+        thumbnailPlayer.Rate = 1
+        btnFastForward.Text = "▶▶"
+        thumbnailPlayer.Play()
+        If chkUpdate.Checked Then
+            player.Ctlcontrols.play()
+        End If
+
     End Sub
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
-        player.Ctlcontrols.pause()
+        thumbnailPlayer.Pause()
+        If chkUpdate.Checked Then
+            player.Ctlcontrols.pause()
+        End If
+
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles btnFastForward.Click
-        player.Ctlcontrols.fastForward()
+        'todo:
+        btnFastForward.Text = "▶▶▶"
+        If thumbnailPlayer.Rate = 2.0 Then
+            thumbnailPlayer.Rate = 4.0
+        Else
+            thumbnailPlayer.Rate = 2.0
+        End If
+
+        If chkUpdate.Checked Then
+            player.Ctlcontrols.fastForward()
+        End If
+
     End Sub
 
     Private Sub btnFastReverse_Click(sender As Object, e As EventArgs) Handles btnFastReverse.Click
-        player.Ctlcontrols.fastReverse()
+        'todo:
+        If thumbnailPlayer.Time < 15000 Then
+            thumbnailPlayer.Time = 0
+        Else
+            thumbnailPlayer.Time = thumbnailPlayer.Time - 15000
+        End If
+
+        If chkUpdate.Checked Then
+            player.Ctlcontrols.fastReverse()
+        End If
+
 
     End Sub
 
 
 
     Private Sub GotoFirst_Click(sender As Object, e As EventArgs) Handles GotoFirst.Click
-        player.Ctlcontrols.stop()
-        player.Ctlcontrols.play()
-        player.Ctlcontrols.pause()
+        thumbnailPlayer.VlcMediaPlayer.Time = 0
     End Sub
 
     Private trackBarSeek_Scrolled As Boolean = False
-    Private Sub Seek(sender As Object, e As EventArgs) Handles Timer1.Tick
-        If player Is Nothing Then
-            Exit Sub
-        End If
+    Private Sub SeekTimer_Tick(sender As Object, e As EventArgs) Handles SeekTimer.Tick
+
+        Trackbar_Seek()
+    End Sub
+
+    Private Sub Trackbar_Seek()
         Try
             If trackBarSeek_Scrolled Then
-                player.Ctlcontrols.currentPosition = trackBarSeek.Value / 100
-                If Not player.playState = WMPLib.WMPPlayState.wmppsPlaying Then
-                    player.Ctlcontrols.play()
-                    player.Ctlcontrols.pause()
-
-                End If
+                thumbnailPlayer.VlcMediaPlayer.Time = trackBarSeek.Value * 10000
                 trackBarSeek_Scrolled = False
             Else
-                trackBarSeek.Maximum = CType(player.Ctlcontrols.currentItem.duration * 100, Integer)
-                trackBarSeek.Value = CType(player.Ctlcontrols.currentPosition * 100, Integer)
+                trackBarSeek.Maximum = Convert.ToInt32(thumbnailPlayer.VlcMediaPlayer.Length / 10000)
+                trackBarSeek.Value = Convert.ToInt32(thumbnailPlayer.Time / 10000)
             End If
 
         Catch ex As Exception
 
         End Try
+        lbl_Update()
+    End Sub
 
+    Private Sub lbl_Update()
+        Dim ts As New TimeSpan(thumbnailPlayer.VlcMediaPlayer.Time * 10000)
+        Label3.Text = ts.ToString("hh\:mm\:ss")
     End Sub
 
 
-
-    Private Sub trackBarSeek_ValueChanged(sender As Object, e As EventArgs) Handles trackBarSeek.Scroll
+    Private Sub trackBarSeek_Scroll(sender As Object, e As EventArgs) Handles trackBarSeek.Scroll
         trackBarSeek_Scrolled = True
 
     End Sub
@@ -505,9 +536,7 @@ Public Class frmOperation
         UpdateViewIfChecked()
     End Sub
 
-    Private Sub lstPDFFiles_ChangeUICues(sender As Object, e As UICuesEventArgs) Handles lstPDFFiles.ChangeUICues
 
-    End Sub
 
     Private Sub lstPDFFiles_SelectedValueChanged(sender As Object, e As EventArgs) Handles lstPDFFiles.SelectedValueChanged
         ControlEnable()
@@ -524,6 +553,27 @@ Public Class frmOperation
     Private Sub thumbnailPlayer_VlcLibDirectoryNeeded(sender As Object, e As Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs) Handles thumbnailPlayer.VlcLibDirectoryNeeded
         e.VlcLibDirectory = VLCDirectoryGetter.GetVlcLibDirectory()
     End Sub
+
+    Private Sub trackBarSeek_MouseDown(sender As Object, e As MouseEventArgs) Handles trackBarSeek.MouseDown
+        Dim TrackBar1 = trackBarSeek
+        If e.Button <> Windows.Forms.MouseButtons.Left _
+            OrElse e.X < 0 OrElse e.X > TrackBar1.Width OrElse e.Y < 0 OrElse e.Y > TrackBar1.Height Then
+            Exit Sub
+        End If
+
+        If e.X < 8 Then
+            TrackBar1.Value = TrackBar1.Minimum
+        ElseIf e.X > TrackBar1.Width - 8 Then
+            TrackBar1.Value = TrackBar1.Maximum
+        Else
+            Dim seekWidth As Double = TrackBar1.Width - 16
+            Dim ticWidth As Double = seekWidth / (TrackBar1.Maximum - TrackBar1.Minimum)
+            TrackBar1.Value = CInt((e.X - 8) / ticWidth) + TrackBar1.Minimum
+        End If
+        trackBarSeek_Scrolled = True
+        Trackbar_Seek()
+    End Sub
+
 
 
 

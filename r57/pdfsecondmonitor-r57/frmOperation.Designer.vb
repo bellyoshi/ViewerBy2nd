@@ -29,7 +29,7 @@ Partial Class frmOperation
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblFormColor = New System.Windows.Forms.Label()
         Me.btnColorChange = New System.Windows.Forms.Button()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.SeekTimer = New System.Windows.Forms.Timer(Me.components)
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtPDFFileName = New System.Windows.Forms.TextBox()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -54,7 +54,7 @@ Partial Class frmOperation
         Me.btnStop = New System.Windows.Forms.Button()
         Me.btnFastReverse = New System.Windows.Forms.Button()
         Me.btnFastForward = New System.Windows.Forms.Button()
-        Me.btnStartStop = New System.Windows.Forms.Button()
+        Me.btnStart = New System.Windows.Forms.Button()
         Me.btnPreviousHalf = New System.Windows.Forms.Button()
         Me.btnNextHalf = New System.Windows.Forms.Button()
         Me.btnPDFNext = New System.Windows.Forms.Button()
@@ -65,6 +65,7 @@ Partial Class frmOperation
         Me.btnPDFLast = New System.Windows.Forms.Button()
         Me.btnAllSelect = New System.Windows.Forms.Button()
         Me.thumbnailPlayer = New Vlc.DotNet.Forms.VlcControl()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.trackBarSeek, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -327,36 +328,36 @@ Partial Class frmOperation
         '
         'btnFastReverse
         '
-        Me.btnFastReverse.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnFastReverse.Font = New System.Drawing.Font("MS UI Gothic", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.btnFastReverse.Location = New System.Drawing.Point(425, 455)
         Me.btnFastReverse.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnFastReverse.Name = "btnFastReverse"
         Me.btnFastReverse.Size = New System.Drawing.Size(51, 50)
         Me.btnFastReverse.TabIndex = 43
-        Me.btnFastReverse.Text = "◀◀"
+        Me.btnFastReverse.Text = "戻る"
         Me.btnFastReverse.UseVisualStyleBackColor = True
         '
         'btnFastForward
         '
         Me.btnFastForward.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnFastForward.Location = New System.Drawing.Point(629, 455)
+        Me.btnFastForward.Location = New System.Drawing.Point(606, 455)
         Me.btnFastForward.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnFastForward.Name = "btnFastForward"
-        Me.btnFastForward.Size = New System.Drawing.Size(51, 50)
+        Me.btnFastForward.Size = New System.Drawing.Size(74, 50)
         Me.btnFastForward.TabIndex = 44
         Me.btnFastForward.Text = "▶▶"
         Me.btnFastForward.UseVisualStyleBackColor = True
         '
-        'btnStartStop
+        'btnStart
         '
-        Me.btnStartStop.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnStartStop.Location = New System.Drawing.Point(481, 455)
-        Me.btnStartStop.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.btnStartStop.Name = "btnStartStop"
-        Me.btnStartStop.Size = New System.Drawing.Size(51, 50)
-        Me.btnStartStop.TabIndex = 45
-        Me.btnStartStop.Text = "▶"
-        Me.btnStartStop.UseVisualStyleBackColor = True
+        Me.btnStart.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnStart.Location = New System.Drawing.Point(481, 455)
+        Me.btnStart.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnStart.Name = "btnStart"
+        Me.btnStart.Size = New System.Drawing.Size(51, 50)
+        Me.btnStart.TabIndex = 45
+        Me.btnStart.Text = "▶"
+        Me.btnStart.UseVisualStyleBackColor = True
         '
         'btnPreviousHalf
         '
@@ -458,12 +459,21 @@ Partial Class frmOperation
         Me.thumbnailPlayer.VlcLibDirectory = Nothing
         Me.thumbnailPlayer.VlcMediaplayerOptions = Nothing
         '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(484, 559)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(48, 15)
+        Me.Label3.TabIndex = 63
+        Me.Label3.Text = "Label3"
+        '
         'frmOperation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1199, 649)
-        Me.Controls.Add(Me.thumbnailPlayer)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.btnAllSelect)
         Me.Controls.Add(Me.btnPDFLast)
         Me.Controls.Add(Me.btnWhole)
@@ -478,10 +488,9 @@ Partial Class frmOperation
         Me.Controls.Add(Me.btnStop)
         Me.Controls.Add(Me.btnFastReverse)
         Me.Controls.Add(Me.btnFastForward)
-        Me.Controls.Add(Me.btnStartStop)
+        Me.Controls.Add(Me.btnStart)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.VScrollBar1)
-        Me.Controls.Add(Me.pbThumbnail)
         Me.Controls.Add(Me.btnSetWindow)
         Me.Controls.Add(Me.btnRotate90)
         Me.Controls.Add(Me.btnRotate0)
@@ -497,6 +506,8 @@ Partial Class frmOperation
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.lstPDFFiles)
         Me.Controls.Add(Me.txtPDFFileName)
+        Me.Controls.Add(Me.thumbnailPlayer)
+        Me.Controls.Add(Me.pbThumbnail)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "frmOperation"
         Me.Text = "PDF Second Monitor"
@@ -513,7 +524,7 @@ Partial Class frmOperation
     Friend WithEvents cmbDisplay As Windows.Forms.ComboBox
     Friend WithEvents Label1 As Windows.Forms.Label
     Friend WithEvents GroupBox1 As Windows.Forms.GroupBox
-    Friend WithEvents Timer1 As Windows.Forms.Timer
+    Friend WithEvents SeekTimer As Windows.Forms.Timer
     Friend WithEvents txtPDFFileName As TextBox
     Friend WithEvents lstPDFFiles As ListBox
     Friend WithEvents btnDelete As Button
@@ -540,7 +551,7 @@ Partial Class frmOperation
     Friend WithEvents btnStop As Button
     Friend WithEvents btnFastReverse As Button
     Friend WithEvents btnFastForward As Button
-    Friend WithEvents btnStartStop As Button
+    Friend WithEvents btnStart As Button
     Friend WithEvents btnPreviousHalf As Button
     Friend WithEvents btnNextHalf As Button
     Friend WithEvents btnPDFNext As Button
@@ -551,4 +562,5 @@ Partial Class frmOperation
     Friend WithEvents btnPDFLast As Button
     Friend WithEvents btnAllSelect As Button
     Friend WithEvents thumbnailPlayer As Vlc.DotNet.Forms.VlcControl
+    Friend WithEvents Label3 As Label
 End Class
