@@ -20,7 +20,7 @@ Public Class frmOperation
 
     Public Sub CtlPdf1ControlEnabled()
 
-        Dim isEnabled = document.FileType.IsPDFExt()
+        Dim isEnabled = (document IsNot Nothing) AndAlso document.FileType.IsPDFExt()
         btnPDFFirst.Enabled = isEnabled
         btnPDFBack.Enabled = isEnabled
         btnPDFNext.Enabled = isEnabled
@@ -28,27 +28,31 @@ Public Class frmOperation
         btnPreviousHalf.Enabled = isEnabled
         btnNextHalf.Enabled = isEnabled
 
-        Dim setwin As Boolean = document.FileType.IsPDFExt() OrElse document.FileType.IsImageExt() OrElse document.FileType.IsSVGExt()
-        btnSetWindow.Enabled = setwin
-        btnWhole.Enabled = setwin
+        Dim canSetWin As Boolean = (document IsNot Nothing) AndAlso
+            (document.FileType.IsPDFExt() OrElse document.FileType.IsImageExt() OrElse document.FileType.IsSVGExt())
+        btnSetWindow.Enabled = canSetWin
+        btnWhole.Enabled = canSetWin
+        VScrollBar1.Enabled = (fileViewParam IsNot Nothing) AndAlso fileViewParam.IsWidthEqualWin
     End Sub
     Public Sub CtlMovie1ControlEnabled()
-        Dim isMovie = document.FileType.IsMovieExt()
+        Dim isMovie = (document IsNot Nothing) AndAlso document.FileType.IsMovieExt()
         GotoFirst.Enabled = isMovie
         btnFastReverse.Enabled = isMovie
         btnStart.Enabled = isMovie
         btnStop.Enabled = isMovie
         btnFastForward.Enabled = isMovie
         chkUpdate.Enabled = Not isMovie
+
         If isMovie Then
             btnDisp.Text = "再生"
         Else
             btnDisp.Text = "表示"
         End If
+        lblMovieTime.Visible = isMovie
     End Sub
 
     Public Sub CtlImage1ControlEnabled()
-        Dim isEnabled = document.FileType.IsImageExt() OrElse document.FileType.IsSVGExt()
+        Dim isEnabled = (document IsNot Nothing) AndAlso (document.FileType.IsImageExt() OrElse document.FileType.IsSVGExt())
 
         btnRotateM90.Enabled = isEnabled
         btnRotate90.Enabled = isEnabled
@@ -323,8 +327,11 @@ Public Class frmOperation
 
     Private ReadOnly Property fileViewParam As FileViewParam
         Get
+            If lstPDFFiles.SelectedItems.Count <> 1 Then
+                Return Nothing
+            End If
             If lstPDFFiles.SelectedItem Is Nothing Then
-                Return New FileViewParam
+                Return Nothing
             End If
             Dim p = DirectCast(lstPDFFiles.SelectedItem, FileViewParam)
             p.Bound = _dispacher.GetViewScreen.Bounds.Size
@@ -334,7 +341,7 @@ Public Class frmOperation
 
     Private ReadOnly Property document As ViewerBy2ndLib.Document
         Get
-            Return fileViewParam.document
+            Return fileViewParam?.document
         End Get
     End Property
 
@@ -372,17 +379,17 @@ Public Class frmOperation
     Private requirePouse As Boolean = False
 
     Private Sub SetPreview()
-        pbThumbnail.Image = document.Image
+        pbThumbnail.Image = document?.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
-        If document.FileType.IsPDFExt Then
+        If document?.FileType?.IsPDFExt Then
             lblPageDisp.Text = $"ページ{document.page + 1}/{document.PageCount}"
         Else
             lblPageDisp.Text = ""
         End If
-        pbThumbnail.Visible = Not document.FileType.IsMovieExt
-        thumbnailPlayer.Visible = document.FileType.IsMovieExt
+        pbThumbnail.Visible = (document Is Nothing) OrElse (Not document.FileType.IsMovieExt)
+        thumbnailPlayer.Visible = (document IsNot Nothing) AndAlso document.FileType.IsMovieExt
 
-        If document.FileType.IsMovieExt() Then
+        If document IsNot Nothing AndAlso document.FileType.IsMovieExt() Then
 
             thumbnailPlayer.Play((New Uri("file://" & fileViewParam.FileName)), New String() {})
             requirePouse = False
@@ -408,11 +415,16 @@ Public Class frmOperation
 
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
+        ' IsScroll = True
+        VSctollUpdate()
+    End Sub
 
+    Private Sub VSctollUpdate()
+        If fileViewParam Is Nothing Then
+            Return
+        End If
         fileViewParam.scrollBarValue = VScrollBar1.Value
         document.DispSetWindow()
-
-
         UpdateViewIfChecked()
     End Sub
     Private Sub VScrollBar1Init()
@@ -424,7 +436,7 @@ Public Class frmOperation
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
         fileViewParam.scrollBarValue = 0
         fileViewParam.IsWidthEqualWin = True
-
+        ControlEnable()
         VScrollBar1Init()
         UpdateViewIfChecked()
     End Sub
@@ -522,7 +534,7 @@ Public Class frmOperation
 
     Private Sub lbl_Update()
         Dim ts As New TimeSpan(thumbnailPlayer.VlcMediaPlayer.Time * 10000)
-        Label3.Text = ts.ToString("hh\:mm\:ss")
+        lblMovieTime.Text = ts.ToString("hh\:mm\:ss")
     End Sub
 
 
@@ -533,6 +545,7 @@ Public Class frmOperation
 
     Private Sub btnWhole_Click(sender As Object, e As EventArgs) Handles btnWhole.Click
         fileViewParam.IsWidthEqualWin = False
+        ControlEnable()
         UpdateViewIfChecked()
     End Sub
 
@@ -572,6 +585,24 @@ Public Class frmOperation
         End If
         trackBarSeek_Scrolled = True
         Trackbar_Seek()
+    End Sub
+
+    Private Sub frmOperation_MouseWheel(sender As Object, e As MouseEventArgs) Handles Me.MouseWheel
+        If Not VScrollBar1.Enabled Then
+            Return
+        End If
+        Dim numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / 10
+        Debug.Print(numberOfTextLinesToMove.ToString)
+        Dim expect As Integer = -Convert.ToInt32(numberOfTextLinesToMove) + VScrollBar1.Value
+        If expect < 0 Then
+            expect = 0
+        End If
+
+        If VScrollBar1.Maximum < expect Then
+            expect = VScrollBar1.Maximum
+        End If
+        VScrollBar1.Value = expect
+        VSctollUpdate()
     End Sub
 
 

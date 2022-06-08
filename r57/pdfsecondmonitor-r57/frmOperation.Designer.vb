@@ -65,7 +65,7 @@ Partial Class frmOperation
         Me.btnPDFLast = New System.Windows.Forms.Button()
         Me.btnAllSelect = New System.Windows.Forms.Button()
         Me.thumbnailPlayer = New Vlc.DotNet.Forms.VlcControl()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblMovieTime = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.trackBarSeek, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -461,19 +461,19 @@ Partial Class frmOperation
         '
         'Label3
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(484, 559)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(48, 15)
-        Me.Label3.TabIndex = 63
-        Me.Label3.Text = "Label3"
+        Me.lblMovieTime.AutoSize = True
+        Me.lblMovieTime.Location = New System.Drawing.Point(484, 559)
+        Me.lblMovieTime.Name = "Label3"
+        Me.lblMovieTime.Size = New System.Drawing.Size(48, 15)
+        Me.lblMovieTime.TabIndex = 63
+        Me.lblMovieTime.Text = "Label3"
         '
         'frmOperation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1199, 649)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.lblMovieTime)
         Me.Controls.Add(Me.btnAllSelect)
         Me.Controls.Add(Me.btnPDFLast)
         Me.Controls.Add(Me.btnWhole)
@@ -562,5 +562,5 @@ Partial Class frmOperation
     Friend WithEvents btnPDFLast As Button
     Friend WithEvents btnAllSelect As Button
     Friend WithEvents thumbnailPlayer As Vlc.DotNet.Forms.VlcControl
-    Friend WithEvents Label3 As Label
+    Friend WithEvents lblMovieTime As Label
 End Class
