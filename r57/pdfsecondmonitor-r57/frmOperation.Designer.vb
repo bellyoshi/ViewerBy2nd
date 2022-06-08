@@ -29,6 +29,7 @@ Partial Class frmOperation
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblFormColor = New System.Windows.Forms.Label()
         Me.btnColorChange = New System.Windows.Forms.Button()
+        Me.chkUpdate = New System.Windows.Forms.CheckBox()
         Me.SeekTimer = New System.Windows.Forms.Timer(Me.components)
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtPDFFileName = New System.Windows.Forms.TextBox()
@@ -39,7 +40,6 @@ Partial Class frmOperation
         Me.btnFileAdd = New System.Windows.Forms.Button()
         Me.ColorDialog1 = New System.Windows.Forms.ColorDialog()
         Me.btnDisp = New System.Windows.Forms.Button()
-        Me.chkUpdate = New System.Windows.Forms.CheckBox()
         Me.btnUnDisp = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.VScrollBar1 = New System.Windows.Forms.VScrollBar()
@@ -66,6 +66,8 @@ Partial Class frmOperation
         Me.btnAllSelect = New System.Windows.Forms.Button()
         Me.thumbnailPlayer = New Vlc.DotNet.Forms.VlcControl()
         Me.lblMovieTime = New System.Windows.Forms.Label()
+        Me.btnDispPause = New System.Windows.Forms.Button()
+        Me.btnUnSelectUpdate = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.pbThumbnail, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.trackBarSeek, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -101,11 +103,12 @@ Partial Class frmOperation
         Me.GroupBox1.Controls.Add(Me.btnColorChange)
         Me.GroupBox1.Controls.Add(Me.Label1)
         Me.GroupBox1.Controls.Add(Me.cmbDisplay)
+        Me.GroupBox1.Controls.Add(Me.chkUpdate)
         Me.GroupBox1.Location = New System.Drawing.Point(17, 12)
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.GroupBox1.Size = New System.Drawing.Size(661, 54)
+        Me.GroupBox1.Size = New System.Drawing.Size(1037, 54)
         Me.GroupBox1.TabIndex = 11
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "設定"
@@ -129,7 +132,18 @@ Partial Class frmOperation
         Me.btnColorChange.Text = "背景色変更"
         Me.btnColorChange.UseVisualStyleBackColor = True
         '
-        'Timer1
+        'chkUpdate
+        '
+        Me.chkUpdate.AutoSize = True
+        Me.chkUpdate.Location = New System.Drawing.Point(600, 23)
+        Me.chkUpdate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.chkUpdate.Name = "chkUpdate"
+        Me.chkUpdate.Size = New System.Drawing.Size(195, 19)
+        Me.chkUpdate.TabIndex = 25
+        Me.chkUpdate.Text = "操作中にモニターを更新する"
+        Me.chkUpdate.UseVisualStyleBackColor = True
+        '
+        'SeekTimer
         '
         '
         'Label6
@@ -165,11 +179,11 @@ Partial Class frmOperation
         Me.lstPDFFiles.AllowDrop = True
         Me.lstPDFFiles.FormattingEnabled = True
         Me.lstPDFFiles.ItemHeight = 15
-        Me.lstPDFFiles.Location = New System.Drawing.Point(35, 170)
+        Me.lstPDFFiles.Location = New System.Drawing.Point(35, 95)
         Me.lstPDFFiles.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.lstPDFFiles.Name = "lstPDFFiles"
         Me.lstPDFFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended
-        Me.lstPDFFiles.Size = New System.Drawing.Size(308, 349)
+        Me.lstPDFFiles.Size = New System.Drawing.Size(308, 424)
         Me.lstPDFFiles.TabIndex = 19
         '
         'btnUnSelect
@@ -194,31 +208,20 @@ Partial Class frmOperation
         '
         'btnDisp
         '
-        Me.btnDisp.Location = New System.Drawing.Point(35, 114)
+        Me.btnDisp.Location = New System.Drawing.Point(496, 566)
         Me.btnDisp.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnDisp.Name = "btnDisp"
-        Me.btnDisp.Size = New System.Drawing.Size(99, 40)
+        Me.btnDisp.Size = New System.Drawing.Size(163, 53)
         Me.btnDisp.TabIndex = 20
         Me.btnDisp.Text = "表示"
         Me.btnDisp.UseVisualStyleBackColor = True
         '
-        'chkUpdate
-        '
-        Me.chkUpdate.AutoSize = True
-        Me.chkUpdate.Location = New System.Drawing.Point(60, 88)
-        Me.chkUpdate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.chkUpdate.Name = "chkUpdate"
-        Me.chkUpdate.Size = New System.Drawing.Size(195, 19)
-        Me.chkUpdate.TabIndex = 25
-        Me.chkUpdate.Text = "操作中にモニターを更新する"
-        Me.chkUpdate.UseVisualStyleBackColor = True
-        '
         'btnUnDisp
         '
-        Me.btnUnDisp.Location = New System.Drawing.Point(145, 114)
+        Me.btnUnDisp.Location = New System.Drawing.Point(1024, 564)
         Me.btnUnDisp.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnUnDisp.Name = "btnUnDisp"
-        Me.btnUnDisp.Size = New System.Drawing.Size(91, 40)
+        Me.btnUnDisp.Size = New System.Drawing.Size(150, 49)
         Me.btnUnDisp.TabIndex = 20
         Me.btnUnDisp.Text = "表示終了"
         Me.btnUnDisp.UseVisualStyleBackColor = True
@@ -226,7 +229,7 @@ Partial Class frmOperation
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(832, 139)
+        Me.Label2.Location = New System.Drawing.Point(864, 112)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(92, 15)
         Me.Label2.TabIndex = 40
@@ -234,14 +237,14 @@ Partial Class frmOperation
         '
         'VScrollBar1
         '
-        Me.VScrollBar1.Location = New System.Drawing.Point(1153, 168)
+        Me.VScrollBar1.Location = New System.Drawing.Point(1154, 130)
         Me.VScrollBar1.Name = "VScrollBar1"
         Me.VScrollBar1.Size = New System.Drawing.Size(23, 300)
         Me.VScrollBar1.TabIndex = 39
         '
         'pbThumbnail
         '
-        Me.pbThumbnail.Location = New System.Drawing.Point(691, 168)
+        Me.pbThumbnail.Location = New System.Drawing.Point(693, 131)
         Me.pbThumbnail.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.pbThumbnail.Name = "pbThumbnail"
         Me.pbThumbnail.Size = New System.Drawing.Size(460, 300)
@@ -250,7 +253,7 @@ Partial Class frmOperation
         '
         'btnSetWindow
         '
-        Me.btnSetWindow.Location = New System.Drawing.Point(365, 378)
+        Me.btnSetWindow.Location = New System.Drawing.Point(365, 327)
         Me.btnSetWindow.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnSetWindow.Name = "btnSetWindow"
         Me.btnSetWindow.Size = New System.Drawing.Size(167, 36)
@@ -260,7 +263,7 @@ Partial Class frmOperation
         '
         'btnRotate90
         '
-        Me.btnRotate90.Location = New System.Drawing.Point(556, 300)
+        Me.btnRotate90.Location = New System.Drawing.Point(556, 249)
         Me.btnRotate90.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnRotate90.Name = "btnRotate90"
         Me.btnRotate90.Size = New System.Drawing.Size(80, 51)
@@ -270,7 +273,7 @@ Partial Class frmOperation
         '
         'btnRotate0
         '
-        Me.btnRotate0.Location = New System.Drawing.Point(460, 265)
+        Me.btnRotate0.Location = New System.Drawing.Point(460, 214)
         Me.btnRotate0.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnRotate0.Name = "btnRotate0"
         Me.btnRotate0.Size = New System.Drawing.Size(91, 51)
@@ -280,7 +283,7 @@ Partial Class frmOperation
         '
         'btnRotateM90
         '
-        Me.btnRotateM90.Location = New System.Drawing.Point(376, 300)
+        Me.btnRotateM90.Location = New System.Drawing.Point(376, 249)
         Me.btnRotateM90.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnRotateM90.Name = "btnRotateM90"
         Me.btnRotateM90.Size = New System.Drawing.Size(79, 51)
@@ -290,7 +293,7 @@ Partial Class frmOperation
         '
         'btnRotate180
         '
-        Me.btnRotate180.Location = New System.Drawing.Point(460, 322)
+        Me.btnRotate180.Location = New System.Drawing.Point(460, 271)
         Me.btnRotate180.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnRotate180.Name = "btnRotate180"
         Me.btnRotate180.Size = New System.Drawing.Size(91, 51)
@@ -300,7 +303,7 @@ Partial Class frmOperation
         '
         'trackBarSeek
         '
-        Me.trackBarSeek.Location = New System.Drawing.Point(369, 509)
+        Me.trackBarSeek.Location = New System.Drawing.Point(369, 458)
         Me.trackBarSeek.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.trackBarSeek.Name = "trackBarSeek"
         Me.trackBarSeek.Size = New System.Drawing.Size(317, 56)
@@ -308,7 +311,7 @@ Partial Class frmOperation
         '
         'GotoFirst
         '
-        Me.GotoFirst.Location = New System.Drawing.Point(363, 455)
+        Me.GotoFirst.Location = New System.Drawing.Point(363, 404)
         Me.GotoFirst.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.GotoFirst.Name = "GotoFirst"
         Me.GotoFirst.Size = New System.Drawing.Size(51, 50)
@@ -318,7 +321,7 @@ Partial Class frmOperation
         '
         'btnStop
         '
-        Me.btnStop.Location = New System.Drawing.Point(549, 455)
+        Me.btnStop.Location = New System.Drawing.Point(628, 404)
         Me.btnStop.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnStop.Name = "btnStop"
         Me.btnStop.Size = New System.Drawing.Size(51, 50)
@@ -328,19 +331,19 @@ Partial Class frmOperation
         '
         'btnFastReverse
         '
-        Me.btnFastReverse.Font = New System.Drawing.Font("MS UI Gothic", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnFastReverse.Location = New System.Drawing.Point(425, 455)
+        Me.btnFastReverse.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
+        Me.btnFastReverse.Location = New System.Drawing.Point(425, 404)
         Me.btnFastReverse.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnFastReverse.Name = "btnFastReverse"
         Me.btnFastReverse.Size = New System.Drawing.Size(51, 50)
         Me.btnFastReverse.TabIndex = 43
-        Me.btnFastReverse.Text = "戻る"
+        Me.btnFastReverse.Text = "◀"
         Me.btnFastReverse.UseVisualStyleBackColor = True
         '
         'btnFastForward
         '
         Me.btnFastForward.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnFastForward.Location = New System.Drawing.Point(606, 455)
+        Me.btnFastForward.Location = New System.Drawing.Point(539, 404)
         Me.btnFastForward.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnFastForward.Name = "btnFastForward"
         Me.btnFastForward.Size = New System.Drawing.Size(74, 50)
@@ -351,7 +354,7 @@ Partial Class frmOperation
         'btnStart
         '
         Me.btnStart.Font = New System.Drawing.Font("MS UI Gothic", 13.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.btnStart.Location = New System.Drawing.Point(481, 455)
+        Me.btnStart.Location = New System.Drawing.Point(481, 404)
         Me.btnStart.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Size = New System.Drawing.Size(51, 50)
@@ -361,7 +364,7 @@ Partial Class frmOperation
         '
         'btnPreviousHalf
         '
-        Me.btnPreviousHalf.Location = New System.Drawing.Point(384, 212)
+        Me.btnPreviousHalf.Location = New System.Drawing.Point(384, 161)
         Me.btnPreviousHalf.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPreviousHalf.Name = "btnPreviousHalf"
         Me.btnPreviousHalf.Size = New System.Drawing.Size(124, 39)
@@ -371,7 +374,7 @@ Partial Class frmOperation
         '
         'btnNextHalf
         '
-        Me.btnNextHalf.Location = New System.Drawing.Point(513, 212)
+        Me.btnNextHalf.Location = New System.Drawing.Point(513, 161)
         Me.btnNextHalf.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnNextHalf.Name = "btnNextHalf"
         Me.btnNextHalf.Size = New System.Drawing.Size(123, 39)
@@ -381,7 +384,7 @@ Partial Class frmOperation
         '
         'btnPDFNext
         '
-        Me.btnPDFNext.Location = New System.Drawing.Point(515, 168)
+        Me.btnPDFNext.Location = New System.Drawing.Point(515, 117)
         Me.btnPDFNext.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPDFNext.Name = "btnPDFNext"
         Me.btnPDFNext.Size = New System.Drawing.Size(53, 41)
@@ -391,7 +394,7 @@ Partial Class frmOperation
         '
         'btnPDFBack
         '
-        Me.btnPDFBack.Location = New System.Drawing.Point(452, 168)
+        Me.btnPDFBack.Location = New System.Drawing.Point(452, 117)
         Me.btnPDFBack.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPDFBack.Name = "btnPDFBack"
         Me.btnPDFBack.Size = New System.Drawing.Size(56, 41)
@@ -401,7 +404,7 @@ Partial Class frmOperation
         '
         'btnPDFFirst
         '
-        Me.btnPDFFirst.Location = New System.Drawing.Point(381, 168)
+        Me.btnPDFFirst.Location = New System.Drawing.Point(381, 117)
         Me.btnPDFFirst.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPDFFirst.Name = "btnPDFFirst"
         Me.btnPDFFirst.Size = New System.Drawing.Size(65, 41)
@@ -411,7 +414,7 @@ Partial Class frmOperation
         '
         'lblPageDisp
         '
-        Me.lblPageDisp.Location = New System.Drawing.Point(832, 472)
+        Me.lblPageDisp.Location = New System.Drawing.Point(853, 439)
         Me.lblPageDisp.Name = "lblPageDisp"
         Me.lblPageDisp.Size = New System.Drawing.Size(267, 15)
         Me.lblPageDisp.TabIndex = 57
@@ -419,7 +422,7 @@ Partial Class frmOperation
         '
         'btnWhole
         '
-        Me.btnWhole.Location = New System.Drawing.Point(539, 381)
+        Me.btnWhole.Location = New System.Drawing.Point(539, 330)
         Me.btnWhole.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnWhole.Name = "btnWhole"
         Me.btnWhole.Size = New System.Drawing.Size(140, 31)
@@ -429,7 +432,7 @@ Partial Class frmOperation
         '
         'btnPDFLast
         '
-        Me.btnPDFLast.Location = New System.Drawing.Point(573, 168)
+        Me.btnPDFLast.Location = New System.Drawing.Point(573, 117)
         Me.btnPDFLast.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnPDFLast.Name = "btnPDFLast"
         Me.btnPDFLast.Size = New System.Drawing.Size(67, 41)
@@ -450,7 +453,7 @@ Partial Class frmOperation
         'thumbnailPlayer
         '
         Me.thumbnailPlayer.BackColor = System.Drawing.Color.Black
-        Me.thumbnailPlayer.Location = New System.Drawing.Point(692, 168)
+        Me.thumbnailPlayer.Location = New System.Drawing.Point(693, 130)
         Me.thumbnailPlayer.Name = "thumbnailPlayer"
         Me.thumbnailPlayer.Size = New System.Drawing.Size(458, 301)
         Me.thumbnailPlayer.Spu = -1
@@ -459,14 +462,34 @@ Partial Class frmOperation
         Me.thumbnailPlayer.VlcLibDirectory = Nothing
         Me.thumbnailPlayer.VlcMediaplayerOptions = Nothing
         '
-        'Label3
+        'lblMovieTime
         '
         Me.lblMovieTime.AutoSize = True
-        Me.lblMovieTime.Location = New System.Drawing.Point(484, 559)
-        Me.lblMovieTime.Name = "Label3"
+        Me.lblMovieTime.Location = New System.Drawing.Point(493, 504)
+        Me.lblMovieTime.Name = "lblMovieTime"
         Me.lblMovieTime.Size = New System.Drawing.Size(48, 15)
         Me.lblMovieTime.TabIndex = 63
         Me.lblMovieTime.Text = "Label3"
+        '
+        'btnDispPause
+        '
+        Me.btnDispPause.Location = New System.Drawing.Point(672, 564)
+        Me.btnDispPause.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnDispPause.Name = "btnDispPause"
+        Me.btnDispPause.Size = New System.Drawing.Size(163, 53)
+        Me.btnDispPause.TabIndex = 20
+        Me.btnDispPause.Text = "停止"
+        Me.btnDispPause.UseVisualStyleBackColor = True
+        '
+        'btnUnSelectUpdate
+        '
+        Me.btnUnSelectUpdate.Location = New System.Drawing.Point(851, 564)
+        Me.btnUnSelectUpdate.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.btnUnSelectUpdate.Name = "btnUnSelectUpdate"
+        Me.btnUnSelectUpdate.Size = New System.Drawing.Size(167, 49)
+        Me.btnUnSelectUpdate.TabIndex = 20
+        Me.btnUnSelectUpdate.Text = "背景表示"
+        Me.btnUnSelectUpdate.UseVisualStyleBackColor = True
         '
         'frmOperation
         '
@@ -496,10 +519,11 @@ Partial Class frmOperation
         Me.Controls.Add(Me.btnRotate0)
         Me.Controls.Add(Me.btnRotateM90)
         Me.Controls.Add(Me.btnRotate180)
-        Me.Controls.Add(Me.chkUpdate)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.btnFileAdd)
+        Me.Controls.Add(Me.btnDispPause)
         Me.Controls.Add(Me.btnDisp)
+        Me.Controls.Add(Me.btnUnSelectUpdate)
         Me.Controls.Add(Me.btnUnDisp)
         Me.Controls.Add(Me.btnUnSelect)
         Me.Controls.Add(Me.GroupBox1)
@@ -563,4 +587,6 @@ Partial Class frmOperation
     Friend WithEvents btnAllSelect As Button
     Friend WithEvents thumbnailPlayer As Vlc.DotNet.Forms.VlcControl
     Friend WithEvents lblMovieTime As Label
+    Friend WithEvents btnDispPause As Button
+    Friend WithEvents btnUnSelectUpdate As Button
 End Class

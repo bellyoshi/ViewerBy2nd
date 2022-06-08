@@ -45,7 +45,9 @@ Public Class frmOperation
 
         If isMovie Then
             btnDisp.Text = "再生"
+            btnDispPause.Visible = True
         Else
+            btnDispPause.Visible = False
             btnDisp.Text = "表示"
         End If
         lblMovieTime.Visible = isMovie
@@ -209,7 +211,7 @@ Public Class frmOperation
             End If
             Exit Sub
         End If
-        txtPDFFileName.Text = fileViewParam.FileName
+
 
 
         UpdateViewIfChecked()
@@ -220,6 +222,12 @@ Public Class frmOperation
 
     Private Sub btnDisp_Click(sender As Object, e As EventArgs) Handles btnDisp.Click
         UpdateView()
+    End Sub
+
+    Private player As Vlc.DotNet.Forms.VlcControl
+
+    Private Sub btnDispPause_Click(sender As Object, e As EventArgs) Handles btnDispPause.Click
+        player.Pause()
     End Sub
     Private Sub btnFileAdd_Click(sender As Object, e As EventArgs) Handles btnFileAdd.Click
         OpenFileDialog1.Multiselect = True
@@ -247,7 +255,14 @@ Public Class frmOperation
     Private Sub btnUnDisp_Click(sender As Object, e As EventArgs) Handles btnUnDisp.Click
         _dispacher.CloseViewers()
     End Sub
+    Private Sub btnUnSelectUpdate_Click(sender As Object, e As EventArgs) Handles btnUnSelectUpdate.Click
+        lstPDFFiles.SelectedItem = Nothing
+        pbThumbnail.Image = Nothing
+        SetPreview()
+        UpdateView()
+            ControlEnable()
 
+    End Sub
 #Region "ドラッグアンドドロップ"
     Private Sub lstPDFFiles_DragEnter(sender As Object, e As DragEventArgs) Handles lstPDFFiles.DragEnter
         'コントロール内にドラッグされたとき実行される
@@ -310,7 +325,7 @@ Public Class frmOperation
 
     Public Sub UpdateViewIfChecked()
         SetPreview()
-        If chkUpdate.Checked Then
+        If chkUpdate.Checked AndAlso Not (document?.FileType?.IsMovieExt) Then
             UpdateView()
         End If
     End Sub
@@ -322,6 +337,7 @@ Public Class frmOperation
             Dim starttime As Integer = Convert.ToInt32(thumbnailPlayer.Time / 1000)
             Dim op = New String() {$"start-time={starttime}"}
             vlc.Play(New Uri("file://" & fileViewParam.FileName), op)
+            player = vlc
         End If
 
     End Sub
@@ -380,6 +396,7 @@ Public Class frmOperation
     Private requirePouse As Boolean = False
 
     Private Sub SetPreview()
+        txtPDFFileName.Text = "" & fileViewParam?.FileName
         pbThumbnail.Image = document?.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
         If document?.FileType?.IsPDFExt Then

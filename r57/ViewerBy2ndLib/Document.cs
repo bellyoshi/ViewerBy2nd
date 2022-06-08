@@ -143,7 +143,7 @@ namespace ViewerBy2ndLib
         }
 
         public bool CanNextPage()
-        => (page<pdfDoc.PageCount - 1);
+        => (pdfDoc != null && page<pdfDoc.PageCount - 1);
 
         public void NextPage() {
             isHalf = false;
