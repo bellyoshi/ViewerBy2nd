@@ -314,8 +314,8 @@ Public Class frmOperation
         _dispacher.ShowImage(pbThumbnail.Image)
         If thumbnailPlayer.Visible Then
             Dim vlc = _dispacher.ShowMovie()
-            'todo:
-            Dim op = New String() {}
+            Dim starttime As Integer = Convert.ToInt32(thumbnailPlayer.Time / 1000)
+            Dim op = New String() {$"start-time={starttime}"}
             vlc.Play(New Uri("file://" & fileViewParam.FileName), op)
         End If
 
@@ -449,7 +449,7 @@ Public Class frmOperation
         thumbnailPlayer.Rate = 1
         btnFastForward.Text = "▶▶"
         thumbnailPlayer.Play()
-
+        thumbnailPlayer.Audio.Volume = 0
     End Sub
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
