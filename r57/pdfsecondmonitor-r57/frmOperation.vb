@@ -529,11 +529,11 @@ Public Class frmOperation
     Private Sub Trackbar_Seek()
         Try
             If trackBarSeek_Scrolled Then
-                thumbnailPlayer.VlcMediaPlayer.Time = trackBarSeek.Value * 10000
+                thumbnailPlayer.VlcMediaPlayer.Time = Convert.ToInt32(trackBarSeek.Value * 100)
                 trackBarSeek_Scrolled = False
             Else
-                trackBarSeek.Maximum = Convert.ToInt32(thumbnailPlayer.VlcMediaPlayer.Length / 10000)
-                trackBarSeek.Value = Convert.ToInt32(thumbnailPlayer.Time / 10000)
+                trackBarSeek.Maximum = Convert.ToInt32(thumbnailPlayer.VlcMediaPlayer.Length / 100)
+                trackBarSeek.Value = Convert.ToInt32(thumbnailPlayer.Time / 100)
             End If
 
         Catch ex As Exception
