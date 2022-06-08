@@ -48,7 +48,15 @@ namespace ViewerBy2ndLib
         }
         private RotateFlipType flip;
         public void Rotate(RotateFlipType flip) {
-            OpenFile(FileViewParam.FileName);
+            if (FileType.IsPDFExt())
+            {
+                Render();
+            }
+            else
+            {
+                OpenFile(FileViewParam.FileName);
+            }
+
             this.flip = flip;
             this.Image.RotateFlip(flip);
         }
@@ -258,16 +266,10 @@ namespace ViewerBy2ndLib
 
 
         public void DispSetWindow() {
-            if (FileType.IsPDFExt())
-            {
-                Render();
-                //return;
-            }
-            else
-            {
-                Rotate(flip);
-            }
-                if (Image == null) return;
+           
+            Rotate(flip);
+            
+            if (Image == null) return;
 
             if (!CanSetWindowWidthRate()) return;
 

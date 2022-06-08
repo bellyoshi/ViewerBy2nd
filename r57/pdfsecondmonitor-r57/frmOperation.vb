@@ -54,7 +54,7 @@ Public Class frmOperation
     End Sub
 
     Public Sub CtlImage1ControlEnabled()
-        Dim isEnabled = (document IsNot Nothing) AndAlso (document.FileType.IsImageExt() OrElse document.FileType.IsSVGExt())
+        Dim isEnabled = (document IsNot Nothing) AndAlso (Not document.FileType.IsMovieExt())
 
         btnRotateM90.Enabled = isEnabled
         btnRotate90.Enabled = isEnabled
