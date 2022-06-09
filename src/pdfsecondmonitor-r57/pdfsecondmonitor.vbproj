@@ -54,6 +54,9 @@
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>pdfsecond.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Fizzler, Version=1.2.1.0, Culture=neutral, PublicKeyToken=4ebff4844e382110, processorArchitecture=MSIL">
       <HintPath>packages\Fizzler.1.2.1\lib\netstandard2.0\Fizzler.dll</HintPath>
@@ -171,14 +174,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <COMReference Include="AxWMPLib">
-      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="WMPLib">
       <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -194,6 +189,9 @@
       <Project>{0451af46-f9e1-4449-aa8b-1436b46ca87c}</Project>
       <Name>ViewerBy2ndLib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="pdfsecond.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
