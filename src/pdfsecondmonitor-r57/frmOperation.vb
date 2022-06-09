@@ -60,7 +60,10 @@ Public Class frmOperation
         btnFastForward.Enabled = canThumnailPlay
         chkUpdate.Enabled = Not isMovie
         thumbnailPlayer.Visible = isMovie
-
+        trackBarSeek.Enabled = canThumnailPlay
+        If Not isMovie Then
+            thumbnailPlayer.Stop()
+        End If
         lblMovieTime.Visible = isMovie
     End Sub
 
@@ -209,7 +212,10 @@ Public Class frmOperation
         For Each i In list
             lstPDFFiles.Items.Remove(i)
         Next
-
+        If list.Contains(DispFileViewParam) Then
+            UpdateView()
+            ControlEnable()
+        End If
     End Sub
 
     Private Sub lstFiles_Click(sender As Object, e As EventArgs) Handles lstPDFFiles.Click
@@ -252,7 +258,7 @@ Public Class frmOperation
         Dim op = New String() {$"start-time={starttime}"}
         vlc.Play(New Uri("file://" & fileViewParam.FileName), op)
         player = vlc
-
+        DispFileViewParam = fileViewParam
 
     End Sub
 
@@ -293,14 +299,15 @@ Public Class frmOperation
 
     Private Sub btnUnDisp_Click(sender As Object, e As EventArgs) Handles btnUnDisp.Click
         _dispacher.CloseViewers()
+        DispFileViewParam = Nothing
     End Sub
     Private Sub btnUnSelectUpdate_Click(sender As Object, e As EventArgs) Handles btnUnSelectUpdate.Click
         lstPDFFiles.SelectedItem = Nothing
         pbThumbnail.Image = Nothing
         SetPreview()
         UpdateView()
-            ControlEnable()
-
+        ControlEnable()
+        DispFileViewParam = Nothing
     End Sub
 #Region "ドラッグアンドドロップ"
     Private Sub lstPDFFiles_DragEnter(sender As Object, e As DragEventArgs) Handles lstPDFFiles.DragEnter
@@ -372,7 +379,7 @@ Public Class frmOperation
 
     Public Sub UpdateView()
         _dispacher.ShowImage(pbThumbnail.Image)
-
+        DispFileViewParam = fileViewParam
 
     End Sub
 
@@ -676,5 +683,6 @@ Public Class frmOperation
 
 #End Region
 
+    Private DispFileViewParam As FileViewParam
 
 End Class
