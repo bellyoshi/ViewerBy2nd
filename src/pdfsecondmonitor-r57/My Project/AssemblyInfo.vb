@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' アセンブリ属性の値を確認します
 
-<Assembly: AssemblyTitle("WindowsApp1")>
+<Assembly: AssemblyTitle("PDF Viewer By 2nd Monitor")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("WindowsApp1")>
-<Assembly: AssemblyCopyright("Copyright ©  2017")>
+<Assembly: AssemblyProduct("PDFSecondMonitor")>
+<Assembly: AssemblyCopyright("Copyright ©  2017- 2022 tccwas")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' 既定値にすることができます:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.0.0")>
-<Assembly: AssemblyFileVersion("1.0.0.0")>
+<Assembly: AssemblyVersion("1.1.3.0")>
+<Assembly: AssemblyFileVersion("1.1.3.0")>

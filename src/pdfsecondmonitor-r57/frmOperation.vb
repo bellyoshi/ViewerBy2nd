@@ -92,7 +92,12 @@ Public Class frmOperation
     Private loading As Boolean
     Private Sub AppSettingLoad()
         loading = True
-        cmbDisplay.SelectedIndex = My.Settings.cmbDisplaySelectedIndex
+        If cmbDisplay.Items.Count > My.Settings.cmbDisplaySelectedIndex Then
+            cmbDisplay.SelectedIndex = My.Settings.cmbDisplaySelectedIndex
+        Else
+            cmbDisplay.SelectedIndex = 0
+        End If
+
         lblFormColor.BackColor = My.Settings.formColor
         chkUpdate.Checked = My.Settings.chkUpdate
         _dispacher.SetColor(My.Settings.formColor)
@@ -190,10 +195,13 @@ Public Class frmOperation
         '        'フォームの開始位置をディスプレイの左上座標に設定する
         _dispacher.SetSecondScreen(s)
 
+        SetThumnailSize()
+
+    End Sub
+
+    Private Sub SetThumnailSize()
         Dim viewerSize = _dispacher.GetViewScreen().Bounds.Size
-
         pbThumbnail.Height = pbThumbnail.Width * viewerSize.Height \ viewerSize.Width
-
     End Sub
 
     Private _dispacher As FormDispacher = FormDispacher.GetInstance
