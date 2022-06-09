@@ -10,12 +10,28 @@ Public Class frmOperation
         CtlMovie1ControlEnabled()
         CtlImage1ControlEnabled()
         ListControlEnabled()
+        CtlSecondEnabled()
     End Sub
 
     Public Sub ListControlEnabled()
         btnDelete.Enabled = 0 < lstPDFFiles.SelectedItems.Count
         btnUnSelect.Enabled = 0 < lstPDFFiles.SelectedItems.Count
 
+    End Sub
+
+    Public ReadOnly Property isMovie As Boolean
+        Get
+            Return (document IsNot Nothing) AndAlso document.FileType.IsMovieExt()
+        End Get
+    End Property
+
+
+    Private Sub CtlSecondEnabled()
+
+        btnDispPause.Enabled = isMovie
+        btnDispPaly.Enabled = isMovie
+        btnDispStart.Enabled = isMovie
+        btnDisp.Enabled = Not isMovie AndAlso Not chkUpdate.Checked
     End Sub
 
     Public Sub CtlPdf1ControlEnabled()
@@ -35,21 +51,16 @@ Public Class frmOperation
         VScrollBar1.Enabled = (fileViewParam IsNot Nothing) AndAlso fileViewParam.IsWidthEqualWin
     End Sub
     Public Sub CtlMovie1ControlEnabled()
-        Dim isMovie = (document IsNot Nothing) AndAlso document.FileType.IsMovieExt()
-        GotoFirst.Enabled = isMovie
-        btnFastReverse.Enabled = isMovie
-        btnStart.Enabled = isMovie
-        btnStop.Enabled = isMovie
-        btnFastForward.Enabled = isMovie
-        chkUpdate.Enabled = Not isMovie
 
-        If isMovie Then
-            btnDisp.Text = "再生"
-            btnDispPause.Visible = True
-        Else
-            btnDispPause.Visible = False
-            btnDisp.Text = "表示"
-        End If
+        Dim canThumnailPlay As Boolean = isMovie AndAlso Not isPlay
+        GotoFirst.Enabled = canThumnailPlay
+        btnFastReverse.Enabled = canThumnailPlay
+        btnStart.Enabled = canThumnailPlay
+        btnStop.Enabled = canThumnailPlay
+        btnFastForward.Enabled = canThumnailPlay
+        chkUpdate.Enabled = Not isMovie
+        thumbnailPlayer.Visible = isMovie
+
         lblMovieTime.Visible = isMovie
     End Sub
 
@@ -202,8 +213,10 @@ Public Class frmOperation
     End Sub
 
     Private Sub lstFiles_Click(sender As Object, e As EventArgs) Handles lstPDFFiles.Click
-
-        Dim path = Me.fileViewParam.FileName
+        If fileViewParam Is Nothing Then
+            Return
+        End If
+        Dim path = fileViewParam.FileName
         If Not IO.File.Exists(path) Then
             Dim ret = MessageBox.Show("ファイルが見つかりません。リストから削除しますか？", "ファイルがありません", MessageBoxButtons.YesNo)
             If ret = DialogResult.Yes Then
@@ -224,10 +237,36 @@ Public Class frmOperation
         UpdateView()
     End Sub
 
+    Private ReadOnly Property isPlay As Boolean
+        Get
+            If player Is Nothing Then
+                Return False
+            End If
+            Return player.State = Vlc.DotNet.Core.Interops.Signatures.MediaStates.Playing
+        End Get
+    End Property
+    Private Sub btnDispPaly_Click(sender As Object, e As EventArgs) Handles btnDispPaly.Click
+
+        Dim vlc = _dispacher.ShowMovie()
+        Dim starttime As Integer = Convert.ToInt32(thumbnailPlayer.Time / 1000)
+        Dim op = New String() {$"start-time={starttime}"}
+        vlc.Play(New Uri("file://" & fileViewParam.FileName), op)
+        player = vlc
+
+
+    End Sub
+
     Private player As Vlc.DotNet.Forms.VlcControl
 
     Private Sub btnDispPause_Click(sender As Object, e As EventArgs) Handles btnDispPause.Click
         player.Pause()
+        If thumbnailPlayer.IsPlaying Then
+            thumbnailPlayer.Pause()
+        End If
+    End Sub
+
+    Private Sub btnDispStart_Click(sender As Object, e As EventArgs) Handles btnDispStart.Click
+        player.Play()
     End Sub
     Private Sub btnFileAdd_Click(sender As Object, e As EventArgs) Handles btnFileAdd.Click
         OpenFileDialog1.Multiselect = True
@@ -288,6 +327,7 @@ Public Class frmOperation
 
     Private Sub chkUpdate_CheckedChanged(sender As Object, e As EventArgs) Handles chkUpdate.CheckedChanged
         UpdateViewIfChecked()
+        ControlEnable()
     End Sub
 
 #End Region
@@ -332,13 +372,7 @@ Public Class frmOperation
 
     Public Sub UpdateView()
         _dispacher.ShowImage(pbThumbnail.Image)
-        If thumbnailPlayer.Visible Then
-            Dim vlc = _dispacher.ShowMovie()
-            Dim starttime As Integer = Convert.ToInt32(thumbnailPlayer.Time / 1000)
-            Dim op = New String() {$"start-time={starttime}"}
-            vlc.Play(New Uri("file://" & fileViewParam.FileName), op)
-            player = vlc
-        End If
+
 
     End Sub
 
@@ -553,6 +587,7 @@ Public Class frmOperation
     Private Sub lbl_Update()
         Dim ts As New TimeSpan(thumbnailPlayer.VlcMediaPlayer.Time * 10000)
         lblMovieTime.Text = ts.ToString("hh\:mm\:ss")
+        ControlEnable()
     End Sub
 
 
