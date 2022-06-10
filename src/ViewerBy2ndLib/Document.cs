@@ -243,7 +243,15 @@ namespace ViewerBy2ndLib
         private Image GetImage(Size renderSize) {
             return pdfDoc.Render(Convert.ToInt32(page), renderSize.Width, renderSize.Height, 96, 96, false);
         }
-        public System.Drawing.Image Image { get; set; }
+
+        private Image _image;
+        public Image Image { 
+            get { return _image; }
+            set { if (_image != null && _image != value)
+                {
+                    _image.Dispose();
+                }
+                _image = value; } }
         private int GetSetWinImageHeight()
         {
             var pbSize = FileViewParam.Bound;
