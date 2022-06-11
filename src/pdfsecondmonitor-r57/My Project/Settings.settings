@@ -21,7 +21,7 @@
       <Value Profile="(Default)">5000</Value>
     </Setting>
     <Setting Name="formColor" Type="System.Drawing.Color" Scope="User">
-      <Value Profile="(Default)">Control</Value>
+      <Value Profile="(Default)">Black</Value>
     </Setting>
     <Setting Name="chkUpdate" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

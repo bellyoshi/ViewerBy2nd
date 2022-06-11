@@ -128,7 +128,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Control")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Black")>  _
         Public Property formColor() As Global.System.Drawing.Color
             Get
                 Return CType(Me("formColor"),Global.System.Drawing.Color)

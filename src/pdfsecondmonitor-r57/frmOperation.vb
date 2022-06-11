@@ -61,6 +61,7 @@ Public Class frmOperation
         chkUpdate.Enabled = Not isMovie
         thumbnailPlayer.Visible = isMovie
         trackBarSeek.Enabled = canThumnailPlay
+        trackBarSeek.Visible = isMovie
         If Not isMovie Then
             thumbnailPlayer.Stop()
         End If
@@ -200,9 +201,16 @@ Public Class frmOperation
     End Sub
 
     Private Sub SetThumnailSize()
-        Dim viewerSize = _dispacher.GetViewScreen().Bounds.Size
-        pbThumbnail.Height = pbThumbnail.Width * viewerSize.Height \ viewerSize.Width
+
+        pbThumbnail.Height = getThumnailWidth(pbThumbnail.Width)
+        thumbnailPlayer.Height = getThumnailWidth(thumbnailPlayer.Width)
     End Sub
+    Private Function getThumnailWidth(thumWidth As Integer) As Integer
+        Dim viewerSize = _dispacher.GetViewScreen().Bounds.Size
+        Return thumWidth * viewerSize.Height \ viewerSize.Width
+    End Function
+
+
 
     Private _dispacher As FormDispacher = FormDispacher.GetInstance
 
@@ -449,9 +457,10 @@ Public Class frmOperation
         pbThumbnail.Image = document?.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
         If document?.FileType?.IsPDFExt Then
+            lblPageDisp.Visible = True
             lblPageDisp.Text = $"ページ{document.page + 1}/{document.PageCount}"
         Else
-            lblPageDisp.Text = ""
+            lblPageDisp.Visible = False
         End If
         pbThumbnail.Visible = (document Is Nothing) OrElse (Not document.FileType.IsMovieExt)
         thumbnailPlayer.Visible = (document IsNot Nothing) AndAlso document.FileType.IsMovieExt
@@ -459,7 +468,7 @@ Public Class frmOperation
         If document IsNot Nothing AndAlso document.FileType.IsMovieExt() Then
 
             thumbnailPlayer.Play((New Uri("file://" & fileViewParam.FileName)), New String() {})
-            requirePouse = False
+            requirePouse = True
 
         End If
     End Sub
@@ -588,10 +597,10 @@ Public Class frmOperation
         Catch ex As Exception
 
         End Try
-        If requirePouse = False Then
+        If requirePouse Then
             If thumbnailPlayer.Time <> 0 Then
                 thumbnailPlayer.Pause()
-                requirePouse = True
+                requirePouse = False
             End If
 
 
