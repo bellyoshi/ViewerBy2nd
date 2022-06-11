@@ -23,6 +23,7 @@ Partial Class frmOperation
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOperation))
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.cmbDisplay = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -568,6 +569,7 @@ Partial Class frmOperation
         Me.Controls.Add(Me.txtPDFFileName)
         Me.Controls.Add(Me.thumbnailPlayer)
         Me.Controls.Add(Me.pbThumbnail)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "frmOperation"
         Me.Text = "ViewerBy2nd Monitor"
