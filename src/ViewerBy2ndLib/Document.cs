@@ -244,6 +244,10 @@ namespace ViewerBy2ndLib
             return pdfDoc.Render(Convert.ToInt32(page), renderSize.Width, renderSize.Height, 96, 96, false);
         }
 
+
+        public int OriginalImageHeight { get; private set; }
+        
+
         private Image _image;
         public Image Image { 
             get { return _image; }
@@ -276,8 +280,11 @@ namespace ViewerBy2ndLib
         public void DispSetWindow() {
            
             Rotate(flip);
+
             
             if (Image == null) return;
+
+            OriginalImageHeight = this.Image.Height;
 
             if (!CanSetWindowWidthRate()) return;
 

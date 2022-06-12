@@ -509,7 +509,7 @@ Public Class frmOperation
     Private Sub VScrollBar1Init()
         VScrollBar1.Value = 0
         VScrollBar1.Minimum = 0
-        VScrollBar1.Maximum = document.Image.Height
+        VScrollBar1.Maximum = document.OriginalImageHeight
 
     End Sub
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
