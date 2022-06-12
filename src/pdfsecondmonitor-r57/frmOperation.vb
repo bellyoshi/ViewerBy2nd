@@ -415,7 +415,10 @@ Public Class frmOperation
 
     Private ReadOnly Property document As ViewerBy2ndLib.Document
         Get
-            Return fileViewParam?.document
+            If System.IO.File.Exists(fileViewParam?.FileName) Then
+                Return fileViewParam?.document
+            End If
+            Return Nothing
         End Get
     End Property
 
