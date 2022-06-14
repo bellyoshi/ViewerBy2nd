@@ -292,7 +292,7 @@ Public Class frmOperation
     End Sub
     Private Sub btnFileAdd_Click(sender As Object, e As EventArgs) Handles btnFileAdd.Click
         OpenFileDialog1.Multiselect = True
-        OpenFileDialog1.Filter = FileType.CreateFilter()
+        OpenFileDialog1.Filter = FileTypes.CreateFilter()
         OpenFileDialog1.FileName = txtPDFFileName.Text
         Dim ret = OpenFileDialog1.ShowDialog()
         If ret = Windows.Forms.DialogResult.Cancel Then

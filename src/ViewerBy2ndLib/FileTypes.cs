@@ -15,7 +15,7 @@ namespace ViewerBy2ndLib
     //}
 
     //サポートするファイルの種類
-    public class FileType
+    public class FileTypes
     {
 
         /// 開ける動画の拡張子
@@ -56,7 +56,7 @@ namespace ViewerBy2ndLib
         public bool IsPDFExt()
             => IsContain(PDFExts);
 
-        public FileType(string filename)
+        public FileTypes(string filename)
         {
             this.extention = System.IO.Path.GetExtension(filename);
         }

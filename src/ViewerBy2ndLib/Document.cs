@@ -9,10 +9,10 @@ namespace ViewerBy2ndLib
 
         private FileViewParam FileViewParam;
 
-        public FileType FileType { get; set; }
+        public FileTypes FileType { get; set; }
         public Document(FileViewParam fileViewParam) {
             this.FileViewParam = fileViewParam;
-            this.FileType = new FileType(FileViewParam.FileName);
+            this.FileType = new FileTypes(FileViewParam.FileName);
             OpenFile(fileViewParam.FileName);
         }
         PdfiumViewer.PdfDocument pdfDoc;
