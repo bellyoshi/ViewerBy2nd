@@ -15,7 +15,15 @@ namespace ViewerBy2ndLib.Tests
         public void CreateFilterTest()
         {
             FileDialogFilter sut = new FileDialogFilter();
-            Assert.AreEqual("すべてのファイル (*.*)|*.*", sut.CreateFilter());
+            Assert.AreEqual("すべての対応ファイル(*.*)|*.*", sut.CreateFilter());
         }
+
+        //[TestMethod()]
+        //public void AddTypeTest()
+        //{
+        //    //FileDialogFilter sut = new FileDialogFilter();
+        //    //sut.AddType("スケーラブル ベクター ", "svg");
+        //    //Assert.AreEqual("すべての対応ファイル  (*.*)|*.svg", sut.CreateFilter());
+        //}
     }
 }

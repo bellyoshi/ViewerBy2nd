@@ -6,13 +6,6 @@ using System.Threading.Tasks;
 
 namespace ViewerBy2ndLib
 {
-    //public enum FileTypeEnum
-    //{
-    //    MOVIE = 1,
-    //    IMAGE = 2,
-    //    PDF = 3,
-    //    SVG = 4,
-    //}
 
     //サポートするファイルの種類
     public class FileTypes

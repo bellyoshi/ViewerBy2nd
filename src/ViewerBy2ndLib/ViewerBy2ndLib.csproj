@@ -82,6 +82,7 @@
     <Compile Include="BitmapTool.cs" />
     <Compile Include="Document.cs" />
     <Compile Include="FileDialogFilter.cs" />
+    <Compile Include="FileType.cs" />
     <Compile Include="FileTypes.cs" />
     <Compile Include="FileViewParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

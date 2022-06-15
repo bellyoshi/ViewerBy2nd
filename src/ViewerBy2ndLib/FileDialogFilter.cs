@@ -9,13 +9,13 @@ namespace ViewerBy2ndLib
     public class FileDialogFilter
     {
 
-        public void AddType(string FileTypeText, string[] extentions)
+        public void AddType(string FileTypeText, params string[] extentions)
         {
 
         }
         public string CreateFilter()
         {
-            return "すべてのファイル (*.*)|*.*";
+            return "すべての対応ファイル(*.*)|*.*";
         }
 
 
