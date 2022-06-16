@@ -63,7 +63,7 @@ namespace ViewerBy2ndLib
         public void LoadFile(string filename, params string[] options)
         {
             Play(filename, options);
-            loadTimer.Interval = 20;
+            loadTimer.Interval = 10;
             loadTimer.Start();
 
             requirePause = true;
