@@ -16,7 +16,6 @@ Public Class frmOperation
     Public Sub ListControlEnabled()
         btnDelete.Enabled = 0 < lstPDFFiles.SelectedItems.Count
         btnUnSelect.Enabled = 0 < lstPDFFiles.SelectedItems.Count
-
     End Sub
 
     Public ReadOnly Property isMovie As Boolean
@@ -25,9 +24,7 @@ Public Class frmOperation
         End Get
     End Property
 
-
     Private Sub CtlSecondEnabled()
-
         btnDispPause.Enabled = isMovie
         btnDispPaly.Enabled = isMovie
         btnDispStart.Enabled = isMovie
@@ -49,6 +46,7 @@ Public Class frmOperation
         btnSetWindow.Enabled = canSetWin
         btnWhole.Enabled = canSetWin
         VScrollBar1.Enabled = (fileViewParam IsNot Nothing) AndAlso fileViewParam.IsWidthEqualWin
+
     End Sub
     Public Sub CtlMovie1ControlEnabled()
 
@@ -209,8 +207,6 @@ Public Class frmOperation
         Dim viewerSize = _dispacher.GetViewScreen().Bounds.Size
         Return thumWidth * viewerSize.Height \ viewerSize.Width
     End Function
-
-
 
     Private _dispacher As FormDispacher = FormDispacher.GetInstance
 
@@ -487,7 +483,6 @@ Public Class frmOperation
 
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
-        ' IsScroll = True
         VSctollUpdate()
     End Sub
 
