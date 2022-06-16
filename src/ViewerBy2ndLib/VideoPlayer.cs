@@ -12,6 +12,17 @@ namespace ViewerBy2ndLib
 {
     public partial class VideoPlayer : UserControl
     {
+        int _volume;
+        public int Volume
+        {
+            get { return vlcControl1.VlcMediaPlayer.Audio.Volume; }
+            set
+            {
+                _volume = value;
+                loadTimer.Interval  = 20;
+                loadTimer.Start();
+            }
+        } 
         public float Rate
         {
             get { return vlcControl1.Rate; }
@@ -80,6 +91,10 @@ namespace ViewerBy2ndLib
                     requirePause = false;
 
                 }
+            }
+            if (Volume != _volume)
+            {
+                vlcControl1.VlcMediaPlayer.Audio.Volume = _volume;
             }
         }
     

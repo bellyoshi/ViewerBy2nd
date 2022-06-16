@@ -260,7 +260,8 @@ Public Class frmOperation
 
         Dim vlc = _dispacher.ShowMovie()
         Dim starttime As Integer = Convert.ToInt32(thumbnailPlayer.Time / 1000)
-        Dim op = New String() {$"start-time={starttime}", $"audio"}
+        Dim op = New String() {$"start-time={starttime}"}
+        vlc.Volume = 100
         vlc.Play(fileViewParam.FileName, op)
         player = vlc
         DispFileViewParam = fileViewParam
@@ -570,8 +571,10 @@ Public Class frmOperation
 
     Private trackBarSeek_Scrolled As Boolean = False
     Private Sub SeekTimer_Tick(sender As Object, e As EventArgs) Handles SeekTimer.Tick
-
+        Debug.Print($"volume={player?.Volume}")
         Trackbar_Seek()
+        lbl_Update()
+        ControlEnable()
     End Sub
 
     Private Sub Trackbar_Seek()
@@ -588,13 +591,13 @@ Public Class frmOperation
 
         End Try
 
-        lbl_Update()
+
     End Sub
 
     Private Sub lbl_Update()
         Dim ts As New TimeSpan(thumbnailPlayer.Time * 10000)
         lblMovieTime.Text = ts.ToString("hh\:mm\:ss")
-        ControlEnable()
+
     End Sub
 
 
