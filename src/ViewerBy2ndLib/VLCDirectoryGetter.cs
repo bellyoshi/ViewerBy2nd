@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace ViewerBy2ndLib
 {
-    public class VLCDirectoryGetter
+    internal class VLCDirectoryGetter
     {
         public static DirectoryInfo GetVlcLibDirectory()
         {

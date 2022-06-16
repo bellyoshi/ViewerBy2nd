@@ -52,7 +52,7 @@ Public Class frmOperation
     End Sub
     Public Sub CtlMovie1ControlEnabled()
 
-        Dim canThumnailPlay As Boolean = isMovie AndAlso Not isPlay
+        Dim canThumnailPlay As Boolean = isMovie AndAlso Not thumbnailPlayer.IsPlaying
         GotoFirst.Enabled = canThumnailPlay
         btnFastReverse.Enabled = canThumnailPlay
         btnStart.Enabled = canThumnailPlay
@@ -259,26 +259,19 @@ Public Class frmOperation
         UpdateView()
     End Sub
 
-    Private ReadOnly Property isPlay As Boolean
-        Get
-            If player Is Nothing Then
-                Return False
-            End If
-            Return player.State = Vlc.DotNet.Core.Interops.Signatures.MediaStates.Playing
-        End Get
-    End Property
+
     Private Sub btnDispPaly_Click(sender As Object, e As EventArgs) Handles btnDispPaly.Click
 
         Dim vlc = _dispacher.ShowMovie()
         Dim starttime As Integer = Convert.ToInt32(thumbnailPlayer.Time / 1000)
-        Dim op = New String() {$"start-time={starttime}"}
-        vlc.Play(New Uri("file://" & fileViewParam.FileName), op)
+        Dim op = New String() {$"start-time={starttime}", $"audio"}
+        vlc.Play(fileViewParam.FileName, op)
         player = vlc
         DispFileViewParam = fileViewParam
 
     End Sub
 
-    Private player As Vlc.DotNet.Forms.VlcControl
+    Private player As VideoPlayer
 
     Private Sub btnDispPause_Click(sender As Object, e As EventArgs) Handles btnDispPause.Click
         player.Pause()
@@ -453,7 +446,7 @@ Public Class frmOperation
 
 
 
-    Private requirePouse As Boolean = False
+
 
     Private Sub SetPreview()
         txtPDFFileName.Text = "" & fileViewParam?.FileName
@@ -469,9 +462,9 @@ Public Class frmOperation
         thumbnailPlayer.Visible = (document IsNot Nothing) AndAlso document.FileType.IsMovieExt
 
         If document IsNot Nothing AndAlso document.FileType.IsMovieExt() Then
+            Dim op = New String() {"no-audio"}
+            thumbnailPlayer.LoadFile(fileViewParam.FileName, op)
 
-            thumbnailPlayer.Play((New Uri("file://" & fileViewParam.FileName)), New String() {})
-            requirePouse = True
 
         End If
     End Sub
@@ -540,7 +533,6 @@ Public Class frmOperation
         thumbnailPlayer.Rate = 1
         btnFastForward.Text = "▶▶"
         thumbnailPlayer.Play()
-        thumbnailPlayer.Audio.Volume = 0
     End Sub
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
@@ -578,7 +570,7 @@ Public Class frmOperation
 
 
     Private Sub GotoFirst_Click(sender As Object, e As EventArgs) Handles GotoFirst.Click
-        thumbnailPlayer.VlcMediaPlayer.Time = 0
+        thumbnailPlayer.Time = 0
     End Sub
 
     Private trackBarSeek_Scrolled As Boolean = False
@@ -590,29 +582,22 @@ Public Class frmOperation
     Private Sub Trackbar_Seek()
         Try
             If trackBarSeek_Scrolled Then
-                thumbnailPlayer.VlcMediaPlayer.Time = Convert.ToInt32(trackBarSeek.Value * 100)
+                thumbnailPlayer.Time = Convert.ToInt32(trackBarSeek.Value * 100)
                 trackBarSeek_Scrolled = False
             Else
-                trackBarSeek.Maximum = Convert.ToInt32(thumbnailPlayer.VlcMediaPlayer.Length / 100)
+                trackBarSeek.Maximum = Convert.ToInt32(thumbnailPlayer.Length / 100)
                 trackBarSeek.Value = Convert.ToInt32(thumbnailPlayer.Time / 100)
             End If
 
         Catch ex As Exception
 
         End Try
-        If requirePouse Then
-            If thumbnailPlayer.Time <> 0 Then
-                thumbnailPlayer.Pause()
-                requirePouse = False
-            End If
 
-
-        End If
         lbl_Update()
     End Sub
 
     Private Sub lbl_Update()
-        Dim ts As New TimeSpan(thumbnailPlayer.VlcMediaPlayer.Time * 10000)
+        Dim ts As New TimeSpan(thumbnailPlayer.Time * 10000)
         lblMovieTime.Text = ts.ToString("hh\:mm\:ss")
         ControlEnable()
     End Sub
@@ -643,9 +628,7 @@ Public Class frmOperation
         Next
     End Sub
 
-    Private Sub thumbnailPlayer_VlcLibDirectoryNeeded(sender As Object, e As Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs) Handles thumbnailPlayer.VlcLibDirectoryNeeded
-        e.VlcLibDirectory = VLCDirectoryGetter.GetVlcLibDirectory()
-    End Sub
+
 
     Private Sub trackBarSeek_MouseDown(sender As Object, e As MouseEventArgs) Handles trackBarSeek.MouseDown
         Dim TrackBar1 = trackBarSeek
