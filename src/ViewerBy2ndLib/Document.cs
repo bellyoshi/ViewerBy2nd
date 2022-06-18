@@ -24,17 +24,17 @@ namespace ViewerBy2ndLib
         {
             if (filename == null) return;
             isHalf = false;
-            if (FileType.IsPDFExt())
+            if (FileType.IsPDFExt)
             {
                 pdfDoc = PdfDocument.Load(filename);
                 FirstPage();
             }
-            else if (FileType.IsImageExt())
+            else if (FileType.IsImageExt)
             {
                 LoadImage();
 
             }
-            else if (FileType.IsSVGExt())
+            else if (FileType.IsSVGExt)
             {
                 LoadSVGImage();
             }
@@ -48,7 +48,7 @@ namespace ViewerBy2ndLib
         }
         private RotateFlipType flip;
         public void Rotate(RotateFlipType flip) {
-            if (FileType.IsPDFExt())
+            if (FileType.IsPDFExt)
             {
                 Render();
             }
@@ -67,16 +67,16 @@ namespace ViewerBy2ndLib
 
         public void Disp()
         {
-            if (FileType.IsPDFExt())
+            if (FileType.IsPDFExt)
             {
                 Render();
             }
-            else if (FileType.IsImageExt())
+            else if (FileType.IsImageExt)
             {
                 LoadImage();
 
             }
-            else if (FileType.IsSVGExt())
+            else if (FileType.IsSVGExt)
             {
                 LoadSVGImage();
             }

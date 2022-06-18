@@ -77,6 +77,7 @@
             this.pbThumbnail = new System.Windows.Forms.PictureBox();
             this.btnUnSelect = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
+            this.thumbnailPlayer = new ViewerBy2ndLib.VideoPlayer();
             this.GroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSeek)).BeginInit();
             this.GroupBox1.SuspendLayout();
@@ -493,7 +494,7 @@
             // 
             // pbThumbnail
             // 
-            this.pbThumbnail.Location = new System.Drawing.Point(660, 154);
+            this.pbThumbnail.Location = new System.Drawing.Point(666, 152);
             this.pbThumbnail.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pbThumbnail.Name = "pbThumbnail";
             this.pbThumbnail.Size = new System.Drawing.Size(495, 300);
@@ -520,11 +521,22 @@
             this.btnDelete.Text = "削除";
             this.btnDelete.UseVisualStyleBackColor = true;
             // 
-            // Form1
+            // thumbnailPlayer
+            // 
+            this.thumbnailPlayer.Location = new System.Drawing.Point(666, 152);
+            this.thumbnailPlayer.Name = "thumbnailPlayer";
+            this.thumbnailPlayer.Rate = -1F;
+            this.thumbnailPlayer.Size = new System.Drawing.Size(495, 298);
+            this.thumbnailPlayer.TabIndex = 97;
+            this.thumbnailPlayer.Time = ((long)(-1));
+            this.thumbnailPlayer.Volume = -1;
+            // 
+            // frmOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 668);
+            this.Controls.Add(this.thumbnailPlayer);
             this.Controls.Add(this.GroupBox2);
             this.Controls.Add(this.lblMovieTime);
             this.Controls.Add(this.btnAllSelect);
@@ -558,7 +570,7 @@
             this.Controls.Add(this.btnUnSelect);
             this.Controls.Add(this.btnDelete);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form1";
+            this.Name = "frmOperation";
             this.Text = "ViewerBy2nd Monitor";
             this.GroupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSeek)).EndInit();
@@ -619,6 +631,7 @@
         internal System.Windows.Forms.PictureBox pbThumbnail;
         internal System.Windows.Forms.Button btnUnSelect;
         internal System.Windows.Forms.Button btnDelete;
+        internal ViewerBy2ndLib.VideoPlayer thumbnailPlayer;
     }
 }
 

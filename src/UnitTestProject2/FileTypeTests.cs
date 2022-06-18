@@ -9,8 +9,8 @@ namespace ViewerBy2ndLib.Tests
         public void IsImageExtTest()
         {
             var bitmapExtention = new FileTypes(".bmp");
-            Assert.IsTrue(bitmapExtention.IsImageExt());
-            Assert.IsFalse(bitmapExtention.IsPDFExt());
+            Assert.IsTrue(bitmapExtention.IsImageExt);
+            Assert.IsFalse(bitmapExtention.IsPDFExt);
         }
 
         [TestMethod()]

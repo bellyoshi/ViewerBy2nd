@@ -25,10 +25,7 @@ namespace ViewerBy2ndLib
         //FileTypeEnum fileType;
 
         public string extention;
-        bool IsPDFExt(String ext)
-        {
-            return IsContain(PDFExts);
-        }
+
 
         bool IsContain(string[] exts)
         {
@@ -40,13 +37,13 @@ namespace ViewerBy2ndLib
             return false;
         }
 
-        public bool IsImageExt()
+        public bool IsImageExt
              => IsContain(ImageExts);
-        public bool IsMovieExt()
+        public bool IsMovieExt
              => IsContain(movieExts);
-        public bool IsSVGExt()
+        public bool IsSVGExt
             => IsContain(SVGExts);
-        public bool IsPDFExt()
+        public bool IsPDFExt
             => IsContain(PDFExts);
 
         public FileTypes(string filename)
