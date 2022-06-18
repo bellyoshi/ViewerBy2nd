@@ -66,11 +66,11 @@
             this.chkUpdate = new System.Windows.Forms.CheckBox();
             this.SeekTimer = new System.Windows.Forms.Timer(this.components);
             this.BackgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.btnRotateM90 = new System.Windows.Forms.Button();
+            this.btnRotate270 = new System.Windows.Forms.Button();
             this.btnRotate180 = new System.Windows.Forms.Button();
             this.Label6 = new System.Windows.Forms.Label();
             this.btnFileAdd = new System.Windows.Forms.Button();
-            this.lstPDFFiles = new System.Windows.Forms.ListBox();
+            this.lstFiles = new System.Windows.Forms.ListBox();
             this.txtPDFFileName = new System.Windows.Forms.TextBox();
             this.ColorDialog1 = new System.Windows.Forms.ColorDialog();
             this.GroupBox1 = new System.Windows.Forms.GroupBox();
@@ -108,6 +108,7 @@
             this.btnDispStart.TabIndex = 21;
             this.btnDispStart.Text = "再生再開";
             this.btnDispStart.UseVisualStyleBackColor = true;
+            this.btnDispStart.Click += new System.EventHandler(this.btnDispStart_Click);
             // 
             // btnDispPause
             // 
@@ -118,6 +119,7 @@
             this.btnDispPause.TabIndex = 20;
             this.btnDispPause.Text = "停止";
             this.btnDispPause.UseVisualStyleBackColor = true;
+            this.btnDispPause.Click += new System.EventHandler(this.btnDispPause_Click);
             // 
             // btnDispPaly
             // 
@@ -128,6 +130,7 @@
             this.btnDispPaly.TabIndex = 20;
             this.btnDispPaly.Text = "ここから再生";
             this.btnDispPaly.UseVisualStyleBackColor = true;
+            this.btnDispPaly.Click += new System.EventHandler(this.btnDispPaly_Click);
             // 
             // btnDisp
             // 
@@ -138,6 +141,7 @@
             this.btnDisp.TabIndex = 20;
             this.btnDisp.Text = "表示";
             this.btnDisp.UseVisualStyleBackColor = true;
+            this.btnDisp.Click += new System.EventHandler(this.btnDisp_Click);
             // 
             // btnUnSelectUpdate
             // 
@@ -148,6 +152,7 @@
             this.btnUnSelectUpdate.TabIndex = 20;
             this.btnUnSelectUpdate.Text = "背景表示";
             this.btnUnSelectUpdate.UseVisualStyleBackColor = true;
+            this.btnUnSelectUpdate.Click += new System.EventHandler(this.btnUnSelectUpdate_Click);
             // 
             // btnUnDisp
             // 
@@ -158,6 +163,7 @@
             this.btnUnDisp.TabIndex = 20;
             this.btnUnDisp.Text = "表示終了";
             this.btnUnDisp.UseVisualStyleBackColor = true;
+            this.btnUnDisp.Click += new System.EventHandler(this.btnUnDisp_Click);
             // 
             // lblMovieTime
             // 
@@ -177,6 +183,7 @@
             this.btnAllSelect.TabIndex = 94;
             this.btnAllSelect.Text = "全選択";
             this.btnAllSelect.UseVisualStyleBackColor = true;
+            this.btnAllSelect.Click += new System.EventHandler(this.btnAllSelect_Click);
             // 
             // btnPDFLast
             // 
@@ -187,6 +194,7 @@
             this.btnPDFLast.TabIndex = 93;
             this.btnPDFLast.Text = "最後へ";
             this.btnPDFLast.UseVisualStyleBackColor = true;
+            this.btnPDFLast.Click += new System.EventHandler(this.btnLast_Click);
             // 
             // btnWhole
             // 
@@ -197,6 +205,7 @@
             this.btnWhole.TabIndex = 92;
             this.btnWhole.Text = "全体を表示";
             this.btnWhole.UseVisualStyleBackColor = true;
+            this.btnWhole.Click += new System.EventHandler(this.btnWhole_Click);
             // 
             // lblPageDisp
             // 
@@ -215,6 +224,7 @@
             this.btnPreviousHalf.TabIndex = 89;
             this.btnPreviousHalf.Text = "0.5ページ前へ";
             this.btnPreviousHalf.UseVisualStyleBackColor = true;
+            this.btnPreviousHalf.Click += new System.EventHandler(this.btnPreviousHalf_Click);
             // 
             // btnNextHalf
             // 
@@ -225,6 +235,7 @@
             this.btnNextHalf.TabIndex = 90;
             this.btnNextHalf.Text = "0.5ページ先へ";
             this.btnNextHalf.UseVisualStyleBackColor = true;
+            this.btnNextHalf.Click += new System.EventHandler(this.btnNextHalf_Click);
             // 
             // btnPDFNext
             // 
@@ -235,6 +246,7 @@
             this.btnPDFNext.TabIndex = 86;
             this.btnPDFNext.Text = "次へ";
             this.btnPDFNext.UseVisualStyleBackColor = true;
+            this.btnPDFNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPDFBack
             // 
@@ -245,6 +257,7 @@
             this.btnPDFBack.TabIndex = 87;
             this.btnPDFBack.Text = "前へ";
             this.btnPDFBack.UseVisualStyleBackColor = true;
+            this.btnPDFBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // btnPDFFirst
             // 
@@ -255,6 +268,7 @@
             this.btnPDFFirst.TabIndex = 88;
             this.btnPDFFirst.Text = "最初へ";
             this.btnPDFFirst.UseVisualStyleBackColor = true;
+            this.btnPDFFirst.Click += new System.EventHandler(this.btnFirst_Click);
             // 
             // GotoFirst
             // 
@@ -265,6 +279,7 @@
             this.GotoFirst.TabIndex = 80;
             this.GotoFirst.Text = "先頭";
             this.GotoFirst.UseVisualStyleBackColor = true;
+            this.GotoFirst.Click += new System.EventHandler(this.GotoFirst_Click);
             // 
             // btnStop
             // 
@@ -275,6 +290,7 @@
             this.btnStop.TabIndex = 81;
             this.btnStop.Text = "||";
             this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnFastReverse
             // 
@@ -286,6 +302,7 @@
             this.btnFastReverse.TabIndex = 82;
             this.btnFastReverse.Text = "◀";
             this.btnFastReverse.UseVisualStyleBackColor = true;
+            this.btnFastReverse.Click += new System.EventHandler(this.btnFastReverse_Click);
             // 
             // btnFastForward
             // 
@@ -297,6 +314,7 @@
             this.btnFastForward.TabIndex = 83;
             this.btnFastForward.Text = "▶▶";
             this.btnFastForward.UseVisualStyleBackColor = true;
+            this.btnFastForward.Click += new System.EventHandler(this.btnFastForward_Click);
             // 
             // btnStart
             // 
@@ -308,6 +326,7 @@
             this.btnStart.TabIndex = 84;
             this.btnStart.Text = "▶";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // Label2
             // 
@@ -324,6 +343,7 @@
             this.VScrollBar1.Name = "VScrollBar1";
             this.VScrollBar1.Size = new System.Drawing.Size(23, 300);
             this.VScrollBar1.TabIndex = 78;
+            this.VScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.VScrollBar1_Scroll);
             // 
             // btnSetWindow
             // 
@@ -334,6 +354,7 @@
             this.btnSetWindow.TabIndex = 76;
             this.btnSetWindow.Text = "ウィンドウ幅に合わせる";
             this.btnSetWindow.UseVisualStyleBackColor = true;
+            this.btnSetWindow.Click += new System.EventHandler(this.btnSetWindow_Click);
             // 
             // btnRotate90
             // 
@@ -344,6 +365,7 @@
             this.btnRotate90.TabIndex = 72;
             this.btnRotate90.Text = "右90度";
             this.btnRotate90.UseVisualStyleBackColor = true;
+            this.btnRotate90.Click += new System.EventHandler(this.btnRotate90_Click);
             // 
             // trackBarSeek
             // 
@@ -352,6 +374,8 @@
             this.trackBarSeek.Name = "trackBarSeek";
             this.trackBarSeek.Size = new System.Drawing.Size(317, 56);
             this.trackBarSeek.TabIndex = 85;
+            this.trackBarSeek.Scroll += new System.EventHandler(this.trackBarSeek_Scroll);
+            this.trackBarSeek.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarSeek_MouseDown);
             // 
             // btnRotate0
             // 
@@ -362,6 +386,7 @@
             this.btnRotate0.TabIndex = 73;
             this.btnRotate0.Text = "０度";
             this.btnRotate0.UseVisualStyleBackColor = true;
+            this.btnRotate0.Click += new System.EventHandler(this.btnRotate0_Click);
             // 
             // OpenFileDialog1
             // 
@@ -385,6 +410,7 @@
             this.btnColorChange.TabIndex = 8;
             this.btnColorChange.Text = "背景色変更";
             this.btnColorChange.UseVisualStyleBackColor = true;
+            this.btnColorChange.Click += new System.EventHandler(this.btnColorChange_Click);
             // 
             // Label1
             // 
@@ -404,6 +430,7 @@
             this.cmbDisplay.Name = "cmbDisplay";
             this.cmbDisplay.Size = new System.Drawing.Size(163, 23);
             this.cmbDisplay.TabIndex = 6;
+            this.cmbDisplay.SelectedIndexChanged += new System.EventHandler(this.cmbDisplay_SelectedIndexChanged);
             // 
             // chkUpdate
             // 
@@ -415,16 +442,22 @@
             this.chkUpdate.TabIndex = 25;
             this.chkUpdate.Text = "操作中に自動表示";
             this.chkUpdate.UseVisualStyleBackColor = true;
+            this.chkUpdate.CheckedChanged += new System.EventHandler(this.chkUpdate_CheckedChanged);
             // 
-            // btnRotateM90
+            // SeekTimer
             // 
-            this.btnRotateM90.Location = new System.Drawing.Point(351, 297);
-            this.btnRotateM90.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnRotateM90.Name = "btnRotateM90";
-            this.btnRotateM90.Size = new System.Drawing.Size(79, 51);
-            this.btnRotateM90.TabIndex = 74;
-            this.btnRotateM90.Text = "左90度";
-            this.btnRotateM90.UseVisualStyleBackColor = true;
+            this.SeekTimer.Tick += new System.EventHandler(this.SeekTimer_Tick);
+            // 
+            // btnRotate270
+            // 
+            this.btnRotate270.Location = new System.Drawing.Point(351, 297);
+            this.btnRotate270.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnRotate270.Name = "btnRotate270";
+            this.btnRotate270.Size = new System.Drawing.Size(79, 51);
+            this.btnRotate270.TabIndex = 74;
+            this.btnRotate270.Text = "左90度";
+            this.btnRotate270.UseVisualStyleBackColor = true;
+            this.btnRotate270.Click += new System.EventHandler(this.btnRotate270_Click);
             // 
             // btnRotate180
             // 
@@ -435,6 +468,7 @@
             this.btnRotate180.TabIndex = 75;
             this.btnRotate180.Text = "180度回転";
             this.btnRotate180.UseVisualStyleBackColor = true;
+            this.btnRotate180.Click += new System.EventHandler(this.btnRotate180_Click);
             // 
             // Label6
             // 
@@ -454,18 +488,23 @@
             this.btnFileAdd.TabIndex = 70;
             this.btnFileAdd.Text = "ファイルを追加";
             this.btnFileAdd.UseVisualStyleBackColor = true;
+            this.btnFileAdd.Click += new System.EventHandler(this.btnFileAdd_Click);
             // 
-            // lstPDFFiles
+            // lstFiles
             // 
-            this.lstPDFFiles.AllowDrop = true;
-            this.lstPDFFiles.FormattingEnabled = true;
-            this.lstPDFFiles.ItemHeight = 15;
-            this.lstPDFFiles.Location = new System.Drawing.Point(19, 118);
-            this.lstPDFFiles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.lstPDFFiles.Name = "lstPDFFiles";
-            this.lstPDFFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.lstPDFFiles.Size = new System.Drawing.Size(308, 424);
-            this.lstPDFFiles.TabIndex = 67;
+            this.lstFiles.AllowDrop = true;
+            this.lstFiles.FormattingEnabled = true;
+            this.lstFiles.ItemHeight = 15;
+            this.lstFiles.Location = new System.Drawing.Point(19, 118);
+            this.lstFiles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lstFiles.Name = "lstFiles";
+            this.lstFiles.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
+            this.lstFiles.Size = new System.Drawing.Size(308, 424);
+            this.lstFiles.TabIndex = 67;
+            this.lstFiles.Click += new System.EventHandler(this.lstFiles_Click);
+            this.lstFiles.SelectedValueChanged += new System.EventHandler(this.lstFiles_SelectedValueChanged);
+            this.lstFiles.DragDrop += new System.Windows.Forms.DragEventHandler(this.lstFiles_DragDrop);
+            this.lstFiles.DragEnter += new System.Windows.Forms.DragEventHandler(this.lstFiles_DragEnter);
             // 
             // txtPDFFileName
             // 
@@ -510,6 +549,7 @@
             this.btnUnSelect.TabIndex = 68;
             this.btnUnSelect.Text = "選択解除";
             this.btnUnSelect.UseVisualStyleBackColor = true;
+            this.btnUnSelect.Click += new System.EventHandler(this.btnUnSelect_Click);
             // 
             // btnDelete
             // 
@@ -520,6 +560,7 @@
             this.btnDelete.TabIndex = 69;
             this.btnDelete.Text = "削除";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // thumbnailPlayer
             // 
@@ -559,11 +600,11 @@
             this.Controls.Add(this.btnRotate90);
             this.Controls.Add(this.trackBarSeek);
             this.Controls.Add(this.btnRotate0);
-            this.Controls.Add(this.btnRotateM90);
+            this.Controls.Add(this.btnRotate270);
             this.Controls.Add(this.btnRotate180);
             this.Controls.Add(this.Label6);
             this.Controls.Add(this.btnFileAdd);
-            this.Controls.Add(this.lstPDFFiles);
+            this.Controls.Add(this.lstFiles);
             this.Controls.Add(this.txtPDFFileName);
             this.Controls.Add(this.GroupBox1);
             this.Controls.Add(this.pbThumbnail);
@@ -572,6 +613,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmOperation";
             this.Text = "ViewerBy2nd Monitor";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmOperation_FormClosed);
+            this.Load += new System.EventHandler(this.frmOperation_Load);
             this.GroupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSeek)).EndInit();
             this.GroupBox1.ResumeLayout(false);
@@ -620,11 +663,11 @@
         internal System.Windows.Forms.CheckBox chkUpdate;
         internal System.Windows.Forms.Timer SeekTimer;
         internal System.ComponentModel.BackgroundWorker BackgroundWorker1;
-        internal System.Windows.Forms.Button btnRotateM90;
+        internal System.Windows.Forms.Button btnRotate270;
         internal System.Windows.Forms.Button btnRotate180;
         internal System.Windows.Forms.Label Label6;
         internal System.Windows.Forms.Button btnFileAdd;
-        internal System.Windows.Forms.ListBox lstPDFFiles;
+        internal System.Windows.Forms.ListBox lstFiles;
         internal System.Windows.Forms.TextBox txtPDFFileName;
         internal System.Windows.Forms.ColorDialog ColorDialog1;
         internal System.Windows.Forms.GroupBox GroupBox1;

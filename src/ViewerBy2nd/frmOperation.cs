@@ -15,6 +15,7 @@ namespace ViewerBy2nd
         {
             InitializeComponent();
         }
+
         private void ControlEnable()
         {
             CtlPdf1ControlEnabled();
@@ -26,8 +27,8 @@ namespace ViewerBy2nd
 
         public void ListControlEnabled()
         {
-            btnDelete.Enabled = 0 < lstPDFFiles.SelectedItems.Count;
-            btnUnSelect.Enabled = 0 < lstPDFFiles.SelectedItems.Count;
+            btnDelete.Enabled = 0 < lstFiles.SelectedItems.Count;
+            btnUnSelect.Enabled = 0 < lstFiles.SelectedItems.Count;
         }
 
         public bool isMovie
@@ -61,6 +62,7 @@ namespace ViewerBy2nd
             btnWhole.Enabled = canSetWin;
             VScrollBar1.Enabled = (fileViewParam != null) && fileViewParam.IsWidthEqualWin;
         }
+
         public void CtlMovie1ControlEnabled()
         {
             bool canThumnailPlay = isMovie && !thumbnailPlayer.IsPlaying;
@@ -82,7 +84,7 @@ namespace ViewerBy2nd
         {
             var isEnabled = (document != null) && (!document.FileType.IsMovieExt);
 
-            btnRotateM90.Enabled = isEnabled;
+            btnRotate270.Enabled = isEnabled;
             btnRotate90.Enabled = isEnabled;
             btnRotate180.Enabled = isEnabled;
             btnRotate0.Enabled = isEnabled;
@@ -96,14 +98,12 @@ namespace ViewerBy2nd
             ControlEnable();
             SeekTimer.Interval = 100;
             SeekTimer.Start();
+
+            this.MouseWheel +=  new MouseEventHandler(this.frmOperation_MouseWheel);
         }
 
-
-
-        private bool loading;
         private void AppSettingLoad()
         {
-            loading = true;
             if (cmbDisplay.Items.Count > Properties.Settings.Default.cmbDisplaySelectedIndex)
                 cmbDisplay.SelectedIndex = Properties.Settings.Default.cmbDisplaySelectedIndex;
             else
@@ -129,13 +129,12 @@ namespace ViewerBy2nd
                     fvinfos = (List<FileViewParam>)serializer.Deserialize(sr);
                 }
                 foreach (var info in fvinfos)
-                    lstPDFFiles.Items.Add(info);
+                    lstFiles.Items.Add(info);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            loading = false;
         }
 
         private void AppSettingSave()
@@ -146,7 +145,7 @@ namespace ViewerBy2nd
             Properties.Settings.Default.Save();
 
             List<FileViewParam> fvinfos = new List<FileViewParam>();
-            foreach (FileViewParam info in lstPDFFiles.Items)
+            foreach (FileViewParam info in lstFiles.Items)
                 fvinfos.Add(info);
             System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<FileViewParam>));
             // 書き込むファイルを開く（UTF-8 BOM無し）
@@ -156,7 +155,6 @@ namespace ViewerBy2nd
                 serializer.Serialize(sw, fvinfos);
             }
         }
-
 
         private void screenDetect()
         {
@@ -174,8 +172,6 @@ namespace ViewerBy2nd
             SetColor();
             _dispacher.SetColor(ColorDialog1.Color);
         }
-
-
 
         private void frmOperation_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -209,17 +205,14 @@ namespace ViewerBy2nd
 
         private FormDispacher _dispacher = FormDispacher.GetInstance();
 
-
-
-
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (lstPDFFiles.SelectedItem == null)
+            if (lstFiles.SelectedItem == null)
                 return;
 
-            var list =lstPDFFiles.SelectedItems.Cast<FileViewParam>().ToList();
+            var list =lstFiles.SelectedItems.Cast<FileViewParam>().ToList();
             foreach (var i in list)
-                lstPDFFiles.Items.Remove(i);
+                lstFiles.Items.Remove(i);
             if (list.Contains(DispFileViewParam))
             {
                 UpdateView();
@@ -236,7 +229,7 @@ namespace ViewerBy2nd
             {
                 var ret = MessageBox.Show("ファイルが見つかりません。リストから削除しますか？", "ファイルがありません", MessageBoxButtons.YesNo);
                 if (ret == DialogResult.Yes)
-                    lstPDFFiles.Items.Remove(fileViewParam);
+                    lstFiles.Items.Remove(fileViewParam);
                 return;
             }
 
@@ -251,7 +244,6 @@ namespace ViewerBy2nd
         {
             UpdateView();
         }
-
 
         private void btnDispPaly_Click(object sender, EventArgs e)
         {
@@ -286,7 +278,7 @@ namespace ViewerBy2nd
             if (ret == DialogResult.Cancel)
                 return;
 
-            var items = lstPDFFiles.Items;
+            var items = lstFiles.Items;
 
             foreach (var filename in OpenFileDialog1.FileNames)
                 items.Add(new FileViewParam(filename, _dispacher.GetViewScreen.Bounds.Size));
@@ -294,7 +286,7 @@ namespace ViewerBy2nd
 
         private void btnUnSelect_Click(object sender, EventArgs e)
         {
-            lstPDFFiles.SelectedItem = null;
+            lstFiles.SelectedItem = null;
             pbThumbnail.Image = null;
             ControlEnable();
         }
@@ -304,16 +296,18 @@ namespace ViewerBy2nd
             _dispacher.CloseViewers();
             DispFileViewParam = null;
         }
+
         private void btnUnSelectUpdate_Click(object sender, EventArgs e)
         {
-            lstPDFFiles.SelectedItem = null;
+            lstFiles.SelectedItem = null;
             pbThumbnail.Image = null;
             SetPreview();
             UpdateView();
             ControlEnable();
             DispFileViewParam = null;
         }
-        private void lstPDFFiles_DragEnter(object sender, DragEventArgs e)
+
+        private void lstFiles_DragEnter(object sender, DragEventArgs e)
         {
             // コントロール内にドラッグされたとき実行される
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -324,9 +318,9 @@ namespace ViewerBy2nd
                 e.Effect = DragDropEffects.None;
         }
 
-        private void lstPDFFiles_DragDrop(object sender, DragEventArgs e)
+        private void lstFiles_DragDrop(object sender, DragEventArgs e)
         {
-            var items = lstPDFFiles.Items;
+            var items = lstFiles.Items;
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
             foreach (var f in fileName)
@@ -339,10 +333,7 @@ namespace ViewerBy2nd
             ControlEnable();
         }
 
-
-
-
-        private void btnRotate_Click(object sender, EventArgs e)
+        private void btnRotate180_Click(object sender, EventArgs e)
         {
             document.Rotate(RotateFlipType.Rotate180FlipNone);
             VScrollBar1Init();
@@ -370,7 +361,6 @@ namespace ViewerBy2nd
             UpdateViewIfChecked();
         }
 
-
         public void UpdateViewIfChecked()
         {
             SetPreview();
@@ -388,17 +378,17 @@ namespace ViewerBy2nd
         {
             get
             {
-                if (lstPDFFiles.SelectedItems.Count != 1)
+                if (lstFiles.SelectedItems.Count != 1)
                     return null/* TODO Change to default(_) if this is not a reference type */;
-                if (lstPDFFiles.SelectedItem == null)
+                if (lstFiles.SelectedItem == null)
                     return null/* TODO Change to default(_) if this is not a reference type */;
-                var p = (FileViewParam)lstPDFFiles.SelectedItem;
+                var p = (FileViewParam)lstFiles.SelectedItem;
                 p.Bound = _dispacher.GetViewScreen.Bounds.Size;
                 return p;
             }
         }
 
-        private ViewerBy2ndLib.Document document
+        private Document document
         {
             get
             {
@@ -408,13 +398,10 @@ namespace ViewerBy2nd
             }
         }
 
-
         public void SetColor()
         {
             pbThumbnail.BackColor = Properties.Settings.Default.formColor;
         }
-
-
 
         private void btnFirst_Click(object sender, EventArgs e)
         {
@@ -440,10 +427,6 @@ namespace ViewerBy2nd
             UpdateViewIfChecked();
         }
 
-
-
-
-
         private void SetPreview()
         {
             txtPDFFileName.Text = "" + fileViewParam?.FileName;
@@ -466,11 +449,6 @@ namespace ViewerBy2nd
             }
         }
 
-
-
-
-
-
         private void btnNextHalf_Click(object sender, EventArgs e)
         {
             document.NextHalfPage();
@@ -482,8 +460,6 @@ namespace ViewerBy2nd
             document.PreviousHalfPage();
             UpdateViewIfChecked();
         }
-
-
 
         private void VScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
@@ -498,6 +474,7 @@ namespace ViewerBy2nd
             document.DispSetWindow();
             UpdateViewIfChecked();
         }
+
         private void VScrollBar1Init()
         {
             VScrollBar1.Minimum = 0;
@@ -507,6 +484,7 @@ namespace ViewerBy2nd
 
             VScrollBar1.LargeChange = clientWidth;
         }
+
         private void btnSetWindow_Click(object sender, EventArgs e)
         {
             fileViewParam.scrollBarValue = 0;
@@ -515,19 +493,6 @@ namespace ViewerBy2nd
             VScrollBar1Init();
             UpdateViewIfChecked();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -541,7 +506,7 @@ namespace ViewerBy2nd
             thumbnailPlayer.Pause();
         }
 
-        private void Button5_Click(object sender, EventArgs e)
+        private void btnFastForward_Click(object sender, EventArgs e)
         {
             // todo:
             btnFastForward.Text = "▶▶▶";
@@ -560,14 +525,13 @@ namespace ViewerBy2nd
                 thumbnailPlayer.Time = thumbnailPlayer.Time - 15000;
         }
 
-
-
         private void GotoFirst_Click(object sender, EventArgs e)
         {
             thumbnailPlayer.Time = 0;
         }
 
         private bool trackBarSeek_Scrolled = false;
+
         private void SeekTimer_Tick(object sender, EventArgs e)
         {
 
@@ -602,7 +566,6 @@ namespace ViewerBy2nd
             lblMovieTime.Text = ts.ToString(@"hh\:mm\:ss");
         }
 
-
         private void trackBarSeek_Scroll(object sender, EventArgs e)
         {
             trackBarSeek_Scrolled = true;
@@ -615,9 +578,7 @@ namespace ViewerBy2nd
             UpdateViewIfChecked();
         }
 
-
-
-        private void lstPDFFiles_SelectedValueChanged(object sender, EventArgs e)
+        private void lstFiles_SelectedValueChanged(object sender, EventArgs e)
         {
             ControlEnable();
             UpdateViewIfChecked();
@@ -627,12 +588,10 @@ namespace ViewerBy2nd
 
         private void btnAllSelect_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= lstPDFFiles.Items.Count - 1; i++)
+            for (int i = 0; i <= lstFiles.Items.Count - 1; i++)
 
-                lstPDFFiles.SetSelected(i, true);
+                lstFiles.SetSelected(i, true);
         }
-
-
 
         private void trackBarSeek_MouseDown(object sender, MouseEventArgs e)
         {
@@ -684,15 +643,9 @@ namespace ViewerBy2nd
             VSctollUpdate();
         }
 
-
-
-
-
-
-
-
-
         private FileViewParam DispFileViewParam;
+
+
     }
 
 }

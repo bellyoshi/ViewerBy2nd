@@ -42,6 +42,7 @@
             this.VideoPlayer1.Size = new System.Drawing.Size(800, 450);
             this.VideoPlayer1.TabIndex = 6;
             this.VideoPlayer1.Time = ((long)(-1));
+            this.VideoPlayer1.Volume = -1;
             // 
             // PictureBox1
             // 
@@ -63,6 +64,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmViewer";
             this.Text = "Viewer Screen";
+            this.Load += new System.EventHandler(this.frmViewer_Load);
+            this.VisibleChanged += new System.EventHandler(this.frmViewer_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
 

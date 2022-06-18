@@ -17,17 +17,22 @@ namespace ViewerBy2nd
         {
             InitializeComponent();
         }
-        private void frmMovieViewer_VisibleChanged(object sender, EventArgs e)
-        {
-            if (this.Visible == false)
-                VideoPlayer1.Pause();
-        }
-
 
         public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
         {
             var dispacher = FormDispacher.GetInstance();
             dispacher.frmOperation_MouseWheel(sender, e);
+        }
+
+        private void frmViewer_Load(object sender, EventArgs e)
+        {
+            this.MouseWheel +=  new MouseEventHandler(this.frmOperation_MouseWheel);
+        }
+
+        private void frmViewer_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == false)
+                VideoPlayer1.Pause();
         }
     }
 
