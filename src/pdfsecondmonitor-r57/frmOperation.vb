@@ -496,9 +496,13 @@ Public Class frmOperation
         UpdateViewIfChecked()
     End Sub
     Private Sub VScrollBar1Init()
-        VScrollBar1.Value = 0
+
         VScrollBar1.Minimum = 0
-        VScrollBar1.Maximum = document.OriginalImageHeight
+        Dim clientWidth = document.Image.Height
+        VScrollBar1.Maximum = document.OriginalImageHeight ' - clientWidth
+        VScrollBar1.Value = fileViewParam.scrollBarValue
+
+        VScrollBar1.LargeChange = clientWidth
 
     End Sub
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
@@ -617,6 +621,10 @@ Public Class frmOperation
     Private Sub lstPDFFiles_SelectedValueChanged(sender As Object, e As EventArgs) Handles lstPDFFiles.SelectedValueChanged
         ControlEnable()
         UpdateViewIfChecked()
+        If btnSetWindow.Enabled Then
+            VScrollBar1Init()
+        End If
+
     End Sub
 
     Private Sub btnAllSelect_Click(sender As Object, e As EventArgs) Handles btnAllSelect.Click
@@ -654,17 +662,18 @@ Public Class frmOperation
         End If
         Dim numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / 10
         Debug.Print(numberOfTextLinesToMove.ToString)
+        Dim maximum = VScrollBar1.Maximum - VScrollBar1.LargeChange
         Dim expect As Integer = -Convert.ToInt32(numberOfTextLinesToMove) + VScrollBar1.Value
         If expect < 0 Then
             expect = 0
             If document.CanPrePage() Then
-                expect = VScrollBar1.Maximum
+                expect = maximum
                 document.PrePage()
             End If
         End If
 
-        If VScrollBar1.Maximum < expect Then
-            expect = VScrollBar1.Maximum
+        If maximum < expect Then
+            expect = maximum
             If document.CanNextPage() Then
                 expect = 0
                 document.NextPage()
