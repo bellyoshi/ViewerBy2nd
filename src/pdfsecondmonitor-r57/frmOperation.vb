@@ -499,7 +499,7 @@ Public Class frmOperation
 
         VScrollBar1.Minimum = 0
         Dim clientWidth = document.Image.Height
-        VScrollBar1.Maximum = document.OriginalImageHeight ' - clientWidth
+        VScrollBar1.Maximum = document.OriginalImageHeight
         VScrollBar1.Value = fileViewParam.scrollBarValue
 
         VScrollBar1.LargeChange = clientWidth
