@@ -15,7 +15,7 @@ namespace ViewerBy2ndLib
         int _volume;
         public int Volume
         {
-            get { return vlcControl1.VlcMediaPlayer.Audio.Volume; }
+            get { return vlcControl1?.VlcMediaPlayer?.Audio?.Volume??-1; }
             set
             {
                 _volume = value;

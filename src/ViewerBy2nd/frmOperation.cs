@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace ViewerBy2nd
 {
-    public partial class Form1 : Form
+    public partial class frmOperation : Form
     {
-        public Form1()
+        public frmOperation()
         {
             InitializeComponent();
         }

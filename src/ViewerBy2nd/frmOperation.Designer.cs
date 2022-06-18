@@ -1,6 +1,6 @@
 ﻿namespace ViewerBy2nd
 {
-    partial class Form1
+    partial class frmOperation
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOperation));
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
             this.btnDispStart = new System.Windows.Forms.Button();
             this.btnDispPause = new System.Windows.Forms.Button();
