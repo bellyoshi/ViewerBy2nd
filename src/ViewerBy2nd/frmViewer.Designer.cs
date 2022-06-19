@@ -64,6 +64,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmViewer";
             this.Text = "Viewer Screen";
+
             this.Load += new System.EventHandler(this.frmViewer_Load);
             this.VisibleChanged += new System.EventHandler(this.frmViewer_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();

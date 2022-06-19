@@ -34,6 +34,11 @@ namespace ViewerBy2nd
             if (this.Visible == false)
                 VideoPlayer1.Pause();
         }
+
+        private void frmViewer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
+        }
     }
 
 }

@@ -92,7 +92,7 @@ namespace ViewerBy2nd
 
         private void frmOperation_Load(object sender, EventArgs e)
         {
-            _dispacher.RegistfrmOperation(this);
+            _dispacher.RegistrationfrmOperation(this);
             screenDetect();
             AppSettingLoad();
             ControlEnable();
@@ -477,6 +477,10 @@ namespace ViewerBy2nd
 
         private void VScrollBar1Init()
         {
+            if(document.OriginalImageHeight == 0)
+            {
+                return;
+            }
             VScrollBar1.Minimum = 0;
             var clientWidth = document.Image.Height;
             VScrollBar1.Maximum = document.OriginalImageHeight;
@@ -618,7 +622,7 @@ namespace ViewerBy2nd
             if (!VScrollBar1.Enabled)
                 return;
             var numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / (double)10;
-            var maximum = VScrollBar1.Maximum - VScrollBar1.LargeChange;
+            var maximum = VScrollBar1.Maximum - VScrollBar1.LargeChange + 1;
             int expect = -Convert.ToInt32(numberOfTextLinesToMove) + VScrollBar1.Value;
             if (expect < 0)
             {

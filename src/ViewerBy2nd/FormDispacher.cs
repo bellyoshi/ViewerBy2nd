@@ -9,39 +9,37 @@ namespace ViewerBy2nd
     public class FormDispacher
     {
         private frmOperation _frmOperation;
-        private Screen _secondScreen;
+        private frmViewer _frmViewer;
+
+        private Screen _viewScreen;
         public Screen GetViewScreen => 
-             _secondScreen;
+             _viewScreen;
         
         public void SetSecondScreen(Screen screen)
         {
-            _secondScreen = screen;
-            foreach (var frm in _secondMonitorWindows)
-                SetViewerBounds(frm);
+            _viewScreen = screen;
+            
+            SetViewerBounds();
         }
         public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
         {
             _frmOperation.frmOperation_MouseWheel(sender, e);
         }
 
-        private void SetViewerBounds(Form frm)
+        private void SetViewerBounds()
         {
-            if (_secondScreen == null)
-                return;
-            var bouds = _secondScreen.Bounds;
-            frm.StartPosition = FormStartPosition.Manual;
-            frm.Location = bouds.Location;
-            frm.Size = bouds.Size;
+            if (_viewScreen == null) return;
+
+            if (_frmViewer == null) return;
+            var bouds = _viewScreen.Bounds;
+            _frmViewer.StartPosition = FormStartPosition.Manual;
+            _frmViewer.Location = bouds.Location;
+            _frmViewer.Size = bouds.Size;
         }
 
-        private List<Form> _secondMonitorWindows = new List<Form>();
 
-        private void registViewer(Form frm)
-        {
-            if (!_secondMonitorWindows.Contains(frm))
-                _secondMonitorWindows.Add(frm);
-            SetViewerBounds(frm);
-        }
+
+
 
         private static FormDispacher instance;
         public static FormDispacher GetInstance()
@@ -53,62 +51,44 @@ namespace ViewerBy2nd
 
         public void ShowImage(Image image)
         {
-            _frmImageViewer = (frmViewer)Show(_frmImageViewer, typeof(frmViewer));
-            _frmImageViewer.PictureBox1.Image = image;
-            _frmImageViewer.PictureBox1.Visible = true;
-            _frmImageViewer.PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            _frmImageViewer.VideoPlayer1.Visible = false;
-            _frmImageViewer.VideoPlayer1.Stop();
+            Show();
+            _frmViewer.PictureBox1.Image = image;
+            _frmViewer.PictureBox1.Visible = true;
+            _frmViewer.PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            _frmViewer.VideoPlayer1.Visible = false;
+            _frmViewer.VideoPlayer1.Stop();
         }
-        private frmViewer _frmImageViewer;
+
 
 
         public ViewerBy2ndLib.VideoPlayer ShowMovie()
         {
-            _frmImageViewer = (frmViewer)Show(_frmImageViewer, typeof(frmViewer));
-            _frmImageViewer.PictureBox1.Visible = false;
-            _frmImageViewer.VideoPlayer1.Visible = true;
-            return _frmImageViewer.VideoPlayer1;
+            Show();
+            _frmViewer.PictureBox1.Visible = false;
+            _frmViewer.VideoPlayer1.Visible = true;
+            return _frmViewer.VideoPlayer1;
         }
 
-        public void Create(ref Form form, Type formType)
-        {
-            if (form == null || !_secondMonitorWindows.Contains(form))
-            {
-                form = (Form)Activator.CreateInstance(formType);
-                form.BackColor = color;
-                form.FormClosed += from_Closed;
-            }
-        }
-
-        internal void RegistfrmOperation(frmOperation frmOperation)
+        internal void RegistrationfrmOperation(frmOperation frmOperation)
         {
             _frmOperation = frmOperation;
         }
 
         private void from_Closed(object sender, EventArgs e)
         {
-            var form = (Form)sender;
-            _secondMonitorWindows.Remove(form);
+            _frmViewer = null;
         }
 
-        private void HideOther(Form targetForm)
+
+        public void Show()
         {
-            foreach (var frm in _secondMonitorWindows)
+            if (_frmViewer == null)
             {
-                if (frm == targetForm)
-                    continue;
-                frm.Hide();
+                _frmViewer = new frmViewer();
+                SetViewerBounds();
+                _frmViewer.FormClosed += new FormClosedEventHandler(this.from_Closed);
             }
-        }
-
-        public Form Show(Form targetForm, Type formType)
-        {
-            Create(ref targetForm, formType);
-            registViewer(targetForm);
-            HideOther(targetForm);
-            targetForm.Show();
-            return targetForm;
+            _frmViewer.Show();
         }
 
 
@@ -116,15 +96,12 @@ namespace ViewerBy2nd
         public void SetColor(Color color)
         {
             this.color = color;
-            foreach (var frm in _secondMonitorWindows)
-                frm.BackColor = color;
+            _frmViewer.BackColor = color;
         }
 
         public void CloseViewers()
         {
-            var forms = new List<Form>(_secondMonitorWindows);
-            foreach (var frm in forms)
-                frm.Close();
+            _frmViewer.Close();
         }
     }
 
