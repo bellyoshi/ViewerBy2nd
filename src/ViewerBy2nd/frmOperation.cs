@@ -41,7 +41,7 @@ namespace ViewerBy2nd
 
         private void CtlSecondEnabled()
         {
-            btnDisp.Enabled = !chkUpdate.Checked || !_dispacher.ViewerVisible;
+            btnDisp.Enabled = !chkUpdate.Checked || !_dispacher.ViewerVisible || isMovie ;
         }
 
         public void CtlPdf1ControlEnabled()
@@ -108,8 +108,8 @@ namespace ViewerBy2nd
 
             lblFormColor.BackColor = Properties.Settings.Default.formColor;
             chkUpdate.Checked = Properties.Settings.Default.chkUpdate;
-            _dispacher.SetColor(Properties.Settings.Default.formColor);
-            SetColor();
+
+            SetBackColor();
             try
             {
                 List<FileViewParam> fvinfos = new List<FileViewParam>();
@@ -166,8 +166,8 @@ namespace ViewerBy2nd
                 return;
             this.lblFormColor.BackColor = ColorDialog1.Color;
             Properties.Settings.Default.formColor = ColorDialog1.Color;
-            SetColor();
-            _dispacher.SetColor(ColorDialog1.Color);
+            SetBackColor();
+
         }
 
         private void frmOperation_FormClosed(object sender, FormClosedEventArgs e)
@@ -184,7 +184,7 @@ namespace ViewerBy2nd
             // 'フォームを表示するディスプレイのScreenを取得する
             Screen s = (Screen)this.cmbDisplay.SelectedItem;
             // 'フォームの開始位置をディスプレイの左上座標に設定する
-            _dispacher.SetSecondScreen(s);
+            _dispacher.ViewScreen = s;
 
             SetThumnailSize();
         }
@@ -196,7 +196,7 @@ namespace ViewerBy2nd
         }
         private int getThumnailWidth(int thumWidth)
         {
-            var viewerSize = _dispacher.GetViewScreen.Bounds.Size;
+            var viewerSize = _dispacher.ViewScreen.Bounds.Size;
             return thumWidth * viewerSize.Height / viewerSize.Width;
         }
 
@@ -287,7 +287,7 @@ namespace ViewerBy2nd
             var items = lstFiles.Items;
 
             foreach (var filename in OpenFileDialog1.FileNames)
-                items.Add(new FileViewParam(filename, _dispacher.GetViewScreen.Bounds.Size));
+                items.Add(new FileViewParam(filename, _dispacher.ViewScreen.Bounds.Size));
         }
 
         private void btnUnSelect_Click(object sender, EventArgs e)
@@ -333,7 +333,7 @@ namespace ViewerBy2nd
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
             foreach (var f in fileName)
-                items.Add(new FileViewParam(f, _dispacher.GetViewScreen.Bounds.Size));
+                items.Add(new FileViewParam(f, _dispacher.ViewScreen.Bounds.Size));
         }
 
         private void chkUpdate_CheckedChanged(object sender, EventArgs e)
@@ -392,7 +392,7 @@ namespace ViewerBy2nd
                 if (lstFiles.SelectedItem == null)
                     return null/* TODO Change to default(_) if this is not a reference type */;
                 var p = (FileViewParam)lstFiles.SelectedItem;
-                p.Bound = _dispacher.GetViewScreen.Bounds.Size;
+                p.Bound = _dispacher.ViewScreen.Bounds.Size;
                 return p;
             }
         }
@@ -407,8 +407,9 @@ namespace ViewerBy2nd
             }
         }
 
-        public void SetColor()
+        public void SetBackColor()
         {
+            _dispacher.BackColor = Properties.Settings.Default.formColor;
             pbThumbnail.BackColor = Properties.Settings.Default.formColor;
         }
 
@@ -519,13 +520,12 @@ namespace ViewerBy2nd
 
         }
 
-        private void btnStop_Click(object sender, EventArgs e)
+        private void btnPause_Click(object sender, EventArgs e)
         {
-            if (thumbnailPlayer.IsPlaying)
-            {
-                thumbnailPlayer.Pause();
-                player_Pause();
-            }
+
+            thumbnailPlayer.Pause();
+            player_Pause();
+            
 
         }
 
@@ -572,6 +572,7 @@ namespace ViewerBy2nd
             Trackbar_Seek();
             lbl_Update();
             ControlEnable();
+            SyncThumbnail();
         }
 
         private void Trackbar_Seek()
@@ -596,6 +597,17 @@ namespace ViewerBy2nd
             }
         }
 
+        private void SyncThumbnail()
+        {
+            if (player == null) return;
+            if (!player.IsPlaying) return;
+            if (player.Time < 1000) return;
+            if(Math.Abs( thumbnailPlayer.Time - player.Time) > 500)
+            {
+                thumbnailPlayer.Time = player.Time;
+            }
+        }
+
         private void lbl_Update()
         {
             TimeSpan ts = new TimeSpan(thumbnailPlayer.Time * 10000);
@@ -616,6 +628,13 @@ namespace ViewerBy2nd
 
         private void lstFiles_SelectedValueChanged(object sender, EventArgs e)
         {
+            if (lstFiles.SelectedItem == null)
+            {
+                if(player != null)
+                {
+                    player.Stop();
+                }
+            }
             ControlEnable();
             UpdateViewIfChecked();
             if (btnSetWindow.Enabled)

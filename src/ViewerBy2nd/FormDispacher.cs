@@ -1,28 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
 using System.Drawing;
-
+using System.Windows.Forms;
 
 namespace ViewerBy2nd
 {
     public class FormDispacher
     {
+#region "singlton"
+        private static FormDispacher instance = new FormDispacher();
+        public static FormDispacher GetInstance()
+        {
+            return instance;
+        }
+        private FormDispacher() { }
+#endregion
+
         private frmOperation _frmOperation;
         private frmViewer _frmViewer;
 
         private Screen _viewScreen;
-        public Screen GetViewScreen => 
-             _viewScreen;
-
+        public Screen ViewScreen
+        {
+            get { return _viewScreen; }
+            set
+            {
+                _viewScreen = value;
+                SetViewerBounds();
+            }
+        }
         public bool ViewerVisible => _frmViewer?.Visible??false;
 
-        public void SetSecondScreen(Screen screen)
-        {
-            _viewScreen = screen;
-            
-            SetViewerBounds();
-        }
         public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
         {
             _frmOperation.frmOperation_MouseWheel(sender, e);
@@ -31,44 +38,20 @@ namespace ViewerBy2nd
         private void SetViewerBounds()
         {
             if (_viewScreen == null) return;
-
             if (_frmViewer == null) return;
-            var bouds = _viewScreen.Bounds;
-            _frmViewer.StartPosition = FormStartPosition.Manual;
-            _frmViewer.Location = bouds.Location;
-            _frmViewer.Size = bouds.Size;
-        }
-
-
-
-
-
-        private static FormDispacher instance;
-        public static FormDispacher GetInstance()
-        {
-            if (instance == null)
-                instance = new FormDispacher();
-            return instance;
+            _frmViewer.SetViewerBounds(_viewScreen.Bounds);
         }
 
         public void ShowImage(Image image)
         {
             Show();
-            _frmViewer.PictureBox1.Image = image;
-            _frmViewer.PictureBox1.Visible = true;
-            _frmViewer.PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            _frmViewer.VideoPlayer1.Visible = false;
-            _frmViewer.VideoPlayer1.Stop();
+            _frmViewer.ShowImage(image);
         }
-
-
 
         public ViewerBy2ndLib.VideoPlayer ShowMovie()
         {
             Show();
-            _frmViewer.PictureBox1.Visible = false;
-            _frmViewer.VideoPlayer1.Visible = true;
-            return _frmViewer.VideoPlayer1;
+            return _frmViewer.ShowVideo();
         }
 
         internal void RegistrationfrmOperation(frmOperation frmOperation)
@@ -80,7 +63,6 @@ namespace ViewerBy2nd
         {
             _frmViewer = null;
         }
-
 
         public void Show()
         {
@@ -94,17 +76,20 @@ namespace ViewerBy2nd
         public void CreateViewerForm()
         {
             _frmViewer = new frmViewer();
-            _frmViewer.BackColor = color;
+            _frmViewer.BackColor = BackColor;
             SetViewerBounds();
             _frmViewer.FormClosed += new FormClosedEventHandler(this.from_Closed);
         }
 
-        private Color color;
-        public void SetColor(Color color)
-        {
-            this.color = color;
-            if(_frmViewer != null)
-                _frmViewer.BackColor = color;
+        private Color _backColor = Color.Black  ;
+        public Color BackColor {
+            get { return _backColor; }
+            set
+            {
+                this._backColor = value;
+                if (_frmViewer != null)
+                    _frmViewer.BackColor = BackColor;
+            } 
         }
 
         public void CloseViewers()
@@ -113,5 +98,4 @@ namespace ViewerBy2nd
             _frmViewer.Close();
         }
     }
-
 }

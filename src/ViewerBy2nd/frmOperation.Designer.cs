@@ -34,6 +34,7 @@
             this.btnDisp = new System.Windows.Forms.Button();
             this.btnUnSelectUpdate = new System.Windows.Forms.Button();
             this.btnUnDisp = new System.Windows.Forms.Button();
+            this.chkUpdate = new System.Windows.Forms.CheckBox();
             this.lblMovieTime = new System.Windows.Forms.Label();
             this.btnAllSelect = new System.Windows.Forms.Button();
             this.btnPDFLast = new System.Windows.Forms.Button();
@@ -60,7 +61,6 @@
             this.btnColorChange = new System.Windows.Forms.Button();
             this.Label1 = new System.Windows.Forms.Label();
             this.cmbDisplay = new System.Windows.Forms.ComboBox();
-            this.chkUpdate = new System.Windows.Forms.CheckBox();
             this.SeekTimer = new System.Windows.Forms.Timer(this.components);
             this.BackgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.btnRotate270 = new System.Windows.Forms.Button();
@@ -87,7 +87,7 @@
             this.GroupBox2.Controls.Add(this.btnUnSelectUpdate);
             this.GroupBox2.Controls.Add(this.btnUnDisp);
             this.GroupBox2.Controls.Add(this.chkUpdate);
-            this.GroupBox2.Location = new System.Drawing.Point(367, 527);
+            this.GroupBox2.Location = new System.Drawing.Point(367, 550);
             this.GroupBox2.Name = "GroupBox2";
             this.GroupBox2.Size = new System.Drawing.Size(794, 92);
             this.GroupBox2.TabIndex = 96;
@@ -126,6 +126,19 @@
             this.btnUnDisp.Text = "表示終了";
             this.btnUnDisp.UseVisualStyleBackColor = true;
             this.btnUnDisp.Click += new System.EventHandler(this.btnUnDisp_Click);
+            // 
+            // chkUpdate
+            // 
+            this.chkUpdate.AutoSize = true;
+            this.chkUpdate.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.chkUpdate.Location = new System.Drawing.Point(343, 46);
+            this.chkUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.chkUpdate.Name = "chkUpdate";
+            this.chkUpdate.Size = new System.Drawing.Size(155, 20);
+            this.chkUpdate.TabIndex = 25;
+            this.chkUpdate.Text = "操作中に自動表示";
+            this.chkUpdate.UseVisualStyleBackColor = true;
+            this.chkUpdate.CheckedChanged += new System.EventHandler(this.chkUpdate_CheckedChanged);
             // 
             // lblMovieTime
             // 
@@ -252,7 +265,7 @@
             this.btnStop.TabIndex = 81;
             this.btnStop.Text = "||";
             this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.btnStop.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnFastReverse
             // 
@@ -393,19 +406,6 @@
             this.cmbDisplay.Size = new System.Drawing.Size(163, 23);
             this.cmbDisplay.TabIndex = 6;
             this.cmbDisplay.SelectedIndexChanged += new System.EventHandler(this.cmbDisplay_SelectedIndexChanged);
-            // 
-            // chkUpdate
-            // 
-            this.chkUpdate.AutoSize = true;
-            this.chkUpdate.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.chkUpdate.Location = new System.Drawing.Point(343, 46);
-            this.chkUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.chkUpdate.Name = "chkUpdate";
-            this.chkUpdate.Size = new System.Drawing.Size(155, 20);
-            this.chkUpdate.TabIndex = 25;
-            this.chkUpdate.Text = "操作中に自動表示";
-            this.chkUpdate.UseVisualStyleBackColor = true;
-            this.chkUpdate.CheckedChanged += new System.EventHandler(this.chkUpdate_CheckedChanged);
             // 
             // SeekTimer
             // 

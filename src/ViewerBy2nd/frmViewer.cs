@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ViewerBy2ndLib;
 
 namespace ViewerBy2nd
 {
@@ -35,9 +36,29 @@ namespace ViewerBy2nd
                 VideoPlayer1.Pause();
         }
 
-        private void frmViewer_FormClosed(object sender, FormClosedEventArgs e)
+        internal void SetViewerBounds(Rectangle bounds)
+        {
+            StartPosition = FormStartPosition.Manual;
+            Location = bounds.Location;
+            Size = bounds.Size;
+            
+        }
+
+        internal void ShowImage(Image image)
+        {
+            PictureBox1.Image = image;
+            PictureBox1.Visible = true;
+            PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            VideoPlayer1.Visible = false;
+            VideoPlayer1.Stop();
+        }
+
+        internal VideoPlayer ShowVideo()
         {
 
+            PictureBox1.Visible = false;
+            VideoPlayer1.Visible = true;
+            return VideoPlayer1;
         }
     }
 

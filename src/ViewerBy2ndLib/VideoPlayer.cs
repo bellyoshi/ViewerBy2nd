@@ -57,7 +57,8 @@ namespace ViewerBy2ndLib
 
         public void Pause()
         {
-            vlcControl1.Pause();
+            if (vlcControl1.IsPlaying) 
+                vlcControl1.Pause();
         }
 
         public void Play()
