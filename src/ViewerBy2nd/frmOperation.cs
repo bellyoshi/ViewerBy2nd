@@ -230,8 +230,6 @@ namespace ViewerBy2nd
                 return;
             }
 
-
-
             UpdateViewIfChecked();
 
             ControlEnable();

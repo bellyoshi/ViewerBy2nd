@@ -103,7 +103,8 @@ namespace ViewerBy2nd
         public void SetColor(Color color)
         {
             this.color = color;
-
+            if(_frmViewer != null)
+                _frmViewer.BackColor = color;
         }
 
         public void CloseViewers()
