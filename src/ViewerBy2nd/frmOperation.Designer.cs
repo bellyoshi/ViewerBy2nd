@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOperation));
             this.GroupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnDispStart = new System.Windows.Forms.Button();
-            this.btnDispPause = new System.Windows.Forms.Button();
-            this.btnDispPaly = new System.Windows.Forms.Button();
             this.btnDisp = new System.Windows.Forms.Button();
             this.btnUnSelectUpdate = new System.Windows.Forms.Button();
             this.btnUnDisp = new System.Windows.Forms.Button();
@@ -86,51 +83,16 @@
             // 
             // GroupBox2
             // 
-            this.GroupBox2.Controls.Add(this.btnDispStart);
-            this.GroupBox2.Controls.Add(this.btnDispPause);
-            this.GroupBox2.Controls.Add(this.btnDispPaly);
             this.GroupBox2.Controls.Add(this.btnDisp);
             this.GroupBox2.Controls.Add(this.btnUnSelectUpdate);
             this.GroupBox2.Controls.Add(this.btnUnDisp);
+            this.GroupBox2.Controls.Add(this.chkUpdate);
             this.GroupBox2.Location = new System.Drawing.Point(367, 527);
             this.GroupBox2.Name = "GroupBox2";
             this.GroupBox2.Size = new System.Drawing.Size(794, 92);
             this.GroupBox2.TabIndex = 96;
             this.GroupBox2.TabStop = false;
             this.GroupBox2.Text = "セカンドモニター操作";
-            // 
-            // btnDispStart
-            // 
-            this.btnDispStart.Location = new System.Drawing.Point(619, 28);
-            this.btnDispStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDispStart.Name = "btnDispStart";
-            this.btnDispStart.Size = new System.Drawing.Size(97, 53);
-            this.btnDispStart.TabIndex = 21;
-            this.btnDispStart.Text = "再生再開";
-            this.btnDispStart.UseVisualStyleBackColor = true;
-            this.btnDispStart.Click += new System.EventHandler(this.btnDispStart_Click);
-            // 
-            // btnDispPause
-            // 
-            this.btnDispPause.Location = new System.Drawing.Point(522, 27);
-            this.btnDispPause.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDispPause.Name = "btnDispPause";
-            this.btnDispPause.Size = new System.Drawing.Size(91, 53);
-            this.btnDispPause.TabIndex = 20;
-            this.btnDispPause.Text = "停止";
-            this.btnDispPause.UseVisualStyleBackColor = true;
-            this.btnDispPause.Click += new System.EventHandler(this.btnDispPause_Click);
-            // 
-            // btnDispPaly
-            // 
-            this.btnDispPaly.Location = new System.Drawing.Point(419, 27);
-            this.btnDispPaly.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnDispPaly.Name = "btnDispPaly";
-            this.btnDispPaly.Size = new System.Drawing.Size(97, 53);
-            this.btnDispPaly.TabIndex = 20;
-            this.btnDispPaly.Text = "ここから再生";
-            this.btnDispPaly.UseVisualStyleBackColor = true;
-            this.btnDispPaly.Click += new System.EventHandler(this.btnDispPaly_Click);
             // 
             // btnDisp
             // 
@@ -435,10 +397,11 @@
             // chkUpdate
             // 
             this.chkUpdate.AutoSize = true;
-            this.chkUpdate.Location = new System.Drawing.Point(40, 55);
+            this.chkUpdate.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.chkUpdate.Location = new System.Drawing.Point(343, 46);
             this.chkUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.chkUpdate.Name = "chkUpdate";
-            this.chkUpdate.Size = new System.Drawing.Size(146, 19);
+            this.chkUpdate.Size = new System.Drawing.Size(155, 20);
             this.chkUpdate.TabIndex = 25;
             this.chkUpdate.Text = "操作中に自動表示";
             this.chkUpdate.UseVisualStyleBackColor = true;
@@ -521,12 +484,11 @@
             this.GroupBox1.Controls.Add(this.btnColorChange);
             this.GroupBox1.Controls.Add(this.Label1);
             this.GroupBox1.Controls.Add(this.cmbDisplay);
-            this.GroupBox1.Controls.Add(this.chkUpdate);
             this.GroupBox1.Location = new System.Drawing.Point(1, 12);
             this.GroupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GroupBox1.Name = "GroupBox1";
             this.GroupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.GroupBox1.Size = new System.Drawing.Size(1037, 78);
+            this.GroupBox1.Size = new System.Drawing.Size(1037, 63);
             this.GroupBox1.TabIndex = 66;
             this.GroupBox1.TabStop = false;
             this.GroupBox1.Text = "設定";
@@ -564,7 +526,7 @@
             // 
             // thumbnailPlayer
             // 
-            this.thumbnailPlayer.Location = new System.Drawing.Point(666, 152);
+            this.thumbnailPlayer.Location = new System.Drawing.Point(666, 153);
             this.thumbnailPlayer.Name = "thumbnailPlayer";
             this.thumbnailPlayer.Rate = -1F;
             this.thumbnailPlayer.Size = new System.Drawing.Size(495, 298);
@@ -616,6 +578,7 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmOperation_FormClosed);
             this.Load += new System.EventHandler(this.frmOperation_Load);
             this.GroupBox2.ResumeLayout(false);
+            this.GroupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSeek)).EndInit();
             this.GroupBox1.ResumeLayout(false);
             this.GroupBox1.PerformLayout();
@@ -628,9 +591,6 @@
         #endregion
 
         internal System.Windows.Forms.GroupBox GroupBox2;
-        internal System.Windows.Forms.Button btnDispStart;
-        internal System.Windows.Forms.Button btnDispPause;
-        internal System.Windows.Forms.Button btnDispPaly;
         internal System.Windows.Forms.Button btnDisp;
         internal System.Windows.Forms.Button btnUnSelectUpdate;
         internal System.Windows.Forms.Button btnUnDisp;

@@ -14,7 +14,9 @@ namespace ViewerBy2nd
         private Screen _viewScreen;
         public Screen GetViewScreen => 
              _viewScreen;
-        
+
+        public bool ViewerVisible => _frmViewer?.Visible??false;
+
         public void SetSecondScreen(Screen screen)
         {
             _viewScreen = screen;
@@ -84,23 +86,29 @@ namespace ViewerBy2nd
         {
             if (_frmViewer == null)
             {
-                _frmViewer = new frmViewer();
-                SetViewerBounds();
-                _frmViewer.FormClosed += new FormClosedEventHandler(this.from_Closed);
+                CreateViewerForm();
             }
             _frmViewer.Show();
         }
 
+        public void CreateViewerForm()
+        {
+            _frmViewer = new frmViewer();
+            _frmViewer.BackColor = color;
+            SetViewerBounds();
+            _frmViewer.FormClosed += new FormClosedEventHandler(this.from_Closed);
+        }
 
         private Color color;
         public void SetColor(Color color)
         {
             this.color = color;
-            _frmViewer.BackColor = color;
+
         }
 
         public void CloseViewers()
         {
+            if (_frmViewer == null) return;
             _frmViewer.Close();
         }
     }

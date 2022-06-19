@@ -94,6 +94,7 @@ namespace ViewerBy2ndLib
             }
             if (Volume != _volume)
             {
+                if (vlcControl1.VlcMediaPlayer == null) return;
                 vlcControl1.VlcMediaPlayer.Audio.Volume = _volume;
             }
         }

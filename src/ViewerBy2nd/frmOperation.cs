@@ -41,10 +41,7 @@ namespace ViewerBy2nd
 
         private void CtlSecondEnabled()
         {
-            btnDispPause.Enabled = isMovie;
-            btnDispPaly.Enabled = isMovie;
-            btnDispStart.Enabled = isMovie;
-            btnDisp.Enabled = !isMovie && !chkUpdate.Checked;
+            btnDisp.Enabled = !chkUpdate.Checked || !_dispacher.ViewerVisible;
         }
 
         public void CtlPdf1ControlEnabled()
@@ -65,15 +62,15 @@ namespace ViewerBy2nd
 
         public void CtlMovie1ControlEnabled()
         {
-            bool canThumnailPlay = isMovie && !thumbnailPlayer.IsPlaying;
-            GotoFirst.Enabled = canThumnailPlay;
-            btnFastReverse.Enabled = canThumnailPlay;
-            btnStart.Enabled = canThumnailPlay;
-            btnStop.Enabled = canThumnailPlay;
-            btnFastForward.Enabled = canThumnailPlay;
+
+            GotoFirst.Enabled = isMovie;
+            btnFastReverse.Enabled = isMovie;
+            btnStart.Enabled = isMovie;
+            btnStop.Enabled = isMovie;
+            btnFastForward.Enabled = isMovie;
             chkUpdate.Enabled = !isMovie;
             thumbnailPlayer.Visible = isMovie;
-            trackBarSeek.Enabled = canThumnailPlay;
+            trackBarSeek.Enabled = isMovie;
             trackBarSeek.Visible = isMovie;
             if (!isMovie)
                 thumbnailPlayer.Stop();
@@ -242,10 +239,18 @@ namespace ViewerBy2nd
 
         private void btnDisp_Click(object sender, EventArgs e)
         {
-            UpdateView();
+            if(isMovie)
+            {
+                player_Play();
+            }
+            else
+            {
+                UpdateView();
+            }
+            ControlEnable();
         }
 
-        private void btnDispPaly_Click(object sender, EventArgs e)
+        private void PlayMovie()
         {
             var vlc = _dispacher.ShowMovie();
             int starttime = Convert.ToInt32(thumbnailPlayer.Time / (double)1000);
@@ -253,21 +258,24 @@ namespace ViewerBy2nd
             vlc.Volume = 100;
             vlc.Play(fileViewParam.FileName, op);
             player = vlc;
+            player.Rate = 1.0f;
             DispFileViewParam = fileViewParam;
         }
 
         private VideoPlayer player;
 
-        private void btnDispPause_Click(object sender, EventArgs e)
+        private void player_Pause()
         {
-            player.Pause();
-            if (thumbnailPlayer.IsPlaying)
-                thumbnailPlayer.Pause();
+            player?.Pause();
         }
 
-        private void btnDispStart_Click(object sender, EventArgs e)
+        private void player_Play()
         {
-            player.Play();
+            if (!thumbnailPlayer.IsPlaying)
+            {
+                thumbnailPlayer.Play();
+            }
+            PlayMovie();
         }
         private void btnFileAdd_Click(object sender, EventArgs e)
         {
@@ -295,6 +303,9 @@ namespace ViewerBy2nd
         {
             _dispacher.CloseViewers();
             DispFileViewParam = null;
+            thumbnailPlayer .Pause();
+            player?.Pause();
+            ControlEnable();
         }
 
         private void btnUnSelectUpdate_Click(object sender, EventArgs e)
@@ -503,21 +514,37 @@ namespace ViewerBy2nd
             thumbnailPlayer.Rate = 1;
             btnFastForward.Text = "▶▶";
             thumbnailPlayer.Play();
+            if (_dispacher.ViewerVisible)
+            {
+                player_Play();
+            }
+
         }
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            thumbnailPlayer.Pause();
+            if (thumbnailPlayer.IsPlaying)
+            {
+                thumbnailPlayer.Pause();
+                player_Pause();
+            }
+
         }
 
         private void btnFastForward_Click(object sender, EventArgs e)
         {
             // todo:
             btnFastForward.Text = "▶▶▶";
-            if (thumbnailPlayer.Rate == 2.0)
+            if (thumbnailPlayer.Rate == 2.0) { 
                 thumbnailPlayer.Rate = 4.0f;
+                player.Rate = 4.0f;
+            }
             else
+            {
                 thumbnailPlayer.Rate = 2.0f;
+                player.Rate = 2.0f;
+            }
+             
         }
 
         private void btnFastReverse_Click(object sender, EventArgs e)
@@ -532,6 +559,11 @@ namespace ViewerBy2nd
         private void GotoFirst_Click(object sender, EventArgs e)
         {
             thumbnailPlayer.Time = 0;
+            if(player != null)
+            {
+                player.Time = 0;
+            }
+
         }
 
         private bool trackBarSeek_Scrolled = false;
@@ -551,6 +583,8 @@ namespace ViewerBy2nd
                 if (trackBarSeek_Scrolled)
                 {
                     thumbnailPlayer.Time = Convert.ToInt32(trackBarSeek.Value * 100);
+                    if(player != null)
+                        player.Time = thumbnailPlayer.Time;
                     trackBarSeek_Scrolled = false;
                 }
                 else
@@ -648,7 +682,6 @@ namespace ViewerBy2nd
         }
 
         private FileViewParam DispFileViewParam;
-
 
     }
 
