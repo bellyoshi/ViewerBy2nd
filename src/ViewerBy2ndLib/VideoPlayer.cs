@@ -32,7 +32,17 @@ namespace ViewerBy2ndLib
         public long Time
         {
             get { return vlcControl1.Time; }
-            set { vlcControl1.Time = value; }
+            set {
+                if (0 > value)
+                    vlcControl1.Time = 0;
+                else if (value > vlcControl1.Length)
+                {
+                    vlcControl1.Time = vlcControl1.Length -1;
+                }
+                else
+                    vlcControl1.Time = value; 
+                
+            }
         }
 
         public long Length => vlcControl1.Length;

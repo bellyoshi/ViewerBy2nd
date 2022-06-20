@@ -42,6 +42,7 @@ namespace ViewerBy2nd
         private void CtlSecondEnabled()
         {
             btnDisp.Enabled = !chkUpdate.Checked || !_dispacher.ViewerVisible || isMovie ;
+            btnDisp.Text = isMovie ? "再生" : "表示";
         }
 
         public void CtlPdf1ControlEnabled()
@@ -670,9 +671,29 @@ namespace ViewerBy2nd
 
         public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
         {
+            var numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / (double)25;
             if (!VScrollBar1.Enabled)
+            {
+                if (numberOfTextLinesToMove>0)
+                {
+                    if (document.CanPrePage())
+                    {
+                        document.PrePage();
+                            UpdateViewIfChecked();
+                    }
+                }
+                else
+                {
+                    if (document.CanNextPage())
+                    {
+                        document.NextPage();
+                        UpdateViewIfChecked();
+                    }                        
+                }
                 return;
-            var numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / (double)10;
+            }
+                
+
             var maximum = VScrollBar1.Maximum - VScrollBar1.LargeChange + 1;
             int expect = -Convert.ToInt32(numberOfTextLinesToMove) + VScrollBar1.Value;
             if (expect < 0)
