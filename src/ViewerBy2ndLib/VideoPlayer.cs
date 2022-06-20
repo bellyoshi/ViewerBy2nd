@@ -29,14 +29,31 @@ namespace ViewerBy2ndLib
             set { vlcControl1.Rate = value; }
         }
         public bool IsPlaying => vlcControl1.IsPlaying;
+
+        private long _time;
         public long Time
         {
-            get { return vlcControl1.Time; }
-            set { vlcControl1.Time = value; }
+            get {
+                if (vlcControl1.Time <= 0) return _time;
+                return vlcControl1.Time; }
+            set {
+                _time = value;
+
+                if (0 > value)
+                    vlcControl1.Time = 0;
+                else if (value > vlcControl1.Length)
+                {
+                    vlcControl1.Time = vlcControl1.Length -1;
+                }
+                else
+                    vlcControl1.Time = value; 
+                
+            }
         }
 
         public long Length => vlcControl1.Length;
 
+        public bool RequiredReload => vlcControl1.State == Vlc.DotNet.Core.Interops.Signatures.MediaStates.Ended;
 
         Timer loadTimer = new Timer();
         public VideoPlayer()

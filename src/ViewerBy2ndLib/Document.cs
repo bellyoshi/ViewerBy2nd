@@ -44,7 +44,7 @@ namespace ViewerBy2ndLib
             var doc = Svg.SvgDocument.Open(FileViewParam.FileName);
             var sc = FileViewParam.Bound;
             this.Image = doc.Draw(sc.Height, sc.Height);
-
+            this.OriginalRotateImage = Image;
         }
         private RotateFlipType flip;
         public void Rotate(RotateFlipType flip) {
@@ -59,10 +59,12 @@ namespace ViewerBy2ndLib
 
             this.flip = flip;
             this.Image.RotateFlip(flip);
+            this.OriginalRotateImage = this.Image;
         }
         public void LoadImage()
         {
             this.Image = new Bitmap(FileViewParam.FileName);
+            this.OriginalRotateImage = this.Image;
         }
 
         public void Disp()
@@ -120,7 +122,7 @@ namespace ViewerBy2ndLib
             renderSize = GetWinWidthRenderSize(renderSize.Value, FileViewParam.Bound);
             
             this.Image = GetImage(renderSize.Value);
-
+            this.OriginalRotateImage  = this.Image;
 
 
 
@@ -239,6 +241,7 @@ namespace ViewerBy2ndLib
                 g.DrawImage(img, desRect, srcRect, GraphicsUnit.Pixel);
             }
             this.Image = canvas;
+            this.OriginalRotateImage = this.Image;
         }
         private Image GetImage(Size renderSize) {
             return pdfDoc.Render(Convert.ToInt32(page), renderSize.Width, renderSize.Height, 96, 96, false);
@@ -251,11 +254,32 @@ namespace ViewerBy2ndLib
         private Image _image;
         public Image Image { 
             get { return _image; }
-            set { if (_image != null && _image != value)
-                {
-                    _image.Dispose();
-                }
+            set {
+                ImageDispose(value);
                 _image = value; } }
+
+        private void ImageDispose(Image value)
+        {
+            if (_image == null) return;
+            if (_image == value) return;
+            if(_image == _orignailImage) return; 
+            _image.Dispose();
+            
+        }
+
+
+        private Image _orignailImage;
+        private Image OriginalRotateImage
+        {
+            get { return _orignailImage; }
+            set
+            {
+                if(_orignailImage == value) return;
+                _orignailImage?.Dispose();
+                _orignailImage = value;
+            }
+        }
+
         private int GetSetWinImageHeight()
         {
             var pbSize = FileViewParam.Bound;
@@ -278,28 +302,31 @@ namespace ViewerBy2ndLib
 
 
         public void DispSetWindow() {
-           
-            Rotate(flip);
+
+            if (_orignailImage == null)
+            {
+                Rotate(flip);
+            }
 
             
-            if (Image == null) return;
+            if (OriginalRotateImage == null) return;
 
-            OriginalImageHeight = this.Image.Height;
+            OriginalImageHeight = this.OriginalRotateImage.Height;
 
             if (!CanSetWindowWidthRate()) return;
 
 
             int ImageY;
-            if(FileViewParam.scrollBarValue + GetSetWinImageHeight() > Image.Height) {
-                ImageY = Convert.ToInt32(Image.Height - GetSetWinImageHeight());
+            if(FileViewParam.scrollBarValue + GetSetWinImageHeight() > OriginalRotateImage.Height) {
+                ImageY = Convert.ToInt32(OriginalRotateImage.Height - GetSetWinImageHeight());
             }
             else
             {
                 ImageY = FileViewParam.scrollBarValue;
             }
 
-            var rect = new Rectangle(0, ImageY, Image.Width, GetSetWinImageHeight());
-            this.Image = BitmapTool.ImageRoi(Image, rect);
+            var rect = new Rectangle(0, ImageY, OriginalRotateImage.Width, GetSetWinImageHeight());
+            this.Image = BitmapTool.ImageRoi(OriginalRotateImage, rect);
             
         }
     }

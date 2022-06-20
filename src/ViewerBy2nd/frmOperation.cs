@@ -42,6 +42,7 @@ namespace ViewerBy2nd
         private void CtlSecondEnabled()
         {
             btnDisp.Enabled = !chkUpdate.Checked || !_dispacher.ViewerVisible || isMovie ;
+            btnDisp.Text = isMovie ? "再生" : "表示";
         }
 
         public void CtlPdf1ControlEnabled()
@@ -535,12 +536,14 @@ namespace ViewerBy2nd
             btnFastForward.Text = "▶▶▶";
             if (thumbnailPlayer.Rate == 2.0) { 
                 thumbnailPlayer.Rate = 4.0f;
-                player.Rate = 4.0f;
+                if (player != null)
+                    player.Rate = 4.0f;
             }
             else
             {
                 thumbnailPlayer.Rate = 2.0f;
-                player.Rate = 2.0f;
+                if(player != null)
+                    player.Rate = 2.0f;
             }
              
         }
@@ -572,7 +575,8 @@ namespace ViewerBy2nd
             Trackbar_Seek();
             lbl_Update();
             ControlEnable();
-            SyncThumbnail();
+                    SyncThumbnail();
+
         }
 
         private void Trackbar_Seek()
@@ -581,15 +585,22 @@ namespace ViewerBy2nd
             {
                 if (trackBarSeek_Scrolled)
                 {
-                    thumbnailPlayer.Time = Convert.ToInt32(trackBarSeek.Value * 100);
-                    if(player != null)
+                    var seek_time = Convert.ToInt32(trackBarSeek.Value * 100);
+                    if (thumbnailPlayer.RequiredReload)
+                    {
+                        var op = new string[] { $"start-time={seek_time / 1000}" };
+                        thumbnailPlayer.Play(fileViewParam.FileName, op);
+                    }
+                    thumbnailPlayer.Time = seek_time;
+                    if (player != null)
                         player.Time = thumbnailPlayer.Time;
                     trackBarSeek_Scrolled = false;
                 }
                 else
                 {
-                    trackBarSeek.Maximum = Convert.ToInt32(thumbnailPlayer.Length / (double)100);
-                    trackBarSeek.Value = Convert.ToInt32(thumbnailPlayer.Time / (double)100);
+                    trackBarSeek.Maximum = (int)thumbnailPlayer.Length / 100;
+                    trackBarSeek.Value = (int)thumbnailPlayer.Time / 100;
+
                 }
             }
             catch (Exception ex)
@@ -606,6 +617,7 @@ namespace ViewerBy2nd
             {
                 thumbnailPlayer.Time = player.Time;
             }
+
         }
 
         private void lbl_Update()
@@ -670,9 +682,29 @@ namespace ViewerBy2nd
 
         public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
         {
+            var numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / (double)25;
             if (!VScrollBar1.Enabled)
+            {
+                if (numberOfTextLinesToMove>0)
+                {
+                    if (document.CanPrePage())
+                    {
+                        document.PrePage();
+                            UpdateViewIfChecked();
+                    }
+                }
+                else
+                {
+                    if (document.CanNextPage())
+                    {
+                        document.NextPage();
+                        UpdateViewIfChecked();
+                    }                        
+                }
                 return;
-            var numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / (double)10;
+            }
+                
+
             var maximum = VScrollBar1.Maximum - VScrollBar1.LargeChange + 1;
             int expect = -Convert.ToInt32(numberOfTextLinesToMove) + VScrollBar1.Value;
             if (expect < 0)
