@@ -16,7 +16,6 @@ Public Class frmOperation
     Public Sub ListControlEnabled()
         btnDelete.Enabled = 0 < lstPDFFiles.SelectedItems.Count
         btnUnSelect.Enabled = 0 < lstPDFFiles.SelectedItems.Count
-
     End Sub
 
     Public ReadOnly Property isMovie As Boolean
@@ -25,9 +24,7 @@ Public Class frmOperation
         End Get
     End Property
 
-
     Private Sub CtlSecondEnabled()
-
         btnDispPause.Enabled = isMovie
         btnDispPaly.Enabled = isMovie
         btnDispStart.Enabled = isMovie
@@ -49,10 +46,11 @@ Public Class frmOperation
         btnSetWindow.Enabled = canSetWin
         btnWhole.Enabled = canSetWin
         VScrollBar1.Enabled = (fileViewParam IsNot Nothing) AndAlso fileViewParam.IsWidthEqualWin
+
     End Sub
     Public Sub CtlMovie1ControlEnabled()
 
-        Dim canThumnailPlay As Boolean = isMovie AndAlso Not isPlay
+        Dim canThumnailPlay As Boolean = isMovie AndAlso Not thumbnailPlayer.IsPlaying
         GotoFirst.Enabled = canThumnailPlay
         btnFastReverse.Enabled = canThumnailPlay
         btnStart.Enabled = canThumnailPlay
@@ -61,6 +59,7 @@ Public Class frmOperation
         chkUpdate.Enabled = Not isMovie
         thumbnailPlayer.Visible = isMovie
         trackBarSeek.Enabled = canThumnailPlay
+        trackBarSeek.Visible = isMovie
         If Not isMovie Then
             thumbnailPlayer.Stop()
         End If
@@ -200,9 +199,14 @@ Public Class frmOperation
     End Sub
 
     Private Sub SetThumnailSize()
-        Dim viewerSize = _dispacher.GetViewScreen().Bounds.Size
-        pbThumbnail.Height = pbThumbnail.Width * viewerSize.Height \ viewerSize.Width
+
+        pbThumbnail.Height = getThumnailWidth(pbThumbnail.Width)
+        thumbnailPlayer.Height = getThumnailWidth(thumbnailPlayer.Width)
     End Sub
+    Private Function getThumnailWidth(thumWidth As Integer) As Integer
+        Dim viewerSize = _dispacher.GetViewScreen().Bounds.Size
+        Return thumWidth * viewerSize.Height \ viewerSize.Width
+    End Function
 
     Private _dispacher As FormDispacher = FormDispacher.GetInstance
 
@@ -251,26 +255,20 @@ Public Class frmOperation
         UpdateView()
     End Sub
 
-    Private ReadOnly Property isPlay As Boolean
-        Get
-            If player Is Nothing Then
-                Return False
-            End If
-            Return player.State = Vlc.DotNet.Core.Interops.Signatures.MediaStates.Playing
-        End Get
-    End Property
+
     Private Sub btnDispPaly_Click(sender As Object, e As EventArgs) Handles btnDispPaly.Click
 
         Dim vlc = _dispacher.ShowMovie()
         Dim starttime As Integer = Convert.ToInt32(thumbnailPlayer.Time / 1000)
         Dim op = New String() {$"start-time={starttime}"}
-        vlc.Play(New Uri("file://" & fileViewParam.FileName), op)
+        vlc.Volume = 100
+        vlc.Play(fileViewParam.FileName, op)
         player = vlc
         DispFileViewParam = fileViewParam
 
     End Sub
 
-    Private player As Vlc.DotNet.Forms.VlcControl
+    Private player As VideoPlayer
 
     Private Sub btnDispPause_Click(sender As Object, e As EventArgs) Handles btnDispPause.Click
         player.Pause()
@@ -284,7 +282,7 @@ Public Class frmOperation
     End Sub
     Private Sub btnFileAdd_Click(sender As Object, e As EventArgs) Handles btnFileAdd.Click
         OpenFileDialog1.Multiselect = True
-        OpenFileDialog1.Filter = FileType.CreateFilter()
+        OpenFileDialog1.Filter = FileTypes.CreateFilter()
         OpenFileDialog1.FileName = txtPDFFileName.Text
         Dim ret = OpenFileDialog1.ShowDialog()
         If ret = Windows.Forms.DialogResult.Cancel Then
@@ -407,7 +405,10 @@ Public Class frmOperation
 
     Private ReadOnly Property document As ViewerBy2ndLib.Document
         Get
-            Return fileViewParam?.document
+            If System.IO.File.Exists(fileViewParam?.FileName) Then
+                Return fileViewParam?.document
+            End If
+            Return Nothing
         End Get
     End Property
 
@@ -442,24 +443,25 @@ Public Class frmOperation
 
 
 
-    Private requirePouse As Boolean = False
+
 
     Private Sub SetPreview()
         txtPDFFileName.Text = "" & fileViewParam?.FileName
         pbThumbnail.Image = document?.Image
         pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom
         If document?.FileType?.IsPDFExt Then
+            lblPageDisp.Visible = True
             lblPageDisp.Text = $"ページ{document.page + 1}/{document.PageCount}"
         Else
-            lblPageDisp.Text = ""
+            lblPageDisp.Visible = False
         End If
         pbThumbnail.Visible = (document Is Nothing) OrElse (Not document.FileType.IsMovieExt)
         thumbnailPlayer.Visible = (document IsNot Nothing) AndAlso document.FileType.IsMovieExt
 
         If document IsNot Nothing AndAlso document.FileType.IsMovieExt() Then
+            Dim op = New String() {"no-audio"}
+            thumbnailPlayer.LoadFile(fileViewParam.FileName, op)
 
-            thumbnailPlayer.Play((New Uri("file://" & fileViewParam.FileName)), New String() {})
-            requirePouse = False
 
         End If
     End Sub
@@ -482,7 +484,6 @@ Public Class frmOperation
 
 
     Private Sub VScrollBar1_Scroll(sender As Object, e As ScrollEventArgs) Handles VScrollBar1.Scroll
-        ' IsScroll = True
         VSctollUpdate()
     End Sub
 
@@ -495,9 +496,13 @@ Public Class frmOperation
         UpdateViewIfChecked()
     End Sub
     Private Sub VScrollBar1Init()
-        VScrollBar1.Value = 0
+
         VScrollBar1.Minimum = 0
-        VScrollBar1.Maximum = document.Image.Height
+        Dim clientWidth = document.Image.Height
+        VScrollBar1.Maximum = document.OriginalImageHeight
+        VScrollBar1.Value = fileViewParam.scrollBarValue
+
+        VScrollBar1.LargeChange = clientWidth
 
     End Sub
     Private Sub btnSetWindow_Click(sender As Object, e As EventArgs) Handles btnSetWindow.Click
@@ -528,7 +533,6 @@ Public Class frmOperation
         thumbnailPlayer.Rate = 1
         btnFastForward.Text = "▶▶"
         thumbnailPlayer.Play()
-        thumbnailPlayer.Audio.Volume = 0
     End Sub
 
     Private Sub btnStop_Click(sender As Object, e As EventArgs) Handles btnStop.Click
@@ -566,43 +570,38 @@ Public Class frmOperation
 
 
     Private Sub GotoFirst_Click(sender As Object, e As EventArgs) Handles GotoFirst.Click
-        thumbnailPlayer.VlcMediaPlayer.Time = 0
+        thumbnailPlayer.Time = 0
     End Sub
 
     Private trackBarSeek_Scrolled As Boolean = False
     Private Sub SeekTimer_Tick(sender As Object, e As EventArgs) Handles SeekTimer.Tick
-
+        Debug.Print($"volume={player?.Volume}")
         Trackbar_Seek()
+        lbl_Update()
+        ControlEnable()
     End Sub
 
     Private Sub Trackbar_Seek()
         Try
             If trackBarSeek_Scrolled Then
-                thumbnailPlayer.VlcMediaPlayer.Time = Convert.ToInt32(trackBarSeek.Value * 100)
+                thumbnailPlayer.Time = Convert.ToInt32(trackBarSeek.Value * 100)
                 trackBarSeek_Scrolled = False
             Else
-                trackBarSeek.Maximum = Convert.ToInt32(thumbnailPlayer.VlcMediaPlayer.Length / 100)
+                trackBarSeek.Maximum = Convert.ToInt32(thumbnailPlayer.Length / 100)
                 trackBarSeek.Value = Convert.ToInt32(thumbnailPlayer.Time / 100)
             End If
 
         Catch ex As Exception
 
         End Try
-        If requirePouse = False Then
-            If thumbnailPlayer.Time <> 0 Then
-                thumbnailPlayer.Pause()
-                requirePouse = True
-            End If
 
 
-        End If
-        lbl_Update()
     End Sub
 
     Private Sub lbl_Update()
-        Dim ts As New TimeSpan(thumbnailPlayer.VlcMediaPlayer.Time * 10000)
+        Dim ts As New TimeSpan(thumbnailPlayer.Time * 10000)
         lblMovieTime.Text = ts.ToString("hh\:mm\:ss")
-        ControlEnable()
+
     End Sub
 
 
@@ -622,6 +621,10 @@ Public Class frmOperation
     Private Sub lstPDFFiles_SelectedValueChanged(sender As Object, e As EventArgs) Handles lstPDFFiles.SelectedValueChanged
         ControlEnable()
         UpdateViewIfChecked()
+        If btnSetWindow.Enabled Then
+            VScrollBar1Init()
+        End If
+
     End Sub
 
     Private Sub btnAllSelect_Click(sender As Object, e As EventArgs) Handles btnAllSelect.Click
@@ -631,9 +634,7 @@ Public Class frmOperation
         Next
     End Sub
 
-    Private Sub thumbnailPlayer_VlcLibDirectoryNeeded(sender As Object, e As Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs) Handles thumbnailPlayer.VlcLibDirectoryNeeded
-        e.VlcLibDirectory = VLCDirectoryGetter.GetVlcLibDirectory()
-    End Sub
+
 
     Private Sub trackBarSeek_MouseDown(sender As Object, e As MouseEventArgs) Handles trackBarSeek.MouseDown
         Dim TrackBar1 = trackBarSeek
@@ -661,17 +662,18 @@ Public Class frmOperation
         End If
         Dim numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / 10
         Debug.Print(numberOfTextLinesToMove.ToString)
+        Dim maximum = VScrollBar1.Maximum - VScrollBar1.LargeChange
         Dim expect As Integer = -Convert.ToInt32(numberOfTextLinesToMove) + VScrollBar1.Value
         If expect < 0 Then
             expect = 0
             If document.CanPrePage() Then
-                expect = VScrollBar1.Maximum
+                expect = maximum
                 document.PrePage()
             End If
         End If
 
-        If VScrollBar1.Maximum < expect Then
-            expect = VScrollBar1.Maximum
+        If maximum < expect Then
+            expect = maximum
             If document.CanNextPage() Then
                 expect = 0
                 document.NextPage()

@@ -11,36 +11,24 @@ namespace prototype
         public Form1()
         {
             InitializeComponent();
-            var control = new VlcControl();
 
 
-            var currentAssembly = Assembly.GetEntryAssembly();
-            var currentDirectory = new FileInfo(currentAssembly.Location).DirectoryName;
-            // Default installation path of VideoLAN.LibVLC.Windows
-            var libDirectory = new DirectoryInfo(Path.Combine(currentDirectory, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
 
-            control.BeginInit();
-            control.VlcLibDirectory = libDirectory;
-            control.Dock = DockStyle.Fill;
-            control.EndInit();
-            this.Controls.Add(control);
-
-            control.Play(new Uri(@"file://C:\Users\catik\Videos\2021巡回大会\１支部代表\AM.mp4"));
         }
 
-        private void vlcControl1_VlcLibDirectoryNeeded(object sender, VlcLibDirectoryNeededEventArgs e)
-        {
 
-            var currentAssembly = Assembly.GetEntryAssembly();
-            var currentDirectory = new FileInfo(currentAssembly.Location).DirectoryName;
-            // Default installation path of VideoLAN.LibVLC.Windows
-            var libDirectory = new DirectoryInfo(Path.Combine(currentDirectory, "libvlc", IntPtr.Size == 4 ? "win-x86" : "win-x64"));
-            e.VlcLibDirectory = libDirectory;
-        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            vlcControl1.Play(new Uri(@"file://C:\Users\catik\Videos\2021巡回大会\１支部代表\AM.mp4"));
+            videoPlayer1.Play(@"C:\Users\catik\Videos\2021巡回大会\１支部代表\AM.mp4");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            videoPlayer1.Stop();
+            videoPlayer1.Visible = false;
+            videoPlayer1.Visible = true;
+            videoPlayer1.Play(@"C:\Users\catik\Videos\2021巡回大会\１支部代表\AM.mp4");
         }
     }
 }

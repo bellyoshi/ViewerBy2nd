@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentTests.cs" />
+    <Compile Include="FileDialogFilterTests.cs" />
+    <Compile Include="FileTypesTests.cs" />
     <Compile Include="FileTypeTests.cs" />
     <Compile Include="FileViewParamTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

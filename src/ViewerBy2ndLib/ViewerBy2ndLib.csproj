@@ -81,13 +81,26 @@
   <ItemGroup>
     <Compile Include="BitmapTool.cs" />
     <Compile Include="Document.cs" />
+    <Compile Include="FileDialogFilter.cs" />
     <Compile Include="FileType.cs" />
+    <Compile Include="FileTypes.cs" />
     <Compile Include="FileViewParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VideoPlayer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VideoPlayer.Designer.cs">
+      <DependentUpon>VideoPlayer.cs</DependentUpon>
+    </Compile>
     <Compile Include="VLCDirectoryGetter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="VideoPlayer.resx">
+      <DependentUpon>VideoPlayer.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

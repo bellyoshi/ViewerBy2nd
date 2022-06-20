@@ -9,10 +9,10 @@ namespace ViewerBy2ndLib
 
         private FileViewParam FileViewParam;
 
-        public FileType FileType { get; set; }
+        public FileTypes FileType { get; set; }
         public Document(FileViewParam fileViewParam) {
             this.FileViewParam = fileViewParam;
-            this.FileType = new FileType(FileViewParam.FileName);
+            this.FileType = new FileTypes(FileViewParam.FileName);
             OpenFile(fileViewParam.FileName);
         }
         PdfiumViewer.PdfDocument pdfDoc;
@@ -24,17 +24,17 @@ namespace ViewerBy2ndLib
         {
             if (filename == null) return;
             isHalf = false;
-            if (FileType.IsPDFExt())
+            if (FileType.IsPDFExt)
             {
                 pdfDoc = PdfDocument.Load(filename);
                 FirstPage();
             }
-            else if (FileType.IsImageExt())
+            else if (FileType.IsImageExt)
             {
                 LoadImage();
 
             }
-            else if (FileType.IsSVGExt())
+            else if (FileType.IsSVGExt)
             {
                 LoadSVGImage();
             }
@@ -48,7 +48,7 @@ namespace ViewerBy2ndLib
         }
         private RotateFlipType flip;
         public void Rotate(RotateFlipType flip) {
-            if (FileType.IsPDFExt())
+            if (FileType.IsPDFExt)
             {
                 Render();
             }
@@ -67,16 +67,16 @@ namespace ViewerBy2ndLib
 
         public void Disp()
         {
-            if (FileType.IsPDFExt())
+            if (FileType.IsPDFExt)
             {
                 Render();
             }
-            else if (FileType.IsImageExt())
+            else if (FileType.IsImageExt)
             {
                 LoadImage();
 
             }
-            else if (FileType.IsSVGExt())
+            else if (FileType.IsSVGExt)
             {
                 LoadSVGImage();
             }
@@ -243,7 +243,19 @@ namespace ViewerBy2ndLib
         private Image GetImage(Size renderSize) {
             return pdfDoc.Render(Convert.ToInt32(page), renderSize.Width, renderSize.Height, 96, 96, false);
         }
-        public System.Drawing.Image Image { get; set; }
+
+
+        public int OriginalImageHeight { get; private set; }
+        
+
+        private Image _image;
+        public Image Image { 
+            get { return _image; }
+            set { if (_image != null && _image != value)
+                {
+                    _image.Dispose();
+                }
+                _image = value; } }
         private int GetSetWinImageHeight()
         {
             var pbSize = FileViewParam.Bound;
@@ -268,8 +280,11 @@ namespace ViewerBy2ndLib
         public void DispSetWindow() {
            
             Rotate(flip);
+
             
             if (Image == null) return;
+
+            OriginalImageHeight = this.Image.Height;
 
             if (!CanSetWindowWidthRate()) return;
 
