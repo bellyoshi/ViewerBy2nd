@@ -584,7 +584,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 668);
             this.Controls.Add(this.pnlPage);
-            this.Controls.Add(this.pnlDispOption);
             this.Controls.Add(this.pnlMovie);
             this.Controls.Add(this.thumbnailPlayer);
             this.Controls.Add(this.GroupBox2);
@@ -602,6 +601,7 @@
             this.Controls.Add(this.pbThumbnail);
             this.Controls.Add(this.btnUnSelect);
             this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.pnlDispOption);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmOperation";
             this.Text = "ViewerBy2nd Monitor";

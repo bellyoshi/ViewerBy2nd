@@ -584,6 +584,10 @@ namespace ViewerBy2nd
                 thumbnailPlayer.Time = 0;
             else
                 thumbnailPlayer.Time = thumbnailPlayer.Time - 15000;
+            if(player != null)
+            {
+                player.Time = thumbnailPlayer.Time;
+            }
         }
 
         private void GotoFirst_Click(object sender, EventArgs e)
