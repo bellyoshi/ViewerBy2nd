@@ -75,10 +75,16 @@
             this.btnUnSelect = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.thumbnailPlayer = new ViewerBy2ndLib.VideoPlayer();
+            this.pnlMovie = new System.Windows.Forms.Panel();
+            this.pnlDispOption = new System.Windows.Forms.Panel();
+            this.pnlPage = new System.Windows.Forms.Panel();
             this.GroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSeek)).BeginInit();
             this.GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbThumbnail)).BeginInit();
+            this.pnlMovie.SuspendLayout();
+            this.pnlDispOption.SuspendLayout();
+            this.pnlPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // GroupBox2
@@ -162,10 +168,10 @@
             // 
             // btnPDFLast
             // 
-            this.btnPDFLast.Location = new System.Drawing.Point(546, 175);
+            this.btnPDFLast.Location = new System.Drawing.Point(216, 2);
             this.btnPDFLast.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPDFLast.Name = "btnPDFLast";
-            this.btnPDFLast.Size = new System.Drawing.Size(67, 41);
+            this.btnPDFLast.Size = new System.Drawing.Size(65, 41);
             this.btnPDFLast.TabIndex = 93;
             this.btnPDFLast.Text = "最後へ";
             this.btnPDFLast.UseVisualStyleBackColor = true;
@@ -173,7 +179,7 @@
             // 
             // btnWhole
             // 
-            this.btnWhole.Location = new System.Drawing.Point(514, 378);
+            this.btnWhole.Location = new System.Drawing.Point(182, 116);
             this.btnWhole.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnWhole.Name = "btnWhole";
             this.btnWhole.Size = new System.Drawing.Size(140, 31);
@@ -192,10 +198,10 @@
             // 
             // btnPreviousHalf
             // 
-            this.btnPreviousHalf.Location = new System.Drawing.Point(357, 219);
+            this.btnPreviousHalf.Location = new System.Drawing.Point(27, 46);
             this.btnPreviousHalf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPreviousHalf.Name = "btnPreviousHalf";
-            this.btnPreviousHalf.Size = new System.Drawing.Size(124, 39);
+            this.btnPreviousHalf.Size = new System.Drawing.Size(122, 39);
             this.btnPreviousHalf.TabIndex = 89;
             this.btnPreviousHalf.Text = "0.5ページ前へ";
             this.btnPreviousHalf.UseVisualStyleBackColor = true;
@@ -203,10 +209,10 @@
             // 
             // btnNextHalf
             // 
-            this.btnNextHalf.Location = new System.Drawing.Point(486, 219);
+            this.btnNextHalf.Location = new System.Drawing.Point(156, 46);
             this.btnNextHalf.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnNextHalf.Name = "btnNextHalf";
-            this.btnNextHalf.Size = new System.Drawing.Size(123, 39);
+            this.btnNextHalf.Size = new System.Drawing.Size(121, 39);
             this.btnNextHalf.TabIndex = 90;
             this.btnNextHalf.Text = "0.5ページ先へ";
             this.btnNextHalf.UseVisualStyleBackColor = true;
@@ -214,10 +220,10 @@
             // 
             // btnPDFNext
             // 
-            this.btnPDFNext.Location = new System.Drawing.Point(488, 175);
+            this.btnPDFNext.Location = new System.Drawing.Point(158, 2);
             this.btnPDFNext.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPDFNext.Name = "btnPDFNext";
-            this.btnPDFNext.Size = new System.Drawing.Size(53, 41);
+            this.btnPDFNext.Size = new System.Drawing.Size(51, 41);
             this.btnPDFNext.TabIndex = 86;
             this.btnPDFNext.Text = "次へ";
             this.btnPDFNext.UseVisualStyleBackColor = true;
@@ -225,10 +231,10 @@
             // 
             // btnPDFBack
             // 
-            this.btnPDFBack.Location = new System.Drawing.Point(425, 175);
+            this.btnPDFBack.Location = new System.Drawing.Point(95, 2);
             this.btnPDFBack.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPDFBack.Name = "btnPDFBack";
-            this.btnPDFBack.Size = new System.Drawing.Size(56, 41);
+            this.btnPDFBack.Size = new System.Drawing.Size(54, 41);
             this.btnPDFBack.TabIndex = 87;
             this.btnPDFBack.Text = "前へ";
             this.btnPDFBack.UseVisualStyleBackColor = true;
@@ -236,10 +242,10 @@
             // 
             // btnPDFFirst
             // 
-            this.btnPDFFirst.Location = new System.Drawing.Point(354, 175);
+            this.btnPDFFirst.Location = new System.Drawing.Point(24, 2);
             this.btnPDFFirst.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPDFFirst.Name = "btnPDFFirst";
-            this.btnPDFFirst.Size = new System.Drawing.Size(65, 41);
+            this.btnPDFFirst.Size = new System.Drawing.Size(63, 41);
             this.btnPDFFirst.TabIndex = 88;
             this.btnPDFFirst.Text = "最初へ";
             this.btnPDFFirst.UseVisualStyleBackColor = true;
@@ -247,7 +253,7 @@
             // 
             // GotoFirst
             // 
-            this.GotoFirst.Location = new System.Drawing.Point(338, 424);
+            this.GotoFirst.Location = new System.Drawing.Point(6, 14);
             this.GotoFirst.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.GotoFirst.Name = "GotoFirst";
             this.GotoFirst.Size = new System.Drawing.Size(51, 50);
@@ -258,7 +264,7 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(603, 424);
+            this.btnStop.Location = new System.Drawing.Point(271, 14);
             this.btnStop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(51, 50);
@@ -270,7 +276,7 @@
             // btnFastReverse
             // 
             this.btnFastReverse.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFastReverse.Location = new System.Drawing.Point(400, 424);
+            this.btnFastReverse.Location = new System.Drawing.Point(68, 14);
             this.btnFastReverse.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFastReverse.Name = "btnFastReverse";
             this.btnFastReverse.Size = new System.Drawing.Size(51, 50);
@@ -282,7 +288,7 @@
             // btnFastForward
             // 
             this.btnFastForward.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnFastForward.Location = new System.Drawing.Point(514, 424);
+            this.btnFastForward.Location = new System.Drawing.Point(182, 14);
             this.btnFastForward.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFastForward.Name = "btnFastForward";
             this.btnFastForward.Size = new System.Drawing.Size(74, 50);
@@ -294,7 +300,7 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("MS UI Gothic", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.btnStart.Location = new System.Drawing.Point(456, 424);
+            this.btnStart.Location = new System.Drawing.Point(124, 14);
             this.btnStart.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(51, 50);
@@ -322,7 +328,7 @@
             // 
             // btnSetWindow
             // 
-            this.btnSetWindow.Location = new System.Drawing.Point(340, 375);
+            this.btnSetWindow.Location = new System.Drawing.Point(8, 113);
             this.btnSetWindow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSetWindow.Name = "btnSetWindow";
             this.btnSetWindow.Size = new System.Drawing.Size(167, 36);
@@ -333,7 +339,7 @@
             // 
             // btnRotate90
             // 
-            this.btnRotate90.Location = new System.Drawing.Point(531, 297);
+            this.btnRotate90.Location = new System.Drawing.Point(201, 35);
             this.btnRotate90.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRotate90.Name = "btnRotate90";
             this.btnRotate90.Size = new System.Drawing.Size(80, 51);
@@ -354,7 +360,7 @@
             // 
             // btnRotate0
             // 
-            this.btnRotate0.Location = new System.Drawing.Point(435, 262);
+            this.btnRotate0.Location = new System.Drawing.Point(103, 0);
             this.btnRotate0.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRotate0.Name = "btnRotate0";
             this.btnRotate0.Size = new System.Drawing.Size(91, 51);
@@ -413,7 +419,7 @@
             // 
             // btnRotate270
             // 
-            this.btnRotate270.Location = new System.Drawing.Point(351, 297);
+            this.btnRotate270.Location = new System.Drawing.Point(19, 35);
             this.btnRotate270.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRotate270.Name = "btnRotate270";
             this.btnRotate270.Size = new System.Drawing.Size(79, 51);
@@ -424,7 +430,7 @@
             // 
             // btnRotate180
             // 
-            this.btnRotate180.Location = new System.Drawing.Point(435, 319);
+            this.btnRotate180.Location = new System.Drawing.Point(103, 57);
             this.btnRotate180.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnRotate180.Name = "btnRotate180";
             this.btnRotate180.Size = new System.Drawing.Size(91, 51);
@@ -534,36 +540,60 @@
             this.thumbnailPlayer.Time = ((long)(-1));
             this.thumbnailPlayer.Volume = -1;
             // 
+            // pnlMovie
+            // 
+            this.pnlMovie.Controls.Add(this.GotoFirst);
+            this.pnlMovie.Controls.Add(this.btnStop);
+            this.pnlMovie.Controls.Add(this.btnFastReverse);
+            this.pnlMovie.Controls.Add(this.btnFastForward);
+            this.pnlMovie.Controls.Add(this.btnStart);
+            this.pnlMovie.Location = new System.Drawing.Point(329, 169);
+            this.pnlMovie.Name = "pnlMovie";
+            this.pnlMovie.Size = new System.Drawing.Size(328, 75);
+            this.pnlMovie.TabIndex = 98;
+            // 
+            // pnlDispOption
+            // 
+            this.pnlDispOption.Controls.Add(this.btnWhole);
+            this.pnlDispOption.Controls.Add(this.btnSetWindow);
+            this.pnlDispOption.Controls.Add(this.btnRotate90);
+            this.pnlDispOption.Controls.Add(this.btnRotate0);
+            this.pnlDispOption.Controls.Add(this.btnRotate270);
+            this.pnlDispOption.Controls.Add(this.btnRotate180);
+            this.pnlDispOption.Location = new System.Drawing.Point(334, 153);
+            this.pnlDispOption.Name = "pnlDispOption";
+            this.pnlDispOption.Size = new System.Drawing.Size(326, 148);
+            this.pnlDispOption.TabIndex = 99;
+            // 
+            // pnlPage
+            // 
+            this.pnlPage.Controls.Add(this.btnPDFLast);
+            this.pnlPage.Controls.Add(this.btnPreviousHalf);
+            this.pnlPage.Controls.Add(this.btnNextHalf);
+            this.pnlPage.Controls.Add(this.btnPDFNext);
+            this.pnlPage.Controls.Add(this.btnPDFBack);
+            this.pnlPage.Controls.Add(this.btnPDFFirst);
+            this.pnlPage.Location = new System.Drawing.Point(342, 307);
+            this.pnlPage.Name = "pnlPage";
+            this.pnlPage.Size = new System.Drawing.Size(299, 87);
+            this.pnlPage.TabIndex = 100;
+            // 
             // frmOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 668);
+            this.Controls.Add(this.pnlPage);
+            this.Controls.Add(this.pnlDispOption);
+            this.Controls.Add(this.pnlMovie);
             this.Controls.Add(this.thumbnailPlayer);
             this.Controls.Add(this.GroupBox2);
             this.Controls.Add(this.lblMovieTime);
             this.Controls.Add(this.btnAllSelect);
-            this.Controls.Add(this.btnPDFLast);
-            this.Controls.Add(this.btnWhole);
             this.Controls.Add(this.lblPageDisp);
-            this.Controls.Add(this.btnPreviousHalf);
-            this.Controls.Add(this.btnNextHalf);
-            this.Controls.Add(this.btnPDFNext);
-            this.Controls.Add(this.btnPDFBack);
-            this.Controls.Add(this.btnPDFFirst);
-            this.Controls.Add(this.GotoFirst);
-            this.Controls.Add(this.btnStop);
-            this.Controls.Add(this.btnFastReverse);
-            this.Controls.Add(this.btnFastForward);
-            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.VScrollBar1);
-            this.Controls.Add(this.btnSetWindow);
-            this.Controls.Add(this.btnRotate90);
             this.Controls.Add(this.trackBarSeek);
-            this.Controls.Add(this.btnRotate0);
-            this.Controls.Add(this.btnRotate270);
-            this.Controls.Add(this.btnRotate180);
             this.Controls.Add(this.Label6);
             this.Controls.Add(this.btnFileAdd);
             this.Controls.Add(this.lstFiles);
@@ -583,6 +613,9 @@
             this.GroupBox1.ResumeLayout(false);
             this.GroupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbThumbnail)).EndInit();
+            this.pnlMovie.ResumeLayout(false);
+            this.pnlDispOption.ResumeLayout(false);
+            this.pnlPage.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -635,6 +668,9 @@
         internal System.Windows.Forms.Button btnUnSelect;
         internal System.Windows.Forms.Button btnDelete;
         internal ViewerBy2ndLib.VideoPlayer thumbnailPlayer;
+        private System.Windows.Forms.Panel pnlMovie;
+        private System.Windows.Forms.Panel pnlDispOption;
+        private System.Windows.Forms.Panel pnlPage;
     }
 }
 

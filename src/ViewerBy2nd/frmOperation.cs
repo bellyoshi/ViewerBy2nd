@@ -47,13 +47,15 @@ namespace ViewerBy2nd
 
         public void CtlPdf1ControlEnabled()
         {
-            var isEnabled = (document != null) && document.FileType.IsPDFExt;
-            btnPDFFirst.Enabled = isEnabled;
-            btnPDFBack.Enabled = isEnabled;
-            btnPDFNext.Enabled = isEnabled;
-            btnPDFLast.Enabled = isEnabled;
-            btnPreviousHalf.Enabled = isEnabled;
-            btnNextHalf.Enabled = isEnabled;
+
+            var isPdf = (document != null) && document.FileType.IsPDFExt;
+            btnPDFFirst.Enabled = isPdf;
+            btnPDFBack.Enabled = isPdf;
+            btnPDFNext.Enabled = isPdf;
+            btnPDFLast.Enabled = isPdf;
+            btnPreviousHalf.Enabled = isPdf;
+            btnNextHalf.Enabled = isPdf;
+            pnlPage.Visible = isPdf || document == null;
 
             bool canSetWin = (document != null) && (document.FileType.IsPDFExt || document.FileType.IsImageExt || document.FileType.IsSVGExt);
             btnSetWindow.Enabled = canSetWin;
@@ -63,7 +65,7 @@ namespace ViewerBy2nd
 
         public void CtlMovie1ControlEnabled()
         {
-
+            pnlMovie.Visible = isMovie;
             GotoFirst.Enabled = isMovie;
             btnFastReverse.Enabled = isMovie;
             btnStart.Enabled = isMovie;
@@ -80,12 +82,13 @@ namespace ViewerBy2nd
 
         public void CtlImage1ControlEnabled()
         {
-            var isEnabled = (document != null) && (!document.FileType.IsMovieExt);
+            var IsPdfOrImage = (document != null) && (!document.FileType.IsMovieExt);
 
-            btnRotate270.Enabled = isEnabled;
-            btnRotate90.Enabled = isEnabled;
-            btnRotate180.Enabled = isEnabled;
-            btnRotate0.Enabled = isEnabled;
+            btnRotate270.Enabled = IsPdfOrImage;
+            btnRotate90.Enabled = IsPdfOrImage;
+            btnRotate180.Enabled = IsPdfOrImage;
+            btnRotate0.Enabled = IsPdfOrImage;
+            pnlDispOption.Visible = IsPdfOrImage || document == null;
         }
 
         private void frmOperation_Load(object sender, EventArgs e)
@@ -416,20 +419,28 @@ namespace ViewerBy2nd
 
         private void btnFirst_Click(object sender, EventArgs e)
         {
+            scrollToFirst();
             document.FirstPage();
+
             UpdateViewIfChecked();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (!document.CanNextPage()) return;
+            scrollToFirst();
+            document.NextPage();
+
+            UpdateViewIfChecked();
+        }
+
+        private void scrollToFirst()
         {
             if (fileViewParam.IsWidthEqualWin)
             {
                 VScrollBar1.Value = 0;
                 fileViewParam.scrollBarValue = 0;
             }
-            document.NextPage();
-
-            UpdateViewIfChecked();
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -463,6 +474,10 @@ namespace ViewerBy2nd
             {
                 var op = new string[] { "no-audio" };
                 thumbnailPlayer.LoadFile(fileViewParam.FileName, op);
+                if(player != null)
+                {
+                    player.LoadFile(fileViewParam.FileName, op);
+                }
             }
         }
 
