@@ -141,13 +141,10 @@ namespace ViewerBy2ndLib
         }
         public void docRender()
         {
+            Render();
             if (FileViewParam.IsWidthEqualWin)
             {
                 DispSetWindow();
-            }
-            else
-            {
-                Render();
             }
             
         }

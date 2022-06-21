@@ -422,7 +422,13 @@ namespace ViewerBy2nd
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+            if (fileViewParam.IsWidthEqualWin)
+            {
+                VScrollBar1.Value = 0;
+                fileViewParam.scrollBarValue = 0;
+            }
             document.NextPage();
+
             UpdateViewIfChecked();
         }
 
@@ -474,10 +480,20 @@ namespace ViewerBy2nd
 
         private void VScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-            VSctollUpdate();
+            requireVScrollUpdate = true;
+            
         }
-
-        private void VSctollUpdate()
+        private void VScrollUpdateSync()
+        {
+            if (requireVScrollUpdate)
+            {
+                VScrollUpdate();
+                requireVScrollUpdate =false;
+            } 
+                
+        }
+        bool requireVScrollUpdate = false;
+        private void VScrollUpdate()
         {
             if (fileViewParam == null)
                 return;
@@ -532,7 +548,6 @@ namespace ViewerBy2nd
 
         private void btnFastForward_Click(object sender, EventArgs e)
         {
-            // todo:
             btnFastForward.Text = "▶▶▶";
             if (thumbnailPlayer.Rate == 2.0) { 
                 thumbnailPlayer.Rate = 4.0f;
@@ -550,7 +565,6 @@ namespace ViewerBy2nd
 
         private void btnFastReverse_Click(object sender, EventArgs e)
         {
-            // todo:
             if (thumbnailPlayer.Time < 15000)
                 thumbnailPlayer.Time = 0;
             else
@@ -576,6 +590,7 @@ namespace ViewerBy2nd
             lbl_Update();
             ControlEnable();
                     SyncThumbnail();
+            VScrollUpdateSync();
 
         }
 
@@ -727,7 +742,7 @@ namespace ViewerBy2nd
                 }
             }
             VScrollBar1.Value = expect;
-            VSctollUpdate();
+            requireVScrollUpdate = true ;
         }
 
         private FileViewParam DispFileViewParam;
