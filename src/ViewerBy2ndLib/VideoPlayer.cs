@@ -23,10 +23,14 @@ namespace ViewerBy2ndLib
                 loadTimer.Start();
             }
         } 
+        private float _rate;
         public float Rate
         {
-            get { return vlcControl1.Rate; }
-            set { vlcControl1.Rate = value; }
+            get { return vlcControl1?.Rate??_rate ; }
+            set { if (vlcControl1 == null)
+                    _rate = value;
+                else
+                    vlcControl1.Rate = value; }
         }
         public bool IsPlaying => vlcControl1.IsPlaying;
 
@@ -38,7 +42,7 @@ namespace ViewerBy2ndLib
                 return vlcControl1.Time; }
             set {
                 _time = value;
-
+                if (vlcControl1 == null) return;
                 if (0 > value)
                     vlcControl1.Time = 0;
                 else if (value > vlcControl1.Length)
@@ -59,7 +63,7 @@ namespace ViewerBy2ndLib
         public VideoPlayer()
         {
             InitializeComponent();
-            InitializeVLCComponent();
+            //InitializeVLCComponent();
             loadTimer.Tick += LoadTimer_Tick;
         }
 
@@ -134,10 +138,30 @@ namespace ViewerBy2ndLib
             this.vlcControl1.VlcLibDirectory = null;
             this.vlcControl1.VlcMediaplayerOptions = null;
             this.vlcControl1.VlcLibDirectoryNeeded += new System.EventHandler<Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs>(this.vlcControl1_VlcLibDirectoryNeeded);
+
+        }
+
+        private void VLCInitializeEnd()
+        {
             this.Controls.Add(this.vlcControl1);
             ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).EndInit();
 
             this.ResumeLayout(false);
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            InitializeVLCComponent();
+        }
+
+        private void VideoPlayer_Load(object sender, EventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync();
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            VLCInitializeEnd();
         }
     }
 }
