@@ -614,31 +614,32 @@ namespace ViewerBy2nd
 
         private void Trackbar_Seek()
         {
-            try
-            {
-                if (trackBarSeek_Scrolled)
-                {
-                    var seek_time = Convert.ToInt32(trackBarSeek.Value * 100);
-                    if (thumbnailMoviePlayer.RequiredReload)
-                    {
-                        var op = new string[] { $"start-time={seek_time / 1000}" };
-                        thumbnailMoviePlayer.Play(PreviewFile.FileName, op);
-                    }
-                    thumbnailMoviePlayer.Time = seek_time;
-                    if (player != null)
-                        player.Time = thumbnailMoviePlayer.Time;
-                    trackBarSeek_Scrolled = false;
-                }
-                else
-                {
-                    trackBarSeek.Maximum = (int)thumbnailMoviePlayer.Length / 100;
-                    trackBarSeek.Value = (int)thumbnailMoviePlayer.Time / 100;
 
-                }
-            }
-            catch (Exception ex)
+            if (trackBarSeek_Scrolled)
             {
+                var seek_time = Convert.ToInt32(trackBarSeek.Value * 100);
+                if (thumbnailMoviePlayer.RequiredReload)
+                {
+                    var op = new string[] { $"start-time={seek_time / 1000}" };
+                    thumbnailMoviePlayer.Play(PreviewFile.FileName, op);
+                }
+                thumbnailMoviePlayer.Time = seek_time;
+                if (player != null)
+                    player.Time = thumbnailMoviePlayer.Time;
+                trackBarSeek_Scrolled = false;
             }
+            else
+            {
+                trackBarSeek.Maximum = (int)thumbnailMoviePlayer.Length / 100;
+                var value = (int)thumbnailMoviePlayer.Time / 100;
+                if(0 <= value && value <= trackBarSeek.Maximum)
+                {
+                    trackBarSeek.Value = value;
+                }
+          
+
+            }
+
         }
 
         private void SyncThumbnail()
