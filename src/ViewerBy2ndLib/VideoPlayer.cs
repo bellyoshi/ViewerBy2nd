@@ -59,7 +59,6 @@ namespace ViewerBy2ndLib
         public VideoPlayer()
         {
             InitializeComponent();
-            InitializeVLCComponent();
             loadTimer.Tick += LoadTimer_Tick;
         }
 
@@ -117,27 +116,7 @@ namespace ViewerBy2ndLib
                 vlcControl1.VlcMediaPlayer.Audio.Volume = _volume;
             }
         }
-        private Vlc.DotNet.Forms.VlcControl vlcControl1;
-        private void InitializeVLCComponent()
-        {
-            this.vlcControl1 = new Vlc.DotNet.Forms.VlcControl();
-            ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).BeginInit();
-            this.SuspendLayout();
-            this.vlcControl1.BackColor = System.Drawing.Color.Black;
-            this.vlcControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.vlcControl1.Location = new System.Drawing.Point(0, 0);
-            this.vlcControl1.Name = "vlcControl1";
-            this.vlcControl1.Size = new System.Drawing.Size(452, 339);
-            this.vlcControl1.Spu = -1;
-            this.vlcControl1.TabIndex = 0;
-            this.vlcControl1.Text = "vlcControl1";
-            this.vlcControl1.VlcLibDirectory = null;
-            this.vlcControl1.VlcMediaplayerOptions = null;
-            this.vlcControl1.VlcLibDirectoryNeeded += new System.EventHandler<Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs>(this.vlcControl1_VlcLibDirectoryNeeded);
-            this.Controls.Add(this.vlcControl1);
-            ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).EndInit();
+    
 
-            this.ResumeLayout(false);
-        }
     }
 }
