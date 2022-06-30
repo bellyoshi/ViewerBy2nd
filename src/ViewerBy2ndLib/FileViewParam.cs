@@ -9,7 +9,7 @@ namespace ViewerBy2ndLib
     public class FileViewParam
     {
      
-        public System.Drawing.Size Bound { get; set; }
+        public System.Drawing.Size BoundsSize { get; set; }
         public string FileName { get; set; }
 
         public override string ToString()
@@ -20,7 +20,7 @@ namespace ViewerBy2ndLib
         public FileViewParam(string filename, System.Drawing.Size bound)
         {
             this.FileName = filename;
-            this.Bound=bound;
+            this.BoundsSize=bound;
         }
         public FileViewParam()
         {

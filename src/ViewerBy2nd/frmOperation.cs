@@ -32,12 +32,9 @@ namespace ViewerBy2nd
         }
 
         public bool isMovie
-        {
-            get
-            {
-                return (document != null) && document.FileType.IsMovieExt;
-            }
-        }
+            => (document != null) && document.FileType.IsMovieExt;
+            
+        
 
         private void CtlSecondEnabled()
         {
@@ -60,7 +57,7 @@ namespace ViewerBy2nd
             bool canSetWin = (document != null) && (document.FileType.IsPDFExt || document.FileType.IsImageExt || document.FileType.IsSVGExt);
             btnSetWindow.Enabled = canSetWin;
             btnWhole.Enabled = canSetWin;
-            VScrollBar1.Enabled = (fileViewParam != null) && fileViewParam.IsWidthEqualWin;
+            VScrollBar1.Enabled = (PreviewFile != null) && PreviewFile.IsWidthEqualWin;
         }
 
         public void CtlMovie1ControlEnabled()
@@ -72,11 +69,11 @@ namespace ViewerBy2nd
             btnStop.Enabled = isMovie;
             btnFastForward.Enabled = isMovie;
             chkUpdate.Enabled = !isMovie;
-            thumbnailPlayer.Visible = isMovie;
+            thumbnailMoviePlayer.Visible = isMovie;
             trackBarSeek.Enabled = isMovie;
             trackBarSeek.Visible = isMovie;
             if (!isMovie)
-                thumbnailPlayer.Stop();
+                thumbnailMoviePlayer.Stop();
             lblMovieTime.Visible = isMovie;
         }
 
@@ -196,7 +193,7 @@ namespace ViewerBy2nd
         private void SetThumnailSize()
         {
             pbThumbnail.Height = getThumnailWidth(pbThumbnail.Width);
-            thumbnailPlayer.Height = getThumnailWidth(thumbnailPlayer.Width);
+            thumbnailMoviePlayer.Height = getThumnailWidth(thumbnailMoviePlayer.Width);
         }
         private int getThumnailWidth(int thumWidth)
         {
@@ -214,7 +211,7 @@ namespace ViewerBy2nd
             var list =lstFiles.SelectedItems.Cast<FileViewParam>().ToList();
             foreach (var i in list)
                 lstFiles.Items.Remove(i);
-            if (list.Contains(DispFileViewParam))
+            if (list.Contains(DispFile))
             {
                 UpdateView();
                 ControlEnable();
@@ -223,14 +220,14 @@ namespace ViewerBy2nd
 
         private void lstFiles_Click(object sender, EventArgs e)
         {
-            if (fileViewParam == null)
+            if (PreviewFile == null)
                 return;
-            var path = fileViewParam.FileName;
+            var path = PreviewFile.FileName;
             if (!System.IO.File.Exists(path))
             {
                 var ret = MessageBox.Show("ファイルが見つかりません。リストから削除しますか？", "ファイルがありません", MessageBoxButtons.YesNo);
                 if (ret == DialogResult.Yes)
-                    lstFiles.Items.Remove(fileViewParam);
+                    lstFiles.Items.Remove(PreviewFile);
                 return;
             }
 
@@ -255,13 +252,13 @@ namespace ViewerBy2nd
         private void PlayMovie()
         {
             var vlc = _dispacher.ShowMovie();
-            int starttime = Convert.ToInt32(thumbnailPlayer.Time / (double)1000);
+            int starttime = Convert.ToInt32(thumbnailMoviePlayer.Time / (double)1000);
             var op = new string[] { $"start-time={starttime}" };
             vlc.Volume = 100;
-            vlc.Play(fileViewParam.FileName, op);
+            vlc.Play(PreviewFile.FileName, op);
             player = vlc;
             player.Rate = 1.0f;
-            DispFileViewParam = fileViewParam;
+            DispFile = PreviewFile;
         }
 
         private VideoPlayer player;
@@ -273,9 +270,9 @@ namespace ViewerBy2nd
 
         private void player_Play()
         {
-            if (!thumbnailPlayer.IsPlaying)
+            if (!thumbnailMoviePlayer.IsPlaying)
             {
-                thumbnailPlayer.Play();
+                thumbnailMoviePlayer.Play();
             }
             PlayMovie();
         }
@@ -304,8 +301,8 @@ namespace ViewerBy2nd
         private void btnUnDisp_Click(object sender, EventArgs e)
         {
             _dispacher.CloseViewers();
-            DispFileViewParam = null;
-            thumbnailPlayer .Pause();
+            DispFile = null;
+            thumbnailMoviePlayer .Pause();
             player?.Pause();
             ControlEnable();
         }
@@ -317,7 +314,7 @@ namespace ViewerBy2nd
             SetPreview();
             UpdateView();
             ControlEnable();
-            DispFileViewParam = null;
+            DispFile = null;
         }
 
         private void lstFiles_DragEnter(object sender, DragEventArgs e)
@@ -384,10 +381,10 @@ namespace ViewerBy2nd
         public void UpdateView()
         {
             _dispacher.ShowImage(pbThumbnail.Image);
-            DispFileViewParam = fileViewParam;
+            DispFile = PreviewFile;
         }
 
-        private FileViewParam fileViewParam
+        private FileViewParam PreviewFile
         {
             get
             {
@@ -396,17 +393,19 @@ namespace ViewerBy2nd
                 if (lstFiles.SelectedItem == null)
                     return null/* TODO Change to default(_) if this is not a reference type */;
                 var p = (FileViewParam)lstFiles.SelectedItem;
-                p.Bound = _dispacher.ViewScreen.Bounds.Size;
+                p.BoundsSize = _dispacher.ViewScreen.Bounds.Size;
                 return p;
             }
         }
+
+        private FileViewParam DispFile;
 
         private Document document
         {
             get
             {
-                if (System.IO.File.Exists(fileViewParam?.FileName))
-                    return fileViewParam?.document;
+                if (System.IO.File.Exists(PreviewFile?.FileName))
+                    return PreviewFile?.document;
                 return null/* TODO Change to default(_) if this is not a reference type */;
             }
         }
@@ -436,10 +435,10 @@ namespace ViewerBy2nd
 
         private void scrollToFirst()
         {
-            if (fileViewParam.IsWidthEqualWin)
+            if (PreviewFile.IsWidthEqualWin)
             {
                 VScrollBar1.Value = 0;
-                fileViewParam.scrollBarValue = 0;
+                PreviewFile.scrollBarValue = 0;
             }
         }
 
@@ -457,7 +456,7 @@ namespace ViewerBy2nd
 
         private void SetPreview()
         {
-            txtPDFFileName.Text = "" + fileViewParam?.FileName;
+            txtPDFFileName.Text = "" + PreviewFile?.FileName;
             pbThumbnail.Image = document?.Image;
             pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom;
             if (document?.FileType?.IsPDFExt??false)
@@ -467,16 +466,16 @@ namespace ViewerBy2nd
             }
             else
                 lblPageDisp.Visible = false;
-            pbThumbnail.Visible = (document == null) || (!document.FileType.IsMovieExt);
-            thumbnailPlayer.Visible = (document != null) && document.FileType.IsMovieExt;
+            pbThumbnail.Visible = !isMovie;
+            thumbnailMoviePlayer.Visible = isMovie;
 
-            if (document != null && document.FileType.IsMovieExt)
+            if (isMovie)
             {
                 var op = new string[] { "no-audio" };
-                thumbnailPlayer.LoadFile(fileViewParam.FileName, op);
+                thumbnailMoviePlayer.LoadFile(PreviewFile.FileName, op);
                 if(player != null)
                 {
-                    player.LoadFile(fileViewParam.FileName, op);
+                    player.LoadFile(PreviewFile.FileName, op);
                 }
             }
         }
@@ -510,9 +509,9 @@ namespace ViewerBy2nd
         bool requireVScrollUpdate = false;
         private void VScrollUpdate()
         {
-            if (fileViewParam == null)
+            if (PreviewFile == null)
                 return;
-            fileViewParam.scrollBarValue = VScrollBar1.Value;
+            PreviewFile.scrollBarValue = VScrollBar1.Value;
             document.DispSetWindow();
             UpdateViewIfChecked();
         }
@@ -526,15 +525,15 @@ namespace ViewerBy2nd
             VScrollBar1.Minimum = 0;
             var clientWidth = document.Image.Height;
             VScrollBar1.Maximum = document.OriginalImageHeight;
-            VScrollBar1.Value = fileViewParam.scrollBarValue;
+            VScrollBar1.Value = PreviewFile.scrollBarValue;
 
             VScrollBar1.LargeChange = clientWidth;
         }
 
         private void btnSetWindow_Click(object sender, EventArgs e)
         {
-            fileViewParam.scrollBarValue = 0;
-            fileViewParam.IsWidthEqualWin = true;
+            PreviewFile.scrollBarValue = 0;
+            PreviewFile.IsWidthEqualWin = true;
             ControlEnable();
             VScrollBar1Init();
             UpdateViewIfChecked();
@@ -542,9 +541,9 @@ namespace ViewerBy2nd
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            thumbnailPlayer.Rate = 1;
+            thumbnailMoviePlayer.Rate = 1;
             btnFastForward.Text = "▶▶";
-            thumbnailPlayer.Play();
+            thumbnailMoviePlayer.Play();
             if (_dispacher.ViewerVisible)
             {
                 player_Play();
@@ -555,7 +554,7 @@ namespace ViewerBy2nd
         private void btnPause_Click(object sender, EventArgs e)
         {
 
-            thumbnailPlayer.Pause();
+            thumbnailMoviePlayer.Pause();
             player_Pause();
             
 
@@ -564,14 +563,14 @@ namespace ViewerBy2nd
         private void btnFastForward_Click(object sender, EventArgs e)
         {
             btnFastForward.Text = "▶▶▶";
-            if (thumbnailPlayer.Rate == 2.0) { 
-                thumbnailPlayer.Rate = 4.0f;
+            if (thumbnailMoviePlayer.Rate == 2.0) { 
+                thumbnailMoviePlayer.Rate = 4.0f;
                 if (player != null)
                     player.Rate = 4.0f;
             }
             else
             {
-                thumbnailPlayer.Rate = 2.0f;
+                thumbnailMoviePlayer.Rate = 2.0f;
                 if(player != null)
                     player.Rate = 2.0f;
             }
@@ -580,19 +579,19 @@ namespace ViewerBy2nd
 
         private void btnFastReverse_Click(object sender, EventArgs e)
         {
-            if (thumbnailPlayer.Time < 15000)
-                thumbnailPlayer.Time = 0;
+            if (thumbnailMoviePlayer.Time < 15000)
+                thumbnailMoviePlayer.Time = 0;
             else
-                thumbnailPlayer.Time = thumbnailPlayer.Time - 15000;
+                thumbnailMoviePlayer.Time = thumbnailMoviePlayer.Time - 15000;
             if(player != null)
             {
-                player.Time = thumbnailPlayer.Time;
+                player.Time = thumbnailMoviePlayer.Time;
             }
         }
 
         private void GotoFirst_Click(object sender, EventArgs e)
         {
-            thumbnailPlayer.Time = 0;
+            thumbnailMoviePlayer.Time = 0;
             if(player != null)
             {
                 player.Time = 0;
@@ -620,20 +619,20 @@ namespace ViewerBy2nd
                 if (trackBarSeek_Scrolled)
                 {
                     var seek_time = Convert.ToInt32(trackBarSeek.Value * 100);
-                    if (thumbnailPlayer.RequiredReload)
+                    if (thumbnailMoviePlayer.RequiredReload)
                     {
                         var op = new string[] { $"start-time={seek_time / 1000}" };
-                        thumbnailPlayer.Play(fileViewParam.FileName, op);
+                        thumbnailMoviePlayer.Play(PreviewFile.FileName, op);
                     }
-                    thumbnailPlayer.Time = seek_time;
+                    thumbnailMoviePlayer.Time = seek_time;
                     if (player != null)
-                        player.Time = thumbnailPlayer.Time;
+                        player.Time = thumbnailMoviePlayer.Time;
                     trackBarSeek_Scrolled = false;
                 }
                 else
                 {
-                    trackBarSeek.Maximum = (int)thumbnailPlayer.Length / 100;
-                    trackBarSeek.Value = (int)thumbnailPlayer.Time / 100;
+                    trackBarSeek.Maximum = (int)thumbnailMoviePlayer.Length / 100;
+                    trackBarSeek.Value = (int)thumbnailMoviePlayer.Time / 100;
 
                 }
             }
@@ -647,16 +646,16 @@ namespace ViewerBy2nd
             if (player == null) return;
             if (!player.IsPlaying) return;
             if (player.Time < 1000) return;
-            if(Math.Abs( thumbnailPlayer.Time - player.Time) > 500)
+            if(Math.Abs( thumbnailMoviePlayer.Time - player.Time) > 500)
             {
-                thumbnailPlayer.Time = player.Time;
+                thumbnailMoviePlayer.Time = player.Time;
             }
 
         }
 
         private void lbl_Update()
         {
-            TimeSpan ts = new TimeSpan(thumbnailPlayer.Time * 10000);
+            TimeSpan ts = new TimeSpan(thumbnailMoviePlayer.Time * 10000);
             lblMovieTime.Text = ts.ToString(@"hh\:mm\:ss");
         }
 
@@ -667,7 +666,7 @@ namespace ViewerBy2nd
 
         private void btnWhole_Click(object sender, EventArgs e)
         {
-            fileViewParam.IsWidthEqualWin = false;
+            PreviewFile.IsWidthEqualWin = false;
             ControlEnable();
             UpdateViewIfChecked();
         }
@@ -764,7 +763,6 @@ namespace ViewerBy2nd
             requireVScrollUpdate = true ;
         }
 
-        private FileViewParam DispFileViewParam;
 
     }
 

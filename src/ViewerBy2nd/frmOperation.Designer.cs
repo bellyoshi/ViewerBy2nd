@@ -74,7 +74,7 @@
             this.pbThumbnail = new System.Windows.Forms.PictureBox();
             this.btnUnSelect = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.thumbnailPlayer = new ViewerBy2ndLib.VideoPlayer();
+            this.thumbnailMoviePlayer = new ViewerBy2ndLib.VideoPlayer();
             this.pnlMovie = new System.Windows.Forms.Panel();
             this.pnlDispOption = new System.Windows.Forms.Panel();
             this.pnlPage = new System.Windows.Forms.Panel();
@@ -530,15 +530,15 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // thumbnailPlayer
+            // thumbnailMoviePlayer
             // 
-            this.thumbnailPlayer.Location = new System.Drawing.Point(666, 153);
-            this.thumbnailPlayer.Name = "thumbnailPlayer";
-            this.thumbnailPlayer.Rate = -1F;
-            this.thumbnailPlayer.Size = new System.Drawing.Size(495, 298);
-            this.thumbnailPlayer.TabIndex = 97;
-            this.thumbnailPlayer.Time = ((long)(-1));
-            this.thumbnailPlayer.Volume = -1;
+            this.thumbnailMoviePlayer.Location = new System.Drawing.Point(666, 153);
+            this.thumbnailMoviePlayer.Name = "thumbnailMoviePlayer";
+            this.thumbnailMoviePlayer.Rate = -1F;
+            this.thumbnailMoviePlayer.Size = new System.Drawing.Size(495, 298);
+            this.thumbnailMoviePlayer.TabIndex = 97;
+            this.thumbnailMoviePlayer.Time = ((long)(-1));
+            this.thumbnailMoviePlayer.Volume = -1;
             // 
             // pnlMovie
             // 
@@ -585,7 +585,6 @@
             this.ClientSize = new System.Drawing.Size(1247, 668);
             this.Controls.Add(this.pnlPage);
             this.Controls.Add(this.pnlMovie);
-            this.Controls.Add(this.thumbnailPlayer);
             this.Controls.Add(this.GroupBox2);
             this.Controls.Add(this.lblMovieTime);
             this.Controls.Add(this.btnAllSelect);
@@ -602,6 +601,7 @@
             this.Controls.Add(this.btnUnSelect);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.pnlDispOption);
+            this.Controls.Add(this.thumbnailMoviePlayer);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmOperation";
             this.Text = "ViewerBy2nd Monitor";
@@ -667,7 +667,7 @@
         internal System.Windows.Forms.PictureBox pbThumbnail;
         internal System.Windows.Forms.Button btnUnSelect;
         internal System.Windows.Forms.Button btnDelete;
-        internal ViewerBy2ndLib.VideoPlayer thumbnailPlayer;
+        internal ViewerBy2ndLib.VideoPlayer thumbnailMoviePlayer;
         private System.Windows.Forms.Panel pnlMovie;
         private System.Windows.Forms.Panel pnlDispOption;
         private System.Windows.Forms.Panel pnlPage;

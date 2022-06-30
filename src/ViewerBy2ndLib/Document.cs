@@ -42,7 +42,7 @@ namespace ViewerBy2ndLib
         }
         public void LoadSVGImage() {
             var doc = Svg.SvgDocument.Open(FileViewParam.FileName);
-            var sc = FileViewParam.Bound;
+            var sc = FileViewParam.BoundsSize;
             this.Image = doc.Draw(sc.Height, sc.Height);
             this.OriginalRotateImage = Image;
         }
@@ -85,7 +85,7 @@ namespace ViewerBy2ndLib
         }
 
         System.Drawing.Size? GetRenderSize(SizeF pdfSize) {
-            var bound = this.FileViewParam.Bound;
+            var bound = this.FileViewParam.BoundsSize;
             if (bound.Width == 0 || bound.Height == 0)
             {
                 return null;
@@ -119,7 +119,7 @@ namespace ViewerBy2ndLib
             }
             //if (FileViewParam.IsWidthEqualWin)
             
-            renderSize = GetWinWidthRenderSize(renderSize.Value, FileViewParam.Bound);
+            renderSize = GetWinWidthRenderSize(renderSize.Value, FileViewParam.BoundsSize);
             
             this.Image = GetImage(renderSize.Value);
             this.OriginalRotateImage  = this.Image;
@@ -279,7 +279,7 @@ namespace ViewerBy2ndLib
 
         private int GetSetWinImageHeight()
         {
-            var pbSize = FileViewParam.Bound;
+            var pbSize = FileViewParam.BoundsSize;
             return Convert.ToInt32(Image.Width * pbSize.Height/pbSize.Width );
 
         }
@@ -288,7 +288,7 @@ namespace ViewerBy2ndLib
         
         public bool CanSetWindowWidthRate() {
             var imageSize = Image.Size;
-            var pictureBoxSize = FileViewParam.Bound;
+            var pictureBoxSize = FileViewParam.BoundsSize;
             var imageRate = GetWidthHeightRate(imageSize);
             var pbRate = GetWidthHeightRate(pictureBoxSize);
             if (imageRate > pbRate) { 
