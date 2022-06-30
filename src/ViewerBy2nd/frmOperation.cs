@@ -713,31 +713,9 @@ namespace ViewerBy2nd
             Trackbar_Seek();
         }
 
-        public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
+        private void MouseWheelScrollLine(int delta)
         {
-            var numberOfTextLinesToMove = e.Delta * SystemInformation.MouseWheelScrollLines / (double)25;
-            if (!VScrollBar1.Enabled)
-            {
-                if (numberOfTextLinesToMove>0)
-                {
-                    if (document.CanPrePage())
-                    {
-                        document.PrePage();
-                            UpdateViewIfChecked();
-                    }
-                }
-                else
-                {
-                    if (document.CanNextPage())
-                    {
-                        document.NextPage();
-                        UpdateViewIfChecked();
-                    }                        
-                }
-                return;
-            }
-                
-
+            var numberOfTextLinesToMove = delta * SystemInformation.MouseWheelScrollLines / (double)25;
             var maximum = VScrollBar1.Maximum - VScrollBar1.LargeChange + 1;
             int expect = -Convert.ToInt32(numberOfTextLinesToMove) + VScrollBar1.Value;
             if (expect < 0)
@@ -760,9 +738,43 @@ namespace ViewerBy2nd
                 }
             }
             VScrollBar1.Value = expect;
-            requireVScrollUpdate = true ;
+            requireVScrollUpdate = true;
         }
+        private void MouseWheelScrollPage(int delta)
+        {
 
+            if (delta>0)
+            {
+                if (document.CanPrePage())
+                {
+                    document.PrePage();
+                    UpdateViewIfChecked();
+                }
+            }
+            else
+            {
+                if (document.CanNextPage())
+                {
+                    document.NextPage();
+                    UpdateViewIfChecked();
+                }
+            }
+            return;
+            
+        }
+        public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
+        {
+
+            if (!VScrollBar1.Enabled)
+            {
+                MouseWheelScrollPage(e.Delta);
+            }
+            else
+            {
+                MouseWheelScrollLine(e.Delta);
+            }
+           
+        }
 
     }
 
