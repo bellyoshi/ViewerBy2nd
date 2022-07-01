@@ -457,7 +457,7 @@ namespace ViewerBy2nd
         private void SetPreview()
         {
             txtPDFFileName.Text = "" + PreviewFile?.FileName;
-            pbThumbnail.Image = document?.Image;
+            pbThumbnail.Image = document?.OutPutImage;
             pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom;
             if (document?.FileType?.IsPDFExt??false)
             {
@@ -523,7 +523,7 @@ namespace ViewerBy2nd
                 return;
             }
             VScrollBar1.Minimum = 0;
-            var clientWidth = document.Image.Height;
+            var clientWidth = document.OutPutImage.Height;
             VScrollBar1.Maximum = document.OriginalImageHeight;
             VScrollBar1.Value = PreviewFile.scrollBarValue;
 

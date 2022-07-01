@@ -46,17 +46,12 @@ namespace ViewerBy2ndLib
             set
             {
                 _isWidthEqualWin = value;
-                if (IsWidthEqualWin == true)
-                {
-                    _document?.DispSetWindow();
-                }
-                else
-                {
-                    _document?.Disp();
-                }
-                
+
+                _document?.UpdateImage();
             }
         }
         public int scrollBarValue { get;  set; }
+
+        public System.Drawing.RotateFlipType  rotateFlipType { get; set; }
     }
 }
