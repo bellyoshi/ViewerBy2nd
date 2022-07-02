@@ -31,15 +31,15 @@ namespace ViewerBy2nd
             btnUnSelect.Enabled = 0 < lstFiles.SelectedItems.Count;
         }
 
-        public bool isMovie
+        public bool IsMovie
             => (document != null) && document.FileType.IsMovieExt;
             
         
 
         private void CtlSecondEnabled()
         {
-            btnDisp.Enabled = !chkUpdate.Checked || !_dispacher.ViewerVisible || isMovie ;
-            btnDisp.Text = isMovie ? "再生" : "表示";
+            btnDisp.Enabled = !chkUpdate.Checked || !Dispacher.ViewerVisible || IsMovie ;
+            btnDisp.Text = IsMovie ? "再生" : "表示";
         }
 
         public void CtlPdf1ControlEnabled()
@@ -62,19 +62,19 @@ namespace ViewerBy2nd
 
         public void CtlMovie1ControlEnabled()
         {
-            pnlMovie.Visible = isMovie;
-            GotoFirst.Enabled = isMovie;
-            btnFastReverse.Enabled = isMovie;
-            btnStart.Enabled = isMovie;
-            btnStop.Enabled = isMovie;
-            btnFastForward.Enabled = isMovie;
-            chkUpdate.Enabled = !isMovie;
-            thumbnailMoviePlayer.Visible = isMovie;
-            trackBarSeek.Enabled = isMovie;
-            trackBarSeek.Visible = isMovie;
-            if (!isMovie)
+            pnlMovie.Visible = IsMovie;
+            GotoFirst.Enabled = IsMovie;
+            btnFastReverse.Enabled = IsMovie;
+            btnStart.Enabled = IsMovie;
+            btnStop.Enabled = IsMovie;
+            btnFastForward.Enabled = IsMovie;
+            chkUpdate.Enabled = !IsMovie;
+            thumbnailMoviePlayer.Visible = IsMovie;
+            trackBarSeek.Enabled = IsMovie;
+            trackBarSeek.Visible = IsMovie;
+            if (!IsMovie)
                 thumbnailMoviePlayer.Stop();
-            lblMovieTime.Visible = isMovie;
+            lblMovieTime.Visible = IsMovie;
         }
 
         public void CtlImage1ControlEnabled()
@@ -90,7 +90,7 @@ namespace ViewerBy2nd
 
         private void frmOperation_Load(object sender, EventArgs e)
         {
-            _dispacher.RegistrationfrmOperation(this);
+            Dispacher.RegistrationfrmOperation(this);
             screenDetect();
             AppSettingLoad();
             ControlEnable();
@@ -185,7 +185,7 @@ namespace ViewerBy2nd
             // 'フォームを表示するディスプレイのScreenを取得する
             Screen s = (Screen)this.cmbDisplay.SelectedItem;
             // 'フォームの開始位置をディスプレイの左上座標に設定する
-            _dispacher.ViewScreen = s;
+            Dispacher.ViewScreen = s;
 
             SetThumnailSize();
         }
@@ -197,11 +197,11 @@ namespace ViewerBy2nd
         }
         private int getThumnailWidth(int thumWidth)
         {
-            var viewerSize = _dispacher.ViewScreen.Bounds.Size;
+            var viewerSize = Dispacher.ViewScreen.Bounds.Size;
             return thumWidth * viewerSize.Height / viewerSize.Width;
         }
 
-        private FormDispacher _dispacher = FormDispacher.GetInstance();
+        private FormDispacher Dispacher { get; } = FormDispacher.GetInstance();
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -238,7 +238,7 @@ namespace ViewerBy2nd
 
         private void btnDisp_Click(object sender, EventArgs e)
         {
-            if(isMovie)
+            if(IsMovie)
             {
                 player_Play();
             }
@@ -251,7 +251,7 @@ namespace ViewerBy2nd
 
         private void PlayMovie()
         {
-            var vlc = _dispacher.ShowMovie();
+            var vlc = Dispacher.ShowMovie();
             int starttime = Convert.ToInt32(thumbnailMoviePlayer.Time / (double)1000);
             var op = new string[] { $"start-time={starttime}" };
             vlc.Volume = 100;
@@ -288,7 +288,7 @@ namespace ViewerBy2nd
             var items = lstFiles.Items;
 
             foreach (var filename in OpenFileDialog1.FileNames)
-                items.Add(new FileViewParam(filename, _dispacher.ViewScreen.Bounds.Size));
+                items.Add(new FileViewParam(filename, Dispacher.ViewScreen.Bounds.Size));
         }
 
         private void btnUnSelect_Click(object sender, EventArgs e)
@@ -300,7 +300,7 @@ namespace ViewerBy2nd
 
         private void btnUnDisp_Click(object sender, EventArgs e)
         {
-            _dispacher.CloseViewers();
+            Dispacher.CloseViewers();
             DispFile = null;
             thumbnailMoviePlayer .Pause();
             player?.Pause();
@@ -334,7 +334,7 @@ namespace ViewerBy2nd
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
             foreach (var f in fileName)
-                items.Add(new FileViewParam(f, _dispacher.ViewScreen.Bounds.Size));
+                items.Add(new FileViewParam(f, Dispacher.ViewScreen.Bounds.Size));
         }
 
         private void chkUpdate_CheckedChanged(object sender, EventArgs e)
@@ -380,7 +380,8 @@ namespace ViewerBy2nd
 
         public void UpdateView()
         {
-            _dispacher.ShowImage(pbThumbnail.Image);
+            ImageDisposer.DisplayImage = pbThumbnail.Image;
+            Dispacher.ShowImage(ImageDisposer.DisplayImage);
             DispFile = PreviewFile;
         }
 
@@ -393,7 +394,7 @@ namespace ViewerBy2nd
                 if (lstFiles.SelectedItem == null)
                     return null/* TODO Change to default(_) if this is not a reference type */;
                 var p = (FileViewParam)lstFiles.SelectedItem;
-                p.BoundsSize = _dispacher.ViewScreen.Bounds.Size;
+                p.BoundsSize = Dispacher.ViewScreen.Bounds.Size;
                 return p;
             }
         }
@@ -412,7 +413,7 @@ namespace ViewerBy2nd
 
         public void SetBackColor()
         {
-            _dispacher.BackColor = Properties.Settings.Default.formColor;
+            Dispacher.BackColor = Properties.Settings.Default.formColor;
             pbThumbnail.BackColor = Properties.Settings.Default.formColor;
         }
 
@@ -457,19 +458,18 @@ namespace ViewerBy2nd
         private void SetPreview()
         {
             txtPDFFileName.Text = "" + PreviewFile?.FileName;
-            pbThumbnail.Image = document?.OutPutImage;
-            pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom;
+
             if (document?.FileType?.IsPDFExt??false)
             {
                 lblPageDisp.Visible = true;
-                lblPageDisp.Text = $"ページ{document.page + 1}/{document.PageCount}";
+                lblPageDisp.Text = $"ページ{document.PageIndex + 1}/{document.PageCount}";
             }
             else
                 lblPageDisp.Visible = false;
-            pbThumbnail.Visible = !isMovie;
-            thumbnailMoviePlayer.Visible = isMovie;
+            pbThumbnail.Visible = !IsMovie;
+            thumbnailMoviePlayer.Visible = IsMovie;
 
-            if (isMovie)
+            if (IsMovie)
             {
                 var op = new string[] { "no-audio" };
                 thumbnailMoviePlayer.LoadFile(PreviewFile.FileName, op);
@@ -477,6 +477,12 @@ namespace ViewerBy2nd
                 {
                     player.LoadFile(PreviewFile.FileName, op);
                 }
+            }
+            else
+            {
+                ImageDisposer.PrevieImage = document?.OutPutImage;
+                pbThumbnail.Image = ImageDisposer.PrevieImage;
+                pbThumbnail.SizeMode = PictureBoxSizeMode.Zoom;
             }
         }
 
@@ -512,7 +518,7 @@ namespace ViewerBy2nd
             if (PreviewFile == null)
                 return;
             PreviewFile.scrollBarValue = VScrollBar1.Value;
-            document.DispSetWindow();
+            document.UpdateImage();
             UpdateViewIfChecked();
         }
 
@@ -544,7 +550,7 @@ namespace ViewerBy2nd
             thumbnailMoviePlayer.Rate = 1;
             btnFastForward.Text = "▶▶";
             thumbnailMoviePlayer.Play();
-            if (_dispacher.ViewerVisible)
+            if (Dispacher.ViewerVisible)
             {
                 player_Play();
             }
@@ -582,7 +588,7 @@ namespace ViewerBy2nd
             if (thumbnailMoviePlayer.Time < 15000)
                 thumbnailMoviePlayer.Time = 0;
             else
-                thumbnailMoviePlayer.Time = thumbnailMoviePlayer.Time - 15000;
+                thumbnailMoviePlayer.Time -= 15000;
             if(player != null)
             {
                 player.Time = thumbnailMoviePlayer.Time;
@@ -682,6 +688,8 @@ namespace ViewerBy2nd
                 }
             }
             ControlEnable();
+            if(!IsMovie)
+                document.UpdateImage();
             UpdateViewIfChecked();
             if (btnSetWindow.Enabled)
                 VScrollBar1Init();

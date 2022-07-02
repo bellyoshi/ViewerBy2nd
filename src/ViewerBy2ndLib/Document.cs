@@ -6,91 +6,94 @@ namespace ViewerBy2ndLib
 {
     public class Document
     {
-
-        private FileViewParam FileViewParam;
+        private ImageDisposer disposer = new ImageDisposer();
+        private FileViewParam FileViewParam { get; }
 
         public FileTypes FileType { get; set; }
         public Document(FileViewParam fileViewParam) {
             this.FileViewParam = fileViewParam;
             this.FileType = new FileTypes(FileViewParam.FileName);
-            OpenFile(fileViewParam.FileName);
+            if (FileType.IsPDFExt)
+            {
+                pdfDoc = PdfDocument.Load(FileViewParam.FileName);
+            }
+            if (!FileType.IsMovieExt )
+                 UpdateImage();
         }
+
+        
         PdfiumViewer.PdfDocument pdfDoc;
 
         public int PageCount => pdfDoc.PageCount;
-        private bool isHalf { get; set; }
-        public double page { get; set; }
-        public Image OpenFile(string filename)
+
+        public double PageIndex { get; set; }
+        private Image OpenImageFile(string filename)
         {
             if (filename == null) return null;
-            isHalf = false;
-            if (FileType.IsPDFExt)
+
+            if (FileType.IsImageExt)
             {
-                pdfDoc = PdfDocument.Load(filename);
-                FirstPage();
-            }
-            else if (FileType.IsImageExt)
-            {
-                LoadImage();
+                return LoadImage(filename);
 
             }
             else if (FileType.IsSVGExt)
             {
-                LoadSVGImage();
+                return LoadSVGImage(filename);
             }
-            return this.OutPutImage;
+            else
+            {
+                return null;
+            }
+
         }
-        public void LoadSVGImage() {
-            var doc = Svg.SvgDocument.Open(FileViewParam.FileName);
+        public Image LoadSVGImage(string filename) {
+            var doc = Svg.SvgDocument.Open(filename);
             var sc = FileViewParam.BoundsSize;
-            this.OutPutImage = doc.Draw(sc.Height, sc.Height);
-            this.OriginalRotateImage = OutPutImage;
+            return  doc.Draw(sc.Height, sc.Height);
         }
 
         public void Rotate(RotateFlipType flip) {
 
 
             FileViewParam.rotateFlipType = flip;
-            CreateOriginaiImage();
+            RotatedImage = null;
             UpdateImage();
         }
-        internal void CreateOriginaiImage()
+        internal void CreateRotateImage()
         {
             Image image;
             if (FileType.IsPDFExt)
             {
-                image = pdfRender();
+                image = RenderPDF();
             }
             else
             {
-                image = OpenFile(FileViewParam.FileName);
+                image = OpenImageFile(FileViewParam.FileName);
             }
             image.RotateFlip(FileViewParam.rotateFlipType);
-            this.OriginalRotateImage = image;
-            this.OutPutImage = image;
+            this.RotatedImage = image;
         }
-        internal void UpdateImage()
+        public void UpdateImage()
         {
-            if (OriginalRotateImage == null)
-            {
-                CreateOriginaiImage();
-            }
-           
             if (FileViewParam.IsWidthEqualWin == true)
             {
+                if (RotatedImage == null)
+                {
+                    CreateRotateImage();
+                }
                 DispSetWindow();
             }
             else
             {
-                CreateOriginaiImage();
+                CreateRotateImage();
+                this.OutPutImage = RotatedImage;
             }
 
         }
 
-        public void LoadImage()
+        public Image LoadImage(string filename)
         {
-            this.OutPutImage = new Bitmap(FileViewParam.FileName);
-            this.OriginalRotateImage = this.OutPutImage;
+            return new Bitmap(filename);
         }
 
 
@@ -116,19 +119,19 @@ namespace ViewerBy2ndLib
             return renderSize;
         }
 
-        Image pdfRender()
+        Image RenderPDF()
         {
-            if (page >= pdfDoc.PageCount)
+            if (PageIndex >= pdfDoc.PageCount)
             {
                 System.Diagnostics.Debug.Assert(false);
-                return this.OriginalRotateImage;
+                return this.RotatedImage;
             }
 
-            var sourceSize = pdfDoc.PageSizes[Convert.ToInt32(page)];
+            var sourceSize = pdfDoc.PageSizes[Convert.ToInt32(PageIndex)];
             var renderSize = GetRenderSize(sourceSize);
             if (renderSize == null) {
                 System.Diagnostics.Debug.Assert(false);
-                return this.OriginalRotateImage;
+                return this.RotatedImage;
             }
 
             
@@ -146,41 +149,39 @@ namespace ViewerBy2ndLib
 
         public void FirstPage() {
 
-            isHalf = false;
-            page = 0.0;
-            OriginalRotateImage = null;
+
+            PageIndex = 0.0;
+            RotatedImage = null;
             UpdateImage();
         }
 
 
         public bool CanNextPage()
-        => (pdfDoc != null && page<pdfDoc.PageCount - 1);
+        => (pdfDoc != null && PageIndex<pdfDoc.PageCount - 1);
 
         public void NextPage() {
-            isHalf = false;
 
             if (CanNextPage()) {
-                OriginalRotateImage = null;
-                page += 1;
+                RotatedImage = null;
+                PageIndex += 1;
                 UpdateImage();
             }
         }
         public bool CanPrePage()
-            => 0 < page;
+            => 0 < PageIndex;
         public void PrePage() {
-            isHalf = false;
             if (CanPrePage()) {
-                OriginalRotateImage = null;
-                page -= 1;
+                RotatedImage = null;
+                PageIndex -= 1;
                 UpdateImage();
 
             }
         }
         public void LastPage()
         {
-            isHalf = false;
-            page = PageCount - 1;
-            OriginalRotateImage = null;             
+
+            PageIndex = PageCount - 1;
+            RotatedImage = null;             
             UpdateImage();
 
         }
@@ -189,7 +190,7 @@ namespace ViewerBy2ndLib
         private decimal buttomInPage;
 
         public void NextHalfPage() {
-            if ((buttomInPage == 1.0m) && (page == pdfDoc.PageCount - 1)) {
+            if ((buttomInPage == 1.0m) && (PageIndex == pdfDoc.PageCount - 1)) {
                 return;
             }
 
@@ -200,30 +201,30 @@ namespace ViewerBy2ndLib
                 buttomInPage = 0.5m;
             }
 
-            isHalf = true;
+
             DisplayHalfPage();
         }
 
         public void PreviousHalfPage() {
 
-            if (page == 0 && buttomInPage <= 0.5m) {
+            if (PageIndex == 0 && buttomInPage <= 0.5m) {
                 return;
             }
             buttomInPage -= 0.5m;
             if (buttomInPage <= 0.0m) {
                 buttomInPage = 1m;
-                page -= 1;
+                PageIndex -= 1;
 
             }
-            isHalf = true;
+
             DisplayHalfPage();
         }
 
         private void DisplayHalfPage() {
-            if (page >= pdfDoc.PageCount || page< 0) {
+            if (PageIndex >= pdfDoc.PageCount || PageIndex< 0) {
                 return;
             }
-            var pdfSize = pdfDoc.PageSizes[Convert.ToInt32(page)];
+            var pdfSize = pdfDoc.PageSizes[Convert.ToInt32(PageIndex)];
             SizeF sourceSize = new SizeF(pdfSize.Width, pdfSize.Height / 2);
             Size? renderSize = GetRenderSize(sourceSize);
             if (renderSize == null) {
@@ -246,56 +247,38 @@ namespace ViewerBy2ndLib
                 g.DrawImage(img, desRect, srcRect, GraphicsUnit.Pixel);
             }
             this.OutPutImage = canvas;
-            this.OriginalRotateImage = this.OutPutImage;
+            this.RotatedImage = this.OutPutImage;
         }
         private Image GetPdfImage(Size renderSize) {
-            return pdfDoc.Render(Convert.ToInt32(page), renderSize.Width, renderSize.Height, 96, 96, false);
+            return pdfDoc.Render(Convert.ToInt32(PageIndex), renderSize.Width, renderSize.Height, 96, 96, false);
         }
 
 
         public int OriginalImageHeight { get; private set; }
         
-
-        private Image _image;
-        public Image OutPutImage { 
-            get { return _image; }
-            set {
-                ImageDispose(value);
-                _image = value; } }
-
-        private void ImageDispose(Image value)
-        {
-            if (_image == null) return;
-            if (_image == value) return;
-            if(_image == OriginalRotateImage) return; 
-            _image.Dispose();
-            
+        public Image OutPutImage {
+            get => disposer.OutputImage;
+            set => disposer.OutputImage = value;
         }
 
-
-        private Image _originalRotateImage;
-        private Image OriginalRotateImage
+        private Image RotatedImage
         {
-            get { return _originalRotateImage; }
-            set
-            {
-                if(_originalRotateImage == value) return;
-                _originalRotateImage?.Dispose();
-                _originalRotateImage = value;
-            }
+            get => disposer.RotatedImage ;
+            set => disposer.RotatedImage = value;
+            
         }
 
         private int GetSetWinImageHeight()
         {
             var pbSize = FileViewParam.BoundsSize;
-            return Convert.ToInt32(OutPutImage.Width * pbSize.Height/pbSize.Width );
+            return Convert.ToInt32(RotatedImage.Width * pbSize.Height/pbSize.Width );
 
         }
         private double GetWidthHeightRate(Size size) =>
             size.Width / size.Height;
         
         public bool CanSetWindowWidthRate() {
-            var imageSize = OutPutImage.Size;
+            var imageSize = RotatedImage.Size;
             var pictureBoxSize = FileViewParam.BoundsSize;
             var imageRate = GetWidthHeightRate(imageSize);
             var pbRate = GetWidthHeightRate(pictureBoxSize);
@@ -308,30 +291,30 @@ namespace ViewerBy2ndLib
 
         public void DispSetWindow() {
 
-            if (OriginalRotateImage == null)
+            if (RotatedImage == null)
             {
-                CreateOriginaiImage();
+                CreateRotateImage();
             }
 
             
 
 
-            OriginalImageHeight = this.OriginalRotateImage.Height;
+            OriginalImageHeight = this.RotatedImage.Height;
 
             if (!CanSetWindowWidthRate()) return;
 
 
             int ImageY;
-            if(FileViewParam.scrollBarValue + GetSetWinImageHeight() > OriginalRotateImage.Height) {
-                ImageY = Convert.ToInt32(OriginalRotateImage.Height - GetSetWinImageHeight());
+            if(FileViewParam.scrollBarValue + GetSetWinImageHeight() > RotatedImage.Height) {
+                ImageY = Convert.ToInt32(RotatedImage.Height - GetSetWinImageHeight());
             }
             else
             {
                 ImageY = FileViewParam.scrollBarValue;
             }
 
-            var rect = new Rectangle(0, ImageY, OriginalRotateImage.Width, GetSetWinImageHeight());
-            this.OutPutImage = BitmapTool.ImageRoi(OriginalRotateImage, rect);
+            var rect = new Rectangle(0, ImageY, RotatedImage.Width, GetSetWinImageHeight());
+            this.OutPutImage = BitmapTool.ImageRoi(RotatedImage, rect);
             
         }
     }
