@@ -30,8 +30,8 @@ namespace ViewerBy2ndLib
             if (image == null) return;
             if (image == PrevieImage) return;
             if (image == DisplayImage) return;
-            if (image == _outputImage) return;
-            if (image == _rotateImage) return;
+            if (image == OutputImage) return;
+            if (image == RotatedImage) return;
             images.Remove(image);
             image.Dispose();
             
@@ -40,14 +40,14 @@ namespace ViewerBy2ndLib
 
         public static Image DisplayImage { get; set; }
 
-        private  Image _rotateImage;
+        private  Image _rotatedImage;
         internal Image RotatedImage { 
-            get => _rotateImage ; 
+            get => _rotatedImage ; 
             set => SetRotateImage(value); 
         }
         private void SetRotateImage(Image image)
         {
-            _rotateImage = image;
+            _rotatedImage = image;
             AddImage(image);
         }
 
