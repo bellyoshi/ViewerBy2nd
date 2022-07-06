@@ -38,18 +38,10 @@ namespace ViewerBy2ndLib
             }
         }
 
-        bool _isWidthEqualWin;
-        public bool IsWidthEqualWin { 
-            get {
-                return _isWidthEqualWin;
-            }
-            set
-            {
-                _isWidthEqualWin = value;
+        public int ZoomHeight { get; set; } = 1024;
 
-                _document?.UpdateImage();
-            }
-        }
+        public bool IsZoom { get; set; }
+
         public int scrollBarValue { get;  set; }
 
         public System.Drawing.RotateFlipType  rotateFlipType { get; set; }

@@ -52,11 +52,25 @@ namespace ViewerBy2ndLib
             return  doc.Draw(sc.Height, sc.Height);
         }
 
+        bool requireInitZoomHeight = false;
+        private void InitZoomHeight()
+        {
+            if (FileViewParam.IsZoom)
+            {
+                FileViewParam.ZoomHeight = GetZoomImageHeightMin();
+            }
+            else
+            {
+                FileViewParam.ZoomHeight = RotatedImage.Height;
+            }
+            requireInitZoomHeight = false;
+        }
         public void Rotate(RotateFlipType flip) {
 
 
             FileViewParam.rotateFlipType = flip;
             RotatedImage = null;
+            requireInitZoomHeight = true;
             UpdateImage();
         }
         internal void CreateRotateImage()
@@ -75,11 +89,15 @@ namespace ViewerBy2ndLib
         }
         public void UpdateImage()
         {
-            if (FileViewParam.IsWidthEqualWin == true)
+            if (FileViewParam.IsZoom)
             {
                 if (RotatedImage == null)
                 {
                     CreateRotateImage();
+                }
+                if (requireInitZoomHeight)
+                {
+                    InitZoomHeight();
                 }
                 DispSetWindow();
             }
@@ -270,18 +288,52 @@ namespace ViewerBy2ndLib
 
         private int GetSetWinImageHeight()
         {
+            return FileViewParam.ZoomHeight;
+        }
+        public int GetZoomImageHeightMin()
+        {
             var pbSize = FileViewParam.BoundsSize;
-            return Convert.ToInt32(RotatedImage.Width * pbSize.Height/pbSize.Width );
+            return Convert.ToInt32(pbSize.Height  * RotatedImage.Width / pbSize.Width);
+        }
+        public void ZoomUp()
+        {
+            if (!FileViewParam.IsZoom)
+            {
+                FileViewParam.ZoomHeight = RotatedImage.Height;
+            }
+            FileViewParam.IsZoom = true;
+
+
+            var zoomDelta = (RotatedImage.Height - GetZoomImageHeightMin()) / 7;
+            FileViewParam.ZoomHeight -= zoomDelta;
+
+            if (FileViewParam.ZoomHeight <= GetZoomImageHeightMin())
+            {
+                FileViewParam.ZoomHeight = GetZoomImageHeightMin();
+            }
 
         }
-        private double GetWidthHeightRate(Size size) =>
+        public void ZoomDown()
+        {
+
+            var zoomDelta = (RotatedImage.Height - GetZoomImageHeightMin()) / 7;
+            FileViewParam.ZoomHeight += zoomDelta;
+            if (RotatedImage.Height <= FileViewParam.ZoomHeight)
+            {
+                FileViewParam.ZoomHeight = RotatedImage.Height;
+                FileViewParam.IsZoom = false;
+            }
+
+
+        }
+        private double GetAspectRatio(Size size) =>
             size.Width / size.Height;
         
         public bool CanSetWindowWidthRate() {
             var imageSize = RotatedImage.Size;
             var pictureBoxSize = FileViewParam.BoundsSize;
-            var imageRate = GetWidthHeightRate(imageSize);
-            var pbRate = GetWidthHeightRate(pictureBoxSize);
+            var imageRate = GetAspectRatio(imageSize);
+            var pbRate = GetAspectRatio(pictureBoxSize);
             if (imageRate > pbRate) { 
                 return false;
             }

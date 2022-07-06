@@ -57,7 +57,9 @@ namespace ViewerBy2nd
             bool canSetWin = (document != null) && (document.FileType.IsPDFExt || document.FileType.IsImageExt || document.FileType.IsSVGExt);
             btnSetWindow.Enabled = canSetWin;
             btnWhole.Enabled = canSetWin;
-            VScrollBar1.Enabled = (PreviewFile != null) && PreviewFile.IsWidthEqualWin;
+            btnZoomDown.Enabled = canSetWin;
+            btnZoomUp.Enabled = canSetWin;
+            VScrollBar1.Enabled = (PreviewFile != null) && PreviewFile.IsZoom;
         }
 
         public void CtlMovie1ControlEnabled()
@@ -436,7 +438,7 @@ namespace ViewerBy2nd
 
         private void scrollToFirst()
         {
-            if (PreviewFile.IsWidthEqualWin)
+            if (PreviewFile.IsZoom)
             {
                 VScrollBar1.Value = 0;
                 PreviewFile.scrollBarValue = 0;
@@ -539,7 +541,9 @@ namespace ViewerBy2nd
         private void btnSetWindow_Click(object sender, EventArgs e)
         {
             PreviewFile.scrollBarValue = 0;
-            PreviewFile.IsWidthEqualWin = true;
+            PreviewFile.IsZoom = true;
+            PreviewFile.ZoomHeight = document.GetZoomImageHeightMin();
+            document.UpdateImage();
             ControlEnable();
             VScrollBar1Init();
             UpdateViewIfChecked();
@@ -673,7 +677,8 @@ namespace ViewerBy2nd
 
         private void btnWhole_Click(object sender, EventArgs e)
         {
-            PreviewFile.IsWidthEqualWin = false;
+            PreviewFile.IsZoom = false;
+            document?.UpdateImage();
             ControlEnable();
             UpdateViewIfChecked();
         }
@@ -689,7 +694,7 @@ namespace ViewerBy2nd
             }
             ControlEnable();
             if(!IsMovie)
-                document.UpdateImage();
+                document?.UpdateImage();
             UpdateViewIfChecked();
             if (btnSetWindow.Enabled)
                 VScrollBar1Init();
@@ -785,6 +790,25 @@ namespace ViewerBy2nd
            
         }
 
+        private void btnZoomUp_Click(object sender, EventArgs e)
+        {
+            document?.ZoomUp();
+            PreviewFile.scrollBarValue = 0;
+            document?.UpdateImage();
+            ControlEnable();
+            VScrollBar1Init();
+            UpdateViewIfChecked();
+        }
+
+        private void btnZoomDown_Click(object sender, EventArgs e)
+        {
+            document?.ZoomDown();
+            PreviewFile.scrollBarValue = 0;
+            document?.UpdateImage();
+            ControlEnable();
+            VScrollBar1Init();
+            UpdateViewIfChecked();
+        }
     }
 
 }

@@ -74,10 +74,12 @@
             this.pbThumbnail = new System.Windows.Forms.PictureBox();
             this.btnUnSelect = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.thumbnailMoviePlayer = new ViewerBy2ndLib.VideoPlayer();
             this.pnlMovie = new System.Windows.Forms.Panel();
             this.pnlDispOption = new System.Windows.Forms.Panel();
+            this.btnZoomDown = new System.Windows.Forms.Button();
+            this.btnZoomUp = new System.Windows.Forms.Button();
             this.pnlPage = new System.Windows.Forms.Panel();
+            this.thumbnailMoviePlayer = new ViewerBy2ndLib.VideoPlayer();
             this.GroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSeek)).BeginInit();
             this.GroupBox1.SuspendLayout();
@@ -179,10 +181,10 @@
             // 
             // btnWhole
             // 
-            this.btnWhole.Location = new System.Drawing.Point(182, 116);
+            this.btnWhole.Location = new System.Drawing.Point(180, 113);
             this.btnWhole.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnWhole.Name = "btnWhole";
-            this.btnWhole.Size = new System.Drawing.Size(140, 31);
+            this.btnWhole.Size = new System.Drawing.Size(140, 36);
             this.btnWhole.TabIndex = 92;
             this.btnWhole.Text = "全体を表示";
             this.btnWhole.UseVisualStyleBackColor = true;
@@ -530,16 +532,6 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // thumbnailMoviePlayer
-            // 
-            this.thumbnailMoviePlayer.Location = new System.Drawing.Point(666, 153);
-            this.thumbnailMoviePlayer.Name = "thumbnailMoviePlayer";
-            this.thumbnailMoviePlayer.Rate = -1F;
-            this.thumbnailMoviePlayer.Size = new System.Drawing.Size(495, 298);
-            this.thumbnailMoviePlayer.TabIndex = 97;
-            this.thumbnailMoviePlayer.Time = ((long)(-1));
-            this.thumbnailMoviePlayer.Volume = -1;
-            // 
             // pnlMovie
             // 
             this.pnlMovie.Controls.Add(this.GotoFirst);
@@ -554,7 +546,9 @@
             // 
             // pnlDispOption
             // 
+            this.pnlDispOption.Controls.Add(this.btnZoomDown);
             this.pnlDispOption.Controls.Add(this.btnWhole);
+            this.pnlDispOption.Controls.Add(this.btnZoomUp);
             this.pnlDispOption.Controls.Add(this.btnSetWindow);
             this.pnlDispOption.Controls.Add(this.btnRotate90);
             this.pnlDispOption.Controls.Add(this.btnRotate0);
@@ -562,8 +556,29 @@
             this.pnlDispOption.Controls.Add(this.btnRotate180);
             this.pnlDispOption.Location = new System.Drawing.Point(334, 153);
             this.pnlDispOption.Name = "pnlDispOption";
-            this.pnlDispOption.Size = new System.Drawing.Size(326, 148);
+            this.pnlDispOption.Size = new System.Drawing.Size(326, 192);
             this.pnlDispOption.TabIndex = 99;
+            // 
+            // btnZoomDown
+            // 
+            this.btnZoomDown.Location = new System.Drawing.Point(180, 153);
+            this.btnZoomDown.Name = "btnZoomDown";
+            this.btnZoomDown.Size = new System.Drawing.Size(140, 34);
+            this.btnZoomDown.TabIndex = 93;
+            this.btnZoomDown.Text = "縮小";
+            this.btnZoomDown.UseVisualStyleBackColor = true;
+            this.btnZoomDown.Click += new System.EventHandler(this.btnZoomDown_Click);
+            // 
+            // btnZoomUp
+            // 
+            this.btnZoomUp.Location = new System.Drawing.Point(9, 153);
+            this.btnZoomUp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnZoomUp.Name = "btnZoomUp";
+            this.btnZoomUp.Size = new System.Drawing.Size(166, 31);
+            this.btnZoomUp.TabIndex = 76;
+            this.btnZoomUp.Text = "拡大";
+            this.btnZoomUp.UseVisualStyleBackColor = true;
+            this.btnZoomUp.Click += new System.EventHandler(this.btnZoomUp_Click);
             // 
             // pnlPage
             // 
@@ -573,16 +588,27 @@
             this.pnlPage.Controls.Add(this.btnPDFNext);
             this.pnlPage.Controls.Add(this.btnPDFBack);
             this.pnlPage.Controls.Add(this.btnPDFFirst);
-            this.pnlPage.Location = new System.Drawing.Point(342, 307);
+            this.pnlPage.Location = new System.Drawing.Point(342, 348);
             this.pnlPage.Name = "pnlPage";
             this.pnlPage.Size = new System.Drawing.Size(299, 87);
             this.pnlPage.TabIndex = 100;
+            // 
+            // thumbnailMoviePlayer
+            // 
+            this.thumbnailMoviePlayer.Location = new System.Drawing.Point(666, 153);
+            this.thumbnailMoviePlayer.Name = "thumbnailMoviePlayer";
+            this.thumbnailMoviePlayer.Rate = -1F;
+            this.thumbnailMoviePlayer.Size = new System.Drawing.Size(495, 298);
+            this.thumbnailMoviePlayer.TabIndex = 97;
+            this.thumbnailMoviePlayer.Time = ((long)(-1));
+            this.thumbnailMoviePlayer.Volume = -1;
             // 
             // frmOperation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1247, 668);
+            this.Controls.Add(this.pnlDispOption);
             this.Controls.Add(this.pnlPage);
             this.Controls.Add(this.pnlMovie);
             this.Controls.Add(this.GroupBox2);
@@ -600,7 +626,6 @@
             this.Controls.Add(this.pbThumbnail);
             this.Controls.Add(this.btnUnSelect);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.pnlDispOption);
             this.Controls.Add(this.thumbnailMoviePlayer);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmOperation";
@@ -671,6 +696,8 @@
         private System.Windows.Forms.Panel pnlMovie;
         private System.Windows.Forms.Panel pnlDispOption;
         private System.Windows.Forms.Panel pnlPage;
+        internal System.Windows.Forms.Button btnZoomUp;
+        private System.Windows.Forms.Button btnZoomDown;
     }
 }
 
