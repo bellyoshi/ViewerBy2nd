@@ -272,10 +272,9 @@ namespace ViewerBy2nd
 
         private void player_Play()
         {
-            if (!thumbnailMoviePlayer.IsPlaying)
-            {
-                thumbnailMoviePlayer.Play();
-            }
+
+            thumbnailMoviePlayer.Play();
+
             PlayMovie();
         }
         private void btnFileAdd_Click(object sender, EventArgs e)

@@ -80,7 +80,8 @@ namespace ViewerBy2ndLib
 
         public void Play()
         {
-            vlcControl1.Play();
+            if(!vlcControl1.IsPlaying)
+                vlcControl1.Play();
             
         }
         public void Play(string filename, params string[] options)
