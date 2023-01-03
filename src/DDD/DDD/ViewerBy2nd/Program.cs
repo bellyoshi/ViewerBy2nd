@@ -12,8 +12,11 @@ namespace ViewerBy2nd
         {
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
+       
             ApplicationConfiguration.Initialize();
+            ViewerBy2nd.Infrastructure.ConfigurationReader.Initialize();
             Application.Run(new frmOperation());
+            ViewerBy2nd.Infrastructure.ConfigurationReader.Save();
         }
     }
 }

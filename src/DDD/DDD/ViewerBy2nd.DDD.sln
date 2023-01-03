@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewerBy2nd.Domain", "ViewerBy2nd.Domain\ViewerBy2nd.Domain.csproj", "{49C08455-AF95-4F6D-A209-FD56A5886F66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewerBy2nd.Domain", "ViewerBy2nd.Domain\ViewerBy2nd.Domain.csproj", "{49C08455-AF95-4F6D-A209-FD56A5886F66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewerBy2nd.Infrastructure", "ViewerBy2nd.Infrastructure\ViewerBy2nd.Infrastructure.csproj", "{08310E5C-DE9A-4A38-99F0-B1482DE117B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewerBy2nd.Infrastructure", "ViewerBy2nd.Infrastructure\ViewerBy2nd.Infrastructure.csproj", "{08310E5C-DE9A-4A38-99F0-B1482DE117B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewerBy2nd", "ViewerBy2nd\ViewerBy2nd.csproj", "{6B55E73F-A26C-4925-9CB7-68CD17D58BE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewerBy2nd", "ViewerBy2nd\ViewerBy2nd.csproj", "{6B55E73F-A26C-4925-9CB7-68CD17D58BE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewerBy2nd.WinFormsControlLibrary", "ViewerBy2nd.WinFormsControlLibrary\ViewerBy2nd.WinFormsControlLibrary.csproj", "{525CC6C3-60FC-4A47-A760-3601F1A4C7C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewerBy2nd.WinFormsControlLibrary", "ViewerBy2nd.WinFormsControlLibrary\ViewerBy2nd.WinFormsControlLibrary.csproj", "{525CC6C3-60FC-4A47-A760-3601F1A4C7C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewerBy2nd.Tests", "ViewerBy2nd.Tests\ViewerBy2nd.Tests.csproj", "{587DA622-AE90-431E-A983-79D8A428B42E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{525CC6C3-60FC-4A47-A760-3601F1A4C7C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{525CC6C3-60FC-4A47-A760-3601F1A4C7C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{525CC6C3-60FC-4A47-A760-3601F1A4C7C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{587DA622-AE90-431E-A983-79D8A428B42E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{587DA622-AE90-431E-A983-79D8A428B42E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{587DA622-AE90-431E-A983-79D8A428B42E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{587DA622-AE90-431E-A983-79D8A428B42E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

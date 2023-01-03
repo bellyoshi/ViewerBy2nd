@@ -1,4 +1,6 @@
-﻿using System;
+﻿global using ViewerBy2nd.Infrastructure;
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -11,6 +13,7 @@ namespace ViewerBy2nd
 
     public partial class frmOperation : Form
     {
+        Settings Default => ConfigurationReader.Default;
         public frmOperation()
         {
             InitializeComponent();
@@ -104,13 +107,13 @@ namespace ViewerBy2nd
 
         private void AppSettingLoad()
         {
-            if (cmbDisplay.Items.Count > Settings.Default.cmbDisplaySelectedIndex)
-                cmbDisplay.SelectedIndex = Settings.Default.cmbDisplaySelectedIndex;
+            if (cmbDisplay.Items.Count > Default.cmbDisplaySelectedIndex)
+                cmbDisplay.SelectedIndex = Default.cmbDisplaySelectedIndex;
             else
                 cmbDisplay.SelectedIndex = 0;
 
-            lblFormColor.BackColor = Settings.Default.formColor;
-            chkUpdate.Checked = Settings.Default.chkUpdate;
+            lblFormColor.BackColor = Default.formColor;
+            chkUpdate.Checked = Default.chkUpdate;
 
             SetBackColor();
             try
@@ -139,10 +142,10 @@ namespace ViewerBy2nd
 
         private void AppSettingSave()
         {
-            Settings.Default.cmbDisplaySelectedIndex = cmbDisplay.SelectedIndex;
-            Settings.Default.formColor = lblFormColor.BackColor;
-            Settings.Default.chkUpdate = chkUpdate.Checked;
-            Settings.Default.Save();
+            Default.cmbDisplaySelectedIndex = cmbDisplay.SelectedIndex;
+            Default.formColor = lblFormColor.BackColor;
+            Default.chkUpdate = chkUpdate.Checked;
+
 
             List<FileViewParam> fvinfos = new List<FileViewParam>();
             foreach (FileViewParam info in lstFiles.Items)
@@ -168,7 +171,7 @@ namespace ViewerBy2nd
             if (ColorDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             this.lblFormColor.BackColor = ColorDialog1.Color;
-            Settings.Default.formColor = ColorDialog1.Color;
+            Default.formColor = ColorDialog1.Color;
             SetBackColor();
 
         }
@@ -414,8 +417,8 @@ namespace ViewerBy2nd
 
         public void SetBackColor()
         {
-            Dispacher.BackColor = Settings.Default.formColor;
-            pbThumbnail.BackColor = Settings.Default.formColor;
+            Dispacher.BackColor = Default.formColor;
+            pbThumbnail.BackColor = Default.formColor;
         }
 
         private void btnFirst_Click(object sender, EventArgs e)
