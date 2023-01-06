@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace ViewerBy2nd.Infrastructure
 {
@@ -10,27 +10,24 @@ namespace ViewerBy2nd.Infrastructure
         static string fileName = "appsettings.json";
         public static void Initialize()
         {
-            string jsonString = String.Empty;
+            string jsonString= File.ReadAllText(fileName);
             try
             {
-                jsonString = File.ReadAllText(fileName);
-            }
-            catch(System.IO.FileNotFoundException  ex)
+                
+                    Default = JsonConvert.DeserializeObject<Settings>(jsonString);
+                }
+            catch (Exception ex)
             {
-                //初回起動時は、appsettings.jsonが存在しないので、例外が発生する。
+                Default = new();
             }
+       
 
-            var x = JsonSerializer.Deserialize<Settings>(jsonString);
-            Default = x;
         }
         
         public static void Save()
         {
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-            };
-            string jsonString = JsonSerializer.Serialize(Default, options);
+
+            string jsonString = JsonConvert.SerializeObject(Default);
             File.WriteAllText(fileName, jsonString);
 
         }
