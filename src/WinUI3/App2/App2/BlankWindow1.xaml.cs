@@ -40,7 +40,7 @@ namespace App2
 
             //セカンドモニターに移動する
             var d = DisplayArea.FindAll()[1];
-            //var a = d.FirstOrDefault(c => c.IsPrimary);
+            //var a = d.FirstOrDefault(c => c.IsPrimary);todo:実行時エラー
 
             DisplayArea displayArea = d;
 
