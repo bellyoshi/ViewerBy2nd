@@ -39,10 +39,20 @@ namespace App2
 
 
             //セカンドモニターに移動する
-            var d = DisplayArea.FindAll()[1];
-            //var a = d.FirstOrDefault(c => c.IsPrimary);todo:実行時エラー
+            var d = DisplayArea.FindAll();
+            
+            //var a = d.FirstOrDefault(c => !c.IsPrimary);todo:実行時エラー
+            DisplayArea displayArea = null;
+            for(int i=0; i < d.Count; i++)
+            {
+                if (!d[i].IsPrimary)
+                {
+                    displayArea = d[i];
+                    break;
+                }
+            }
 
-            DisplayArea displayArea = d;
+
 
             RectInt32 rect = new RectInt32()
             {
