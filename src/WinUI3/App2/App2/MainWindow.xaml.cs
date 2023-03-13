@@ -14,6 +14,7 @@ namespace App2
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        BlankWindow1 newWindow;
         public MainWindow()
         {
             this.InitializeComponent();
@@ -27,8 +28,12 @@ namespace App2
             //newWindow.Activate();
 
             //BlankWindow1‚ðŠJ‚­
-            var newWindow = new BlankWindow1();
+            newWindow = new BlankWindow1();
             newWindow.Activate();
+        }
+        private void Window_Closed(object sender, WindowEventArgs e)
+        {
+            newWindow?.Close();
         }
     }
 }
