@@ -42,7 +42,7 @@ namespace App2
             var d = DisplayArea.FindAll();
             
             //var a = d.FirstOrDefault(c => !c.IsPrimary);todo:ÀsƒGƒ‰[
-            DisplayArea displayArea = null;
+            DisplayArea displayArea = d[0];
             for(int i=0; i < d.Count; i++)
             {
                 if (!d[i].IsPrimary)
