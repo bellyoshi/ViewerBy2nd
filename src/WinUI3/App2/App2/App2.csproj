@@ -12,6 +12,9 @@
     <EnableMsixTooling>true</EnableMsixTooling>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="WindowHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="BlankPage1.xaml" />
     <None Remove="BlankWindow1.xaml" />
   </ItemGroup>
@@ -29,6 +32,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221109.1" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
+    <PackageReference Include="Pdfium.Net.SDK" Version="4.79.2704" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 

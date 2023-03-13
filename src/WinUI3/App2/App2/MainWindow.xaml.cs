@@ -1,8 +1,9 @@
 // Copyright (c) Microsoft Corporation and Contributors.
 // Licensed under the MIT License.
 
-using AppUIBasics;
+
 using Microsoft.UI.Xaml;
+using System.ComponentModel.DataAnnotations;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -34,6 +35,12 @@ namespace App2
         private void Window_Closed(object sender, WindowEventArgs e)
         {
             newWindow?.Close();
+        }
+
+        private void RenderButton_Click(object sender, RoutedEventArgs e)
+        {
+            var r = new RenderPager();
+            r.RenderPage();
         }
     }
 }
