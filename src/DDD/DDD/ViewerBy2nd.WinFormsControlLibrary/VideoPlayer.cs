@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -66,7 +68,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         System.Windows.Forms.Timer loadTimer = new();
 
 
-        private void vlcControl1_VlcLibDirectoryNeeded(object sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
+        private void vlcControl1_VlcLibDirectoryNeeded(object? sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
         {
             e.VlcLibDirectory = VLCDirectoryGetter.GetVlcLibDirectory();
         }
@@ -120,6 +122,19 @@ namespace ViewerBy2nd.WinFormsControlLibrary
                 if (vlcControl1.VlcMediaPlayer == null) return;
                 vlcControl1.VlcMediaPlayer.Audio.Volume = _volume;
             }
+        }
+        Vlc.DotNet.Forms.VlcControl vlcControl1;
+        private void VideoPlayer_Load(object sender, EventArgs e)
+        {
+            Debug.Assert(false);
+            vlcControl1 = new Vlc.DotNet.Forms.VlcControl();
+            vlcControl1.BeginInit();
+            vlcControl1.VlcLibDirectoryNeeded += vlcControl1_VlcLibDirectoryNeeded;
+            vlcControl1.Dock = DockStyle.Fill;
+            vlcControl1.EndInit();
+
+            Controls.Add(vlcControl1);
+
         }
     }
 }
