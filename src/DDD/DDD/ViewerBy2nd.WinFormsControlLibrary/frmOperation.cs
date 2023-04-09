@@ -758,6 +758,10 @@ namespace ViewerBy2nd
         }
         private void MouseWheelScrollPage(int delta)
         {
+            if(document is null)
+            {
+                return;
+            }
 
             if (delta>0)
             {
