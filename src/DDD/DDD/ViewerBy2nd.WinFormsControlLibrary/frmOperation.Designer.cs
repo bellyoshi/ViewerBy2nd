@@ -79,7 +79,7 @@
             this.btnZoomDown = new System.Windows.Forms.Button();
             this.btnZoomUp = new System.Windows.Forms.Button();
             this.pnlPage = new System.Windows.Forms.Panel();
-            this.thumbnailMoviePlayer = new ViewerBy2ndLib.VideoPlayer();
+            this.thumbnailMoviePlayer = new ViewerBy2nd.WinFormsControlLibrary.VideoPlayer();
             this.GroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarSeek)).BeginInit();
             this.GroupBox1.SuspendLayout();
@@ -692,7 +692,7 @@
         internal System.Windows.Forms.PictureBox pbThumbnail;
         internal System.Windows.Forms.Button btnUnSelect;
         internal System.Windows.Forms.Button btnDelete;
-        internal ViewerBy2ndLib.VideoPlayer thumbnailMoviePlayer;
+        internal ViewerBy2nd.WinFormsControlLibrary.VideoPlayer thumbnailMoviePlayer;
         private System.Windows.Forms.Panel pnlMovie;
         private System.Windows.Forms.Panel pnlDispOption;
         private System.Windows.Forms.Panel pnlPage;

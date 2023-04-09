@@ -48,7 +48,7 @@ namespace ViewerBy2nd
             _frmViewer.ShowImage(image);
         }
 
-        public ViewerBy2ndLib.VideoPlayer ShowMovie()
+        public ViewerBy2nd.WinFormsControlLibrary.VideoPlayer ShowMovie()
         {
             Show();
             return _frmViewer.ShowVideo();

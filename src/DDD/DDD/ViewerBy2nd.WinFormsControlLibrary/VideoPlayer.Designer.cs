@@ -1,4 +1,4 @@
-﻿namespace ViewerBy2ndLib
+﻿namespace ViewerBy2nd.WinFormsControlLibrary
 {
     partial class VideoPlayer
     {
@@ -28,34 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.vlcControl1 = new Vlc.DotNet.Forms.VlcControl();
-            ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).BeginInit();
-            this.SuspendLayout();
+            vlcControl1=new Vlc.DotNet.Forms.VlcControl();
+            ((System.ComponentModel.ISupportInitialize)vlcControl1).BeginInit();
+            SuspendLayout();
             // 
             // vlcControl1
             // 
-            this.vlcControl1.BackColor = System.Drawing.Color.Black;
-            this.vlcControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.vlcControl1.Location = new System.Drawing.Point(0, 0);
-            this.vlcControl1.Name = "vlcControl1";
-            this.vlcControl1.Size = new System.Drawing.Size(452, 339);
-            this.vlcControl1.Spu = -1;
-            this.vlcControl1.TabIndex = 0;
-            this.vlcControl1.Text = "vlcControl1";
-            this.vlcControl1.VlcLibDirectory = null;
-            this.vlcControl1.VlcMediaplayerOptions = null;
-            this.vlcControl1.VlcLibDirectoryNeeded += new System.EventHandler<Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs>(this.vlcControl1_VlcLibDirectoryNeeded);
+            vlcControl1.BackColor=Color.Black;
+            vlcControl1.Dock=DockStyle.Fill;
+            vlcControl1.Location=new Point(0, 0);
+            vlcControl1.Name="vlcControl1";
+            vlcControl1.Size=new Size(150, 150);
+            vlcControl1.Spu=-1;
+            vlcControl1.TabIndex=0;
+            vlcControl1.Text="vlcControl1";
+            vlcControl1.VlcLibDirectory=null;
+            vlcControl1.VlcMediaplayerOptions=null;
+            vlcControl1.VlcLibDirectoryNeeded+=vlcControl1_VlcLibDirectoryNeeded;
             // 
-            // VideoPlayer
+            // VideoPlayer2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.vlcControl1);
-            this.Name = "VideoPlayer";
-            this.Size = new System.Drawing.Size(452, 339);
-            ((System.ComponentModel.ISupportInitialize)(this.vlcControl1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions=new SizeF(8F, 20F);
+            AutoScaleMode=AutoScaleMode.Font;
+            Controls.Add(vlcControl1);
+            Name="VideoPlayer2";
+            ((System.ComponentModel.ISupportInitialize)vlcControl1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

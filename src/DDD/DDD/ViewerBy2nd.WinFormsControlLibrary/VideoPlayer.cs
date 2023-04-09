@@ -5,12 +5,20 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ViewerBy2ndLib;
+using Vlc.DotNet.Forms;
 
-namespace ViewerBy2ndLib
+namespace ViewerBy2nd.WinFormsControlLibrary
 {
     public partial class VideoPlayer : UserControl
     {
+        public VideoPlayer()
+        {
+            InitializeComponent();
+            loadTimer.Tick += LoadTimer_Tick;
+        }
         int _volume;
         public int Volume
         {
@@ -21,7 +29,7 @@ namespace ViewerBy2ndLib
                 loadTimer.Interval  = 20;
                 loadTimer.Start();
             }
-        } 
+        }
         public float Rate
         {
             get { return vlcControl1.Rate; }
@@ -32,10 +40,13 @@ namespace ViewerBy2ndLib
         private long _time;
         public long Time
         {
-            get {
+            get
+            {
                 if (vlcControl1.Time <= 0) return _time;
-                return vlcControl1.Time; }
-            set {
+                return vlcControl1.Time;
+            }
+            set
+            {
                 _time = value;
 
                 if (0 > value)
@@ -45,21 +56,15 @@ namespace ViewerBy2ndLib
                     vlcControl1.Time = vlcControl1.Length -1;
                 }
                 else
-                    vlcControl1.Time = value; 
-                
+                    vlcControl1.Time = value;
             }
         }
-
         public long Length => vlcControl1.Length;
 
         public bool RequiredReload => vlcControl1.State == Vlc.DotNet.Core.Interops.Signatures.MediaStates.Ended;
 
-        System.Windows.Forms.Timer loadTimer = new ();
-        public VideoPlayer()
-        {
-            InitializeComponent();
-            loadTimer.Tick += LoadTimer_Tick;
-        }
+        System.Windows.Forms.Timer loadTimer = new();
+
 
         private void vlcControl1_VlcLibDirectoryNeeded(object sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
         {
@@ -73,15 +78,15 @@ namespace ViewerBy2ndLib
 
         public void Pause()
         {
-            if (vlcControl1.IsPlaying) 
+            if (vlcControl1.IsPlaying)
                 vlcControl1.Pause();
         }
 
         public void Play()
         {
-            if(!vlcControl1.IsPlaying)
+            if (!vlcControl1.IsPlaying)
                 vlcControl1.Play();
-            
+
         }
         public void Play(string filename, params string[] options)
         {
@@ -98,11 +103,11 @@ namespace ViewerBy2ndLib
             requirePause = true;
         }
 
-        private void LoadTimer_Tick(Object sender ,EventArgs  e)
+        private void LoadTimer_Tick(Object? sender, EventArgs e)
         {
             if (requirePause)
             {
-                if(vlcControl1.Time != 0)
+                if (vlcControl1.Time != 0)
                 {
                     loadTimer.Stop();
                     vlcControl1.Pause();
@@ -116,7 +121,5 @@ namespace ViewerBy2ndLib
                 vlcControl1.VlcMediaPlayer.Audio.Volume = _volume;
             }
         }
-    
-
     }
 }

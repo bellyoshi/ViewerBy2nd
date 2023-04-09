@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ViewerBy2nd.WinFormsControlLibrary;
 using ViewerBy2ndLib;
 
 namespace ViewerBy2nd

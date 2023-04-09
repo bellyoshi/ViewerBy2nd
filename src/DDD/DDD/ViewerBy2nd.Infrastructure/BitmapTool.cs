@@ -4,7 +4,7 @@ namespace ViewerBy2ndLib
 {
     public  class BitmapTool
     {
-        public static Bitmap ImageRoi(Image src, Rectangle roi)
+        public static Bitmap? ImageRoi(Image src, Rectangle roi)
         {
             //////////////////////////////////////////////////////////////////////
             // srcRectとroiの重なった領域を取得（画像をはみ出した領域を切り取る）

@@ -36,10 +36,10 @@ namespace ViewerBy2ndLib
             image.Dispose();
             
         }
-        public  static Image PrevieImage { get; set; }
+        public  static Image? PrevieImage { get; set; }
 
-        public static Image DisplayImage { get; set; }
-
+        public static Image? DisplayImage { get; set; }
+        
         private  Image _rotatedImage;
         internal Image RotatedImage { 
             get => _rotatedImage ; 

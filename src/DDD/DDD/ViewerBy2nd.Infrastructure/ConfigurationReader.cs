@@ -16,7 +16,7 @@ namespace ViewerBy2nd.Infrastructure
                 
                     Default = JsonConvert.DeserializeObject<Settings>(jsonString);
                 }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Default = new();
             }

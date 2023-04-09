@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.VideoPlayer1 = new ViewerBy2ndLib.VideoPlayer();
+            this.VideoPlayer1 = new ViewerBy2nd.WinFormsControlLibrary.VideoPlayer();
             this.PictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -74,7 +74,7 @@
 
         #endregion
 
-        internal ViewerBy2ndLib.VideoPlayer VideoPlayer1;
+        internal ViewerBy2nd.WinFormsControlLibrary.VideoPlayer VideoPlayer1;
         internal System.Windows.Forms.PictureBox PictureBox1;
     }
 }
