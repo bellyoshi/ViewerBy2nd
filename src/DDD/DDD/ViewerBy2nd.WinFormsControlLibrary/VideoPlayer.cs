@@ -123,12 +123,12 @@ namespace ViewerBy2nd.WinFormsControlLibrary
                 vlcControl1.VlcMediaPlayer.Audio.Volume = _volume;
             }
         }
-        Vlc.DotNet.Forms.VlcControl vlcControl1;
+        Vlc.DotNet.Forms.VlcControl vlcControl1 = new();
         private void VideoPlayer_Load(object sender, EventArgs e)
         {
             if (DesignMode) return;
 
-            vlcControl1 = new Vlc.DotNet.Forms.VlcControl();
+
             vlcControl1.BeginInit();
             vlcControl1.VlcLibDirectoryNeeded += vlcControl1_VlcLibDirectoryNeeded;
             vlcControl1.Dock = DockStyle.Fill;

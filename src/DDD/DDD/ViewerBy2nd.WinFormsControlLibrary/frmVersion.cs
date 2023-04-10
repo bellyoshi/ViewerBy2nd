@@ -28,6 +28,12 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         {
             string url = linkLabel1.Text;
             Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            this.Close();
+        }
+
+        private void okButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

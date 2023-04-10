@@ -37,12 +37,12 @@ namespace ViewerBy2nd
 
         public bool IsMovie
             => (document != null) && document.FileType.IsMovieExt;
-            
-        
+
+
 
         private void CtlSecondEnabled()
         {
-            btnDisp.Enabled = !chkUpdate.Checked || !Dispacher.ViewerVisible || IsMovie ;
+            btnDisp.Enabled = !chkUpdate.Checked || !Dispacher.ViewerVisible || IsMovie;
             btnDisp.Text = IsMovie ? "再生" : "表示";
         }
 
@@ -214,7 +214,7 @@ namespace ViewerBy2nd
             if (lstFiles.SelectedItem == null)
                 return;
 
-            var list =lstFiles.SelectedItems.Cast<FileViewParam>().ToList();
+            var list = lstFiles.SelectedItems.Cast<FileViewParam>().ToList();
             foreach (var i in list)
                 lstFiles.Items.Remove(i);
             if (list.Contains(DispFile))
@@ -244,7 +244,7 @@ namespace ViewerBy2nd
 
         private void btnDisp_Click(object sender, EventArgs e)
         {
-            if(IsMovie)
+            if (IsMovie)
             {
                 player_Play();
             }
@@ -307,7 +307,7 @@ namespace ViewerBy2nd
         {
             Dispacher.CloseViewers();
             DispFile = null;
-            thumbnailMoviePlayer .Pause();
+            thumbnailMoviePlayer.Pause();
             player?.Pause();
             ControlEnable();
         }
@@ -478,7 +478,7 @@ namespace ViewerBy2nd
             {
                 var op = new string[] { "no-audio" };
                 thumbnailMoviePlayer.LoadFile(PreviewFile.FileName, op);
-                if(player != null)
+                if (player != null)
                 {
                     player.LoadFile(PreviewFile.FileName, op);
                 }
@@ -506,7 +506,7 @@ namespace ViewerBy2nd
         private void VScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
             requireVScrollUpdate = true;
-            
+
         }
         private void VScrollUpdateSync()
         {
@@ -514,8 +514,8 @@ namespace ViewerBy2nd
             {
                 VScrollUpdate();
                 requireVScrollUpdate =false;
-            } 
-                
+            }
+
         }
         bool requireVScrollUpdate = false;
         private void VScrollUpdate()
@@ -529,7 +529,7 @@ namespace ViewerBy2nd
 
         private void VScrollBar1Init()
         {
-            if(document.OriginalImageHeight == 0)
+            if (document.OriginalImageHeight == 0)
             {
                 return;
             }
@@ -569,14 +569,15 @@ namespace ViewerBy2nd
 
             thumbnailMoviePlayer.Pause();
             player_Pause();
-            
+
 
         }
 
         private void btnFastForward_Click(object sender, EventArgs e)
         {
             btnFastForward.Text = "▶▶▶";
-            if (thumbnailMoviePlayer.Rate == 2.0) { 
+            if (thumbnailMoviePlayer.Rate == 2.0)
+            {
                 thumbnailMoviePlayer.Rate = 4.0f;
                 if (player != null)
                     player.Rate = 4.0f;
@@ -584,10 +585,10 @@ namespace ViewerBy2nd
             else
             {
                 thumbnailMoviePlayer.Rate = 2.0f;
-                if(player != null)
+                if (player != null)
                     player.Rate = 2.0f;
             }
-             
+
         }
 
         private void btnFastReverse_Click(object sender, EventArgs e)
@@ -596,7 +597,7 @@ namespace ViewerBy2nd
                 thumbnailMoviePlayer.Time = 0;
             else
                 thumbnailMoviePlayer.Time -= 15000;
-            if(player != null)
+            if (player != null)
             {
                 player.Time = thumbnailMoviePlayer.Time;
             }
@@ -605,7 +606,7 @@ namespace ViewerBy2nd
         private void GotoFirst_Click(object sender, EventArgs e)
         {
             thumbnailMoviePlayer.Time = 0;
-            if(player != null)
+            if (player != null)
             {
                 player.Time = 0;
             }
@@ -620,7 +621,7 @@ namespace ViewerBy2nd
             Trackbar_Seek();
             lbl_Update();
             ControlEnable();
-                    SyncThumbnail();
+            SyncThumbnail();
             VScrollUpdateSync();
 
         }
@@ -645,11 +646,11 @@ namespace ViewerBy2nd
             {
                 trackBarSeek.Maximum = (int)thumbnailMoviePlayer.Length / 100;
                 var value = (int)thumbnailMoviePlayer.Time / 100;
-                if(0 <= value && value <= trackBarSeek.Maximum)
+                if (0 <= value && value <= trackBarSeek.Maximum)
                 {
                     trackBarSeek.Value = value;
                 }
-          
+
 
             }
 
@@ -660,7 +661,7 @@ namespace ViewerBy2nd
             if (player == null) return;
             if (!player.IsPlaying) return;
             if (player.Time < 1000) return;
-            if(Math.Abs( thumbnailMoviePlayer.Time - player.Time) > 500)
+            if (Math.Abs(thumbnailMoviePlayer.Time - player.Time) > 500)
             {
                 thumbnailMoviePlayer.Time = player.Time;
             }
@@ -690,13 +691,13 @@ namespace ViewerBy2nd
         {
             if (lstFiles.SelectedItem == null)
             {
-                if(player != null)
+                if (player != null)
                 {
                     player.Stop();
                 }
             }
             ControlEnable();
-            if(!IsMovie)
+            if (!IsMovie)
                 document?.UpdateImage();
             UpdateViewIfChecked();
             if (btnSetWindow.Enabled)
@@ -759,7 +760,7 @@ namespace ViewerBy2nd
         }
         private void MouseWheelScrollPage(int delta)
         {
-            if(document is null)
+            if (document is null)
             {
                 return;
             }
@@ -781,7 +782,7 @@ namespace ViewerBy2nd
                 }
             }
             return;
-            
+
         }
         public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -794,7 +795,7 @@ namespace ViewerBy2nd
             {
                 MouseWheelScrollLine(e.Delta);
             }
-           
+
         }
 
         private void btnZoomUp_Click(object sender, EventArgs e)
@@ -815,6 +816,12 @@ namespace ViewerBy2nd
             ControlEnable();
             VScrollBar1Init();
             UpdateViewIfChecked();
+        }
+
+        private void このアプリについてToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var frm = new frmVersion();
+            frm.ShowDialog();
         }
     }
 

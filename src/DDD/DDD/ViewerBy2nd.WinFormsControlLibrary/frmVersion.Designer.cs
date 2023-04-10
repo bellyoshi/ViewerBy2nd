@@ -32,6 +32,7 @@
             linkLabel1=new LinkLabel();
             label2=new Label();
             VersionLabel=new Label();
+            okButton=new Button();
             SuspendLayout();
             // 
             // label1
@@ -72,11 +73,22 @@
             VersionLabel.TabIndex=2;
             VersionLabel.Text="label3";
             // 
+            // okButton
+            // 
+            okButton.Location=new Point(375, 120);
+            okButton.Name="okButton";
+            okButton.Size=new Size(94, 29);
+            okButton.TabIndex=3;
+            okButton.Text="OK";
+            okButton.UseVisualStyleBackColor=true;
+            okButton.Click+=okButton_Click;
+            // 
             // frmVersion
             // 
             AutoScaleDimensions=new SizeF(8F, 20F);
             AutoScaleMode=AutoScaleMode.Font;
-            ClientSize=new Size(711, 340);
+            ClientSize=new Size(492, 161);
+            Controls.Add(okButton);
             Controls.Add(VersionLabel);
             Controls.Add(linkLabel1);
             Controls.Add(label2);
@@ -94,5 +106,6 @@
         private LinkLabel linkLabel1;
         private Label label2;
         private Label VersionLabel;
+        private Button okButton;
     }
 }
