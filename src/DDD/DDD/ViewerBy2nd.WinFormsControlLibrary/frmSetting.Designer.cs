@@ -45,7 +45,6 @@
             lblFormColor.Size=new Size(39, 20);
             lblFormColor.TabIndex=9;
             lblFormColor.Text="　　";
-
             // 
             // btnColorChange
             // 
@@ -84,6 +83,7 @@
             button1.TabIndex=10;
             button1.Text="OK";
             button1.UseVisualStyleBackColor=true;
+            button1.Click+=button1_Click;
             // 
             // frmSetting
             // 

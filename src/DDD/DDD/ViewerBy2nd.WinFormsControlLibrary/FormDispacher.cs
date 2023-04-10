@@ -70,7 +70,7 @@ namespace ViewerBy2nd
         {
             _frmViewer = new frmViewer();
             _frmViewer.BackColor = BackColor;
-            SetViewerBounds();
+            _frmViewer?.SetViewerBounds();
             _frmViewer.FormClosed += new FormClosedEventHandler(this.from_Closed);
         }
 
