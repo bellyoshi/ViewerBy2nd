@@ -74,10 +74,9 @@ namespace ViewerBy2nd.WinFormsControlLibrary
                 return;
             if (cmbDisplay.SelectedItem == null)
                 return;
-            // 'フォームを表示するディスプレイのScreenを取得する
-            Screen s = (Screen)cmbDisplay.SelectedItem;
 
-            Dispacher.ViewScreen = s;
+
+            ViewScreenRegister.GetInstance().ChangeScreen(cmbDisplay.SelectedIndex);
 
         }
 

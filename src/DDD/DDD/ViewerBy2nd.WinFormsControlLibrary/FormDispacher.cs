@@ -19,16 +19,8 @@ namespace ViewerBy2nd
         private frmOperation _frmOperation;
         private frmViewer _frmViewer;
 
-        private Screen _viewScreen;
-        public Screen ViewScreen
-        {
-            get { return _viewScreen; }
-            set
-            {
-                _viewScreen = value;
-                SetViewerBounds();
-            }
-        }
+
+
         public bool ViewerVisible => _frmViewer?.Visible??false;
 
         public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
@@ -36,11 +28,10 @@ namespace ViewerBy2nd
             _frmOperation.frmOperation_MouseWheel(sender, e);
         }
 
-        private void SetViewerBounds()
+        public void SetViewerBounds()
         {
-            if (_viewScreen == null) return;
 
-            _frmViewer?.SetViewerBounds(_viewScreen.Bounds);
+            _frmViewer?.SetViewerBounds();
             _frmOperation?.SetThumnailSize();
         }
 

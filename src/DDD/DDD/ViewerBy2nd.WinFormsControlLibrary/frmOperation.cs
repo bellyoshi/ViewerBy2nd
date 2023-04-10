@@ -163,7 +163,7 @@ namespace ViewerBy2nd
         }
         private int getThumnailWidth(int thumWidth)
         {
-            var viewerSize = Dispacher.ViewScreen.Bounds.Size;
+            var viewerSize = ViewScreenRegister.GetInstance().Size;
             return thumWidth * viewerSize.Height / viewerSize.Width;
         }
 
@@ -253,7 +253,7 @@ namespace ViewerBy2nd
             var items = lstFiles.Items;
 
             foreach (var filename in OpenFileDialog1.FileNames)
-                items.Add(new FileViewParam(filename, Dispacher.ViewScreen.Bounds.Size));
+                items.Add(new FileViewParam(filename, ViewScreenRegister.GetInstance().Size));
         }
 
         private void btnUnSelect_Click(object sender, EventArgs e)
@@ -299,7 +299,7 @@ namespace ViewerBy2nd
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
             foreach (var f in fileName)
-                items.Add(new FileViewParam(f, Dispacher.ViewScreen.Bounds.Size));
+                items.Add(new FileViewParam(f, ViewScreenRegister.GetInstance().Size));
         }
 
         private void chkUpdate_CheckedChanged(object sender, EventArgs e)
@@ -359,7 +359,7 @@ namespace ViewerBy2nd
                 if (lstFiles.SelectedItem == null)
                     return null/* TODO Change to default(_) if this is not a reference type */;
                 var p = (FileViewParam)lstFiles.SelectedItem;
-                p.BoundsSize = Dispacher.ViewScreen.Bounds.Size;
+                p.BoundsSize = ViewScreenRegister.GetInstance().Size;
                 return p;
             }
         }

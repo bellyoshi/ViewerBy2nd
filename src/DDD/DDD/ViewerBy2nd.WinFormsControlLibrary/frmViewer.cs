@@ -37,8 +37,9 @@ namespace ViewerBy2nd
                 VideoPlayer1.Pause();
         }
 
-        internal void SetViewerBounds(Rectangle bounds)
+        internal void SetViewerBounds()
         {
+            var bounds = ViewScreenRegister.GetInstance().Bounds;
             StartPosition = FormStartPosition.Manual;
             Location = bounds.Location;
             Size = bounds.Size;
