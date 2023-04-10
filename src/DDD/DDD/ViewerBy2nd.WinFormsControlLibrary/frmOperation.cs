@@ -1,11 +1,5 @@
 ﻿global using ViewerBy2nd.Infrastructure;
-
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 using ViewerBy2nd.WinFormsControlLibrary;
 using ViewerBy2ndLib;
 
@@ -97,7 +91,7 @@ namespace ViewerBy2nd
         private void frmOperation_Load(object sender, EventArgs e)
         {
             Dispacher.RegistrationfrmOperation(this);
-            screenDetect();
+
             AppSettingLoad();
             ControlEnable();
             SeekTimer.Interval = 100;
@@ -108,15 +102,10 @@ namespace ViewerBy2nd
 
         private void AppSettingLoad()
         {
-            if (cmbDisplay.Items.Count > Default.cmbDisplaySelectedIndex)
-                cmbDisplay.SelectedIndex = Default.cmbDisplaySelectedIndex;
-            else
-                cmbDisplay.SelectedIndex = 0;
-
-            lblFormColor.BackColor = Default.formColor;
             chkUpdate.Checked = Default.chkUpdate;
 
             SetBackColor();
+
             try
             {
                 List<FileViewParam> fvinfos = new List<FileViewParam>();
@@ -141,10 +130,17 @@ namespace ViewerBy2nd
             }
         }
 
+
+
+
+
+        private void frmOperation_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            AppSettingSave();
+        }
+
         private void AppSettingSave()
         {
-            Default.cmbDisplaySelectedIndex = cmbDisplay.SelectedIndex;
-            Default.formColor = lblFormColor.BackColor;
             Default.chkUpdate = chkUpdate.Checked;
 
 
@@ -160,43 +156,7 @@ namespace ViewerBy2nd
             }
         }
 
-        private void screenDetect()
-        {
-            // デバイス名が表示されるようにする
-            this.cmbDisplay.DisplayMember = "DeviceName";
-            this.cmbDisplay.DataSource = Screen.AllScreens;
-        }
-
-        private void btnColorChange_Click(object sender, EventArgs e)
-        {
-            if (ColorDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            this.lblFormColor.BackColor = ColorDialog1.Color;
-            Default.formColor = ColorDialog1.Color;
-            SetBackColor();
-
-        }
-
-        private void frmOperation_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            AppSettingSave();
-        }
-
-        private void cmbDisplay_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbDisplay.SelectedIndex < 0)
-                return;
-            if (cmbDisplay.SelectedItem == null)
-                return;
-            // 'フォームを表示するディスプレイのScreenを取得する
-            Screen s = (Screen)this.cmbDisplay.SelectedItem;
-            // 'フォームの開始位置をディスプレイの左上座標に設定する
-            Dispacher.ViewScreen = s;
-
-            SetThumnailSize();
-        }
-
-        private void SetThumnailSize()
+        public void SetThumnailSize()
         {
             pbThumbnail.Height = getThumnailWidth(pbThumbnail.Width);
             thumbnailMoviePlayer.Height = getThumnailWidth(thumbnailMoviePlayer.Width);
@@ -418,7 +378,6 @@ namespace ViewerBy2nd
 
         public void SetBackColor()
         {
-            Dispacher.BackColor = Default.formColor;
             pbThumbnail.BackColor = Default.formColor;
         }
 
@@ -822,6 +781,11 @@ namespace ViewerBy2nd
         {
             var frm = new frmVersion();
             frm.ShowDialog();
+        }
+
+        private void ディスプレイと背景色ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Dispacher.ShowSetting();
         }
     }
 

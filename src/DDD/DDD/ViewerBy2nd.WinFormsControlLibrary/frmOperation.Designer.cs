@@ -57,10 +57,6 @@
             trackBarSeek=new TrackBar();
             btnRotate0=new Button();
             OpenFileDialog1=new OpenFileDialog();
-            lblFormColor=new Label();
-            btnColorChange=new Button();
-            Label1=new Label();
-            cmbDisplay=new ComboBox();
             SeekTimer=new System.Windows.Forms.Timer(components);
             BackgroundWorker1=new System.ComponentModel.BackgroundWorker();
             btnRotate270=new Button();
@@ -69,8 +65,6 @@
             btnFileAdd=new Button();
             lstFiles=new ListBox();
             txtPDFFileName=new TextBox();
-            ColorDialog1=new ColorDialog();
-            GroupBox1=new GroupBox();
             pbThumbnail=new PictureBox();
             btnUnSelect=new Button();
             btnDelete=new Button();
@@ -87,7 +81,6 @@
             このアプリについてToolStripMenuItem=new ToolStripMenuItem();
             GroupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarSeek).BeginInit();
-            GroupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbThumbnail).BeginInit();
             pnlMovie.SuspendLayout();
             pnlDispOption.SuspendLayout();
@@ -101,11 +94,11 @@
             GroupBox2.Controls.Add(btnUnSelectUpdate);
             GroupBox2.Controls.Add(btnUnDisp);
             GroupBox2.Controls.Add(chkUpdate);
-            GroupBox2.Location=new Point(367, 733);
+            GroupBox2.Location=new Point(349, 609);
             GroupBox2.Margin=new Padding(3, 4, 3, 4);
             GroupBox2.Name="GroupBox2";
             GroupBox2.Padding=new Padding(3, 4, 3, 4);
-            GroupBox2.Size=new Size(794, 123);
+            GroupBox2.Size=new Size(529, 123);
             GroupBox2.TabIndex=96;
             GroupBox2.TabStop=false;
             GroupBox2.Text="セカンドモニター操作";
@@ -155,7 +148,7 @@
             // lblMovieTime
             // 
             lblMovieTime.AutoSize=true;
-            lblMovieTime.Location=new Point(890, 672);
+            lblMovieTime.Location=new Point(886, 574);
             lblMovieTime.Name="lblMovieTime";
             lblMovieTime.Size=new Size(71, 20);
             lblMovieTime.TabIndex=95;
@@ -163,7 +156,7 @@
             // 
             // btnAllSelect
             // 
-            btnAllSelect.Location=new Point(19, 743);
+            btnAllSelect.Location=new Point(12, 609);
             btnAllSelect.Name="btnAllSelect";
             btnAllSelect.Size=new Size(88, 53);
             btnAllSelect.TabIndex=94;
@@ -193,7 +186,7 @@
             // 
             // lblPageDisp
             // 
-            lblPageDisp.Location=new Point(837, 616);
+            lblPageDisp.Location=new Point(833, 518);
             lblPageDisp.Name="lblPageDisp";
             lblPageDisp.Size=new Size(267, 20);
             lblPageDisp.TabIndex=91;
@@ -305,7 +298,7 @@
             // Label2
             // 
             Label2.AutoSize=true;
-            Label2.Location=new Point(848, 180);
+            Label2.Location=new Point(886, 106);
             Label2.Name="Label2";
             Label2.Size=new Size(90, 20);
             Label2.TabIndex=79;
@@ -341,7 +334,7 @@
             // 
             // trackBarSeek
             // 
-            trackBarSeek.Location=new Point(766, 611);
+            trackBarSeek.Location=new Point(762, 513);
             trackBarSeek.Name="trackBarSeek";
             trackBarSeek.Size=new Size(317, 56);
             trackBarSeek.TabIndex=85;
@@ -361,44 +354,6 @@
             // OpenFileDialog1
             // 
             OpenFileDialog1.FileName="OpenFileDialog1";
-            // 
-            // lblFormColor
-            // 
-            lblFormColor.AutoSize=true;
-            lblFormColor.Location=new Point(567, 33);
-            lblFormColor.Name="lblFormColor";
-            lblFormColor.Size=new Size(39, 20);
-            lblFormColor.TabIndex=9;
-            lblFormColor.Text="　　";
-            // 
-            // btnColorChange
-            // 
-            btnColorChange.Location=new Point(445, 24);
-            btnColorChange.Name="btnColorChange";
-            btnColorChange.Size=new Size(93, 41);
-            btnColorChange.TabIndex=8;
-            btnColorChange.Text="背景色変更";
-            btnColorChange.UseVisualStyleBackColor=true;
-            btnColorChange.Click+=btnColorChange_Click;
-            // 
-            // Label1
-            // 
-            Label1.AutoSize=true;
-            Label1.Location=new Point(37, 32);
-            Label1.Name="Label1";
-            Label1.Size=new Size(126, 20);
-            Label1.TabIndex=7;
-            Label1.Text="表示するディスプレイ";
-            // 
-            // cmbDisplay
-            // 
-            cmbDisplay.DropDownStyle=ComboBoxStyle.DropDownList;
-            cmbDisplay.FormattingEnabled=true;
-            cmbDisplay.Location=new Point(197, 25);
-            cmbDisplay.Name="cmbDisplay";
-            cmbDisplay.Size=new Size(163, 28);
-            cmbDisplay.TabIndex=6;
-            cmbDisplay.SelectedIndexChanged+=cmbDisplay_SelectedIndexChanged;
             // 
             // SeekTimer
             // 
@@ -427,7 +382,7 @@
             // Label6
             // 
             Label6.AutoSize=true;
-            Label6.Location=new Point(352, 123);
+            Label6.Location=new Point(334, 36);
             Label6.Name="Label6";
             Label6.Size=new Size(81, 20);
             Label6.TabIndex=71;
@@ -435,7 +390,7 @@
             // 
             // btnFileAdd
             // 
-            btnFileAdd.Location=new Point(208, 740);
+            btnFileAdd.Location=new Point(203, 608);
             btnFileAdd.Name="btnFileAdd";
             btnFileAdd.Size=new Size(125, 55);
             btnFileAdd.TabIndex=70;
@@ -448,7 +403,7 @@
             lstFiles.AllowDrop=true;
             lstFiles.FormattingEnabled=true;
             lstFiles.ItemHeight=20;
-            lstFiles.Location=new Point(19, 157);
+            lstFiles.Location=new Point(12, 39);
             lstFiles.Name="lstFiles";
             lstFiles.SelectionMode=SelectionMode.MultiExtended;
             lstFiles.Size=new Size(308, 564);
@@ -460,28 +415,15 @@
             // 
             // txtPDFFileName
             // 
-            txtPDFFileName.Location=new Point(347, 145);
+            txtPDFFileName.Location=new Point(329, 58);
             txtPDFFileName.Name="txtPDFFileName";
             txtPDFFileName.ReadOnly=true;
             txtPDFFileName.Size=new Size(655, 27);
             txtPDFFileName.TabIndex=65;
             // 
-            // GroupBox1
-            // 
-            GroupBox1.Controls.Add(lblFormColor);
-            GroupBox1.Controls.Add(btnColorChange);
-            GroupBox1.Controls.Add(Label1);
-            GroupBox1.Controls.Add(cmbDisplay);
-            GroupBox1.Location=new Point(19, 46);
-            GroupBox1.Name="GroupBox1";
-            GroupBox1.Size=new Size(1037, 84);
-            GroupBox1.TabIndex=66;
-            GroupBox1.TabStop=false;
-            GroupBox1.Text="設定";
-            // 
             // pbThumbnail
             // 
-            pbThumbnail.Location=new Point(657, 236);
+            pbThumbnail.Location=new Point(653, 138);
             pbThumbnail.Name="pbThumbnail";
             pbThumbnail.Size=new Size(495, 400);
             pbThumbnail.TabIndex=77;
@@ -489,7 +431,7 @@
             // 
             // btnUnSelect
             // 
-            btnUnSelect.Location=new Point(112, 743);
+            btnUnSelect.Location=new Point(106, 609);
             btnUnSelect.Name="btnUnSelect";
             btnUnSelect.Size=new Size(91, 53);
             btnUnSelect.TabIndex=68;
@@ -499,7 +441,7 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location=new Point(19, 803);
+            btnDelete.Location=new Point(12, 668);
             btnDelete.Name="btnDelete";
             btnDelete.Size=new Size(88, 53);
             btnDelete.TabIndex=69;
@@ -514,7 +456,7 @@
             pnlMovie.Controls.Add(btnFastReverse);
             pnlMovie.Controls.Add(btnFastForward);
             pnlMovie.Controls.Add(btnStart);
-            pnlMovie.Location=new Point(329, 225);
+            pnlMovie.Location=new Point(325, 127);
             pnlMovie.Margin=new Padding(3, 4, 3, 4);
             pnlMovie.Name="pnlMovie";
             pnlMovie.Size=new Size(328, 100);
@@ -530,7 +472,7 @@
             pnlDispOption.Controls.Add(btnRotate0);
             pnlDispOption.Controls.Add(btnRotate270);
             pnlDispOption.Controls.Add(btnRotate180);
-            pnlDispOption.Location=new Point(334, 204);
+            pnlDispOption.Location=new Point(330, 106);
             pnlDispOption.Margin=new Padding(3, 4, 3, 4);
             pnlDispOption.Name="pnlDispOption";
             pnlDispOption.Size=new Size(326, 256);
@@ -565,7 +507,7 @@
             pnlPage.Controls.Add(btnPDFNext);
             pnlPage.Controls.Add(btnPDFBack);
             pnlPage.Controls.Add(btnPDFFirst);
-            pnlPage.Location=new Point(342, 464);
+            pnlPage.Location=new Point(338, 366);
             pnlPage.Margin=new Padding(3, 4, 3, 4);
             pnlPage.Name="pnlPage";
             pnlPage.Size=new Size(299, 116);
@@ -573,7 +515,7 @@
             // 
             // thumbnailMoviePlayer
             // 
-            thumbnailMoviePlayer.Location=new Point(666, 204);
+            thumbnailMoviePlayer.Location=new Point(662, 106);
             thumbnailMoviePlayer.Margin=new Padding(3, 4, 3, 4);
             thumbnailMoviePlayer.Name="thumbnailMoviePlayer";
             thumbnailMoviePlayer.Rate=-1F;
@@ -604,6 +546,7 @@
             ディスプレイと背景色ToolStripMenuItem.Name="ディスプレイと背景色ToolStripMenuItem";
             ディスプレイと背景色ToolStripMenuItem.Size=new Size(212, 26);
             ディスプレイと背景色ToolStripMenuItem.Text="ディスプレイと背景色";
+            ディスプレイと背景色ToolStripMenuItem.Click+=ディスプレイと背景色ToolStripMenuItem_Click;
             // 
             // ヘルプToolStripMenuItem
             // 
@@ -615,7 +558,7 @@
             // このアプリについてToolStripMenuItem
             // 
             このアプリについてToolStripMenuItem.Name="このアプリについてToolStripMenuItem";
-            このアプリについてToolStripMenuItem.Size=new Size(224, 26);
+            このアプリについてToolStripMenuItem.Size=new Size(194, 26);
             このアプリについてToolStripMenuItem.Text="このアプリについて";
             このアプリについてToolStripMenuItem.Click+=このアプリについてToolStripMenuItem_Click;
             // 
@@ -623,7 +566,7 @@
             // 
             AutoScaleDimensions=new SizeF(8F, 20F);
             AutoScaleMode=AutoScaleMode.Font;
-            ClientSize=new Size(1247, 891);
+            ClientSize=new Size(1247, 742);
             Controls.Add(pnlDispOption);
             Controls.Add(pnlPage);
             Controls.Add(pnlMovie);
@@ -638,7 +581,6 @@
             Controls.Add(btnFileAdd);
             Controls.Add(lstFiles);
             Controls.Add(txtPDFFileName);
-            Controls.Add(GroupBox1);
             Controls.Add(pbThumbnail);
             Controls.Add(btnUnSelect);
             Controls.Add(btnDelete);
@@ -654,8 +596,6 @@
             GroupBox2.ResumeLayout(false);
             GroupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarSeek).EndInit();
-            GroupBox1.ResumeLayout(false);
-            GroupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbThumbnail).EndInit();
             pnlMovie.ResumeLayout(false);
             pnlDispOption.ResumeLayout(false);
@@ -694,10 +634,6 @@
         internal System.Windows.Forms.TrackBar trackBarSeek;
         internal System.Windows.Forms.Button btnRotate0;
         internal System.Windows.Forms.OpenFileDialog OpenFileDialog1;
-        internal System.Windows.Forms.Label lblFormColor;
-        internal System.Windows.Forms.Button btnColorChange;
-        internal System.Windows.Forms.Label Label1;
-        internal System.Windows.Forms.ComboBox cmbDisplay;
         internal System.Windows.Forms.CheckBox chkUpdate;
         internal System.Windows.Forms.Timer SeekTimer;
         internal System.ComponentModel.BackgroundWorker BackgroundWorker1;
@@ -707,8 +643,6 @@
         internal System.Windows.Forms.Button btnFileAdd;
         internal System.Windows.Forms.ListBox lstFiles;
         internal System.Windows.Forms.TextBox txtPDFFileName;
-        internal System.Windows.Forms.ColorDialog ColorDialog1;
-        internal System.Windows.Forms.GroupBox GroupBox1;
         internal System.Windows.Forms.PictureBox pbThumbnail;
         internal System.Windows.Forms.Button btnUnSelect;
         internal System.Windows.Forms.Button btnDelete;

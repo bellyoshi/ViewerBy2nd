@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ViewerBy2nd.WinFormsControlLibrary;
 
 namespace ViewerBy2nd
 {
@@ -38,8 +39,9 @@ namespace ViewerBy2nd
         private void SetViewerBounds()
         {
             if (_viewScreen == null) return;
-            if (_frmViewer == null) return;
-            _frmViewer.SetViewerBounds(_viewScreen.Bounds);
+
+            _frmViewer?.SetViewerBounds(_viewScreen.Bounds);
+            _frmOperation?.SetThumnailSize();
         }
 
         public void ShowImage(Image image)
@@ -89,6 +91,7 @@ namespace ViewerBy2nd
                 this._backColor = value;
                 if (_frmViewer != null)
                     _frmViewer.BackColor = BackColor;
+                _frmOperation.SetBackColor();
             } 
         }
 
@@ -96,6 +99,13 @@ namespace ViewerBy2nd
         {
             if (_frmViewer == null) return;
             _frmViewer.Close();
+        }
+
+        internal void ShowSetting()
+        {
+            frmSetting frm = new();
+            frm.Show();
+                
         }
     }
 }
