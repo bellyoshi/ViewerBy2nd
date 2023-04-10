@@ -126,7 +126,8 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         Vlc.DotNet.Forms.VlcControl vlcControl1;
         private void VideoPlayer_Load(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            if (DesignMode) return;
+
             vlcControl1 = new Vlc.DotNet.Forms.VlcControl();
             vlcControl1.BeginInit();
             vlcControl1.VlcLibDirectoryNeeded += vlcControl1_VlcLibDirectoryNeeded;
