@@ -16,11 +16,20 @@ namespace ViewerBy2nd
 
         private void ControlEnable()
         {
+            MenuControlEnabled();
             CtlPdf1ControlEnabled();
             CtlMovie1ControlEnabled();
             CtlImage1ControlEnabled();
             ListControlEnabled();
             CtlSecondEnabled();
+        }
+
+        private void MenuControlEnabled()
+        {
+
+            表示ToolStripMenuItem.Enabled = !lstFiles.Visible;
+            非表示ToolStripMenuItem.Enabled = lstFiles.Visible;
+
         }
 
         public void ListControlEnabled()
@@ -788,9 +797,52 @@ namespace ViewerBy2nd
         internal void NotifyBackColor()
         {
 
-            
-                pbThumbnail.BackColor = Default.BackColor;
-                
+
+            pbThumbnail.BackColor = Default.BackColor;
+
+        }
+
+        private void frmOperation_Resize(object sender, EventArgs e)
+        {
+            ListPanel.Visible = 600 < Width;
+            ControlRelocation();
+            ControlEnable();
+        }
+
+        private void 非表示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lstFiles.Visible = false;
+            ControlRelocation();
+            ControlEnable();
+
+
+        }
+
+        private void ControlRelocation()
+        {
+
+
+
+            if (lstFiles.Visible)
+            {
+                panel2.Location = new Point(320, 30);
+
+                thumbnailMoviePlayer.Bounds = thumbnailDefaultPanel.Bounds;
+                pbThumbnail.Bounds = thumbnailDefaultPanel.Bounds;
+            }
+            else
+            {
+                panel2.Location = new Point(0, 30);
+                thumbnailMoviePlayer.Bounds = ThumnailMovoToPanel.Bounds;
+                pbThumbnail.Bounds = ThumnailMovoToPanel.Bounds;
+            }
+        }
+
+        private void 表示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            lstFiles.Visible = true;
+            ControlRelocation();
+            ControlEnable();
         }
     }
 
