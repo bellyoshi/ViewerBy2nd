@@ -51,7 +51,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         void Notify()
         {
             if (isEmpty) return;
-            FormDispacher.GetInstance().SetViewerBounds();
+            FormDispacher.GetInstance().NotifyViewerBound();
         }
     }
 

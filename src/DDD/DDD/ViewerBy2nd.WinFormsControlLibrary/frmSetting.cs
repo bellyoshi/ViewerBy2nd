@@ -37,35 +37,26 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             }
 
 
-            lblFormColor.BackColor = Default.formColor;
+            lblFormColor.BackColor = Default.BackColor;
 
 
         }
 
-        private void AppSettingSave()
-        {
-            Default.cmbDisplaySelectedIndex = cmbDisplay.SelectedIndex;
 
-
-
-
-
-        }
 
 
 
         private void frmSetting_Load(object sender, EventArgs e)
         {
             screenDetect();
+            AppSettingLoad();
         }
         private void btnColorChange_Click_1(object sender, EventArgs e)
         {
             if (ColorDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             this.lblFormColor.BackColor = ColorDialog1.Color;
-            Default.formColor = ColorDialog1.Color;
-            Dispacher.BackColor = Default.formColor;
-
+            BackColorRegister.GetInstance().BackColor = ColorDialog1.Color;
         }
 
         private void cmbDisplay_SelectedIndexChanged(object sender, EventArgs e)

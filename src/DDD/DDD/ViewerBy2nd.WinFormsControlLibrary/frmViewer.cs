@@ -62,6 +62,11 @@ namespace ViewerBy2nd
             VideoPlayer1.Visible = true;
             return VideoPlayer1;
         }
+
+        internal void NotifyBackColor()
+        {
+            BackColor = BackColorRegister.GetInstance().BackColor;
+        }
     }
 
 }

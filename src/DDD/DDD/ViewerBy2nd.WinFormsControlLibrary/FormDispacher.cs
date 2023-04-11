@@ -28,13 +28,19 @@ namespace ViewerBy2nd
             _frmOperation.frmOperation_MouseWheel(sender, e);
         }
 
-        public void SetViewerBounds()
+        public void NotifyViewerBound()
         {
 
             _frmViewer?.SetViewerBounds();
             _frmOperation?.SetThumnailSize();
         }
 
+        public void NotifyBackColor()
+        {
+
+            _frmViewer?.NotifyBackColor();
+            _frmOperation?.NotifyBackColor();
+        }
         public void ShowImage(Image image)
         {
             Show();
@@ -69,22 +75,13 @@ namespace ViewerBy2nd
         public void CreateViewerForm()
         {
             _frmViewer = new frmViewer();
-            _frmViewer.BackColor = BackColor;
-            _frmViewer?.SetViewerBounds();
+            _frmViewer.NotifyBackColor();
+            _frmViewer.SetViewerBounds();
             _frmViewer.FormClosed += new FormClosedEventHandler(this.from_Closed);
         }
 
-        private Color _backColor = Color.Black  ;
-        public Color BackColor {
-            get { return _backColor; }
-            set
-            {
-                this._backColor = value;
-                if (_frmViewer != null)
-                    _frmViewer.BackColor = BackColor;
-                _frmOperation.SetBackColor();
-            } 
-        }
+
+
 
         public void CloseViewers()
         {

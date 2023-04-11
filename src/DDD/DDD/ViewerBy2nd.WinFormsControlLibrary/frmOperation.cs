@@ -104,7 +104,7 @@ namespace ViewerBy2nd
         {
             chkUpdate.Checked = Default.chkUpdate;
 
-            SetBackColor();
+            NotifyBackColor();
 
             try
             {
@@ -376,10 +376,7 @@ namespace ViewerBy2nd
             }
         }
 
-        public void SetBackColor()
-        {
-            pbThumbnail.BackColor = Default.formColor;
-        }
+
 
         private void btnFirst_Click(object sender, EventArgs e)
         {
@@ -786,6 +783,14 @@ namespace ViewerBy2nd
         private void ディスプレイと背景色ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Dispacher.ShowSetting();
+        }
+
+        internal void NotifyBackColor()
+        {
+
+            
+                pbThumbnail.BackColor = Default.BackColor;
+                
         }
     }
 
