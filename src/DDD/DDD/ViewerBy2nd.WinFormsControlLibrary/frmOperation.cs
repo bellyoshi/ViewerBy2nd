@@ -829,12 +829,14 @@ namespace ViewerBy2nd
 
                 thumbnailMoviePlayer.Bounds = thumbnailDefaultPanel.Bounds;
                 pbThumbnail.Bounds = thumbnailDefaultPanel.Bounds;
+                //todo:セカンドモニター操作の位置変更
             }
             else
             {
                 panel2.Location = new Point(0, 30);
                 thumbnailMoviePlayer.Bounds = ThumnailMovoToPanel.Bounds;
                 pbThumbnail.Bounds = ThumnailMovoToPanel.Bounds;
+                //todo:セカンドモニター操作の位置変更
             }
         }
 
