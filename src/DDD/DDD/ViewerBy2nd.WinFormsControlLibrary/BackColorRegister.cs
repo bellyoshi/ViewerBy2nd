@@ -19,7 +19,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
 
         private BackColorRegister()
         {
-            _backColor = Default.BackColor;
+            _backColor = Default.BackColor ?? System.Drawing.Color.Black;
         }
 
         private System.Drawing.Color _backColor;

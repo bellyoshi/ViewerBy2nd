@@ -18,6 +18,7 @@ namespace ViewerBy2nd
 
         private frmOperation _frmOperation;
         private frmViewer _frmViewer;
+        private frmSetting _frmSetting;
 
 
 
@@ -91,9 +92,20 @@ namespace ViewerBy2nd
 
         internal void ShowSetting()
         {
-            frmSetting frm = new();
-            frm.Show();
-                
+            if (_frmSetting == null) CreateSettingForm();
+            _frmSetting.Show();   
         }
+
+        private void CreateSettingForm()
+        {
+            _frmSetting = new frmSetting();
+            _frmSetting.FormClosed += new FormClosedEventHandler(this.fromSetting_Closed);
+        }
+
+        private void fromSetting_Closed(object sender, EventArgs e)
+        {
+            _frmSetting = null;
+        }
+
     }
 }

@@ -30,18 +30,19 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             cmbDisplay.SelectedIndex =  ViewScreenRegister.GetInstance().Index;
 
             lblFormColor.BackColor = BackColorRegister.GetInstance().BackColor;
-
+            
 
         }
 
 
 
 
-
+        bool load = false;
         private void frmSetting_Load(object sender, EventArgs e)
         {
             screenDetect();
             AppSettingLoad();
+            load = true;
         }
         private void btnColorChange_Click_1(object sender, EventArgs e)
         {
@@ -53,6 +54,11 @@ namespace ViewerBy2nd.WinFormsControlLibrary
 
         private void cmbDisplay_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            if (!load)
+            {
+                return;
+            }
             if (cmbDisplay.SelectedIndex < 0)
                 return;
             if (cmbDisplay.SelectedItem == null)

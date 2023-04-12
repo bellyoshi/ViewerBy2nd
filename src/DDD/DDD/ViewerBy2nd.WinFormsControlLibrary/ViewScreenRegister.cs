@@ -21,9 +21,34 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         bool isEmpty => _viewScreen == null;
         private ViewScreenRegister()
         {
-            index = Default.cmbDisplaySelectedIndex;
+            var idx = Default.cmbDisplaySelectedIndex;
+            if(!IsValidValue())
+            {
+                idx = null;
+            }
+            Default.cmbDisplaySelectedIndex = idx ?? getDefaultSecondMonitorIndex();
+            index = Default.cmbDisplaySelectedIndex.Value;
             _viewScreen = Screen.AllScreens[index];
         }
+        private bool IsValidValue()
+        {
+            var idx = Default.cmbDisplaySelectedIndex;
+            return 0 <= idx && idx <= Screen.AllScreens.Length;
+        }
+
+        private int getDefaultSecondMonitorIndex()
+        {
+            if (Screen.AllScreens.Length == 1)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
+           
+        }
+        
         private int index;
         public int Index => index;
         public Rectangle Bounds
@@ -45,6 +70,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
 
         public void ChangeScreen(int idx)
         {
+            index = idx;
             _viewScreen = Screen.AllScreens[idx];
             Default.cmbDisplaySelectedIndex = idx;
             Notify();

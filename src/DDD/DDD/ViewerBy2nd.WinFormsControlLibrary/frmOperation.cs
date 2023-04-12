@@ -799,7 +799,7 @@ namespace ViewerBy2nd
         {
 
 
-            pbThumbnail.BackColor = Default.BackColor;
+            pbThumbnail.BackColor = BackColorRegister.GetInstance().BackColor;
 
         }
 
