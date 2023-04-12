@@ -102,6 +102,7 @@ namespace ViewerBy2nd
             Dispacher.RegistrationfrmOperation(this);
 
             AppSettingLoad();
+            ControlRelocation();
             ControlEnable();
             SeekTimer.Interval = 100;
             SeekTimer.Start();
@@ -811,7 +812,7 @@ namespace ViewerBy2nd
 
         private void 非表示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lstFiles.Visible = false;
+            ListPanel.Visible = false;
             ControlRelocation();
             ControlEnable();
 
@@ -823,7 +824,7 @@ namespace ViewerBy2nd
 
 
 
-            if (lstFiles.Visible)
+            if (ListPanel.Visible)
             {
                 panel2.Location = new Point(320, 30);
 
@@ -842,7 +843,7 @@ namespace ViewerBy2nd
 
         private void 表示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            lstFiles.Visible = true;
+            ListPanel.Visible = true;
             ControlRelocation();
             ControlEnable();
         }

@@ -10,13 +10,12 @@ namespace ViewerBy2nd.Infrastructure
         static string fileName = "appsettings.json";
         public static void Initialize()
         {
-            string jsonString= File.ReadAllText(fileName);
+
             try
             {
-                
-                    Default = JsonConvert.DeserializeObject<Settings>(jsonString);
-                }
-            catch (Exception )
+                string jsonString = File.ReadAllText(fileName);
+                Default = JsonConvert.DeserializeObject<Settings>(jsonString);
+            } catch (Exception )
             {
                 Default = new();
             }
