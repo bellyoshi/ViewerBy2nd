@@ -21,9 +21,11 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         bool isEmpty => _viewScreen == null;
         private ViewScreenRegister()
         {
-            var idx = Default.cmbDisplaySelectedIndex;
-            _viewScreen = Screen.AllScreens[idx];
+            index = Default.cmbDisplaySelectedIndex;
+            _viewScreen = Screen.AllScreens[index];
         }
+        private int index;
+        public int Index => index;
         public Rectangle Bounds
         {
             get

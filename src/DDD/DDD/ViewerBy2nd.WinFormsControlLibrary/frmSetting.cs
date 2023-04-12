@@ -14,7 +14,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
     public partial class frmSetting : Form
     {
         private FormDispacher Dispacher => FormDispacher.GetInstance();
-        Settings Default => ConfigurationReader.Default;
+
         private void screenDetect()
         {
             // デバイス名が表示されるようにする
@@ -27,17 +27,9 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         }
         private void AppSettingLoad()
         {
-            if (cmbDisplay.Items.Count > Default.cmbDisplaySelectedIndex)
-            {
-                cmbDisplay.SelectedIndex = Default.cmbDisplaySelectedIndex;
-            }
-            else
-            {
-                cmbDisplay.SelectedIndex = 0;
-            }
+            cmbDisplay.SelectedIndex =  ViewScreenRegister.GetInstance().Index;
 
-
-            lblFormColor.BackColor = Default.BackColor;
+            lblFormColor.BackColor = BackColorRegister.GetInstance().BackColor;
 
 
         }

@@ -826,8 +826,8 @@ namespace ViewerBy2nd
 
             if (ListPanel.Visible)
             {
-                panel2.Location = new Point(320, 30);
-
+                panel2.Location = new Point(270, 30);
+                SecondGroup.Location = new Point(288, 451);
                 thumbnailMoviePlayer.Bounds = thumbnailDefaultPanel.Bounds;
                 pbThumbnail.Bounds = thumbnailDefaultPanel.Bounds;
                 //todo:セカンドモニター操作の位置変更
@@ -837,7 +837,7 @@ namespace ViewerBy2nd
                 panel2.Location = new Point(0, 30);
                 thumbnailMoviePlayer.Bounds = ThumnailMovoToPanel.Bounds;
                 pbThumbnail.Bounds = ThumnailMovoToPanel.Bounds;
-                //todo:セカンドモニター操作の位置変更
+                SecondGroup.Location = new Point(0, 451);
             }
         }
 
