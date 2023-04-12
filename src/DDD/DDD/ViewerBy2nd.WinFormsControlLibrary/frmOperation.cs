@@ -826,6 +826,8 @@ namespace ViewerBy2nd
 
             if (ListPanel.Visible)
             {
+                lstFiles.Width = 260;
+                ListPanel.Width = lstFiles.Width + 10;
                 panel2.Location = new Point(270, 30);
                 SecondGroup.Location = new Point(288, 451);
                 thumbnailMoviePlayer.Bounds = thumbnailDefaultPanel.Bounds;
@@ -834,6 +836,7 @@ namespace ViewerBy2nd
             }
             else
             {
+
                 panel2.Location = new Point(0, 30);
                 thumbnailMoviePlayer.Bounds = ThumnailMovoToPanel.Bounds;
                 pbThumbnail.Bounds = ThumnailMovoToPanel.Bounds;
