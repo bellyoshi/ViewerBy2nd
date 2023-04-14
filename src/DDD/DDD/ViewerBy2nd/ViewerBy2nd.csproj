@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -7,7 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>pdfsecond.ico</ApplicationIcon>
-    <VersionPrefix>1.17.1</VersionPrefix>
+    <VersionPrefix>1.17.2</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
