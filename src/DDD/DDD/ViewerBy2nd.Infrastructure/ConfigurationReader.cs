@@ -5,7 +5,7 @@ namespace ViewerBy2nd.Infrastructure
 {
     public class ConfigurationReader
     {
-        public static Settings? Default;
+        public static Settings Default;
         
         static string fileName = "appsettings.json";
         public static void Initialize()
@@ -14,7 +14,7 @@ namespace ViewerBy2nd.Infrastructure
             try
             {
                 string jsonString = File.ReadAllText(fileName);
-                Default = JsonConvert.DeserializeObject<Settings>(jsonString);
+                Default = JsonConvert.DeserializeObject<Settings>(jsonString)??new();
             } catch (Exception )
             {
                 Default = new();
