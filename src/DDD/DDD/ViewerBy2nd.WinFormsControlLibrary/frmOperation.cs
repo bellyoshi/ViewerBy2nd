@@ -750,7 +750,7 @@ namespace ViewerBy2nd
             return;
 
         }
-        public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
+        public void frmOperation_MouseWheel(object? sender, MouseEventArgs e)
         {
 
             if (!VScrollBar1.Enabled)
