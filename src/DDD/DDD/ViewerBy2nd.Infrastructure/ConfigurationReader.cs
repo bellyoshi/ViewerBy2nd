@@ -5,21 +5,21 @@ namespace ViewerBy2nd.Infrastructure
 {
     public class ConfigurationReader
     {
-        public static Settings Default;
+        public static Settings Default { get; } = GetDefault();
         
         static string fileName = "appsettings.json";
-        public static void Initialize()
+        private static Settings GetDefault()
         {
-
+            Settings settings;
             try
             {
                 string jsonString = File.ReadAllText(fileName);
-                Default = JsonConvert.DeserializeObject<Settings>(jsonString)??new();
+                settings = JsonConvert.DeserializeObject<Settings>(jsonString)??new();
             } catch (Exception )
             {
-                Default = new();
+                settings = new();
             }
-       
+            return settings;
 
         }
         
