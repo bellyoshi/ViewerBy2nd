@@ -832,7 +832,6 @@ namespace ViewerBy2nd
                 SecondGroup.Location = new Point(288, 451);
                 thumbnailMoviePlayer.Bounds = thumbnailDefaultPanel.Bounds;
                 pbThumbnail.Bounds = thumbnailDefaultPanel.Bounds;
-                //todo:セカンドモニター操作の位置変更
             }
             else
             {
