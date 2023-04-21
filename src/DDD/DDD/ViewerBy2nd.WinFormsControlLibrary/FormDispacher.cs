@@ -16,9 +16,9 @@ namespace ViewerBy2nd
         private FormDispacher() { }
 #endregion
 
-        private frmOperation _frmOperation;
-        private frmViewer _frmViewer;
-        private frmSetting _frmSetting;
+        private frmOperation? _frmOperation;
+        private frmViewer? _frmViewer;
+        private frmSetting? _frmSetting;
 
 
 
@@ -26,7 +26,7 @@ namespace ViewerBy2nd
 
         public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
         {
-            _frmOperation.frmOperation_MouseWheel(sender, e);
+            _frmOperation?.frmOperation_MouseWheel(sender, e);
         }
 
         public void NotifyViewerBound()
@@ -44,14 +44,14 @@ namespace ViewerBy2nd
         }
         public void ShowImage(Image image)
         {
-            Show();
-            _frmViewer.ShowImage(image);
+            ShowViewer();
+            _frmViewer?.ShowImage(image);
         }
 
         public ViewerBy2nd.WinFormsControlLibrary.VideoPlayer ShowMovie()
         {
-            Show();
-            return _frmViewer.ShowVideo();
+            ShowViewer();
+            return _frmViewer?.ShowVideo();
         }
 
         internal void RegistrationfrmOperation(frmOperation frmOperation)
@@ -59,18 +59,18 @@ namespace ViewerBy2nd
             _frmOperation = frmOperation;
         }
 
-        private void from_Closed(object sender, EventArgs e)
+        private void from_Closed(object? sender, EventArgs e)
         {
             _frmViewer = null;
         }
 
-        public void Show()
+        public void ShowViewer()
         {
             if (_frmViewer == null)
             {
                 CreateViewerForm();
             }
-            _frmViewer.Show();
+            _frmViewer?.Show();
         }
 
         public void CreateViewerForm()
@@ -93,7 +93,7 @@ namespace ViewerBy2nd
         internal void ShowSetting()
         {
             if (_frmSetting == null) CreateSettingForm();
-            _frmSetting.Show();   
+            _frmSetting?.Show();   
         }
 
         private void CreateSettingForm()
@@ -102,7 +102,7 @@ namespace ViewerBy2nd
             _frmSetting.FormClosed += new FormClosedEventHandler(this.fromSetting_Closed);
         }
 
-        private void fromSetting_Closed(object sender, EventArgs e)
+        private void fromSetting_Closed(object? sender, EventArgs e)
         {
             _frmSetting = null;
         }
