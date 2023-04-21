@@ -237,7 +237,7 @@ namespace ViewerBy2nd
             DispFile = PreviewFile;
         }
 
-        private VideoPlayer player;
+        private VideoPlayer? player;
 
         private void player_Pause()
         {
@@ -374,7 +374,7 @@ namespace ViewerBy2nd
             }
         }
 
-        private FileViewParam DispFile;
+        private FileViewParam? DispFile;
 
         private Document document
         {
