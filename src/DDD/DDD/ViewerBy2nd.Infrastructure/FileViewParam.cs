@@ -10,7 +10,7 @@ namespace ViewerBy2ndLib
     {
      
         public System.Drawing.Size BoundsSize { get; set; }
-        public string FileName { get; set; }
+        public string FileName { get; set; } = String.Empty;
 
         public override string ToString()
         {
@@ -27,7 +27,7 @@ namespace ViewerBy2ndLib
             //シリアル化用
         }
 
-        private Document _document;
+        private Document? _document;
         public Document document {
             get {
                 if (_document == null)

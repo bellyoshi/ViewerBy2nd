@@ -118,8 +118,6 @@ namespace ViewerBy2nd
 
             try
             {
-                List<FileViewParam> fvinfos = new List<FileViewParam>();
-
                 // XmlSerializerオブジェクトを作成
                 System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<FileViewParam>));
                 // 読み込むファイルを開く
@@ -129,10 +127,15 @@ namespace ViewerBy2nd
                 using (System.IO.StreamReader sr = new System.IO.StreamReader(filename, new System.Text.UTF8Encoding(false)))
                 {
                     // XMLファイルから読み込み、逆シリアル化する
-                    fvinfos = (List<FileViewParam>)serializer.Deserialize(sr);
+                    var deserialize = serializer.Deserialize(sr);
+                    if (deserialize != null)
+                    {
+                        List<FileViewParam> fvinfos = (List<FileViewParam>)deserialize;
+                        foreach (var info in fvinfos)
+                            lstFiles.Items.Add(info);
+                    }
                 }
-                foreach (var info in fvinfos)
-                    lstFiles.Items.Add(info);
+
             }
             catch (Exception ex)
             {
@@ -237,7 +240,7 @@ namespace ViewerBy2nd
             DispFile = PreviewFile;
         }
 
-        private VideoPlayer player;
+        private VideoPlayer? player;
 
         private void player_Pause()
         {
@@ -374,7 +377,7 @@ namespace ViewerBy2nd
             }
         }
 
-        private FileViewParam DispFile;
+        private FileViewParam? DispFile;
 
         private Document document
         {

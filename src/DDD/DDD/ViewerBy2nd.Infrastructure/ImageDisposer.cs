@@ -40,7 +40,7 @@ namespace ViewerBy2ndLib
 
         public static Image? DisplayImage { get; set; }
         
-        private  Image _rotatedImage;
+        private  Image? _rotatedImage;
         internal Image RotatedImage { 
             get => _rotatedImage ; 
             set => SetRotateImage(value); 
