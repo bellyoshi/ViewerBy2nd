@@ -190,7 +190,8 @@ namespace ViewerBy2nd
             var list = lstFiles.SelectedItems.Cast<FileViewParam>().ToList();
             foreach (var i in list)
                 lstFiles.Items.Remove(i);
-            if (list.Contains(DispFile))
+            
+            if (DispFile != null && list.Contains(DispFile))
             {
                 UpdateView();
                 ControlEnable();
@@ -297,6 +298,10 @@ namespace ViewerBy2nd
 
         private void lstFiles_DragEnter(object sender, DragEventArgs e)
         {
+            if(e.Data == null)
+            {
+                return;
+            }
             // コントロール内にドラッグされたとき実行される
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 // ドラッグされたデータ形式を調べ、ファイルのときはコピーとする
@@ -308,6 +313,10 @@ namespace ViewerBy2nd
 
         private void lstFiles_DragDrop(object sender, DragEventArgs e)
         {
+            if (e.Data == null)
+            {
+                return;
+            }
             var items = lstFiles.Items;
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
@@ -379,13 +388,19 @@ namespace ViewerBy2nd
 
         private FileViewParam? DispFile;
 
-        private Document document
+        private Document? document
         {
             get
             {
                 if (System.IO.File.Exists(PreviewFile?.FileName))
-                    return PreviewFile?.document;
-                return null/* TODO Change to default(_) if this is not a reference type */;
+                {
+                    var doc = PreviewFile?.document;
+                    if(doc != null)
+                    {
+                        return doc;
+                    }
+                }
+                return null;
             }
         }
 
