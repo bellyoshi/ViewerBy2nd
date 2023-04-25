@@ -1,5 +1,6 @@
 ﻿global using ViewerBy2nd.Infrastructure;
 using System.Data;
+using System.Diagnostics;
 using ViewerBy2nd.WinFormsControlLibrary;
 using ViewerBy2ndLib;
 
@@ -332,6 +333,7 @@ namespace ViewerBy2nd
 
         private void btnRotate180_Click(object sender, EventArgs e)
         {
+            Debug.Assert(document != null);
             document.Rotate(RotateFlipType.Rotate180FlipNone);
             VScrollBar1Init();
             UpdateViewIfChecked();
@@ -339,6 +341,7 @@ namespace ViewerBy2nd
 
         private void btnRotate90_Click(object sender, EventArgs e)
         {
+            Debug.Assert(document != null);
             document.Rotate(RotateFlipType.Rotate90FlipNone);
             VScrollBar1Init();
             UpdateViewIfChecked();
@@ -346,6 +349,7 @@ namespace ViewerBy2nd
 
         private void btnRotate0_Click(object sender, EventArgs e)
         {
+            Debug.Assert(document != null);
             document.Rotate(RotateFlipType.RotateNoneFlipNone);
             VScrollBar1Init();
             UpdateViewIfChecked();
@@ -353,6 +357,7 @@ namespace ViewerBy2nd
 
         private void btnRotate270_Click(object sender, EventArgs e)
         {
+            Debug.Assert(document != null);
             document.Rotate(RotateFlipType.Rotate270FlipNone);
             VScrollBar1Init();
             UpdateViewIfChecked();
@@ -408,6 +413,7 @@ namespace ViewerBy2nd
 
         private void btnFirst_Click(object sender, EventArgs e)
         {
+            Debug.Assert(document != null);
             scrollToFirst();
             document.FirstPage();
 
@@ -416,6 +422,7 @@ namespace ViewerBy2nd
 
         private void btnNext_Click(object sender, EventArgs e)
         {
+            Debug.Assert(document != null);
             if (!document.CanNextPage()) return;
             scrollToFirst();
             document.NextPage();
@@ -434,12 +441,14 @@ namespace ViewerBy2nd
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+            Debug.Assert(document != null);
             document.PrePage();
             UpdateViewIfChecked();
         }
 
         private void btnLast_Click(object sender, EventArgs e)
         {
+            Debug.Assert(document != null);
             document.LastPage();
             UpdateViewIfChecked();
         }
@@ -461,11 +470,11 @@ namespace ViewerBy2nd
             if (IsMovie)
             {
                 var op = new string[] { "no-audio" };
-                thumbnailMoviePlayer.LoadFile(PreviewFile.FileName, op);
-                if (player != null)
-                {
-                    player.LoadFile(PreviewFile.FileName, op);
-                }
+                string filename = PreviewFile?.FileName??string.Empty;
+                thumbnailMoviePlayer.LoadFile(filename, op);
+
+                player?.LoadFile(filename), op);
+                
             }
             else
             {
@@ -477,12 +486,14 @@ namespace ViewerBy2nd
 
         private void btnNextHalf_Click(object sender, EventArgs e)
         {
+            Debug.Assert(document != null);
             document.NextHalfPage();
             UpdateViewIfChecked();
         }
 
         private void btnPreviousHalf_Click(object sender, EventArgs e)
         {
+            Debug.Assert(document != null);
             document.PreviousHalfPage();
             UpdateViewIfChecked();
         }
