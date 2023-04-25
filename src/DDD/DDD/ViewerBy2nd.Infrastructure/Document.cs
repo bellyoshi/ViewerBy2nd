@@ -27,7 +27,7 @@ namespace ViewerBy2ndLib
         public int PageCount => pdfDoc?.PageCount??0;
 
         public double PageIndex { get; set; }
-        private Image OpenImageFile(string filename)
+        private Image? OpenImageFile(string filename)
         {
             if (filename == null) return null;
 
@@ -61,7 +61,7 @@ namespace ViewerBy2ndLib
             }
             else
             {
-                FileViewParam.ZoomHeight = RotatedImage.Height;
+                FileViewParam.ZoomHeight = RotatedImage?.Height??0;
             }
             requireInitZoomHeight = false;
         }
@@ -75,7 +75,7 @@ namespace ViewerBy2ndLib
         }
         internal void CreateRotateImage()
         {
-            Image image;
+            Image? image;
             if (FileType.IsPDFExt)
             {
                 image = RenderPDF();
@@ -84,7 +84,7 @@ namespace ViewerBy2ndLib
             {
                 image = OpenImageFile(FileViewParam.FileName);
             }
-            image.RotateFlip(FileViewParam.rotateFlipType);
+            image?.RotateFlip(FileViewParam.rotateFlipType);
             this.RotatedImage = image;
         }
         public void UpdateImage()
@@ -275,12 +275,12 @@ namespace ViewerBy2ndLib
 
         public int OriginalImageHeight { get; private set; }
         
-        public Image OutPutImage {
+        public Image? OutPutImage {
             get => disposer.OutputImage;
             set => disposer.OutputImage = value;
         }
 
-        private Image RotatedImage
+        private Image? RotatedImage
         {
             get => disposer.RotatedImage ;
             set => disposer.RotatedImage = value;
@@ -294,18 +294,18 @@ namespace ViewerBy2ndLib
         public int GetZoomImageHeightMin()
         {
             var pbSize = FileViewParam.BoundsSize;
-            return Convert.ToInt32(pbSize.Height  * RotatedImage.Width / pbSize.Width);
+            return Convert.ToInt32(pbSize.Height  * RotatedImage?.Width / pbSize.Width);
         }
         public void ZoomUp()
         {
             if (!FileViewParam.IsZoom)
             {
-                FileViewParam.ZoomHeight = RotatedImage.Height;
+                FileViewParam.ZoomHeight = RotatedImage?.Height??0;
             }
             FileViewParam.IsZoom = true;
 
 
-            var zoomDelta = (RotatedImage.Height - GetZoomImageHeightMin()) / 7;
+            var zoomDelta = (RotatedImage?.Height??0 - GetZoomImageHeightMin()) / 7;
             FileViewParam.ZoomHeight -= zoomDelta;
 
             if (FileViewParam.ZoomHeight <= GetZoomImageHeightMin())
@@ -317,11 +317,11 @@ namespace ViewerBy2ndLib
         public void ZoomDown()
         {
 
-            var zoomDelta = (RotatedImage.Height - GetZoomImageHeightMin()) / 7;
+            var zoomDelta = (RotatedImage?.Height??0 - GetZoomImageHeightMin()) / 7;
             FileViewParam.ZoomHeight += zoomDelta;
-            if (RotatedImage.Height <= FileViewParam.ZoomHeight)
+            if ((RotatedImage?.Height??0) <= FileViewParam.ZoomHeight)
             {
-                FileViewParam.ZoomHeight = RotatedImage.Height;
+                FileViewParam.ZoomHeight = RotatedImage?.Height??0;
                 FileViewParam.IsZoom = false;
             }
 
@@ -331,7 +331,7 @@ namespace ViewerBy2ndLib
             size.Width / size.Height;
         
         public bool CanSetWindowWidthRate() {
-            var imageSize = RotatedImage.Size;
+            var imageSize = RotatedImage?.Size??new Size(0,0);
             var pictureBoxSize = FileViewParam.BoundsSize;
             var imageRate = GetAspectRatio(imageSize);
             var pbRate = GetAspectRatio(pictureBoxSize);
@@ -352,22 +352,22 @@ namespace ViewerBy2ndLib
             
 
 
-            OriginalImageHeight = this.RotatedImage.Height;
+            OriginalImageHeight = RotatedImage?.Height??0;
 
             if (!CanSetWindowWidthRate()) return;
 
 
             int ImageY;
-            if(FileViewParam.scrollBarValue + GetSetWinImageHeight() > RotatedImage.Height) {
-                ImageY = Convert.ToInt32(RotatedImage.Height - GetSetWinImageHeight());
+            if(FileViewParam.scrollBarValue + GetSetWinImageHeight() > (RotatedImage?.Height??0)) {
+                ImageY = Convert.ToInt32(RotatedImage?.Height??0 - GetSetWinImageHeight());
             }
             else
             {
                 ImageY = FileViewParam.scrollBarValue;
             }
 
-            var rect = new Rectangle(0, ImageY, RotatedImage.Width, GetSetWinImageHeight());
-            this.OutPutImage = BitmapTool.ImageRoi(RotatedImage, rect);
+            var rect = new Rectangle(0, ImageY, RotatedImage?.Width??0, GetSetWinImageHeight());
+            this.OutPutImage = BitmapTool.ImageRoi(RotatedImage??new Bitmap(0,0), rect);
             
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using ViewerBy2nd.WinFormsControlLibrary;
@@ -51,7 +52,8 @@ namespace ViewerBy2nd
         public ViewerBy2nd.WinFormsControlLibrary.VideoPlayer ShowMovie()
         {
             ShowViewer();
-            return _frmViewer?.ShowVideo();
+            Debug.Assert(_frmViewer != null);
+            return _frmViewer.ShowVideo();
         }
 
         internal void RegistrationfrmOperation(frmOperation frmOperation)
@@ -68,17 +70,20 @@ namespace ViewerBy2nd
         {
             if (_frmViewer == null)
             {
-                CreateViewerForm();
+                _frmViewer = CreateViewerForm();
             }
-            _frmViewer?.Show();
+            _frmViewer.Show();
+
         }
 
-        public void CreateViewerForm()
+        public frmViewer CreateViewerForm()
         {
-            _frmViewer = new frmViewer();
-            _frmViewer.NotifyBackColor();
-            _frmViewer.SetViewerBounds();
-            _frmViewer.FormClosed += new FormClosedEventHandler(this.from_Closed);
+            frmViewer frm;
+            frm = new frmViewer();
+            frm.NotifyBackColor();
+            frm.SetViewerBounds();
+            frm.FormClosed += new FormClosedEventHandler(this.from_Closed);
+            return frm;
         }
 
 

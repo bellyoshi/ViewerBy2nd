@@ -12,8 +12,9 @@ namespace ViewerBy2ndLib
 
         private List<Image> images = new List<Image>();
 
-        private void AddImage(Image image)
+        private void AddImage(Image? image)
         {
+            if (image == null) return;
             images.Add(image);
             DisposeImages();
         }
@@ -41,23 +42,23 @@ namespace ViewerBy2ndLib
         public static Image? DisplayImage { get; set; }
         
         private  Image? _rotatedImage;
-        internal Image RotatedImage { 
+        internal Image? RotatedImage { 
             get => _rotatedImage ; 
             set => SetRotateImage(value); 
         }
-        private void SetRotateImage(Image image)
+        private void SetRotateImage(Image? image)
         {
             _rotatedImage = image;
             AddImage(image);
         }
 
-        private  Image _outputImage;
-        internal Image OutputImage
+        private  Image? _outputImage;
+        internal Image? OutputImage
         {
             get => _outputImage;
             set => SetOutputImage(value);
         }
-        private void SetOutputImage(Image image)
+        private void SetOutputImage(Image? image)
         {
             _outputImage = image;
             AddImage(image);

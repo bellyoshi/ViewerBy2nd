@@ -232,6 +232,7 @@ namespace ViewerBy2nd
 
         private void PlayMovie()
         {
+            Debug.Assert(PreviewFile != null);
             var vlc = Dispacher.ShowMovie();
             int starttime = Convert.ToInt32(thumbnailMoviePlayer.Time / (double)1000);
             var op = new string[] { $"start-time={starttime}" };
@@ -377,14 +378,14 @@ namespace ViewerBy2nd
             DispFile = PreviewFile;
         }
 
-        private FileViewParam PreviewFile
+        private FileViewParam? PreviewFile
         {
             get
             {
                 if (lstFiles.SelectedItems.Count != 1)
-                    return null/* TODO Change to default(_) if this is not a reference type */;
+                    return null;
                 if (lstFiles.SelectedItem == null)
-                    return null/* TODO Change to default(_) if this is not a reference type */;
+                    return null;
                 var p = (FileViewParam)lstFiles.SelectedItem;
                 p.BoundsSize = ViewScreenRegister.GetInstance().Size;
                 return p;
@@ -432,6 +433,7 @@ namespace ViewerBy2nd
 
         private void scrollToFirst()
         {
+            Debug.Assert(PreviewFile != null);
             if (PreviewFile.IsZoom)
             {
                 VScrollBar1.Value = 0;
@@ -472,8 +474,7 @@ namespace ViewerBy2nd
                 var op = new string[] { "no-audio" };
                 string filename = PreviewFile?.FileName??string.Empty;
                 thumbnailMoviePlayer.LoadFile(filename, op);
-
-                player?.LoadFile(filename), op);
+                player?.LoadFile(filename, op);
                 
             }
             else
@@ -517,6 +518,7 @@ namespace ViewerBy2nd
         {
             if (PreviewFile == null)
                 return;
+            Debug.Assert(document != null);
             PreviewFile.scrollBarValue = VScrollBar1.Value;
             document.UpdateImage();
             UpdateViewIfChecked();
@@ -524,13 +526,15 @@ namespace ViewerBy2nd
 
         private void VScrollBar1Init()
         {
+            Debug.Assert(PreviewFile != null);
+            Debug.Assert(document != null);
             if (document.OriginalImageHeight == 0)
             {
                 return;
             }
             VScrollBar1.Minimum = 0;
-            var clientWidth = document.OutPutImage.Height;
-            VScrollBar1.Maximum = document.OriginalImageHeight;
+            var clientWidth = document?.OutPutImage?.Height??0;
+            VScrollBar1.Maximum = document?.OriginalImageHeight??0;
             VScrollBar1.Value = PreviewFile.scrollBarValue;
 
             VScrollBar1.LargeChange = clientWidth;
@@ -538,6 +542,8 @@ namespace ViewerBy2nd
 
         private void btnSetWindow_Click(object sender, EventArgs e)
         {
+            Debug.Assert(PreviewFile != null);
+            Debug.Assert(document != null);
             PreviewFile.scrollBarValue = 0;
             PreviewFile.IsZoom = true;
             PreviewFile.ZoomHeight = document.GetZoomImageHeightMin();
@@ -623,6 +629,7 @@ namespace ViewerBy2nd
 
         private void Trackbar_Seek()
         {
+            Debug.Assert(PreviewFile != null);
 
             if (trackBarSeek_Scrolled)
             {
@@ -676,6 +683,7 @@ namespace ViewerBy2nd
 
         private void btnWhole_Click(object sender, EventArgs e)
         {
+            Debug.Assert(PreviewFile != null);
             PreviewFile.IsZoom = false;
             document?.UpdateImage();
             ControlEnable();
@@ -728,6 +736,7 @@ namespace ViewerBy2nd
 
         private void MouseWheelScrollLine(int delta)
         {
+            Debug.Assert(document != null);
             var numberOfTextLinesToMove = delta * SystemInformation.MouseWheelScrollLines / (double)25;
             var maximum = VScrollBar1.Maximum - VScrollBar1.LargeChange + 1;
             int expect = -Convert.ToInt32(numberOfTextLinesToMove) + VScrollBar1.Value;
@@ -795,6 +804,7 @@ namespace ViewerBy2nd
 
         private void btnZoomUp_Click(object sender, EventArgs e)
         {
+            Debug.Assert(PreviewFile != null);
             document?.ZoomUp();
             PreviewFile.scrollBarValue = 0;
             document?.UpdateImage();
@@ -805,6 +815,7 @@ namespace ViewerBy2nd
 
         private void btnZoomDown_Click(object sender, EventArgs e)
         {
+            Debug.Assert(PreviewFile != null);
             document?.ZoomDown();
             PreviewFile.scrollBarValue = 0;
             document?.UpdateImage();
