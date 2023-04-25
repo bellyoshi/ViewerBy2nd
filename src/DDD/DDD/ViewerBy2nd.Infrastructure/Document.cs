@@ -22,9 +22,9 @@ namespace ViewerBy2ndLib
         }
 
         
-        PdfiumViewer.PdfDocument pdfDoc;
+        PdfiumViewer.PdfDocument? pdfDoc;
 
-        public int PageCount => pdfDoc.PageCount;
+        public int PageCount => pdfDoc?.PageCount??0;
 
         public double PageIndex { get; set; }
         private Image OpenImageFile(string filename)
@@ -139,13 +139,13 @@ namespace ViewerBy2ndLib
 
         Image RenderPDF()
         {
-            if (PageIndex >= pdfDoc.PageCount)
+            if (PageIndex >= PageCount)
             {
                 System.Diagnostics.Debug.Assert(false);
                 return this.RotatedImage;
             }
 
-            var sourceSize = pdfDoc.PageSizes[Convert.ToInt32(PageIndex)];
+            var sourceSize = pdfDoc?.PageSizes[Convert.ToInt32(PageIndex)]??new ();
             var renderSize = GetRenderSize(sourceSize);
             if (renderSize == null) {
                 System.Diagnostics.Debug.Assert(false);
@@ -208,7 +208,7 @@ namespace ViewerBy2ndLib
         private decimal buttomInPage;
 
         public void NextHalfPage() {
-            if ((buttomInPage == 1.0m) && (PageIndex == pdfDoc.PageCount - 1)) {
+            if ((buttomInPage == 1.0m) && (PageIndex == PageCount - 1)) {
                 return;
             }
 
@@ -239,10 +239,10 @@ namespace ViewerBy2ndLib
         }
 
         private void DisplayHalfPage() {
-            if (PageIndex >= pdfDoc.PageCount || PageIndex< 0) {
+            if (PageIndex >= PageCount || PageIndex< 0) {
                 return;
             }
-            var pdfSize = pdfDoc.PageSizes[Convert.ToInt32(PageIndex)];
+            var pdfSize = pdfDoc?.PageSizes[Convert.ToInt32(PageIndex)]??new();
             SizeF sourceSize = new SizeF(pdfSize.Width, pdfSize.Height / 2);
             Size? renderSize = GetRenderSize(sourceSize);
             if (renderSize == null) {
@@ -268,7 +268,8 @@ namespace ViewerBy2ndLib
             this.RotatedImage = this.OutPutImage;
         }
         private Image GetPdfImage(Size renderSize) {
-            return pdfDoc.Render(Convert.ToInt32(PageIndex), renderSize.Width, renderSize.Height, 96, 96, false);
+            return pdfDoc?.Render(Convert.ToInt32(PageIndex), renderSize.Width, renderSize.Height, 96, 96, false)??new Bitmap(1, 1);
+
         }
 
 

@@ -118,8 +118,6 @@ namespace ViewerBy2nd
 
             try
             {
-                List<FileViewParam> fvinfos = new List<FileViewParam>();
-
                 // XmlSerializerオブジェクトを作成
                 System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(List<FileViewParam>));
                 // 読み込むファイルを開く
@@ -129,10 +127,15 @@ namespace ViewerBy2nd
                 using (System.IO.StreamReader sr = new System.IO.StreamReader(filename, new System.Text.UTF8Encoding(false)))
                 {
                     // XMLファイルから読み込み、逆シリアル化する
-                    fvinfos = (List<FileViewParam>)serializer.Deserialize(sr);
+                    var deserialize = serializer.Deserialize(sr);
+                    if (deserialize != null)
+                    {
+                        List<FileViewParam> fvinfos = (List<FileViewParam>)deserialize;
+                        foreach (var info in fvinfos)
+                            lstFiles.Items.Add(info);
+                    }
                 }
-                foreach (var info in fvinfos)
-                    lstFiles.Items.Add(info);
+
             }
             catch (Exception ex)
             {
@@ -187,7 +190,8 @@ namespace ViewerBy2nd
             var list = lstFiles.SelectedItems.Cast<FileViewParam>().ToList();
             foreach (var i in list)
                 lstFiles.Items.Remove(i);
-            if (list.Contains(DispFile))
+            
+            if (DispFile != null && list.Contains(DispFile))
             {
                 UpdateView();
                 ControlEnable();
@@ -294,6 +298,10 @@ namespace ViewerBy2nd
 
         private void lstFiles_DragEnter(object sender, DragEventArgs e)
         {
+            if(e.Data == null)
+            {
+                return;
+            }
             // コントロール内にドラッグされたとき実行される
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 // ドラッグされたデータ形式を調べ、ファイルのときはコピーとする
@@ -305,6 +313,10 @@ namespace ViewerBy2nd
 
         private void lstFiles_DragDrop(object sender, DragEventArgs e)
         {
+            if (e.Data == null)
+            {
+                return;
+            }
             var items = lstFiles.Items;
             string[] fileName = (string[])e.Data.GetData(DataFormats.FileDrop, false);
 
@@ -376,13 +388,19 @@ namespace ViewerBy2nd
 
         private FileViewParam? DispFile;
 
-        private Document document
+        private Document? document
         {
             get
             {
                 if (System.IO.File.Exists(PreviewFile?.FileName))
-                    return PreviewFile?.document;
-                return null/* TODO Change to default(_) if this is not a reference type */;
+                {
+                    var doc = PreviewFile?.document;
+                    if(doc != null)
+                    {
+                        return doc;
+                    }
+                }
+                return null;
             }
         }
 

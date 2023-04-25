@@ -20,7 +20,7 @@ namespace ViewerBy2nd
             InitializeComponent();
         }
 
-        public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
+        public void frmOperation_MouseWheel(object? sender, MouseEventArgs e)
         {
             var dispacher = FormDispacher.GetInstance();
             dispacher.frmOperation_MouseWheel(sender, e);

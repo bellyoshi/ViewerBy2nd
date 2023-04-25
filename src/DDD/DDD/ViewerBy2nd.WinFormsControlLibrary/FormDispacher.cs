@@ -24,7 +24,7 @@ namespace ViewerBy2nd
 
         public bool ViewerVisible => _frmViewer?.Visible??false;
 
-        public void frmOperation_MouseWheel(object sender, MouseEventArgs e)
+        public void frmOperation_MouseWheel(object? sender, MouseEventArgs e)
         {
             _frmOperation?.frmOperation_MouseWheel(sender, e);
         }
