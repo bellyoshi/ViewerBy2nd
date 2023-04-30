@@ -30,7 +30,6 @@
         {
             components=new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmOperation));
-            SecondGroup=new GroupBox();
             btnDisp=new Button();
             btnUnSelectUpdate=new Button();
             btnUnDisp=new Button();
@@ -85,8 +84,7 @@
             panel2=new Panel();
             thumbnailDefaultPanel=new Panel();
             ThumnailMovoToPanel=new Panel();
-            ListPanel=new Panel();
-            SecondGroup.SuspendLayout();
+            SecondGroup=new GroupBox();
             ((System.ComponentModel.ISupportInitialize)trackBarSeek).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbThumbnail).BeginInit();
             pnlMovie.SuspendLayout();
@@ -94,28 +92,14 @@
             pnlPage.SuspendLayout();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
-            ListPanel.SuspendLayout();
+            SecondGroup.SuspendLayout();
             SuspendLayout();
-            // 
-            // SecondGroup
-            // 
-            SecondGroup.Controls.Add(btnDisp);
-            SecondGroup.Controls.Add(btnUnSelectUpdate);
-            SecondGroup.Controls.Add(btnUnDisp);
-            SecondGroup.Controls.Add(chkUpdate);
-            SecondGroup.Location=new Point(288, 451);
-            SecondGroup.Name="SecondGroup";
-            SecondGroup.Size=new Size(463, 77);
-            SecondGroup.TabIndex=96;
-            SecondGroup.TabStop=false;
-            SecondGroup.Text="セカンドモニター操作";
             // 
             // btnDisp
             // 
-            btnDisp.Location=new Point(8, 28);
-            btnDisp.Margin=new Padding(3, 2, 3, 2);
+            btnDisp.Location=new Point(11, 26);
             btnDisp.Name="btnDisp";
-            btnDisp.Size=new Size(85, 38);
+            btnDisp.Size=new Size(97, 51);
             btnDisp.TabIndex=20;
             btnDisp.Text="表示";
             btnDisp.UseVisualStyleBackColor=true;
@@ -123,10 +107,9 @@
             // 
             // btnUnSelectUpdate
             // 
-            btnUnSelectUpdate.Location=new Point(183, 31);
-            btnUnSelectUpdate.Margin=new Padding(3, 2, 3, 2);
+            btnUnSelectUpdate.Location=new Point(215, 26);
             btnUnSelectUpdate.Name="btnUnSelectUpdate";
-            btnUnSelectUpdate.Size=new Size(101, 38);
+            btnUnSelectUpdate.Size=new Size(115, 51);
             btnUnSelectUpdate.TabIndex=20;
             btnUnSelectUpdate.Text="背景表示";
             btnUnSelectUpdate.UseVisualStyleBackColor=true;
@@ -134,10 +117,9 @@
             // 
             // btnUnDisp
             // 
-            btnUnDisp.Location=new Point(98, 30);
-            btnUnDisp.Margin=new Padding(3, 2, 3, 2);
+            btnUnDisp.Location=new Point(118, 26);
             btnUnDisp.Name="btnUnDisp";
-            btnUnDisp.Size=new Size(80, 38);
+            btnUnDisp.Size=new Size(91, 51);
             btnUnDisp.TabIndex=20;
             btnUnDisp.Text="表示終了";
             btnUnDisp.UseVisualStyleBackColor=true;
@@ -147,10 +129,9 @@
             // 
             chkUpdate.AutoSize=true;
             chkUpdate.FlatStyle=FlatStyle.System;
-            chkUpdate.Location=new Point(300, 46);
-            chkUpdate.Margin=new Padding(3, 2, 3, 2);
+            chkUpdate.Location=new Point(336, 40);
             chkUpdate.Name="chkUpdate";
-            chkUpdate.Size=new Size(125, 20);
+            chkUpdate.Size=new Size(157, 25);
             chkUpdate.TabIndex=25;
             chkUpdate.Text="操作中に自動表示";
             chkUpdate.UseVisualStyleBackColor=true;
@@ -159,18 +140,17 @@
             // lblMovieTime
             // 
             lblMovieTime.AutoSize=true;
-            lblMovieTime.Location=new Point(500, 370);
+            lblMovieTime.Location=new Point(571, 493);
             lblMovieTime.Name="lblMovieTime";
-            lblMovieTime.Size=new Size(56, 15);
+            lblMovieTime.Size=new Size(71, 20);
             lblMovieTime.TabIndex=95;
             lblMovieTime.Text="-- time --";
             // 
             // btnAllSelect
             // 
-            btnAllSelect.Location=new Point(8, 435);
-            btnAllSelect.Margin=new Padding(3, 2, 3, 2);
+            btnAllSelect.Location=new Point(2, 623);
             btnAllSelect.Name="btnAllSelect";
-            btnAllSelect.Size=new Size(77, 30);
+            btnAllSelect.Size=new Size(69, 40);
             btnAllSelect.TabIndex=94;
             btnAllSelect.Text="全選択";
             btnAllSelect.UseVisualStyleBackColor=true;
@@ -178,10 +158,9 @@
             // 
             // btnPDFLast
             // 
-            btnPDFLast.Location=new Point(172, 2);
-            btnPDFLast.Margin=new Padding(3, 2, 3, 2);
+            btnPDFLast.Location=new Point(197, 3);
             btnPDFLast.Name="btnPDFLast";
-            btnPDFLast.Size=new Size(53, 34);
+            btnPDFLast.Size=new Size(61, 45);
             btnPDFLast.TabIndex=93;
             btnPDFLast.Text="最後へ";
             btnPDFLast.UseVisualStyleBackColor=true;
@@ -189,10 +168,9 @@
             // 
             // btnWhole
             // 
-            btnWhole.Location=new Point(144, 92);
-            btnWhole.Margin=new Padding(3, 2, 3, 2);
+            btnWhole.Location=new Point(165, 123);
             btnWhole.Name="btnWhole";
-            btnWhole.Size=new Size(80, 34);
+            btnWhole.Size=new Size(91, 45);
             btnWhole.TabIndex=92;
             btnWhole.Text="全体を表示";
             btnWhole.UseVisualStyleBackColor=true;
@@ -200,18 +178,17 @@
             // 
             // lblPageDisp
             // 
-            lblPageDisp.Location=new Point(416, 345);
+            lblPageDisp.Location=new Point(475, 460);
             lblPageDisp.Name="lblPageDisp";
-            lblPageDisp.Size=new Size(234, 15);
+            lblPageDisp.Size=new Size(267, 20);
             lblPageDisp.TabIndex=91;
             lblPageDisp.Text="- page -";
             // 
             // btnPreviousHalf
             // 
-            btnPreviousHalf.Location=new Point(12, 39);
-            btnPreviousHalf.Margin=new Padding(3, 2, 3, 2);
+            btnPreviousHalf.Location=new Point(14, 52);
             btnPreviousHalf.Name="btnPreviousHalf";
-            btnPreviousHalf.Size=new Size(105, 34);
+            btnPreviousHalf.Size=new Size(120, 45);
             btnPreviousHalf.TabIndex=89;
             btnPreviousHalf.Text="0.5ページ前へ";
             btnPreviousHalf.UseVisualStyleBackColor=true;
@@ -219,10 +196,9 @@
             // 
             // btnNextHalf
             // 
-            btnNextHalf.Location=new Point(122, 39);
-            btnNextHalf.Margin=new Padding(3, 2, 3, 2);
+            btnNextHalf.Location=new Point(139, 52);
             btnNextHalf.Name="btnNextHalf";
-            btnNextHalf.Size=new Size(105, 34);
+            btnNextHalf.Size=new Size(120, 45);
             btnNextHalf.TabIndex=90;
             btnNextHalf.Text="0.5ページ先へ";
             btnNextHalf.UseVisualStyleBackColor=true;
@@ -230,10 +206,9 @@
             // 
             // btnPDFNext
             // 
-            btnPDFNext.Location=new Point(123, 2);
-            btnPDFNext.Margin=new Padding(3, 2, 3, 2);
+            btnPDFNext.Location=new Point(141, 3);
             btnPDFNext.Name="btnPDFNext";
-            btnPDFNext.Size=new Size(44, 34);
+            btnPDFNext.Size=new Size(50, 45);
             btnPDFNext.TabIndex=86;
             btnPDFNext.Text="次へ";
             btnPDFNext.UseVisualStyleBackColor=true;
@@ -241,10 +216,9 @@
             // 
             // btnPDFBack
             // 
-            btnPDFBack.Location=new Point(74, 2);
-            btnPDFBack.Margin=new Padding(3, 2, 3, 2);
+            btnPDFBack.Location=new Point(85, 3);
             btnPDFBack.Name="btnPDFBack";
-            btnPDFBack.Size=new Size(44, 34);
+            btnPDFBack.Size=new Size(50, 45);
             btnPDFBack.TabIndex=87;
             btnPDFBack.Text="前へ";
             btnPDFBack.UseVisualStyleBackColor=true;
@@ -252,10 +226,9 @@
             // 
             // btnPDFFirst
             // 
-            btnPDFFirst.Location=new Point(10, 2);
-            btnPDFFirst.Margin=new Padding(3, 2, 3, 2);
+            btnPDFFirst.Location=new Point(11, 3);
             btnPDFFirst.Name="btnPDFFirst";
-            btnPDFFirst.Size=new Size(59, 34);
+            btnPDFFirst.Size=new Size(67, 45);
             btnPDFFirst.TabIndex=88;
             btnPDFFirst.Text="最初へ";
             btnPDFFirst.UseVisualStyleBackColor=true;
@@ -263,10 +236,9 @@
             // 
             // GotoFirst
             // 
-            GotoFirst.Location=new Point(5, 14);
-            GotoFirst.Margin=new Padding(3, 2, 3, 2);
+            GotoFirst.Location=new Point(6, 19);
             GotoFirst.Name="GotoFirst";
-            GotoFirst.Size=new Size(45, 45);
+            GotoFirst.Size=new Size(51, 60);
             GotoFirst.TabIndex=80;
             GotoFirst.Text="先頭";
             GotoFirst.UseVisualStyleBackColor=true;
@@ -274,10 +246,9 @@
             // 
             // btnStop
             // 
-            btnStop.Location=new Point(194, 14);
-            btnStop.Margin=new Padding(3, 2, 3, 2);
+            btnStop.Location=new Point(222, 19);
             btnStop.Name="btnStop";
-            btnStop.Size=new Size(45, 45);
+            btnStop.Size=new Size(51, 60);
             btnStop.TabIndex=81;
             btnStop.Text="||";
             btnStop.UseVisualStyleBackColor=true;
@@ -286,10 +257,9 @@
             // btnFastReverse
             // 
             btnFastReverse.Font=new Font("MS UI Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnFastReverse.Location=new Point(51, 14);
-            btnFastReverse.Margin=new Padding(3, 2, 3, 2);
+            btnFastReverse.Location=new Point(58, 19);
             btnFastReverse.Name="btnFastReverse";
-            btnFastReverse.Size=new Size(45, 45);
+            btnFastReverse.Size=new Size(51, 60);
             btnFastReverse.TabIndex=82;
             btnFastReverse.Text="◀";
             btnFastReverse.UseVisualStyleBackColor=true;
@@ -298,10 +268,9 @@
             // btnFastForward
             // 
             btnFastForward.Font=new Font("MS UI Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnFastForward.Location=new Point(146, 14);
-            btnFastForward.Margin=new Padding(3, 2, 3, 2);
+            btnFastForward.Location=new Point(167, 19);
             btnFastForward.Name="btnFastForward";
-            btnFastForward.Size=new Size(45, 45);
+            btnFastForward.Size=new Size(51, 60);
             btnFastForward.TabIndex=83;
             btnFastForward.Text="▶▶";
             btnFastForward.UseVisualStyleBackColor=true;
@@ -310,10 +279,9 @@
             // btnStart
             // 
             btnStart.Font=new Font("MS UI Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            btnStart.Location=new Point(98, 14);
-            btnStart.Margin=new Padding(3, 2, 3, 2);
+            btnStart.Location=new Point(112, 19);
             btnStart.Name="btnStart";
-            btnStart.Size=new Size(45, 45);
+            btnStart.Size=new Size(51, 60);
             btnStart.TabIndex=84;
             btnStart.Text="▶";
             btnStart.UseVisualStyleBackColor=true;
@@ -322,26 +290,25 @@
             // Label2
             // 
             Label2.AutoSize=true;
-            Label2.Location=new Point(444, 31);
+            Label2.Location=new Point(507, 41);
             Label2.Name="Label2";
-            Label2.Size=new Size(72, 15);
+            Label2.Size=new Size(90, 20);
             Label2.TabIndex=79;
             Label2.Text="表示プレビュー";
             // 
             // VScrollBar1
             // 
-            VScrollBar1.Location=new Point(716, 35);
+            VScrollBar1.Location=new Point(818, 47);
             VScrollBar1.Name="VScrollBar1";
-            VScrollBar1.Size=new Size(23, 300);
+            VScrollBar1.Size=new Size(23, 400);
             VScrollBar1.TabIndex=78;
             VScrollBar1.Scroll+=VScrollBar1_Scroll;
             // 
             // btnSetWindow
             // 
-            btnSetWindow.Location=new Point(2, 92);
-            btnSetWindow.Margin=new Padding(3, 2, 3, 2);
+            btnSetWindow.Location=new Point(2, 123);
             btnSetWindow.Name="btnSetWindow";
-            btnSetWindow.Size=new Size(136, 34);
+            btnSetWindow.Size=new Size(155, 45);
             btnSetWindow.TabIndex=76;
             btnSetWindow.Text="ウィンドウ幅に合わせる";
             btnSetWindow.UseVisualStyleBackColor=true;
@@ -349,10 +316,9 @@
             // 
             // btnRotate90
             // 
-            btnRotate90.Location=new Point(130, 27);
-            btnRotate90.Margin=new Padding(3, 2, 3, 2);
+            btnRotate90.Location=new Point(149, 36);
             btnRotate90.Name="btnRotate90";
-            btnRotate90.Size=new Size(61, 38);
+            btnRotate90.Size=new Size(70, 51);
             btnRotate90.TabIndex=72;
             btnRotate90.Text="右90度";
             btnRotate90.UseVisualStyleBackColor=true;
@@ -360,20 +326,18 @@
             // 
             // trackBarSeek
             // 
-            trackBarSeek.Location=new Point(391, 345);
-            trackBarSeek.Margin=new Padding(3, 2, 3, 2);
+            trackBarSeek.Location=new Point(447, 460);
             trackBarSeek.Name="trackBarSeek";
-            trackBarSeek.Size=new Size(277, 45);
+            trackBarSeek.Size=new Size(317, 56);
             trackBarSeek.TabIndex=85;
             trackBarSeek.Scroll+=trackBarSeek_Scroll;
             trackBarSeek.MouseDown+=trackBarSeek_MouseDown;
             // 
             // btnRotate0
             // 
-            btnRotate0.Location=new Point(73, 0);
-            btnRotate0.Margin=new Padding(3, 2, 3, 2);
+            btnRotate0.Location=new Point(83, 0);
             btnRotate0.Name="btnRotate0";
-            btnRotate0.Size=new Size(52, 38);
+            btnRotate0.Size=new Size(59, 51);
             btnRotate0.TabIndex=73;
             btnRotate0.Text="０度";
             btnRotate0.UseVisualStyleBackColor=true;
@@ -389,10 +353,9 @@
             // 
             // btnRotate270
             // 
-            btnRotate270.Location=new Point(6, 27);
-            btnRotate270.Margin=new Padding(3, 2, 3, 2);
+            btnRotate270.Location=new Point(7, 36);
             btnRotate270.Name="btnRotate270";
-            btnRotate270.Size=new Size(61, 38);
+            btnRotate270.Size=new Size(70, 51);
             btnRotate270.TabIndex=74;
             btnRotate270.Text="左90度";
             btnRotate270.UseVisualStyleBackColor=true;
@@ -400,10 +363,9 @@
             // 
             // btnRotate180
             // 
-            btnRotate180.Location=new Point(73, 50);
-            btnRotate180.Margin=new Padding(3, 2, 3, 2);
+            btnRotate180.Location=new Point(83, 67);
             btnRotate180.Name="btnRotate180";
-            btnRotate180.Size=new Size(52, 38);
+            btnRotate180.Size=new Size(59, 51);
             btnRotate180.TabIndex=75;
             btnRotate180.Text="180度回転";
             btnRotate180.UseVisualStyleBackColor=true;
@@ -412,18 +374,17 @@
             // Label6
             // 
             Label6.AutoSize=true;
-            Label6.Location=new Point(10, 10);
+            Label6.Location=new Point(11, 13);
             Label6.Name="Label6";
-            Label6.Size=new Size(65, 15);
+            Label6.Size=new Size(81, 20);
             Label6.TabIndex=71;
             Label6.Text="ファイル情報";
             // 
             // btnFileAdd
             // 
-            btnFileAdd.Location=new Point(172, 434);
-            btnFileAdd.Margin=new Padding(3, 2, 3, 2);
+            btnFileAdd.Location=new Point(157, 623);
             btnFileAdd.Name="btnFileAdd";
-            btnFileAdd.Size=new Size(101, 30);
+            btnFileAdd.Size=new Size(101, 40);
             btnFileAdd.TabIndex=70;
             btnFileAdd.Text="ファイルを追加";
             btnFileAdd.UseVisualStyleBackColor=true;
@@ -433,12 +394,12 @@
             // 
             lstFiles.AllowDrop=true;
             lstFiles.FormattingEnabled=true;
-            lstFiles.ItemHeight=15;
-            lstFiles.Location=new Point(8, 4);
-            lstFiles.Margin=new Padding(26, 22, 26, 22);
+            lstFiles.ItemHeight=20;
+            lstFiles.Location=new Point(2, 59);
+            lstFiles.Margin=new Padding(30, 29, 30, 29);
             lstFiles.Name="lstFiles";
             lstFiles.SelectionMode=SelectionMode.MultiExtended;
-            lstFiles.Size=new Size(260, 424);
+            lstFiles.Size=new Size(256, 564);
             lstFiles.TabIndex=67;
             lstFiles.Click+=lstFiles_Click;
             lstFiles.SelectedValueChanged+=lstFiles_SelectedValueChanged;
@@ -447,29 +408,26 @@
             // 
             // txtPDFFileName
             // 
-            txtPDFFileName.Location=new Point(80, 4);
-            txtPDFFileName.Margin=new Padding(3, 2, 3, 2);
+            txtPDFFileName.Location=new Point(91, 5);
             txtPDFFileName.Name="txtPDFFileName";
             txtPDFFileName.ReadOnly=true;
-            txtPDFFileName.Size=new Size(574, 23);
+            txtPDFFileName.Size=new Size(655, 27);
             txtPDFFileName.TabIndex=65;
             // 
             // pbThumbnail
             // 
             pbThumbnail.BackColor=Color.Red;
-            pbThumbnail.Location=new Point(701, 361);
-            pbThumbnail.Margin=new Padding(3, 2, 3, 2);
+            pbThumbnail.Location=new Point(801, 481);
             pbThumbnail.Name="pbThumbnail";
-            pbThumbnail.Size=new Size(21, 24);
+            pbThumbnail.Size=new Size(24, 32);
             pbThumbnail.TabIndex=77;
             pbThumbnail.TabStop=false;
             // 
             // btnUnSelect
             // 
-            btnUnSelect.Location=new Point(90, 435);
-            btnUnSelect.Margin=new Padding(3, 2, 3, 2);
+            btnUnSelect.Location=new Point(77, 623);
             btnUnSelect.Name="btnUnSelect";
-            btnUnSelect.Size=new Size(80, 30);
+            btnUnSelect.Size=new Size(77, 40);
             btnUnSelect.TabIndex=68;
             btnUnSelect.Text="選択解除";
             btnUnSelect.UseVisualStyleBackColor=true;
@@ -477,10 +435,9 @@
             // 
             // btnDelete
             // 
-            btnDelete.Location=new Point(8, 470);
-            btnDelete.Margin=new Padding(3, 2, 3, 2);
+            btnDelete.Location=new Point(26, 669);
             btnDelete.Name="btnDelete";
-            btnDelete.Size=new Size(77, 30);
+            btnDelete.Size=new Size(88, 40);
             btnDelete.TabIndex=69;
             btnDelete.Text="削除";
             btnDelete.UseVisualStyleBackColor=true;
@@ -493,9 +450,10 @@
             pnlMovie.Controls.Add(btnFastReverse);
             pnlMovie.Controls.Add(btnFastForward);
             pnlMovie.Controls.Add(btnStart);
-            pnlMovie.Location=new Point(5, 28);
+            pnlMovie.Location=new Point(6, 37);
+            pnlMovie.Margin=new Padding(3, 4, 3, 4);
             pnlMovie.Name="pnlMovie";
-            pnlMovie.Size=new Size(244, 75);
+            pnlMovie.Size=new Size(279, 100);
             pnlMovie.TabIndex=98;
             // 
             // pnlDispOption
@@ -508,16 +466,18 @@
             pnlDispOption.Controls.Add(btnRotate0);
             pnlDispOption.Controls.Add(btnRotate270);
             pnlDispOption.Controls.Add(btnRotate180);
-            pnlDispOption.Location=new Point(4, 34);
+            pnlDispOption.Location=new Point(5, 45);
+            pnlDispOption.Margin=new Padding(3, 4, 3, 4);
             pnlDispOption.Name="pnlDispOption";
-            pnlDispOption.Size=new Size(234, 168);
+            pnlDispOption.Size=new Size(267, 224);
             pnlDispOption.TabIndex=99;
             // 
             // btnZoomDown
             // 
-            btnZoomDown.Location=new Point(110, 130);
+            btnZoomDown.Location=new Point(126, 173);
+            btnZoomDown.Margin=new Padding(3, 4, 3, 4);
             btnZoomDown.Name="btnZoomDown";
-            btnZoomDown.Size=new Size(96, 34);
+            btnZoomDown.Size=new Size(110, 45);
             btnZoomDown.TabIndex=93;
             btnZoomDown.Text="縮小";
             btnZoomDown.UseVisualStyleBackColor=true;
@@ -525,10 +485,9 @@
             // 
             // btnZoomUp
             // 
-            btnZoomUp.Location=new Point(3, 130);
-            btnZoomUp.Margin=new Padding(3, 2, 3, 2);
+            btnZoomUp.Location=new Point(3, 173);
             btnZoomUp.Name="btnZoomUp";
-            btnZoomUp.Size=new Size(96, 34);
+            btnZoomUp.Size=new Size(110, 45);
             btnZoomUp.TabIndex=76;
             btnZoomUp.Text="拡大";
             btnZoomUp.UseVisualStyleBackColor=true;
@@ -542,19 +501,19 @@
             pnlPage.Controls.Add(btnPDFNext);
             pnlPage.Controls.Add(btnPDFBack);
             pnlPage.Controls.Add(btnPDFFirst);
-            pnlPage.Location=new Point(7, 203);
+            pnlPage.Location=new Point(8, 271);
+            pnlPage.Margin=new Padding(3, 4, 3, 4);
             pnlPage.Name="pnlPage";
-            pnlPage.Size=new Size(229, 78);
+            pnlPage.Size=new Size(262, 104);
             pnlPage.TabIndex=100;
             // 
             // thumbnailMoviePlayer
             // 
             thumbnailMoviePlayer.BackColor=Color.FromArgb(192, 0, 0);
-            thumbnailMoviePlayer.Location=new Point(670, 361);
-            thumbnailMoviePlayer.Margin=new Padding(3, 2, 3, 2);
+            thumbnailMoviePlayer.Location=new Point(766, 481);
             thumbnailMoviePlayer.Name="thumbnailMoviePlayer";
             thumbnailMoviePlayer.Rate=-1F;
-            thumbnailMoviePlayer.Size=new Size(25, 24);
+            thumbnailMoviePlayer.Size=new Size(29, 32);
             thumbnailMoviePlayer.TabIndex=97;
             thumbnailMoviePlayer.Time=0L;
             thumbnailMoviePlayer.Volume=-1;
@@ -565,8 +524,8 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { リストToolStripMenuItem, 設定ToolStripMenuItem, ヘルプToolStripMenuItem });
             menuStrip1.Location=new Point(0, 0);
             menuStrip1.Name="menuStrip1";
-            menuStrip1.Padding=new Padding(5, 2, 0, 2);
-            menuStrip1.Size=new Size(1031, 24);
+            menuStrip1.Padding=new Padding(6, 3, 0, 3);
+            menuStrip1.Size=new Size(1170, 30);
             menuStrip1.TabIndex=101;
             menuStrip1.Text="menuStrip1";
             // 
@@ -574,20 +533,20 @@
             // 
             リストToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 表示ToolStripMenuItem, 非表示ToolStripMenuItem });
             リストToolStripMenuItem.Name="リストToolStripMenuItem";
-            リストToolStripMenuItem.Size=new Size(44, 20);
+            リストToolStripMenuItem.Size=new Size(55, 24);
             リストToolStripMenuItem.Text="リスト";
             // 
             // 表示ToolStripMenuItem
             // 
             表示ToolStripMenuItem.Name="表示ToolStripMenuItem";
-            表示ToolStripMenuItem.Size=new Size(110, 22);
+            表示ToolStripMenuItem.Size=new Size(137, 26);
             表示ToolStripMenuItem.Text="表示";
             表示ToolStripMenuItem.Click+=表示ToolStripMenuItem_Click;
             // 
             // 非表示ToolStripMenuItem
             // 
             非表示ToolStripMenuItem.Name="非表示ToolStripMenuItem";
-            非表示ToolStripMenuItem.Size=new Size(110, 22);
+            非表示ToolStripMenuItem.Size=new Size(137, 26);
             非表示ToolStripMenuItem.Text="非表示";
             非表示ToolStripMenuItem.Click+=非表示ToolStripMenuItem_Click;
             // 
@@ -595,13 +554,13 @@
             // 
             設定ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ディスプレイと背景色ToolStripMenuItem });
             設定ToolStripMenuItem.Name="設定ToolStripMenuItem";
-            設定ToolStripMenuItem.Size=new Size(43, 20);
+            設定ToolStripMenuItem.Size=new Size(53, 24);
             設定ToolStripMenuItem.Text="設定";
             // 
             // ディスプレイと背景色ToolStripMenuItem
             // 
             ディスプレイと背景色ToolStripMenuItem.Name="ディスプレイと背景色ToolStripMenuItem";
-            ディスプレイと背景色ToolStripMenuItem.Size=new Size(171, 22);
+            ディスプレイと背景色ToolStripMenuItem.Size=new Size(212, 26);
             ディスプレイと背景色ToolStripMenuItem.Text="ディスプレイと背景色";
             ディスプレイと背景色ToolStripMenuItem.Click+=ディスプレイと背景色ToolStripMenuItem_Click;
             // 
@@ -609,13 +568,13 @@
             // 
             ヘルプToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { このアプリについてToolStripMenuItem });
             ヘルプToolStripMenuItem.Name="ヘルプToolStripMenuItem";
-            ヘルプToolStripMenuItem.Size=new Size(48, 20);
+            ヘルプToolStripMenuItem.Size=new Size(58, 24);
             ヘルプToolStripMenuItem.Text="ヘルプ";
             // 
             // このアプリについてToolStripMenuItem
             // 
             このアプリについてToolStripMenuItem.Name="このアプリについてToolStripMenuItem";
-            このアプリについてToolStripMenuItem.Size=new Size(155, 22);
+            このアプリについてToolStripMenuItem.Size=new Size(194, 26);
             このアプリについてToolStripMenuItem.Text="このアプリについて";
             このアプリについてToolStripMenuItem.Click+=このアプリについてToolStripMenuItem_Click;
             // 
@@ -635,63 +594,63 @@
             panel2.Controls.Add(Label2);
             panel2.Controls.Add(thumbnailMoviePlayer);
             panel2.Controls.Add(trackBarSeek);
-            panel2.Location=new Point(280, 22);
-            panel2.Margin=new Padding(3, 2, 3, 2);
+            panel2.Location=new Point(286, 36);
             panel2.Name="panel2";
-            panel2.Size=new Size(745, 414);
+            panel2.Size=new Size(851, 554);
             panel2.TabIndex=103;
             // 
             // thumbnailDefaultPanel
             // 
             thumbnailDefaultPanel.BackColor=Color.FromArgb(0, 0, 192);
-            thumbnailDefaultPanel.Location=new Point(250, 48);
-            thumbnailDefaultPanel.Margin=new Padding(3, 2, 3, 2);
+            thumbnailDefaultPanel.Location=new Point(286, 64);
             thumbnailDefaultPanel.Name="thumbnailDefaultPanel";
-            thumbnailDefaultPanel.Size=new Size(461, 295);
+            thumbnailDefaultPanel.Size=new Size(527, 393);
             thumbnailDefaultPanel.TabIndex=102;
             thumbnailDefaultPanel.Visible=false;
             // 
             // ThumnailMovoToPanel
             // 
             ThumnailMovoToPanel.BackColor=Color.FromArgb(0, 0, 192);
-            ThumnailMovoToPanel.Location=new Point(14, 284);
-            ThumnailMovoToPanel.Margin=new Padding(3, 2, 3, 2);
+            ThumnailMovoToPanel.Location=new Point(16, 379);
             ThumnailMovoToPanel.Name="ThumnailMovoToPanel";
-            ThumnailMovoToPanel.Size=new Size(219, 121);
+            ThumnailMovoToPanel.Size=new Size(250, 161);
             ThumnailMovoToPanel.TabIndex=101;
             ThumnailMovoToPanel.Visible=false;
             // 
-            // ListPanel
+            // SecondGroup
             // 
-            ListPanel.Controls.Add(btnUnSelect);
-            ListPanel.Controls.Add(lstFiles);
-            ListPanel.Controls.Add(btnAllSelect);
-            ListPanel.Controls.Add(btnFileAdd);
-            ListPanel.Controls.Add(btnDelete);
-            ListPanel.Location=new Point(5, 23);
-            ListPanel.Margin=new Padding(3, 2, 3, 2);
-            ListPanel.Name="ListPanel";
-            ListPanel.Size=new Size(278, 512);
-            ListPanel.TabIndex=95;
+            SecondGroup.Controls.Add(btnDisp);
+            SecondGroup.Controls.Add(chkUpdate);
+            SecondGroup.Controls.Add(btnUnDisp);
+            SecondGroup.Controls.Add(btnUnSelectUpdate);
+            SecondGroup.Location=new Point(286, 694);
+            SecondGroup.Name="SecondGroup";
+            SecondGroup.Size=new Size(491, 92);
+            SecondGroup.TabIndex=104;
+            SecondGroup.TabStop=false;
+            SecondGroup.Text="セカンドモニター操作";
             // 
             // frmOperation
             // 
-            AutoScaleDimensions=new SizeF(7F, 15F);
+            AutoScaleDimensions=new SizeF(8F, 20F);
             AutoScaleMode=AutoScaleMode.Font;
-            ClientSize=new Size(1031, 535);
-            Controls.Add(ListPanel);
-            Controls.Add(panel2);
+            ClientSize=new Size(1170, 843);
             Controls.Add(SecondGroup);
+            Controls.Add(btnDelete);
+            Controls.Add(btnFileAdd);
+            Controls.Add(btnUnSelect);
+            Controls.Add(btnAllSelect);
+            Controls.Add(lstFiles);
+            Controls.Add(panel2);
             Controls.Add(menuStrip1);
             Icon=(Icon)resources.GetObject("$this.Icon");
             MainMenuStrip=menuStrip1;
+            Margin=new Padding(3, 4, 3, 4);
             Name="frmOperation";
             Text="ViewerBy2nd Monitor";
             FormClosed+=frmOperation_FormClosed;
             Load+=frmOperation_Load;
             Resize+=frmOperation_Resize;
-            SecondGroup.ResumeLayout(false);
-            SecondGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarSeek).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbThumbnail).EndInit();
             pnlMovie.ResumeLayout(false);
@@ -701,14 +660,15 @@
             menuStrip1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ListPanel.ResumeLayout(false);
+            SecondGroup.ResumeLayout(false);
+            SecondGroup.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        internal System.Windows.Forms.GroupBox SecondGroup;
+
         internal System.Windows.Forms.Button btnDisp;
         internal System.Windows.Forms.Button btnUnSelectUpdate;
         internal System.Windows.Forms.Button btnUnDisp;
@@ -758,12 +718,12 @@
         private ToolStripMenuItem ヘルプToolStripMenuItem;
         private ToolStripMenuItem このアプリについてToolStripMenuItem;
         private Panel panel2;
-        private Panel ListPanel;
         private ToolStripMenuItem リストToolStripMenuItem;
         private ToolStripMenuItem 表示ToolStripMenuItem;
         private ToolStripMenuItem 非表示ToolStripMenuItem;
         private Panel ThumnailMovoToPanel;
         private Panel thumbnailDefaultPanel;
+        private GroupBox SecondGroup;
     }
 }
 

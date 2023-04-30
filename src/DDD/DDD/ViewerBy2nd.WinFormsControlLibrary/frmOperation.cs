@@ -191,7 +191,7 @@ namespace ViewerBy2nd
             var list = lstFiles.SelectedItems.Cast<FileViewParam>().ToList();
             foreach (var i in list)
                 lstFiles.Items.Remove(i);
-            
+
             if (DispFile != null && list.Contains(DispFile))
             {
                 UpdateView();
@@ -300,7 +300,7 @@ namespace ViewerBy2nd
 
         private void lstFiles_DragEnter(object sender, DragEventArgs e)
         {
-            if(e.Data == null)
+            if (e.Data == null)
             {
                 return;
             }
@@ -401,7 +401,7 @@ namespace ViewerBy2nd
                 if (System.IO.File.Exists(PreviewFile?.FileName))
                 {
                     var doc = PreviewFile?.document;
-                    if(doc != null)
+                    if (doc != null)
                     {
                         return doc;
                     }
@@ -475,7 +475,7 @@ namespace ViewerBy2nd
                 string filename = PreviewFile?.FileName??string.Empty;
                 thumbnailMoviePlayer.LoadFile(filename, op);
                 player?.LoadFile(filename, op);
-                
+
             }
             else
             {
@@ -629,7 +629,8 @@ namespace ViewerBy2nd
 
         private void Trackbar_Seek()
         {
-            Debug.Assert(PreviewFile != null);
+            if (PreviewFile == null)
+                return;
 
             if (trackBarSeek_Scrolled)
             {
@@ -845,14 +846,14 @@ namespace ViewerBy2nd
 
         private void frmOperation_Resize(object sender, EventArgs e)
         {
-            ListPanel.Visible = 600 < Width;
+            lstFiles.Visible = 600 < Width;
             ControlRelocation();
             ControlEnable();
         }
 
         private void 非表示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ListPanel.Visible = false;
+            lstFiles.Visible = false;
             ControlRelocation();
             ControlEnable();
 
@@ -864,12 +865,11 @@ namespace ViewerBy2nd
 
 
 
-            if (ListPanel.Visible)
+            if (lstFiles.Visible)
             {
                 lstFiles.Width = 260;
-                ListPanel.Width = lstFiles.Width + 10;
                 panel2.Location = new Point(270, 30);
-                SecondGroup.Location = new Point(288, 451);
+                SecondGroup.Location = new Point(288, 550);
                 thumbnailMoviePlayer.Bounds = thumbnailDefaultPanel.Bounds;
                 pbThumbnail.Bounds = thumbnailDefaultPanel.Bounds;
             }
@@ -879,13 +879,13 @@ namespace ViewerBy2nd
                 panel2.Location = new Point(0, 30);
                 thumbnailMoviePlayer.Bounds = ThumnailMovoToPanel.Bounds;
                 pbThumbnail.Bounds = ThumnailMovoToPanel.Bounds;
-                SecondGroup.Location = new Point(0, 451);
+                SecondGroup.Location = new Point(0, 550);
             }
         }
 
         private void 表示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ListPanel.Visible = true;
+            lstFiles.Visible = true;
             ControlRelocation();
             ControlEnable();
         }
