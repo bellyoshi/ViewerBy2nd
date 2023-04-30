@@ -1,6 +1,11 @@
 ﻿using System;
-using PdfiumViewer;
+using Patagames;
+using Patagames.Pdf;
+using Patagames.Pdf.Net;
+
 using System.Drawing;
+using Patagames.Pdf.Enums;
+using System.Drawing.Imaging;
 
 namespace ViewerBy2ndLib
 {
@@ -15,6 +20,7 @@ namespace ViewerBy2ndLib
             this.FileType = new FileTypes(FileViewParam.FileName);
             if (FileType.IsPDFExt)
             {
+                PdfCommon.Initialize();
                 pdfDoc = PdfDocument.Load(FileViewParam.FileName);
             }
             if (!FileType.IsMovieExt )
@@ -22,11 +28,18 @@ namespace ViewerBy2ndLib
         }
 
         
-        PdfiumViewer.PdfDocument? pdfDoc;
+        PdfDocument? pdfDoc;
 
-        public int PageCount => pdfDoc?.PageCount??0;
+        public int PageCount => pdfDoc?.Pages?.Count??0;
 
-        public double PageIndex { get; set; }
+        private float PageWidth => Page?.Width??0f;
+        private float PageHeight => Page ?.Height??0f;
+
+        private SizeF PageSize => new SizeF(PageWidth, PageHeight);
+
+        private PdfPage? Page => pdfDoc?.Pages[PageIndex];
+
+        public double PageVirtualIndex { get; set; }
         private Image? OpenImageFile(string filename)
         {
             if (filename == null) return null;
@@ -139,13 +152,13 @@ namespace ViewerBy2ndLib
 
         Image RenderPDF()
         {
-            if (PageIndex >= PageCount)
+            if (PageVirtualIndex >= PageCount)
             {
                 System.Diagnostics.Debug.Assert(false);
                 return this.RotatedImage;
             }
 
-            var sourceSize = pdfDoc?.PageSizes[Convert.ToInt32(PageIndex)]??new ();
+            var sourceSize = PageSize;
             var renderSize = GetRenderSize(sourceSize);
             if (renderSize == null) {
                 System.Diagnostics.Debug.Assert(false);
@@ -168,29 +181,29 @@ namespace ViewerBy2ndLib
         public void FirstPage() {
 
 
-            PageIndex = 0.0;
+            PageVirtualIndex = 0.0;
             RotatedImage = null;
             UpdateImage();
         }
 
 
         public bool CanNextPage()
-        => (pdfDoc != null && PageIndex<pdfDoc.PageCount - 1);
+        => (pdfDoc != null && PageVirtualIndex<PageCount - 1);
 
         public void NextPage() {
 
             if (CanNextPage()) {
                 RotatedImage = null;
-                PageIndex += 1;
+                PageVirtualIndex += 1;
                 UpdateImage();
             }
         }
         public bool CanPrePage()
-            => 0 < PageIndex;
+            => 0 < PageVirtualIndex;
         public void PrePage() {
             if (CanPrePage()) {
                 RotatedImage = null;
-                PageIndex -= 1;
+                PageVirtualIndex -= 1;
                 UpdateImage();
 
             }
@@ -198,7 +211,7 @@ namespace ViewerBy2ndLib
         public void LastPage()
         {
 
-            PageIndex = PageCount - 1;
+            PageVirtualIndex = PageCount - 1;
             RotatedImage = null;             
             UpdateImage();
 
@@ -208,7 +221,7 @@ namespace ViewerBy2ndLib
         private decimal buttomInPage;
 
         public void NextHalfPage() {
-            if ((buttomInPage == 1.0m) && (PageIndex == PageCount - 1)) {
+            if ((buttomInPage == 1.0m) && (PageVirtualIndex == PageCount - 1)) {
                 return;
             }
 
@@ -225,13 +238,13 @@ namespace ViewerBy2ndLib
 
         public void PreviousHalfPage() {
 
-            if (PageIndex == 0 && buttomInPage <= 0.5m) {
+            if (PageVirtualIndex == 0 && buttomInPage <= 0.5m) {
                 return;
             }
             buttomInPage -= 0.5m;
             if (buttomInPage <= 0.0m) {
                 buttomInPage = 1m;
-                PageIndex -= 1;
+                PageVirtualIndex -= 1;
 
             }
 
@@ -239,10 +252,10 @@ namespace ViewerBy2ndLib
         }
 
         private void DisplayHalfPage() {
-            if (PageIndex >= PageCount || PageIndex< 0) {
+            if (PageVirtualIndex >= PageCount || PageVirtualIndex< 0) {
                 return;
             }
-            var pdfSize = pdfDoc?.PageSizes[Convert.ToInt32(PageIndex)]??new();
+            var pdfSize = PageSize;
             SizeF sourceSize = new SizeF(pdfSize.Width, pdfSize.Height / 2);
             Size? renderSize = GetRenderSize(sourceSize);
             if (renderSize == null) {
@@ -267,10 +280,34 @@ namespace ViewerBy2ndLib
             this.OutPutImage = canvas;
             this.RotatedImage = this.OutPutImage;
         }
-        private Image GetPdfImage(Size renderSize) {
-            return pdfDoc?.Render(Convert.ToInt32(PageIndex), renderSize.Width, renderSize.Height, 96, 96, false)??new Bitmap(1, 1);
+
+        private int PageIndex =>
+         Convert.ToInt32(PageVirtualIndex);
+        
+
+        private Image GetPdfImage(Size renderSize)
+        {
+            return RenderPage(PageIndex, renderSize.Width, renderSize.Height)??new Bitmap(1, 1);
 
         }
+
+        Image? RenderPage(int pageIndex,int renderWidth, int renderHeight)
+        {
+            var page = pdfDoc?.Pages[pageIndex];
+
+            int nw = renderWidth;
+            int nh = renderHeight;
+
+            var pdfbitmap = new PdfBitmap(nw, nh, true); // bitmap をつくる
+            pdfbitmap.FillRect(0, 0, nw, nh, FS_COLOR.White); // 背景は白
+
+            page?.Render(pdfbitmap, 0, 0, nw, nh,
+                Patagames.Pdf.Enums.PageRotate.Normal,
+                Patagames.Pdf.Enums.RenderFlags.FPDF_ANNOT);
+            
+            return pdfbitmap.Image;
+        }
+
 
 
         public int OriginalImageHeight { get; private set; }

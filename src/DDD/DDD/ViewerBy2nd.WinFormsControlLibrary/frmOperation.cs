@@ -462,7 +462,7 @@ namespace ViewerBy2nd
             if (document?.FileType?.IsPDFExt??false)
             {
                 lblPageDisp.Visible = true;
-                lblPageDisp.Text = $"ページ{document.PageIndex + 1}/{document.PageCount}";
+                lblPageDisp.Text = $"ページ{document.PageVirtualIndex + 1}/{document.PageCount}";
             }
             else
                 lblPageDisp.Visible = false;

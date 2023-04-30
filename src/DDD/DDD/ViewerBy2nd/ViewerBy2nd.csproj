@@ -11,16 +11,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="pdfsecond.ico" />
+    <Content Remove="C:\Users\catik\.nuget\packages\pdfiumviewer.native.x86_64.v8-xfa\2018.4.8.256\Build\x64\pdfium.dll" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="PdfiumViewer.Native.x86_64.v8-xfa" Version="2018.4.8.256" />
+    <Content Include="pdfsecond.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ViewerBy2nd.Infrastructure\ViewerBy2nd.Infrastructure.csproj" />
     <ProjectReference Include="..\ViewerBy2nd.WinFormsControlLibrary\ViewerBy2nd.WinFormsControlLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="x64\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="x64\pdfium.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
