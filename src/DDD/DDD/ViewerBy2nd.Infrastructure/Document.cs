@@ -11,7 +11,7 @@ namespace ViewerBy2ndLib
 {
     public class Document
     {
-        private ImageDisposer disposer = new ImageDisposer();
+        private readonly ImageDisposer disposer = new ();
         private FileViewParam FileViewParam { get; }
 
         public FileTypes FileType { get; set; }
@@ -27,15 +27,14 @@ namespace ViewerBy2ndLib
                  UpdateImage();
         }
 
-        
-        PdfDocument? pdfDoc;
+        readonly PdfDocument? pdfDoc;
 
         public int PageCount => pdfDoc?.Pages?.Count??0;
 
         private float PageWidth => Page?.Width??0f;
         private float PageHeight => Page ?.Height??0f;
 
-        private SizeF PageSize => new SizeF(PageWidth, PageHeight);
+        private SizeF PageSize => new(PageWidth, PageHeight);
 
         private PdfPage? Page => pdfDoc?.Pages[PageIndex];
 
@@ -122,7 +121,7 @@ namespace ViewerBy2ndLib
 
         }
 
-        public Image LoadImage(string filename)
+        public static Image LoadImage(string filename)
         {
             return new Bitmap(filename);
         }
@@ -256,7 +255,7 @@ namespace ViewerBy2ndLib
                 return;
             }
             var pdfSize = PageSize;
-            SizeF sourceSize = new SizeF(pdfSize.Width, pdfSize.Height / 2);
+            SizeF sourceSize = new(pdfSize.Width, pdfSize.Height / 2);
             Size? renderSize = GetRenderSize(sourceSize);
             if (renderSize == null) {
                 return;
@@ -364,7 +363,7 @@ namespace ViewerBy2ndLib
 
 
         }
-        private double GetAspectRatio(Size size) =>
+        private static double GetAspectRatio(Size size) =>
             size.Width / size.Height;
         
         public bool CanSetWindowWidthRate() {

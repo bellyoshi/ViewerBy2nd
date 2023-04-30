@@ -1,6 +1,6 @@
 ﻿namespace ViewerBy2nd.WinFormsControlLibrary
 {
-    partial class frmVersion
+    partial class VersionForm
     {
         /// <summary>
         /// Required designer variable.

@@ -11,7 +11,7 @@ using ViewerBy2ndLib;
 
 namespace ViewerBy2nd.WinFormsControlLibrary
 {
-    public partial class frmSetting : Form
+    public partial class SettingForm : Form
     {
         private FormDispacher Dispacher => FormDispacher.GetInstance();
 
@@ -21,7 +21,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             this.cmbDisplay.DisplayMember = "DeviceName";
             this.cmbDisplay.DataSource = Screen.AllScreens;
         }
-        public frmSetting()
+        public SettingForm()
         {
             InitializeComponent();
         }

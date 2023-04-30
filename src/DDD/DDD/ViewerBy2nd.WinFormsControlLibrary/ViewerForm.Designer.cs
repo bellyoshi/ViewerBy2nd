@@ -1,6 +1,6 @@
 ﻿namespace ViewerBy2nd
 {
-    partial class frmViewer
+    partial class ViewerForm
     {
         /// <summary>
         /// Required designer variable.

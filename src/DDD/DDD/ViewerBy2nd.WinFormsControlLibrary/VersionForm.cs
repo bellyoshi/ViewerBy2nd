@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace ViewerBy2nd.WinFormsControlLibrary
 {
-    public partial class frmVersion : Form
+    public partial class VersionForm : Form
     {
-        public frmVersion()
+        public VersionForm()
         {
             InitializeComponent();
         }

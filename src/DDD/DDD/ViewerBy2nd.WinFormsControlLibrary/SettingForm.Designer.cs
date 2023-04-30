@@ -1,6 +1,6 @@
 ﻿namespace ViewerBy2nd.WinFormsControlLibrary
 {
-    partial class frmSetting
+    partial class SettingForm
     {
         /// <summary>
         /// Required designer variable.

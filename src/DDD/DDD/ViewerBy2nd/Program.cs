@@ -14,7 +14,7 @@ namespace ViewerBy2nd
             // see https://aka.ms/applicationconfiguration.
        
             ApplicationConfiguration.Initialize();
-            Application.Run(new frmOperation());
+            Application.Run(new OperationForm());
             ViewerBy2nd.Infrastructure.ConfigurationReader.Save();
         }
     }

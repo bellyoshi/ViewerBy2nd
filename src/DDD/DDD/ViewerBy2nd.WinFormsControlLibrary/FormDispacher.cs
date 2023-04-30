@@ -17,9 +17,9 @@ namespace ViewerBy2nd
         private FormDispacher() { }
 #endregion
 
-        private frmOperation? _frmOperation;
-        private frmViewer? _frmViewer;
-        private frmSetting? _frmSetting;
+        private OperationForm? _frmOperation;
+        private ViewerForm? _frmViewer;
+        private SettingForm? _frmSetting;
 
 
 
@@ -56,7 +56,7 @@ namespace ViewerBy2nd
             return _frmViewer.ShowVideo();
         }
 
-        internal void RegistrationfrmOperation(frmOperation frmOperation)
+        internal void RegistrationfrmOperation(OperationForm frmOperation)
         {
             _frmOperation = frmOperation;
         }
@@ -76,10 +76,10 @@ namespace ViewerBy2nd
 
         }
 
-        public frmViewer CreateViewerForm()
+        public ViewerForm CreateViewerForm()
         {
-            frmViewer frm;
-            frm = new frmViewer();
+            ViewerForm frm;
+            frm = new ViewerForm();
             frm.NotifyBackColor();
             frm.SetViewerBounds();
             frm.FormClosed += new FormClosedEventHandler(this.from_Closed);
@@ -103,7 +103,7 @@ namespace ViewerBy2nd
 
         private void CreateSettingForm()
         {
-            _frmSetting = new frmSetting();
+            _frmSetting = new SettingForm();
             _frmSetting.FormClosed += new FormClosedEventHandler(this.fromSetting_Closed);
         }
 

@@ -12,10 +12,10 @@ using ViewerBy2ndLib;
 
 namespace ViewerBy2nd
 {
-    public partial class frmViewer : Form
+    public partial class ViewerForm : Form
     {
 
-        public frmViewer()
+        public ViewerForm()
         {
             InitializeComponent();
         }
