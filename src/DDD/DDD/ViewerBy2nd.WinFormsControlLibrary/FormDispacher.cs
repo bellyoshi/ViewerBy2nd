@@ -27,7 +27,7 @@ namespace ViewerBy2nd
 
         public void frmOperation_MouseWheel(object? sender, MouseEventArgs e)
         {
-            _frmOperation?.frmOperation_MouseWheel(sender, e);
+            _frmOperation?.OperationForm_MouseWheel(sender, e);
         }
 
         public void NotifyViewerBound()
