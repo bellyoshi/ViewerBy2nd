@@ -9,7 +9,7 @@ namespace ViewerBy2nd
     public class FormDispacher
     {
 #region "singlton"
-        private static FormDispacher instance = new FormDispacher();
+        private readonly static FormDispacher instance = new ();
         public static FormDispacher GetInstance()
         {
             return instance;
@@ -25,9 +25,9 @@ namespace ViewerBy2nd
 
         public bool ViewerVisible => _frmViewer?.Visible??false;
 
-        public void frmOperation_MouseWheel(object? sender, MouseEventArgs e)
+        public void OperationForm_MouseWheel(object? sender, MouseEventArgs e)
         {
-            _frmOperation?.frmOperation_MouseWheel(sender, e);
+            _frmOperation?.OperationForm_MouseWheel(sender, e);
         }
 
         public void NotifyViewerBound()
@@ -61,17 +61,14 @@ namespace ViewerBy2nd
             _frmOperation = frmOperation;
         }
 
-        private void from_Closed(object? sender, EventArgs e)
+        private void Form_Closed(object? sender, EventArgs e)
         {
             _frmViewer = null;
         }
 
         public void ShowViewer()
         {
-            if (_frmViewer == null)
-            {
-                _frmViewer = CreateViewerForm();
-            }
+            _frmViewer ??= CreateViewerForm();
             _frmViewer.Show();
 
         }
@@ -82,7 +79,7 @@ namespace ViewerBy2nd
             frm = new ViewerForm();
             frm.NotifyBackColor();
             frm.SetViewerBounds();
-            frm.FormClosed += new FormClosedEventHandler(this.from_Closed);
+            frm.FormClosed += new FormClosedEventHandler(this.Form_Closed);
             return frm;
         }
 
@@ -104,10 +101,10 @@ namespace ViewerBy2nd
         private void CreateSettingForm()
         {
             _frmSetting = new SettingForm();
-            _frmSetting.FormClosed += new FormClosedEventHandler(this.fromSetting_Closed);
+            _frmSetting.FormClosed += new FormClosedEventHandler(this.SettingForm_Closed);
         }
 
-        private void fromSetting_Closed(object? sender, EventArgs e)
+        private void SettingForm_Closed(object? sender, EventArgs e)
         {
             _frmSetting = null;
         }

@@ -23,7 +23,7 @@ namespace ViewerBy2nd
         public void frmOperation_MouseWheel(object? sender, MouseEventArgs e)
         {
             var dispacher = FormDispacher.GetInstance();
-            dispacher.frmOperation_MouseWheel(sender, e);
+            dispacher.OperationForm_MouseWheel(sender, e);
         }
 
         private void frmViewer_Load(object sender, EventArgs e)
