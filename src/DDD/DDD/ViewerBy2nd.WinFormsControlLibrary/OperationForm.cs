@@ -28,8 +28,8 @@ namespace ViewerBy2nd
         private void MenuControlEnabled()
         {
 
-            表示ToolStripMenuItem.Enabled = !FilesList.Visible;
-            非表示ToolStripMenuItem.Enabled = FilesList.Visible;
+            リストの表示ToolStripMenuItem.Enabled = !FilesList.Visible;
+            リストの非表示ToolStripMenuItem.Enabled = FilesList.Visible;
 
         }
 
@@ -134,7 +134,7 @@ namespace ViewerBy2nd
                     foreach (var info in fvinfos)
                         FilesList.Items.Add(info);
                 }
-
+                MenuListUpdate();
             }
             catch (Exception ex)
             {
@@ -193,6 +193,7 @@ namespace ViewerBy2nd
                 UpdateView();
                 ControlEnable();
             }
+            MenuListUpdate();
         }
 
         private void FilesList_Click(object sender, EventArgs e)
@@ -267,6 +268,8 @@ namespace ViewerBy2nd
 
             foreach (var filename in OpenFileDialog1.FileNames)
                 items.Add(new FileViewParam(filename, ViewScreenRegister.GetInstance().Size));
+
+            MenuListUpdate();
         }
 
         private void DeselectFiles_Click(object sender, EventArgs e)
@@ -882,6 +885,39 @@ namespace ViewerBy2nd
             FilesList.Visible = true;
             ControlRelocation();
             ControlEnable();
+        }
+
+        private void MenuListUpdate()
+        {
+            var list = FilesList.Items;
+            var listMenu = リストLToolStripMenuItem;
+            listMenu.DropDownItems.Clear();
+            foreach (var item in list)
+            {
+                if (item is not FileViewParam fileViewParam) { continue; }
+                ToolStripMenuItem fileMenu = new(fileViewParam.FileName)
+                {
+                    Tag = fileViewParam
+                };
+                ;
+                fileMenu.Click += FileMenu_Click;
+                listMenu.DropDownItems.Add(fileMenu);
+
+            }
+        }
+
+        private void FileMenu_Click(object? sender, EventArgs e)
+
+        {
+            if (sender is not ToolStripMenuItem ab) return;
+
+            FilesList.SelectedItem = ab.Tag;
+            FilesList_SelectedValueChanged(sender, e);
+        }
+
+        private void 次へToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
