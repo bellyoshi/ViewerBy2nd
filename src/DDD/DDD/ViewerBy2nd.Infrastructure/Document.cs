@@ -6,6 +6,7 @@ using Patagames.Pdf.Net;
 using System.Drawing;
 using Patagames.Pdf.Enums;
 using System.Drawing.Imaging;
+using ViewerBy2nd.Infrastructure;
 
 namespace ViewerBy2ndLib
 {
@@ -286,26 +287,16 @@ namespace ViewerBy2ndLib
 
         private Image GetPdfImage(Size renderSize)
         {
-            return RenderPage(PageIndex, renderSize.Width, renderSize.Height)??new Bitmap(1, 1);
+            if (pdfDoc == null)
+            {
+                return new Bitmap(1, 1);
+            }
+            PDFRender pDFRender = new(pdfDoc);
+            return pDFRender.RenderPage(PageIndex, renderSize.Width, renderSize.Height);
 
         }
 
-        Image? RenderPage(int pageIndex,int renderWidth, int renderHeight)
-        {
-            var page = pdfDoc?.Pages[pageIndex];
 
-            int nw = renderWidth;
-            int nh = renderHeight;
-
-            var pdfbitmap = new PdfBitmap(nw, nh, true); // bitmap をつくる
-            pdfbitmap.FillRect(0, 0, nw, nh, FS_COLOR.White); // 背景は白
-
-            page?.Render(pdfbitmap, 0, 0, nw, nh,
-                Patagames.Pdf.Enums.PageRotate.Normal,
-                Patagames.Pdf.Enums.RenderFlags.FPDF_ANNOT);
-            
-            return pdfbitmap.Image;
-        }
 
 
 
