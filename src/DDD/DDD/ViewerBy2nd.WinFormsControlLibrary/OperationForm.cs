@@ -257,12 +257,48 @@ namespace ViewerBy2nd
         }
         private void AddFilesButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                AddFiles();
+            }
+            catch (OperationCanceledException)
+            {
+                //no operation
+            }
+
+        }
+        private void AddFilesAndSelect()
+        {
+            AddFiles();
+            FileViewParam? last = null;
+            foreach (FileViewParam item in FilesList.Items)
+            {
+                last = item;
+            }
+            if (last != null)
+            {
+                SelectFileViewParam(last);
+            }
+        }
+
+
+        private void SelectFileViewParam(FileViewParam fileViewParam)
+        {
+
+            FilesList.ClearSelected();
+
+            FilesList.SelectedItem = fileViewParam;
+            FilesList_SelectedValueChanged(null, null);
+        }
+
+        private void AddFiles()
+        {
             OpenFileDialog1.Multiselect = true;
             OpenFileDialog1.Filter = FileTypes.CreateFilter();
             OpenFileDialog1.FileName = txtPDFFileName.Text;
             var ret = OpenFileDialog1.ShowDialog();
             if (ret == DialogResult.Cancel)
-                return;
+                throw new OperationCanceledException();
 
             var items = FilesList.Items;
 
@@ -691,7 +727,7 @@ namespace ViewerBy2nd
             UpdateViewIfChecked();
         }
 
-        private void FilesList_SelectedValueChanged(object sender, EventArgs e)
+        private void FilesList_SelectedValueChanged(object? sender, EventArgs? e)
         {
             if (FilesList.SelectedItem == null)
             {
@@ -848,14 +884,6 @@ namespace ViewerBy2nd
             ControlEnable();
         }
 
-        private void 非表示ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FilesList.Visible = false;
-            ControlRelocation();
-            ControlEnable();
-
-
-        }
 
         private void ControlRelocation()
         {
@@ -880,12 +908,7 @@ namespace ViewerBy2nd
             }
         }
 
-        private void 表示ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FilesList.Visible = true;
-            ControlRelocation();
-            ControlEnable();
-        }
+
 
         private void MenuListUpdate()
         {
@@ -910,15 +933,43 @@ namespace ViewerBy2nd
 
         {
             if (sender is not ToolStripMenuItem ab) return;
-            FilesList.ClearSelected();
 
-            FilesList.SelectedItem = ab.Tag;
-            FilesList_SelectedValueChanged(sender, e);
+            var fileViewParam = (FileViewParam)ab.Tag;
+            SelectFileViewParam(fileViewParam);
         }
 
         private void 次へToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void 開くOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AddFilesAndSelect();
+            }
+            catch (OperationCanceledException)
+            {
+                //no operation
+            }
+
+        }
+
+        private void リストの表示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //todo: 大きく表示という名前のメニューがよいかもしれない
+            FilesList.Visible = true;
+            ControlRelocation();
+            ControlEnable();
+        }
+       
+        private void リストの非表示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //todo: たてに細長く表示という名前のメニューが良いかもしれない
+            FilesList.Visible = false;
+            ControlRelocation();
+            ControlEnable();
         }
     }
 
