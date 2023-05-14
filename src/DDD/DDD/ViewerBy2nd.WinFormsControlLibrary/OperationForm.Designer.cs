@@ -628,32 +628,37 @@
             // 最初のページToolStripMenuItem
             // 
             最初のページToolStripMenuItem.Name="最初のページToolStripMenuItem";
-            最初のページToolStripMenuItem.Size=new Size(168, 26);
+            最初のページToolStripMenuItem.Size=new Size(224, 26);
             最初のページToolStripMenuItem.Text="最初のページ";
+            最初のページToolStripMenuItem.Click+=最初のページToolStripMenuItem_Click;
             // 
             // 次へToolStripMenuItem1
             // 
             次へToolStripMenuItem1.Name="次へToolStripMenuItem1";
-            次へToolStripMenuItem1.Size=new Size(168, 26);
+            次へToolStripMenuItem1.Size=new Size(224, 26);
             次へToolStripMenuItem1.Text="次のページ";
+            次へToolStripMenuItem1.Click+=次へToolStripMenuItem1_Click;
             // 
             // 前のページToolStripMenuItem
             // 
             前のページToolStripMenuItem.Name="前のページToolStripMenuItem";
-            前のページToolStripMenuItem.Size=new Size(168, 26);
+            前のページToolStripMenuItem.Size=new Size(224, 26);
             前のページToolStripMenuItem.Text="前のページ";
+            前のページToolStripMenuItem.Click+=前のページToolStripMenuItem_Click;
             // 
             // 最後のページToolStripMenuItem
             // 
             最後のページToolStripMenuItem.Name="最後のページToolStripMenuItem";
-            最後のページToolStripMenuItem.Size=new Size(168, 26);
+            最後のページToolStripMenuItem.Size=new Size(224, 26);
             最後のページToolStripMenuItem.Text="最後のページ";
+            最後のページToolStripMenuItem.Click+=最後のページToolStripMenuItem_Click;
             // 
             // ページ指定ToolStripMenuItem
             // 
             ページ指定ToolStripMenuItem.Name="ページ指定ToolStripMenuItem";
-            ページ指定ToolStripMenuItem.Size=new Size(168, 26);
+            ページ指定ToolStripMenuItem.Size=new Size(224, 26);
             ページ指定ToolStripMenuItem.Text="ページ指定";
+            ページ指定ToolStripMenuItem.Click+=ページ指定ToolStripMenuItem_Click;
             // 
             // ズームToolStripMenuItem
             // 
@@ -733,27 +738,27 @@
             // ディスプレイと背景色ToolStripMenuItem
             // 
             ディスプレイと背景色ToolStripMenuItem.Name="ディスプレイと背景色ToolStripMenuItem";
-            ディスプレイと背景色ToolStripMenuItem.Size=new Size(224, 26);
+            ディスプレイと背景色ToolStripMenuItem.Size=new Size(212, 26);
             ディスプレイと背景色ToolStripMenuItem.Text="ディスプレイと背景色";
             ディスプレイと背景色ToolStripMenuItem.Click+=ディスプレイと背景色ToolStripMenuItem_Click;
             // 
             // 言語LToolStripMenuItem
             // 
             言語LToolStripMenuItem.Name="言語LToolStripMenuItem";
-            言語LToolStripMenuItem.Size=new Size(224, 26);
+            言語LToolStripMenuItem.Size=new Size(212, 26);
             言語LToolStripMenuItem.Text="言語(&L)";
             // 
             // リストの表示ToolStripMenuItem
             // 
             リストの表示ToolStripMenuItem.Name="リストの表示ToolStripMenuItem";
-            リストの表示ToolStripMenuItem.Size=new Size(224, 26);
+            リストの表示ToolStripMenuItem.Size=new Size(212, 26);
             リストの表示ToolStripMenuItem.Text="リストの表示";
             リストの表示ToolStripMenuItem.Click+=リストの表示ToolStripMenuItem_Click;
             // 
             // リストの非表示ToolStripMenuItem
             // 
             リストの非表示ToolStripMenuItem.Name="リストの非表示ToolStripMenuItem";
-            リストの非表示ToolStripMenuItem.Size=new Size(224, 26);
+            リストの非表示ToolStripMenuItem.Size=new Size(212, 26);
             リストの非表示ToolStripMenuItem.Text="リストの非表示";
             リストの非表示ToolStripMenuItem.Click+=リストの非表示ToolStripMenuItem_Click;
             // 

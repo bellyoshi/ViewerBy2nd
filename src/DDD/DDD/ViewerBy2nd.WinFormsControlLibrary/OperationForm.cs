@@ -970,12 +970,8 @@ namespace ViewerBy2nd
         private void 元の表示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-                RotateAction_Click(RotateFlipType.RotateNoneFlipNone);
-            
+            RotateAction_Click(RotateFlipType.RotateNoneFlipNone);
 
-
-
-            
         }
 
         private void 右へ90回転ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -991,6 +987,31 @@ namespace ViewerBy2nd
         private void 回転ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RotateAction_Click(RotateFlipType.Rotate180FlipNone);
+        }
+
+        private void 最初のページToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 次へToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 前のページToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 最後のページToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ページ指定ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

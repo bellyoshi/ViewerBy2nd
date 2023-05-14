@@ -7,6 +7,7 @@ using System.Drawing;
 using Patagames.Pdf.Enums;
 using System.Drawing.Imaging;
 using ViewerBy2nd.Infrastructure;
+using System.Diagnostics;
 
 namespace ViewerBy2ndLib
 {
@@ -376,25 +377,25 @@ namespace ViewerBy2ndLib
                 CreateRotateImage();
             }
 
-            
+            Debug.Assert(RotatedImage != null);
 
 
-            OriginalImageHeight = RotatedImage?.Height??0;
+            OriginalImageHeight = RotatedImage.Height;
 
             if (!CanSetWindowWidthRate()) return;
 
-
+            Debug.Assert(RotatedImage != null);
             int ImageY;
-            if(FileViewParam.scrollBarValue + GetSetWinImageHeight() > (RotatedImage?.Height??0)) {
-                ImageY = Convert.ToInt32(RotatedImage?.Height??0 - GetSetWinImageHeight());
+            if(FileViewParam.scrollBarValue + GetSetWinImageHeight() > (RotatedImage.Height)) {
+                ImageY = Convert.ToInt32(RotatedImage.Height - GetSetWinImageHeight());
             }
             else
             {
                 ImageY = FileViewParam.scrollBarValue;
             }
 
-            var rect = new Rectangle(0, ImageY, RotatedImage?.Width??0, GetSetWinImageHeight());
-            this.OutPutImage = BitmapTool.ImageRoi(RotatedImage??new Bitmap(0,0), rect);
+            var rect = new Rectangle(0, ImageY, RotatedImage.Width, GetSetWinImageHeight());
+            this.OutPutImage = BitmapTool.ImageRoi(RotatedImage, rect);
             
         }
     }
