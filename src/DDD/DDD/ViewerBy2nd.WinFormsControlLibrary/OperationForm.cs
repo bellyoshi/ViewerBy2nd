@@ -367,37 +367,32 @@ namespace ViewerBy2nd
             UpdateViewIfChecked();
             ControlEnable();
         }
+        private void RotateAction_Click(RotateFlipType rotateFlipType)
+        {
+            Debug.Assert(Document != null);
+            Document.Rotate(rotateFlipType);
+            VScrollBar1Init();
+            UpdateViewIfChecked();
+        }
 
         private void Rotate180Button_Click(object sender, EventArgs e)
         {
-            Debug.Assert(Document != null);
-            Document.Rotate(RotateFlipType.Rotate180FlipNone);
-            VScrollBar1Init();
-            UpdateViewIfChecked();
+            RotateAction_Click(RotateFlipType.Rotate180FlipNone);
         }
 
         private void Rotate90Button_Click(object sender, EventArgs e)
         {
-            Debug.Assert(Document != null);
-            Document.Rotate(RotateFlipType.Rotate90FlipNone);
-            VScrollBar1Init();
-            UpdateViewIfChecked();
+            RotateAction_Click(RotateFlipType.Rotate90FlipNone);
         }
 
         private void Rotate0Button_Click(object sender, EventArgs e)
         {
-            Debug.Assert(Document != null);
-            Document.Rotate(RotateFlipType.RotateNoneFlipNone);
-            VScrollBar1Init();
-            UpdateViewIfChecked();
+            RotateAction_Click(RotateFlipType.RotateNoneFlipNone);
         }
 
         private void Rotate270Button_Click(object sender, EventArgs e)
         {
-            Debug.Assert(Document != null);
-            Document.Rotate(RotateFlipType.Rotate270FlipNone);
-            VScrollBar1Init();
-            UpdateViewIfChecked();
+            RotateAction_Click(RotateFlipType.Rotate270FlipNone);
         }
 
         public void UpdateViewIfChecked()
@@ -963,13 +958,39 @@ namespace ViewerBy2nd
             ControlRelocation();
             ControlEnable();
         }
-       
+
         private void リストの非表示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //todo: たてに細長く表示という名前のメニューが良いかもしれない
             FilesList.Visible = false;
             ControlRelocation();
             ControlEnable();
+        }
+
+        private void 元の表示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+                RotateAction_Click(RotateFlipType.RotateNoneFlipNone);
+            
+
+
+
+            
+        }
+
+        private void 右へ90回転ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RotateAction_Click(RotateFlipType.Rotate90FlipNone);
+        }
+
+        private void 左へ90回転ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RotateAction_Click(RotateFlipType.Rotate270FlipNone);
+        }
+
+        private void 回転ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RotateAction_Click(RotateFlipType.Rotate180FlipNone);
         }
     }
 
