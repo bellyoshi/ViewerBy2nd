@@ -50,7 +50,7 @@
             FastForwardButton=new Button();
             StartButton=new Button();
             Label2=new Label();
-            VScrollBar1=new VScrollBar();
+            InPageScrollBar=new VScrollBar();
             FitToWindowWidthButton=new Button();
             Rotate90Button=new Button();
             SeekTrackBar=new TrackBar();
@@ -322,13 +322,13 @@
             Label2.TabIndex=79;
             Label2.Text="表示プレビュー";
             // 
-            // VScrollBar1
+            // InPageScrollBar
             // 
-            VScrollBar1.Location=new Point(818, 47);
-            VScrollBar1.Name="VScrollBar1";
-            VScrollBar1.Size=new Size(23, 400);
-            VScrollBar1.TabIndex=78;
-            VScrollBar1.Scroll+=VScrollBar1_Scroll;
+            InPageScrollBar.Location=new Point(818, 47);
+            InPageScrollBar.Name="InPageScrollBar";
+            InPageScrollBar.Size=new Size(23, 400);
+            InPageScrollBar.TabIndex=78;
+            InPageScrollBar.Scroll+=VScrollBar1_Scroll;
             // 
             // FitToWindowWidthButton
             // 
@@ -586,35 +586,35 @@
             // 
             表示を回転ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 元の表示ToolStripMenuItem, 右へ90回転ToolStripMenuItem, 左へ90回転ToolStripMenuItem, 回転ToolStripMenuItem });
             表示を回転ToolStripMenuItem.Name="表示を回転ToolStripMenuItem";
-            表示を回転ToolStripMenuItem.Size=new Size(224, 26);
+            表示を回転ToolStripMenuItem.Size=new Size(201, 26);
             表示を回転ToolStripMenuItem.Text="表示を回転";
             表示を回転ToolStripMenuItem.Click+=次へToolStripMenuItem_Click;
             // 
             // 元の表示ToolStripMenuItem
             // 
             元の表示ToolStripMenuItem.Name="元の表示ToolStripMenuItem";
-            元の表示ToolStripMenuItem.Size=new Size(224, 26);
+            元の表示ToolStripMenuItem.Size=new Size(171, 26);
             元の表示ToolStripMenuItem.Text="元の表示";
             元の表示ToolStripMenuItem.Click+=元の表示ToolStripMenuItem_Click;
             // 
             // 右へ90回転ToolStripMenuItem
             // 
             右へ90回転ToolStripMenuItem.Name="右へ90回転ToolStripMenuItem";
-            右へ90回転ToolStripMenuItem.Size=new Size(224, 26);
+            右へ90回転ToolStripMenuItem.Size=new Size(171, 26);
             右へ90回転ToolStripMenuItem.Text="右へ90°回転";
             右へ90回転ToolStripMenuItem.Click+=右へ90回転ToolStripMenuItem_Click;
             // 
             // 左へ90回転ToolStripMenuItem
             // 
             左へ90回転ToolStripMenuItem.Name="左へ90回転ToolStripMenuItem";
-            左へ90回転ToolStripMenuItem.Size=new Size(224, 26);
+            左へ90回転ToolStripMenuItem.Size=new Size(171, 26);
             左へ90回転ToolStripMenuItem.Text="左へ90°回転";
             左へ90回転ToolStripMenuItem.Click+=左へ90回転ToolStripMenuItem_Click;
             // 
             // 回転ToolStripMenuItem
             // 
             回転ToolStripMenuItem.Name="回転ToolStripMenuItem";
-            回転ToolStripMenuItem.Size=new Size(224, 26);
+            回転ToolStripMenuItem.Size=new Size(171, 26);
             回転ToolStripMenuItem.Text="180°回転";
             回転ToolStripMenuItem.Click+=回転ToolStripMenuItem_Click;
             // 
@@ -622,41 +622,41 @@
             // 
             ページナビゲーションToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 最初のページToolStripMenuItem, 次へToolStripMenuItem1, 前のページToolStripMenuItem, 最後のページToolStripMenuItem, ページ指定ToolStripMenuItem });
             ページナビゲーションToolStripMenuItem.Name="ページナビゲーションToolStripMenuItem";
-            ページナビゲーションToolStripMenuItem.Size=new Size(224, 26);
+            ページナビゲーションToolStripMenuItem.Size=new Size(201, 26);
             ページナビゲーションToolStripMenuItem.Text="ページナビゲーション";
             // 
             // 最初のページToolStripMenuItem
             // 
             最初のページToolStripMenuItem.Name="最初のページToolStripMenuItem";
-            最初のページToolStripMenuItem.Size=new Size(224, 26);
+            最初のページToolStripMenuItem.Size=new Size(168, 26);
             最初のページToolStripMenuItem.Text="最初のページ";
             最初のページToolStripMenuItem.Click+=最初のページToolStripMenuItem_Click;
             // 
             // 次へToolStripMenuItem1
             // 
             次へToolStripMenuItem1.Name="次へToolStripMenuItem1";
-            次へToolStripMenuItem1.Size=new Size(224, 26);
+            次へToolStripMenuItem1.Size=new Size(168, 26);
             次へToolStripMenuItem1.Text="次のページ";
             次へToolStripMenuItem1.Click+=次へToolStripMenuItem1_Click;
             // 
             // 前のページToolStripMenuItem
             // 
             前のページToolStripMenuItem.Name="前のページToolStripMenuItem";
-            前のページToolStripMenuItem.Size=new Size(224, 26);
+            前のページToolStripMenuItem.Size=new Size(168, 26);
             前のページToolStripMenuItem.Text="前のページ";
             前のページToolStripMenuItem.Click+=前のページToolStripMenuItem_Click;
             // 
             // 最後のページToolStripMenuItem
             // 
             最後のページToolStripMenuItem.Name="最後のページToolStripMenuItem";
-            最後のページToolStripMenuItem.Size=new Size(224, 26);
+            最後のページToolStripMenuItem.Size=new Size(168, 26);
             最後のページToolStripMenuItem.Text="最後のページ";
             最後のページToolStripMenuItem.Click+=最後のページToolStripMenuItem_Click;
             // 
             // ページ指定ToolStripMenuItem
             // 
             ページ指定ToolStripMenuItem.Name="ページ指定ToolStripMenuItem";
-            ページ指定ToolStripMenuItem.Size=new Size(224, 26);
+            ページ指定ToolStripMenuItem.Size=new Size(168, 26);
             ページ指定ToolStripMenuItem.Text="ページ指定";
             ページ指定ToolStripMenuItem.Click+=ページ指定ToolStripMenuItem_Click;
             // 
@@ -664,7 +664,7 @@
             // 
             ズームToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ウィンドウ幅に合わせるToolStripMenuItem, 全体を表示ToolStripMenuItem, 拡大ToolStripMenuItem, 縮小ToolStripMenuItem });
             ズームToolStripMenuItem.Name="ズームToolStripMenuItem";
-            ズームToolStripMenuItem.Size=new Size(224, 26);
+            ズームToolStripMenuItem.Size=new Size(201, 26);
             ズームToolStripMenuItem.Text="ズーム";
             // 
             // ウィンドウ幅に合わせるToolStripMenuItem
@@ -695,7 +695,7 @@
             // 
             再生ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 最初に移動ToolStripMenuItem, 再生開始ToolStripMenuItem, 再生停止ToolStripMenuItem, 早送りToolStripMenuItem, 巻き戻しToolStripMenuItem });
             再生ToolStripMenuItem.Name="再生ToolStripMenuItem";
-            再生ToolStripMenuItem.Size=new Size(224, 26);
+            再生ToolStripMenuItem.Size=new Size(201, 26);
             再生ToolStripMenuItem.Text="再生";
             // 
             // 最初に移動ToolStripMenuItem
@@ -788,7 +788,7 @@
             panel2.Controls.Add(Label6);
             panel2.Controls.Add(pnlDispOption);
             panel2.Controls.Add(txtPDFFileName);
-            panel2.Controls.Add(VScrollBar1);
+            panel2.Controls.Add(InPageScrollBar);
             panel2.Controls.Add(Label2);
             panel2.Controls.Add(thumbnailMoviePlayer);
             panel2.Controls.Add(SeekTrackBar);
@@ -886,7 +886,7 @@
         internal System.Windows.Forms.Button FastForwardButton;
         internal System.Windows.Forms.Button StartButton;
         internal System.Windows.Forms.Label Label2;
-        internal System.Windows.Forms.VScrollBar VScrollBar1;
+        internal System.Windows.Forms.VScrollBar InPageScrollBar;
         internal System.Windows.Forms.Button FitToWindowWidthButton;
         internal System.Windows.Forms.Button Rotate90Button;
         internal System.Windows.Forms.TrackBar SeekTrackBar;

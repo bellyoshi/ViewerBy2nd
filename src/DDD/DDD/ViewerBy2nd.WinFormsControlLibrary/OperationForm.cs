@@ -67,7 +67,7 @@ namespace ViewerBy2nd
             ShowWholeButton.Enabled = canSetWin;
             ZoomOutButton.Enabled = canSetWin;
             ZoomInButton.Enabled = canSetWin;
-            VScrollBar1.Enabled = (PreviewFile != null) && PreviewFile.IsZoom;
+            InPageScrollBar.Enabled = (PreviewFile != null) && PreviewFile.IsZoom;
         }
 
         public void CtlMovie1ControlEnabled()
@@ -445,6 +445,11 @@ namespace ViewerBy2nd
 
         private void FirstPageOfPDFButton_Click(object sender, EventArgs e)
         {
+            FirstPageOfPDFAction();
+        }
+
+        private void FirstPageOfPDFAction()
+        {
             Debug.Assert(Document != null);
             ScrollToFirst();
             Document.FirstPage();
@@ -453,6 +458,11 @@ namespace ViewerBy2nd
         }
 
         private void NextPageOfPDF_Click(object sender, EventArgs e)
+        {
+            NextPageOfPDFAction();
+        }
+
+        private void NextPageOfPDFAction()
         {
             Debug.Assert(Document != null);
             if (!Document.CanNextPage()) return;
@@ -467,12 +477,17 @@ namespace ViewerBy2nd
             Debug.Assert(PreviewFile != null);
             if (PreviewFile.IsZoom)
             {
-                VScrollBar1.Value = 0;
+                InPageScrollBar.Value = 0;
                 PreviewFile.scrollBarValue = 0;
             }
         }
 
         private void PreviousPageOfPDFButton_Click(object sender, EventArgs e)
+        {
+            PreviousPageOfPDFAction();
+        }
+
+        private void PreviousPageOfPDFAction()
         {
             Debug.Assert(Document != null);
             Document.PrePage();
@@ -480,6 +495,11 @@ namespace ViewerBy2nd
         }
 
         private void LastPageOfPDF_Click(object sender, EventArgs e)
+        {
+            LastPageOfPDFAction();
+        }
+
+        private void LastPageOfPDFAction()
         {
             Debug.Assert(Document != null);
             Document.LastPage();
@@ -550,7 +570,7 @@ namespace ViewerBy2nd
             if (PreviewFile == null)
                 return;
             Debug.Assert(Document != null);
-            PreviewFile.scrollBarValue = VScrollBar1.Value;
+            PreviewFile.scrollBarValue = InPageScrollBar.Value;
             Document.UpdateImage();
             UpdateViewIfChecked();
         }
@@ -563,12 +583,12 @@ namespace ViewerBy2nd
             {
                 return;
             }
-            VScrollBar1.Minimum = 0;
+            InPageScrollBar.Minimum = 0;
             var clientWidth = Document?.OutPutImage?.Height??0;
-            VScrollBar1.Maximum = Document?.OriginalImageHeight??0;
-            VScrollBar1.Value = PreviewFile.scrollBarValue;
+            InPageScrollBar.Maximum = Document?.OriginalImageHeight??0;
+            InPageScrollBar.Value = PreviewFile.scrollBarValue;
 
-            VScrollBar1.LargeChange = clientWidth;
+            InPageScrollBar.LargeChange = clientWidth;
         }
 
         private void FitToWindowWidthButton_Click(object sender, EventArgs e)
@@ -767,8 +787,8 @@ namespace ViewerBy2nd
         {
             Debug.Assert(Document != null);
             var numberOfTextLinesToMove = delta * SystemInformation.MouseWheelScrollLines / (double)25;
-            var maximum = VScrollBar1.Maximum - VScrollBar1.LargeChange + 1;
-            int expect = -Convert.ToInt32(numberOfTextLinesToMove) + VScrollBar1.Value;
+            var maximum = InPageScrollBar.Maximum - InPageScrollBar.LargeChange + 1;
+            int expect = -Convert.ToInt32(numberOfTextLinesToMove) + InPageScrollBar.Value;
             if (expect < 0)
             {
                 expect = 0;
@@ -788,7 +808,7 @@ namespace ViewerBy2nd
                     Document.NextPage();
                 }
             }
-            VScrollBar1.Value = expect;
+            InPageScrollBar.Value = expect;
             requireVScrollUpdate = true;
         }
         private void MouseWheelScrollPage(int delta)
@@ -820,7 +840,7 @@ namespace ViewerBy2nd
         public void OperationForm_MouseWheel(object? sender, MouseEventArgs e)
         {
 
-            if (!VScrollBar1.Enabled)
+            if (!InPageScrollBar.Enabled)
             {
                 MouseWheelScrollPage(e.Delta);
             }
@@ -991,22 +1011,22 @@ namespace ViewerBy2nd
 
         private void 最初のページToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FirstPageOfPDFAction();
         }
 
         private void 次へToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            NextPageOfPDFAction();
         }
 
         private void 前のページToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            PreviousPageOfPDFAction();
         }
 
         private void 最後のページToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            LastPageOfPDFAction();
         }
 
         private void ページ指定ToolStripMenuItem_Click(object sender, EventArgs e)
