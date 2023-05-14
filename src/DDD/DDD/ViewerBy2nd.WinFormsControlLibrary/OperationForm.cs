@@ -910,6 +910,7 @@ namespace ViewerBy2nd
 
         {
             if (sender is not ToolStripMenuItem ab) return;
+            FilesList.ClearSelected();
 
             FilesList.SelectedItem = ab.Tag;
             FilesList_SelectedValueChanged(sender, e);
