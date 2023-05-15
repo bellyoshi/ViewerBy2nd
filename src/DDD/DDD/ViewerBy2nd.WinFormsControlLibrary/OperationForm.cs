@@ -87,6 +87,8 @@ namespace ViewerBy2nd
             if (!IsMovie)
                 thumbnailMoviePlayer.Stop();
             MovieTimeLabel.Visible = IsMovie;
+
+            再生ToolStripMenuItem.Enabled = IsMovie;
         }
 
         public void CtlImage1ControlEnabled()
