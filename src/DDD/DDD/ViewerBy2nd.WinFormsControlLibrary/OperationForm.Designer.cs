@@ -38,7 +38,7 @@
             AllFilesSelectButton=new Button();
             LastPageOfPDFButton=new Button();
             ShowWholeButton=new Button();
-            lblPageDisp=new Label();
+            PageNumberLabel=new Label();
             PreviousHalfPageOfPDFButton=new Button();
             NextHalfPageOfPDFButton=new Button();
             NextPageOfPDFButton=new Button();
@@ -202,13 +202,14 @@
             ShowWholeButton.UseVisualStyleBackColor=true;
             ShowWholeButton.Click+=ShowWholeButton_Click;
             // 
-            // lblPageDisp
+            // PageNumberLabel
             // 
-            lblPageDisp.Location=new Point(475, 460);
-            lblPageDisp.Name="lblPageDisp";
-            lblPageDisp.Size=new Size(267, 20);
-            lblPageDisp.TabIndex=91;
-            lblPageDisp.Text="- page -";
+            PageNumberLabel.Location=new Point(475, 460);
+            PageNumberLabel.Name="PageNumberLabel";
+            PageNumberLabel.Size=new Size(267, 20);
+            PageNumberLabel.TabIndex=91;
+            PageNumberLabel.Text="- page -";
+            PageNumberLabel.Click+=PageNumberLabel_Click;
             // 
             // PreviousHalfPageOfPDFButton
             // 
@@ -782,7 +783,7 @@
             panel2.Controls.Add(pbThumbnail);
             panel2.Controls.Add(thumbnailDefaultPanel);
             panel2.Controls.Add(ThumnailMovoToPanel);
-            panel2.Controls.Add(lblPageDisp);
+            panel2.Controls.Add(PageNumberLabel);
             panel2.Controls.Add(MovieTimeLabel);
             panel2.Controls.Add(pnlPage);
             panel2.Controls.Add(Label6);
@@ -874,7 +875,7 @@
         internal System.Windows.Forms.Button AllFilesSelectButton;
         internal System.Windows.Forms.Button LastPageOfPDFButton;
         internal System.Windows.Forms.Button ShowWholeButton;
-        internal System.Windows.Forms.Label lblPageDisp;
+        internal System.Windows.Forms.Label PageNumberLabel;
         internal System.Windows.Forms.Button PreviousHalfPageOfPDFButton;
         internal System.Windows.Forms.Button NextHalfPageOfPDFButton;
         internal System.Windows.Forms.Button NextPageOfPDFButton;

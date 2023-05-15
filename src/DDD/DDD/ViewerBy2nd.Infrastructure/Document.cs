@@ -187,6 +187,13 @@ namespace ViewerBy2ndLib
             UpdateImage();
         }
 
+        public void SetPage(int page)
+        {
+            PageVirtualIndex = page - 1;
+            RotatedImage = null;
+            UpdateImage();
+        }
+
 
         public bool CanNextPage()
         => (pdfDoc != null && PageVirtualIndex<PageCount - 1);

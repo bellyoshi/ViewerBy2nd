@@ -512,11 +512,11 @@ namespace ViewerBy2nd
 
             if (Document?.FileType?.IsPDFExt??false)
             {
-                lblPageDisp.Visible = true;
-                lblPageDisp.Text = $"ページ{Document.PageVirtualIndex + 1}/{Document.PageCount}";
+                PageNumberLabel.Visible = true;
+                PageNumberLabel.Text = $"ページ{Document.PageVirtualIndex + 1}/{Document.PageCount}";
             }
             else
-                lblPageDisp.Visible = false;
+                PageNumberLabel.Visible = false;
             pbThumbnail.Visible = !IsMovie;
             thumbnailMoviePlayer.Visible = IsMovie;
 
@@ -1031,7 +1031,27 @@ namespace ViewerBy2nd
 
         private void ページ指定ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            PageNumberAction();
+        }
 
+        void PageNumberAction()
+        {
+            if (Document == null)
+            {
+                return;
+            }
+            int max = Document.PageCount;
+            Action<int> action = number =>
+            {
+                Document.SetPage(number);
+                UpdateViewIfChecked();
+            };
+            FormDispacher.GetInstance().ShowPageNumberForm(action, max);
+        }
+
+        private void PageNumberLabel_Click(object sender, EventArgs e)
+        {
+            PageNumberAction();
         }
     }
 

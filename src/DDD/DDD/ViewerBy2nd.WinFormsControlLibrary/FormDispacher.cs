@@ -109,5 +109,11 @@ namespace ViewerBy2nd
             _frmSetting = null;
         }
 
+        public void ShowPageNumberForm(Action<int> setPageNumberAction, int pageNumberMax)
+        {
+            PageNumberForm frm = new (setPageNumberAction, pageNumberMax);
+            frm.Show();
+        }
+
     }
 }
