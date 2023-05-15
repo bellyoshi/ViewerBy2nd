@@ -77,7 +77,7 @@ namespace ViewerBy2nd
             pnlMovie.Visible = IsMovie;
             GotoFirstButton.Enabled = IsMovie;
             FastReverseButton.Enabled = IsMovie;
-            StartButton.Enabled = IsMovie;
+            PlayButton.Enabled = IsMovie;
             PauseButton.Enabled = IsMovie;
             FastForwardButton.Enabled = IsMovie;
             AutoDisplayCheckBox.Enabled = !IsMovie;
@@ -87,6 +87,8 @@ namespace ViewerBy2nd
             if (!IsMovie)
                 thumbnailMoviePlayer.Stop();
             MovieTimeLabel.Visible = IsMovie;
+
+            再生ToolStripMenuItem.Enabled = IsMovie;
         }
 
         public void CtlImage1ControlEnabled()
@@ -595,6 +597,11 @@ namespace ViewerBy2nd
 
         private void FitToWindowWidthButton_Click(object sender, EventArgs e)
         {
+            FitToWindowWidthAction();
+        }
+
+        private void FitToWindowWidthAction()
+        {
             Debug.Assert(PreviewFile != null);
             Debug.Assert(Document != null);
             PreviewFile.scrollBarValue = 0;
@@ -606,7 +613,13 @@ namespace ViewerBy2nd
             UpdateViewIfChecked();
         }
 
-        private void StartButton_Click(object sender, EventArgs e)
+        private void PlayButton_Click(object sender, EventArgs e)
+        {
+            PlayAction();
+
+        }
+
+        private void PlayAction()
         {
             thumbnailMoviePlayer.Rate = 1;
             FastForwardButton.Text = "▶▶";
@@ -615,19 +628,27 @@ namespace ViewerBy2nd
             {
                 PlayPlayer();
             }
-
         }
 
         private void PauseButton_Click(object sender, EventArgs e)
         {
-
-            thumbnailMoviePlayer.Pause();
-            PausePlayer();
-
+            PauseAction();
 
         }
 
+        private void PauseAction()
+        {
+            thumbnailMoviePlayer.Pause();
+            PausePlayer();
+        }
+
         private void FastForwardButton_Click(object sender, EventArgs e)
+        {
+            FastForwardAction();
+
+        }
+
+        private void FastForwardAction()
         {
             FastForwardButton.Text = "▶▶▶";
             if (thumbnailMoviePlayer.Rate == 2.0)
@@ -642,10 +663,14 @@ namespace ViewerBy2nd
                 if (player != null)
                     player.Rate = 2.0f;
             }
-
         }
 
         private void FastReverseButton_Click(object sender, EventArgs e)
+        {
+            FastReverseAction();
+        }
+
+        private void FastReverseAction()
         {
             if (thumbnailMoviePlayer.Time < 15000)
                 thumbnailMoviePlayer.Time = 0;
@@ -659,12 +684,17 @@ namespace ViewerBy2nd
 
         private void GotoFirstButton_Click(object sender, EventArgs e)
         {
+            GoToFirstAction();
+
+        }
+
+        private void GoToFirstAction()
+        {
             thumbnailMoviePlayer.Time = 0;
             if (player != null)
             {
                 player.Time = 0;
             }
-
         }
 
         private bool trackBarSeek_Scrolled = false;
@@ -736,6 +766,11 @@ namespace ViewerBy2nd
         }
 
         private void ShowWholeButton_Click(object sender, EventArgs e)
+        {
+            ShowWholeAction();
+        }
+
+        private void ShowWholeAction()
         {
             Debug.Assert(PreviewFile != null);
             PreviewFile.IsZoom = false;
@@ -855,6 +890,11 @@ namespace ViewerBy2nd
 
         private void ZoomInButton_Click(object sender, EventArgs e)
         {
+            ZoomInAction();
+        }
+
+        private void ZoomInAction()
+        {
             Debug.Assert(PreviewFile != null);
             Document?.ZoomUp();
             PreviewFile.scrollBarValue = 0;
@@ -865,6 +905,11 @@ namespace ViewerBy2nd
         }
 
         private void ZoomOutButton_Click(object sender, EventArgs e)
+        {
+            ZoomOutAction();
+        }
+
+        private void ZoomOutAction()
         {
             Debug.Assert(PreviewFile != null);
             Document?.ZoomDown();
@@ -1055,6 +1100,51 @@ namespace ViewerBy2nd
         private void PageNumberLabel_Click(object sender, EventArgs e)
         {
             PageNumberAction();
+        }
+
+        private void ウィンドウ幅に合わせるToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FitToWindowWidthAction();
+        }
+
+        private void 全体を表示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowWholeAction();
+        }
+
+        private void 拡大ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ZoomInAction();
+        }
+
+        private void 縮小ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ZoomOutAction();
+        }
+
+        private void 最初に移動ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GoToFirstAction();
+        }
+
+        private void 再生開始ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PauseAction();
+        }
+
+        private void 再生停止ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PauseAction();
+        }
+
+        private void 早送りToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FastForwardAction();
+        }
+
+        private void 巻き戻しToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FastReverseAction();
         }
     }
 

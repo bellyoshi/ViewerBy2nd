@@ -48,7 +48,7 @@
             PauseButton=new Button();
             FastReverseButton=new Button();
             FastForwardButton=new Button();
-            StartButton=new Button();
+            PlayButton=new Button();
             Label2=new Label();
             InPageScrollBar=new VScrollBar();
             FitToWindowWidthButton=new Button();
@@ -303,16 +303,16 @@
             FastForwardButton.UseVisualStyleBackColor=true;
             FastForwardButton.Click+=FastForwardButton_Click;
             // 
-            // StartButton
+            // PlayButton
             // 
-            StartButton.Font=new Font("MS UI Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            StartButton.Location=new Point(112, 19);
-            StartButton.Name="StartButton";
-            StartButton.Size=new Size(51, 60);
-            StartButton.TabIndex=84;
-            StartButton.Text="▶";
-            StartButton.UseVisualStyleBackColor=true;
-            StartButton.Click+=StartButton_Click;
+            PlayButton.Font=new Font("MS UI Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
+            PlayButton.Location=new Point(112, 19);
+            PlayButton.Name="PlayButton";
+            PlayButton.Size=new Size(51, 60);
+            PlayButton.TabIndex=84;
+            PlayButton.Text="▶";
+            PlayButton.UseVisualStyleBackColor=true;
+            PlayButton.Click+=PlayButton_Click;
             // 
             // Label2
             // 
@@ -476,7 +476,7 @@
             pnlMovie.Controls.Add(PauseButton);
             pnlMovie.Controls.Add(FastReverseButton);
             pnlMovie.Controls.Add(FastForwardButton);
-            pnlMovie.Controls.Add(StartButton);
+            pnlMovie.Controls.Add(PlayButton);
             pnlMovie.Location=new Point(7, 37);
             pnlMovie.Margin=new Padding(3, 4, 3, 4);
             pnlMovie.Name="pnlMovie";
@@ -673,24 +673,28 @@
             ウィンドウ幅に合わせるToolStripMenuItem.Name="ウィンドウ幅に合わせるToolStripMenuItem";
             ウィンドウ幅に合わせるToolStripMenuItem.Size=new Size(224, 26);
             ウィンドウ幅に合わせるToolStripMenuItem.Text="ウィンドウ幅に合わせる";
+            ウィンドウ幅に合わせるToolStripMenuItem.Click+=ウィンドウ幅に合わせるToolStripMenuItem_Click;
             // 
             // 全体を表示ToolStripMenuItem
             // 
             全体を表示ToolStripMenuItem.Name="全体を表示ToolStripMenuItem";
             全体を表示ToolStripMenuItem.Size=new Size(224, 26);
             全体を表示ToolStripMenuItem.Text="全体を表示";
+            全体を表示ToolStripMenuItem.Click+=全体を表示ToolStripMenuItem_Click;
             // 
             // 拡大ToolStripMenuItem
             // 
             拡大ToolStripMenuItem.Name="拡大ToolStripMenuItem";
             拡大ToolStripMenuItem.Size=new Size(224, 26);
             拡大ToolStripMenuItem.Text="拡大";
+            拡大ToolStripMenuItem.Click+=拡大ToolStripMenuItem_Click;
             // 
             // 縮小ToolStripMenuItem
             // 
             縮小ToolStripMenuItem.Name="縮小ToolStripMenuItem";
             縮小ToolStripMenuItem.Size=new Size(224, 26);
             縮小ToolStripMenuItem.Text="縮小";
+            縮小ToolStripMenuItem.Click+=縮小ToolStripMenuItem_Click;
             // 
             // 再生ToolStripMenuItem
             // 
@@ -704,30 +708,35 @@
             最初に移動ToolStripMenuItem.Name="最初に移動ToolStripMenuItem";
             最初に移動ToolStripMenuItem.Size=new Size(164, 26);
             最初に移動ToolStripMenuItem.Text="最初に移動";
+            最初に移動ToolStripMenuItem.Click+=最初に移動ToolStripMenuItem_Click;
             // 
             // 再生開始ToolStripMenuItem
             // 
             再生開始ToolStripMenuItem.Name="再生開始ToolStripMenuItem";
             再生開始ToolStripMenuItem.Size=new Size(164, 26);
             再生開始ToolStripMenuItem.Text="再生開始";
+            再生開始ToolStripMenuItem.Click+=再生開始ToolStripMenuItem_Click;
             // 
             // 再生停止ToolStripMenuItem
             // 
             再生停止ToolStripMenuItem.Name="再生停止ToolStripMenuItem";
             再生停止ToolStripMenuItem.Size=new Size(164, 26);
             再生停止ToolStripMenuItem.Text="一時停止";
+            再生停止ToolStripMenuItem.Click+=再生停止ToolStripMenuItem_Click;
             // 
             // 早送りToolStripMenuItem
             // 
             早送りToolStripMenuItem.Name="早送りToolStripMenuItem";
             早送りToolStripMenuItem.Size=new Size(164, 26);
             早送りToolStripMenuItem.Text="早送り";
+            早送りToolStripMenuItem.Click+=早送りToolStripMenuItem_Click;
             // 
             // 巻き戻しToolStripMenuItem
             // 
             巻き戻しToolStripMenuItem.Name="巻き戻しToolStripMenuItem";
             巻き戻しToolStripMenuItem.Size=new Size(164, 26);
             巻き戻しToolStripMenuItem.Text="巻き戻し";
+            巻き戻しToolStripMenuItem.Click+=巻き戻しToolStripMenuItem_Click;
             // 
             // 設定ToolStripMenuItem
             // 
@@ -868,49 +877,49 @@
         #endregion
 
 
-        internal System.Windows.Forms.Button DisplayButton;
-        internal System.Windows.Forms.Button BackgroundDisplayButton;
-        internal System.Windows.Forms.Button EndOfDisplayButton;
-        internal System.Windows.Forms.Label MovieTimeLabel;
-        internal System.Windows.Forms.Button AllFilesSelectButton;
-        internal System.Windows.Forms.Button LastPageOfPDFButton;
-        internal System.Windows.Forms.Button ShowWholeButton;
-        internal System.Windows.Forms.Label PageNumberLabel;
-        internal System.Windows.Forms.Button PreviousHalfPageOfPDFButton;
-        internal System.Windows.Forms.Button NextHalfPageOfPDFButton;
-        internal System.Windows.Forms.Button NextPageOfPDFButton;
-        internal System.Windows.Forms.Button PreviousPageOfPDFButton;
-        internal System.Windows.Forms.Button FirstPageOfPDFButton;
-        internal System.Windows.Forms.Button GotoFirstButton;
-        internal System.Windows.Forms.Button PauseButton;
-        internal System.Windows.Forms.Button FastReverseButton;
-        internal System.Windows.Forms.Button FastForwardButton;
-        internal System.Windows.Forms.Button StartButton;
-        internal System.Windows.Forms.Label Label2;
-        internal System.Windows.Forms.VScrollBar InPageScrollBar;
-        internal System.Windows.Forms.Button FitToWindowWidthButton;
-        internal System.Windows.Forms.Button Rotate90Button;
-        internal System.Windows.Forms.TrackBar SeekTrackBar;
-        internal System.Windows.Forms.Button Rotate0Button;
-        internal System.Windows.Forms.OpenFileDialog OpenFileDialog1;
-        internal System.Windows.Forms.CheckBox AutoDisplayCheckBox;
+        internal Button DisplayButton;
+        internal Button BackgroundDisplayButton;
+        internal Button EndOfDisplayButton;
+        internal Label MovieTimeLabel;
+        internal Button AllFilesSelectButton;
+        internal Button LastPageOfPDFButton;
+        internal Button ShowWholeButton;
+        internal Label PageNumberLabel;
+        internal Button PreviousHalfPageOfPDFButton;
+        internal Button NextHalfPageOfPDFButton;
+        internal Button NextPageOfPDFButton;
+        internal Button PreviousPageOfPDFButton;
+        internal Button FirstPageOfPDFButton;
+        internal Button GotoFirstButton;
+        internal Button PauseButton;
+        internal Button FastReverseButton;
+        internal Button FastForwardButton;
+        internal Button PlayButton;
+        internal Label Label2;
+        internal VScrollBar InPageScrollBar;
+        internal Button FitToWindowWidthButton;
+        internal Button Rotate90Button;
+        internal TrackBar SeekTrackBar;
+        internal Button Rotate0Button;
+        internal OpenFileDialog OpenFileDialog1;
+        internal CheckBox AutoDisplayCheckBox;
         internal System.Windows.Forms.Timer SeekTimer;
         internal System.ComponentModel.BackgroundWorker BackgroundWorker1;
-        internal System.Windows.Forms.Button Rotate270Button;
-        internal System.Windows.Forms.Button Rotate180Button;
-        internal System.Windows.Forms.Label Label6;
-        internal System.Windows.Forms.Button AddFilesButton;
-        internal System.Windows.Forms.ListBox FilesList;
-        internal System.Windows.Forms.TextBox txtPDFFileName;
-        internal System.Windows.Forms.PictureBox pbThumbnail;
-        internal System.Windows.Forms.Button DeselectFilesButton;
-        internal System.Windows.Forms.Button DeleteFilesFromListButton;
+        internal Button Rotate270Button;
+        internal Button Rotate180Button;
+        internal Label Label6;
+        internal Button AddFilesButton;
+        internal ListBox FilesList;
+        internal TextBox txtPDFFileName;
+        internal PictureBox pbThumbnail;
+        internal Button DeselectFilesButton;
+        internal Button DeleteFilesFromListButton;
         internal ViewerBy2nd.WinFormsControlLibrary.VideoPlayer thumbnailMoviePlayer;
-        private System.Windows.Forms.Panel pnlMovie;
-        private System.Windows.Forms.Panel pnlDispOption;
-        private System.Windows.Forms.Panel pnlPage;
-        internal System.Windows.Forms.Button ZoomInButton;
-        private System.Windows.Forms.Button ZoomOutButton;
+        private Panel pnlMovie;
+        private Panel pnlDispOption;
+        private Panel pnlPage;
+        internal Button ZoomInButton;
+        private Button ZoomOutButton;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem 設定ToolStripMenuItem;
         private ToolStripMenuItem ディスプレイと背景色ToolStripMenuItem;
