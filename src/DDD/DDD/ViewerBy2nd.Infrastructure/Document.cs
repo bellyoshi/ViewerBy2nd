@@ -179,21 +179,22 @@ namespace ViewerBy2ndLib
             return new Size(bound.Width , bound.Width * originalRendeSize.Height / originalRendeSize.Width );
         }
 
-        public void FirstPage() {
-
-
-            PageVirtualIndex = 0.0;
-            RotatedImage = null;
-            UpdateImage();
+        public void FirstPage()
+        { 
+            SetVirtualPage(0.0);
         }
 
         public void SetPage(int page)
         {
-            PageVirtualIndex = page - 1;
+            SetVirtualPage(page - 1);
+        }
+
+        public void SetVirtualPage(double page)
+        {
+            PageVirtualIndex = page;
             RotatedImage = null;
             UpdateImage();
         }
-
 
         public bool CanNextPage()
         => (pdfDoc != null && PageVirtualIndex<PageCount - 1);
@@ -201,27 +202,19 @@ namespace ViewerBy2ndLib
         public void NextPage() {
 
             if (CanNextPage()) {
-                RotatedImage = null;
-                PageVirtualIndex += 1;
-                UpdateImage();
+                SetVirtualPage(PageVirtualIndex + 1);
             }
         }
         public bool CanPrePage()
             => 0 < PageVirtualIndex;
         public void PrePage() {
             if (CanPrePage()) {
-                RotatedImage = null;
-                PageVirtualIndex -= 1;
-                UpdateImage();
-
+                SetVirtualPage(PageVirtualIndex - 1);
             }
         }
         public void LastPage()
         {
-
-            PageVirtualIndex = PageCount - 1;
-            RotatedImage = null;             
-            UpdateImage();
+            SetVirtualPage(PageCount - 1);
 
         }
 
