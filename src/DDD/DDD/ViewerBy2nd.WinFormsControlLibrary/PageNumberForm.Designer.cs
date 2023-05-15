@@ -94,7 +94,6 @@
             Name="PageNumberForm";
             Text="ページ指定";
             Load+=PageNumberForm_Load;
-            Leave+=PageNumberForm_Leave;
             ResumeLayout(false);
             PerformLayout();
         }

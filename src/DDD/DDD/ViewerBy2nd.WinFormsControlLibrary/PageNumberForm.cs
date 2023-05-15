@@ -13,20 +13,20 @@ namespace ViewerBy2nd.WinFormsControlLibrary
 {
     public partial class PageNumberForm : Form
     {
-        public PageNumberForm(Action<int> action, int max)
-        {
-            SetPageNumberAction = action;
-            PageNumberMax = max;
-            InitializeComponent();
-        }
 
         public Action<int> SetPageNumberAction { get; internal set; }
         public int PageNumberMax { get; internal set; }
-
-        private void PageNumberForm_Leave(object sender, EventArgs e)
+        private int PageNumberIndex;
+        public PageNumberForm(Action<int> action, int max, int index)
         {
-            Close();
+            SetPageNumberAction = action;
+            PageNumberMax = max;
+            PageNumberIndex = index;
+            InitializeComponent();
         }
+
+
+
 
         private void ThrowError()
         {
@@ -82,10 +82,19 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         {
             PageCountLabel.Text = $"/{PageNumberMax}";
 
+            PageNumberTextBox.Text = $"{PageNumberIndex}";
+            PageNumberTextBox.SelectAll();
+
             this.CancelButton = CancelCommandButton;
 
-        }
+            this.Deactivate += new EventHandler(Form1_Deactivate);
 
+        }
+        private void Form1_Deactivate(object? sender, EventArgs e)
+        {
+            // Windowが非アクティブ化されたときにこのWindowを閉じます。
+            this.Close();
+        }
         private void CancelCommandButton_Click(object sender, EventArgs e)
         {
             Close();

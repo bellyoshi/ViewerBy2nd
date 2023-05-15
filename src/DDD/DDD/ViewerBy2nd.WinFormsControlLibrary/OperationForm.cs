@@ -68,6 +68,8 @@ namespace ViewerBy2nd
             ZoomOutButton.Enabled = canSetWin;
             ZoomInButton.Enabled = canSetWin;
             InPageScrollBar.Enabled = (PreviewFile != null) && PreviewFile.IsZoom;
+
+            ページナビゲーションToolStripMenuItem.Enabled = isPdf;
         }
 
         public void CtlMovie1ControlEnabled()
@@ -1046,7 +1048,8 @@ namespace ViewerBy2nd
                 Document.SetPage(number);
                 UpdateViewIfChecked();
             };
-            FormDispacher.GetInstance().ShowPageNumberForm(action, max);
+            var index = Convert.ToInt32(Document.PageVirtualIndex) + 1;
+            FormDispacher.GetInstance().ShowPageNumberForm(action, max, index);
         }
 
         private void PageNumberLabel_Click(object sender, EventArgs e)
