@@ -104,6 +104,7 @@ namespace ViewerBy2nd
 
         private void OperationForm_Load(object sender, EventArgs e)
         {
+            言語LToolStripMenuItem.Visible = false;//todo
             Dispacher.RegistrationfrmOperation(this);
 
             AppSettingLoad();
@@ -1145,6 +1146,11 @@ namespace ViewerBy2nd
         private void 巻き戻しToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FastReverseAction();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 
