@@ -1,10 +1,7 @@
 ﻿using System;
-using Patagames;
-using Patagames.Pdf;
-using Patagames.Pdf.Net;
+
 
 using System.Drawing;
-using Patagames.Pdf.Enums;
 using System.Drawing.Imaging;
 using ViewerBy2nd.Infrastructure;
 using System.Diagnostics;
@@ -22,7 +19,6 @@ namespace ViewerBy2ndLib
             this.FileType = new FileTypes(FileViewParam.FileName);
             if (FileType.IsPDFExt)
             {
-                PdfCommon.Initialize();
                 pdfDoc = PdfDocument.Load(FileViewParam.FileName);
             }
             if (!FileType.IsMovieExt )
@@ -31,14 +27,14 @@ namespace ViewerBy2ndLib
 
         readonly PdfDocument? pdfDoc;
 
-        public int PageCount => pdfDoc?.Pages?.Count??0;
+        public int PageCount => pdfDoc?.PageCount??0;
 
-        private float PageWidth => Page?.Width??0f;
-        private float PageHeight => Page ?.Height??0f;
+        private double PageWidth => pdfDoc?.m_pageWidth??0f;
+        private double PageHeight => pdfDoc?.m_pageHeight??0f;
 
-        private SizeF PageSize => new(PageWidth, PageHeight);
+        private SizeF PageSize => new((float)PageWidth,(float) PageHeight);
 
-        private PdfPage? Page => pdfDoc?.Pages[PageIndex];
+
 
         public double PageVirtualIndex { get; set; }
         private Image? OpenImageFile(string filename)

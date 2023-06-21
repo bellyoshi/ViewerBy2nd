@@ -8,5 +8,7 @@ namespace ViewerBy2nd.Infrastructure
 {
     internal class PdfPage
     {
+        public int Width { get; set; }
+        public int Height { get; set; }
     }
 }

@@ -1,7 +1,4 @@
-﻿using Patagames.Pdf.Net.Wrappers;
-using Patagames.Pdf.Net;
-using Patagames.Pdf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,25 +10,27 @@ namespace ViewerBy2nd.Infrastructure
     internal class PDFRender
     {
         readonly PdfDocument pdfDoc;
-        internal PDFRender(PdfDocument pdfDocument)
+        internal PDFRender(PdfDocument pdfDoc)
         {
-            pdfDoc = pdfDocument;
+            this.pdfDoc = pdfDoc;
         }
         public Image RenderPage(int pageIndex, int renderWidth, int renderHeight)
         {
-            var page = pdfDoc.Pages[pageIndex];
 
-            int nw = renderWidth;
-            int nh = renderHeight;
-
-            var pdfbitmap = new PdfBitmap(nw, nh, true); // bitmap をつくる
-            pdfbitmap.FillRect(0, 0, nw, nh, FS_COLOR.White); // 背景は白
-
-            page?.Render(pdfbitmap, 0, 0, nw, nh,
-                Patagames.Pdf.Enums.PageRotate.Normal,
-                Patagames.Pdf.Enums.RenderFlags.FPDF_ANNOT);
-
-            return pdfbitmap.Image;
+            IntPtr m_pdfDoc = pdfDoc.m_pdfDoc;
+            IntPtr m_pdfPage = m_pdfPage = Win32Api.FPDF_LoadPage(m_pdfDoc, pageIndex);
+            System.Drawing.Image image = new Bitmap(renderWidth, renderHeight);
+            Graphics g = Graphics.FromImage(image);
+            IntPtr hDC = g.GetHdc();
+            Win32Api.FPDF_RenderPage(hDC, m_pdfPage, 0, 0, renderWidth, renderHeight, 0, 0);
+            g.ReleaseHdc();
+            g.Dispose();
+            return image;
+        }
+        // ポイントをピクセル換算
+        private int PointToPixel(int Dpi, double value)
+        {
+            return (int)((value * Dpi) / 72);
         }
     }
 }
