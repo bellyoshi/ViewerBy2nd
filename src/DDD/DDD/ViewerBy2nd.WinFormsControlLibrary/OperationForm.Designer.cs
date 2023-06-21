@@ -100,6 +100,10 @@
             再生停止ToolStripMenuItem=new ToolStripMenuItem();
             早送りToolStripMenuItem=new ToolStripMenuItem();
             巻き戻しToolStripMenuItem=new ToolStripMenuItem();
+            セカンドモニター操作ToolStripMenuItem=new ToolStripMenuItem();
+            表示ToolStripMenuItem=new ToolStripMenuItem();
+            表示終了ToolStripMenuItem=new ToolStripMenuItem();
+            背景表示ToolStripMenuItem=new ToolStripMenuItem();
             設定ToolStripMenuItem=new ToolStripMenuItem();
             ディスプレイと背景色ToolStripMenuItem=new ToolStripMenuItem();
             言語LToolStripMenuItem=new ToolStripMenuItem();
@@ -111,10 +115,6 @@
             thumbnailDefaultPanel=new Panel();
             ThumnailMovoToPanel=new Panel();
             SecondGroup=new GroupBox();
-            セカンドモニター操作ToolStripMenuItem=new ToolStripMenuItem();
-            表示ToolStripMenuItem=new ToolStripMenuItem();
-            表示終了ToolStripMenuItem=new ToolStripMenuItem();
-            背景表示ToolStripMenuItem=new ToolStripMenuItem();
             操作中に自動表示ToolStripMenuItem=new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)SeekTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbThumbnail).BeginInit();
@@ -128,10 +128,9 @@
             // 
             // DisplayButton
             // 
-            DisplayButton.Location=new Point(10, 20);
-            DisplayButton.Margin=new Padding(3, 2, 3, 2);
+            DisplayButton.Location=new Point(11, 27);
             DisplayButton.Name="DisplayButton";
-            DisplayButton.Size=new Size(85, 38);
+            DisplayButton.Size=new Size(97, 51);
             DisplayButton.TabIndex=20;
             DisplayButton.Text="表示";
             DisplayButton.UseVisualStyleBackColor=true;
@@ -139,10 +138,9 @@
             // 
             // BackgroundDisplayButton
             // 
-            BackgroundDisplayButton.Location=new Point(188, 20);
-            BackgroundDisplayButton.Margin=new Padding(3, 2, 3, 2);
+            BackgroundDisplayButton.Location=new Point(215, 27);
             BackgroundDisplayButton.Name="BackgroundDisplayButton";
-            BackgroundDisplayButton.Size=new Size(101, 38);
+            BackgroundDisplayButton.Size=new Size(115, 51);
             BackgroundDisplayButton.TabIndex=20;
             BackgroundDisplayButton.Text="背景表示";
             BackgroundDisplayButton.UseVisualStyleBackColor=true;
@@ -150,10 +148,9 @@
             // 
             // EndOfDisplayButton
             // 
-            EndOfDisplayButton.Location=new Point(103, 20);
-            EndOfDisplayButton.Margin=new Padding(3, 2, 3, 2);
+            EndOfDisplayButton.Location=new Point(118, 27);
             EndOfDisplayButton.Name="EndOfDisplayButton";
-            EndOfDisplayButton.Size=new Size(80, 38);
+            EndOfDisplayButton.Size=new Size(91, 51);
             EndOfDisplayButton.TabIndex=20;
             EndOfDisplayButton.Text="表示終了";
             EndOfDisplayButton.UseVisualStyleBackColor=true;
@@ -163,10 +160,9 @@
             // 
             AutoDisplayCheckBox.AutoSize=true;
             AutoDisplayCheckBox.FlatStyle=FlatStyle.System;
-            AutoDisplayCheckBox.Location=new Point(294, 30);
-            AutoDisplayCheckBox.Margin=new Padding(3, 2, 3, 2);
+            AutoDisplayCheckBox.Location=new Point(336, 40);
             AutoDisplayCheckBox.Name="AutoDisplayCheckBox";
-            AutoDisplayCheckBox.Size=new Size(125, 20);
+            AutoDisplayCheckBox.Size=new Size(157, 25);
             AutoDisplayCheckBox.TabIndex=25;
             AutoDisplayCheckBox.Text="操作中に自動表示";
             AutoDisplayCheckBox.UseVisualStyleBackColor=true;
@@ -175,18 +171,17 @@
             // MovieTimeLabel
             // 
             MovieTimeLabel.AutoSize=true;
-            MovieTimeLabel.Location=new Point(500, 370);
+            MovieTimeLabel.Location=new Point(571, 493);
             MovieTimeLabel.Name="MovieTimeLabel";
-            MovieTimeLabel.Size=new Size(56, 15);
+            MovieTimeLabel.Size=new Size(71, 20);
             MovieTimeLabel.TabIndex=95;
             MovieTimeLabel.Text="-- time --";
             // 
             // AllFilesSelectButton
             // 
-            AllFilesSelectButton.Location=new Point(4, 456);
-            AllFilesSelectButton.Margin=new Padding(3, 2, 3, 2);
+            AllFilesSelectButton.Location=new Point(5, 608);
             AllFilesSelectButton.Name="AllFilesSelectButton";
-            AllFilesSelectButton.Size=new Size(60, 30);
+            AllFilesSelectButton.Size=new Size(69, 40);
             AllFilesSelectButton.TabIndex=94;
             AllFilesSelectButton.Text="全選択";
             AllFilesSelectButton.UseVisualStyleBackColor=true;
@@ -194,10 +189,9 @@
             // 
             // LastPageOfPDFButton
             // 
-            LastPageOfPDFButton.Location=new Point(172, 2);
-            LastPageOfPDFButton.Margin=new Padding(3, 2, 3, 2);
+            LastPageOfPDFButton.Location=new Point(197, 3);
             LastPageOfPDFButton.Name="LastPageOfPDFButton";
-            LastPageOfPDFButton.Size=new Size(53, 34);
+            LastPageOfPDFButton.Size=new Size(61, 45);
             LastPageOfPDFButton.TabIndex=93;
             LastPageOfPDFButton.Text="最後へ";
             LastPageOfPDFButton.UseVisualStyleBackColor=true;
@@ -205,10 +199,9 @@
             // 
             // ShowWholeButton
             // 
-            ShowWholeButton.Location=new Point(144, 92);
-            ShowWholeButton.Margin=new Padding(3, 2, 3, 2);
+            ShowWholeButton.Location=new Point(165, 123);
             ShowWholeButton.Name="ShowWholeButton";
-            ShowWholeButton.Size=new Size(80, 34);
+            ShowWholeButton.Size=new Size(91, 45);
             ShowWholeButton.TabIndex=92;
             ShowWholeButton.Text="全体を表示";
             ShowWholeButton.UseVisualStyleBackColor=true;
@@ -216,19 +209,18 @@
             // 
             // PageNumberLabel
             // 
-            PageNumberLabel.Location=new Point(416, 345);
+            PageNumberLabel.Location=new Point(475, 460);
             PageNumberLabel.Name="PageNumberLabel";
-            PageNumberLabel.Size=new Size(234, 15);
+            PageNumberLabel.Size=new Size(267, 20);
             PageNumberLabel.TabIndex=91;
             PageNumberLabel.Text="- page -";
             PageNumberLabel.Click+=PageNumberLabel_Click;
             // 
             // PreviousHalfPageOfPDFButton
             // 
-            PreviousHalfPageOfPDFButton.Location=new Point(12, 39);
-            PreviousHalfPageOfPDFButton.Margin=new Padding(3, 2, 3, 2);
+            PreviousHalfPageOfPDFButton.Location=new Point(14, 52);
             PreviousHalfPageOfPDFButton.Name="PreviousHalfPageOfPDFButton";
-            PreviousHalfPageOfPDFButton.Size=new Size(105, 34);
+            PreviousHalfPageOfPDFButton.Size=new Size(120, 45);
             PreviousHalfPageOfPDFButton.TabIndex=89;
             PreviousHalfPageOfPDFButton.Text="0.5ページ前へ";
             PreviousHalfPageOfPDFButton.UseVisualStyleBackColor=true;
@@ -236,10 +228,9 @@
             // 
             // NextHalfPageOfPDFButton
             // 
-            NextHalfPageOfPDFButton.Location=new Point(122, 39);
-            NextHalfPageOfPDFButton.Margin=new Padding(3, 2, 3, 2);
+            NextHalfPageOfPDFButton.Location=new Point(139, 52);
             NextHalfPageOfPDFButton.Name="NextHalfPageOfPDFButton";
-            NextHalfPageOfPDFButton.Size=new Size(105, 34);
+            NextHalfPageOfPDFButton.Size=new Size(120, 45);
             NextHalfPageOfPDFButton.TabIndex=90;
             NextHalfPageOfPDFButton.Text="0.5ページ先へ";
             NextHalfPageOfPDFButton.UseVisualStyleBackColor=true;
@@ -247,10 +238,9 @@
             // 
             // NextPageOfPDFButton
             // 
-            NextPageOfPDFButton.Location=new Point(123, 2);
-            NextPageOfPDFButton.Margin=new Padding(3, 2, 3, 2);
+            NextPageOfPDFButton.Location=new Point(141, 3);
             NextPageOfPDFButton.Name="NextPageOfPDFButton";
-            NextPageOfPDFButton.Size=new Size(44, 34);
+            NextPageOfPDFButton.Size=new Size(50, 45);
             NextPageOfPDFButton.TabIndex=86;
             NextPageOfPDFButton.Text="次へ";
             NextPageOfPDFButton.UseVisualStyleBackColor=true;
@@ -258,10 +248,9 @@
             // 
             // PreviousPageOfPDFButton
             // 
-            PreviousPageOfPDFButton.Location=new Point(74, 2);
-            PreviousPageOfPDFButton.Margin=new Padding(3, 2, 3, 2);
+            PreviousPageOfPDFButton.Location=new Point(85, 3);
             PreviousPageOfPDFButton.Name="PreviousPageOfPDFButton";
-            PreviousPageOfPDFButton.Size=new Size(44, 34);
+            PreviousPageOfPDFButton.Size=new Size(50, 45);
             PreviousPageOfPDFButton.TabIndex=87;
             PreviousPageOfPDFButton.Text="前へ";
             PreviousPageOfPDFButton.UseVisualStyleBackColor=true;
@@ -269,10 +258,9 @@
             // 
             // FirstPageOfPDFButton
             // 
-            FirstPageOfPDFButton.Location=new Point(10, 2);
-            FirstPageOfPDFButton.Margin=new Padding(3, 2, 3, 2);
+            FirstPageOfPDFButton.Location=new Point(11, 3);
             FirstPageOfPDFButton.Name="FirstPageOfPDFButton";
-            FirstPageOfPDFButton.Size=new Size(59, 34);
+            FirstPageOfPDFButton.Size=new Size(67, 45);
             FirstPageOfPDFButton.TabIndex=88;
             FirstPageOfPDFButton.Text="最初へ";
             FirstPageOfPDFButton.UseVisualStyleBackColor=true;
@@ -280,10 +268,9 @@
             // 
             // GotoFirstButton
             // 
-            GotoFirstButton.Location=new Point(5, 14);
-            GotoFirstButton.Margin=new Padding(3, 2, 3, 2);
+            GotoFirstButton.Location=new Point(6, 19);
             GotoFirstButton.Name="GotoFirstButton";
-            GotoFirstButton.Size=new Size(45, 45);
+            GotoFirstButton.Size=new Size(51, 60);
             GotoFirstButton.TabIndex=80;
             GotoFirstButton.Text="先頭";
             GotoFirstButton.UseVisualStyleBackColor=true;
@@ -291,10 +278,9 @@
             // 
             // PauseButton
             // 
-            PauseButton.Location=new Point(194, 14);
-            PauseButton.Margin=new Padding(3, 2, 3, 2);
+            PauseButton.Location=new Point(222, 19);
             PauseButton.Name="PauseButton";
-            PauseButton.Size=new Size(45, 45);
+            PauseButton.Size=new Size(51, 60);
             PauseButton.TabIndex=81;
             PauseButton.Text="||";
             PauseButton.UseVisualStyleBackColor=true;
@@ -303,10 +289,9 @@
             // FastReverseButton
             // 
             FastReverseButton.Font=new Font("MS UI Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            FastReverseButton.Location=new Point(51, 14);
-            FastReverseButton.Margin=new Padding(3, 2, 3, 2);
+            FastReverseButton.Location=new Point(58, 19);
             FastReverseButton.Name="FastReverseButton";
-            FastReverseButton.Size=new Size(45, 45);
+            FastReverseButton.Size=new Size(51, 60);
             FastReverseButton.TabIndex=82;
             FastReverseButton.Text="◀";
             FastReverseButton.UseVisualStyleBackColor=true;
@@ -315,10 +300,9 @@
             // FastForwardButton
             // 
             FastForwardButton.Font=new Font("MS UI Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            FastForwardButton.Location=new Point(146, 14);
-            FastForwardButton.Margin=new Padding(3, 2, 3, 2);
+            FastForwardButton.Location=new Point(167, 19);
             FastForwardButton.Name="FastForwardButton";
-            FastForwardButton.Size=new Size(45, 45);
+            FastForwardButton.Size=new Size(51, 60);
             FastForwardButton.TabIndex=83;
             FastForwardButton.Text="▶▶";
             FastForwardButton.UseVisualStyleBackColor=true;
@@ -327,10 +311,9 @@
             // PlayButton
             // 
             PlayButton.Font=new Font("MS UI Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            PlayButton.Location=new Point(98, 14);
-            PlayButton.Margin=new Padding(3, 2, 3, 2);
+            PlayButton.Location=new Point(112, 19);
             PlayButton.Name="PlayButton";
-            PlayButton.Size=new Size(45, 45);
+            PlayButton.Size=new Size(51, 60);
             PlayButton.TabIndex=84;
             PlayButton.Text="▶";
             PlayButton.UseVisualStyleBackColor=true;
@@ -339,26 +322,25 @@
             // Label2
             // 
             Label2.AutoSize=true;
-            Label2.Location=new Point(444, 31);
+            Label2.Location=new Point(507, 41);
             Label2.Name="Label2";
-            Label2.Size=new Size(72, 15);
+            Label2.Size=new Size(90, 20);
             Label2.TabIndex=79;
             Label2.Text="表示プレビュー";
             // 
             // InPageScrollBar
             // 
-            InPageScrollBar.Location=new Point(716, 35);
+            InPageScrollBar.Location=new Point(818, 47);
             InPageScrollBar.Name="InPageScrollBar";
-            InPageScrollBar.Size=new Size(23, 300);
+            InPageScrollBar.Size=new Size(23, 400);
             InPageScrollBar.TabIndex=78;
             InPageScrollBar.Scroll+=VScrollBar1_Scroll;
             // 
             // FitToWindowWidthButton
             // 
-            FitToWindowWidthButton.Location=new Point(2, 92);
-            FitToWindowWidthButton.Margin=new Padding(3, 2, 3, 2);
+            FitToWindowWidthButton.Location=new Point(2, 123);
             FitToWindowWidthButton.Name="FitToWindowWidthButton";
-            FitToWindowWidthButton.Size=new Size(136, 34);
+            FitToWindowWidthButton.Size=new Size(155, 45);
             FitToWindowWidthButton.TabIndex=76;
             FitToWindowWidthButton.Text="ウィンドウ幅に合わせる";
             FitToWindowWidthButton.UseVisualStyleBackColor=true;
@@ -366,10 +348,9 @@
             // 
             // Rotate90Button
             // 
-            Rotate90Button.Location=new Point(130, 27);
-            Rotate90Button.Margin=new Padding(3, 2, 3, 2);
+            Rotate90Button.Location=new Point(149, 36);
             Rotate90Button.Name="Rotate90Button";
-            Rotate90Button.Size=new Size(61, 38);
+            Rotate90Button.Size=new Size(70, 51);
             Rotate90Button.TabIndex=72;
             Rotate90Button.Text="右90度";
             Rotate90Button.UseVisualStyleBackColor=true;
@@ -377,20 +358,18 @@
             // 
             // SeekTrackBar
             // 
-            SeekTrackBar.Location=new Point(391, 345);
-            SeekTrackBar.Margin=new Padding(3, 2, 3, 2);
+            SeekTrackBar.Location=new Point(447, 460);
             SeekTrackBar.Name="SeekTrackBar";
-            SeekTrackBar.Size=new Size(277, 45);
+            SeekTrackBar.Size=new Size(317, 56);
             SeekTrackBar.TabIndex=85;
             SeekTrackBar.Scroll+=SeekTrackBar_Scroll;
             SeekTrackBar.MouseDown+=SeekTrackBar_MouseDown;
             // 
             // Rotate0Button
             // 
-            Rotate0Button.Location=new Point(73, 0);
-            Rotate0Button.Margin=new Padding(3, 2, 3, 2);
+            Rotate0Button.Location=new Point(83, 0);
             Rotate0Button.Name="Rotate0Button";
-            Rotate0Button.Size=new Size(52, 38);
+            Rotate0Button.Size=new Size(59, 51);
             Rotate0Button.TabIndex=73;
             Rotate0Button.Text="０度";
             Rotate0Button.UseVisualStyleBackColor=true;
@@ -406,10 +385,9 @@
             // 
             // Rotate270Button
             // 
-            Rotate270Button.Location=new Point(6, 27);
-            Rotate270Button.Margin=new Padding(3, 2, 3, 2);
+            Rotate270Button.Location=new Point(7, 36);
             Rotate270Button.Name="Rotate270Button";
-            Rotate270Button.Size=new Size(61, 38);
+            Rotate270Button.Size=new Size(70, 51);
             Rotate270Button.TabIndex=74;
             Rotate270Button.Text="左90度";
             Rotate270Button.UseVisualStyleBackColor=true;
@@ -417,10 +395,9 @@
             // 
             // Rotate180Button
             // 
-            Rotate180Button.Location=new Point(73, 50);
-            Rotate180Button.Margin=new Padding(3, 2, 3, 2);
+            Rotate180Button.Location=new Point(83, 67);
             Rotate180Button.Name="Rotate180Button";
-            Rotate180Button.Size=new Size(52, 38);
+            Rotate180Button.Size=new Size(59, 51);
             Rotate180Button.TabIndex=75;
             Rotate180Button.Text="180度回転";
             Rotate180Button.UseVisualStyleBackColor=true;
@@ -429,18 +406,17 @@
             // Label6
             // 
             Label6.AutoSize=true;
-            Label6.Location=new Point(10, 10);
+            Label6.Location=new Point(11, 13);
             Label6.Name="Label6";
-            Label6.Size=new Size(65, 15);
+            Label6.Size=new Size(81, 20);
             Label6.TabIndex=71;
             Label6.Text="ファイル情報";
             // 
             // AddFilesButton
             // 
-            AddFilesButton.Location=new Point(140, 456);
-            AddFilesButton.Margin=new Padding(3, 2, 3, 2);
+            AddFilesButton.Location=new Point(160, 608);
             AddFilesButton.Name="AddFilesButton";
-            AddFilesButton.Size=new Size(88, 30);
+            AddFilesButton.Size=new Size(101, 40);
             AddFilesButton.TabIndex=70;
             AddFilesButton.Text="ファイルを追加";
             AddFilesButton.UseVisualStyleBackColor=true;
@@ -450,12 +426,12 @@
             // 
             FilesList.AllowDrop=true;
             FilesList.FormattingEnabled=true;
-            FilesList.ItemHeight=15;
-            FilesList.Location=new Point(4, 27);
-            FilesList.Margin=new Padding(26, 22, 26, 22);
+            FilesList.ItemHeight=20;
+            FilesList.Location=new Point(5, 36);
+            FilesList.Margin=new Padding(30, 29, 30, 29);
             FilesList.Name="FilesList";
             FilesList.SelectionMode=SelectionMode.MultiExtended;
-            FilesList.Size=new Size(224, 424);
+            FilesList.Size=new Size(255, 564);
             FilesList.TabIndex=67;
             FilesList.Click+=FilesList_Click;
             FilesList.SelectedValueChanged+=FilesList_SelectedValueChanged;
@@ -464,29 +440,26 @@
             // 
             // txtPDFFileName
             // 
-            txtPDFFileName.Location=new Point(80, 4);
-            txtPDFFileName.Margin=new Padding(3, 2, 3, 2);
+            txtPDFFileName.Location=new Point(91, 5);
             txtPDFFileName.Name="txtPDFFileName";
             txtPDFFileName.ReadOnly=true;
-            txtPDFFileName.Size=new Size(574, 23);
+            txtPDFFileName.Size=new Size(655, 27);
             txtPDFFileName.TabIndex=65;
             // 
             // pbThumbnail
             // 
             pbThumbnail.BackColor=Color.Red;
-            pbThumbnail.Location=new Point(701, 361);
-            pbThumbnail.Margin=new Padding(3, 2, 3, 2);
+            pbThumbnail.Location=new Point(801, 481);
             pbThumbnail.Name="pbThumbnail";
-            pbThumbnail.Size=new Size(21, 24);
+            pbThumbnail.Size=new Size(24, 32);
             pbThumbnail.TabIndex=77;
             pbThumbnail.TabStop=false;
             // 
             // DeselectFilesButton
             // 
-            DeselectFilesButton.Location=new Point(70, 456);
-            DeselectFilesButton.Margin=new Padding(3, 2, 3, 2);
+            DeselectFilesButton.Location=new Point(80, 608);
             DeselectFilesButton.Name="DeselectFilesButton";
-            DeselectFilesButton.Size=new Size(67, 30);
+            DeselectFilesButton.Size=new Size(77, 40);
             DeselectFilesButton.TabIndex=68;
             DeselectFilesButton.Text="選択解除";
             DeselectFilesButton.UseVisualStyleBackColor=true;
@@ -494,10 +467,9 @@
             // 
             // DeleteFilesFromListButton
             // 
-            DeleteFilesFromListButton.Location=new Point(25, 490);
-            DeleteFilesFromListButton.Margin=new Padding(3, 2, 3, 2);
+            DeleteFilesFromListButton.Location=new Point(29, 653);
             DeleteFilesFromListButton.Name="DeleteFilesFromListButton";
-            DeleteFilesFromListButton.Size=new Size(77, 30);
+            DeleteFilesFromListButton.Size=new Size(88, 40);
             DeleteFilesFromListButton.TabIndex=69;
             DeleteFilesFromListButton.Text="削除";
             DeleteFilesFromListButton.UseVisualStyleBackColor=true;
@@ -510,9 +482,10 @@
             pnlMovie.Controls.Add(FastReverseButton);
             pnlMovie.Controls.Add(FastForwardButton);
             pnlMovie.Controls.Add(PlayButton);
-            pnlMovie.Location=new Point(6, 28);
+            pnlMovie.Location=new Point(7, 37);
+            pnlMovie.Margin=new Padding(3, 4, 3, 4);
             pnlMovie.Name="pnlMovie";
-            pnlMovie.Size=new Size(244, 75);
+            pnlMovie.Size=new Size(279, 100);
             pnlMovie.TabIndex=98;
             // 
             // pnlDispOption
@@ -525,16 +498,18 @@
             pnlDispOption.Controls.Add(Rotate0Button);
             pnlDispOption.Controls.Add(Rotate270Button);
             pnlDispOption.Controls.Add(Rotate180Button);
-            pnlDispOption.Location=new Point(4, 34);
+            pnlDispOption.Location=new Point(5, 45);
+            pnlDispOption.Margin=new Padding(3, 4, 3, 4);
             pnlDispOption.Name="pnlDispOption";
-            pnlDispOption.Size=new Size(234, 168);
+            pnlDispOption.Size=new Size(267, 224);
             pnlDispOption.TabIndex=99;
             // 
             // ZoomOutButton
             // 
-            ZoomOutButton.Location=new Point(110, 130);
+            ZoomOutButton.Location=new Point(126, 173);
+            ZoomOutButton.Margin=new Padding(3, 4, 3, 4);
             ZoomOutButton.Name="ZoomOutButton";
-            ZoomOutButton.Size=new Size(96, 34);
+            ZoomOutButton.Size=new Size(110, 45);
             ZoomOutButton.TabIndex=93;
             ZoomOutButton.Text="縮小";
             ZoomOutButton.UseVisualStyleBackColor=true;
@@ -542,10 +517,9 @@
             // 
             // ZoomInButton
             // 
-            ZoomInButton.Location=new Point(3, 130);
-            ZoomInButton.Margin=new Padding(3, 2, 3, 2);
+            ZoomInButton.Location=new Point(3, 173);
             ZoomInButton.Name="ZoomInButton";
-            ZoomInButton.Size=new Size(96, 34);
+            ZoomInButton.Size=new Size(110, 45);
             ZoomInButton.TabIndex=76;
             ZoomInButton.Text="拡大";
             ZoomInButton.UseVisualStyleBackColor=true;
@@ -559,19 +533,19 @@
             pnlPage.Controls.Add(NextPageOfPDFButton);
             pnlPage.Controls.Add(PreviousPageOfPDFButton);
             pnlPage.Controls.Add(FirstPageOfPDFButton);
-            pnlPage.Location=new Point(7, 203);
+            pnlPage.Location=new Point(8, 271);
+            pnlPage.Margin=new Padding(3, 4, 3, 4);
             pnlPage.Name="pnlPage";
-            pnlPage.Size=new Size(229, 78);
+            pnlPage.Size=new Size(262, 104);
             pnlPage.TabIndex=100;
             // 
             // thumbnailMoviePlayer
             // 
             thumbnailMoviePlayer.BackColor=Color.FromArgb(192, 0, 0);
-            thumbnailMoviePlayer.Location=new Point(670, 361);
-            thumbnailMoviePlayer.Margin=new Padding(3, 2, 3, 2);
+            thumbnailMoviePlayer.Location=new Point(766, 481);
             thumbnailMoviePlayer.Name="thumbnailMoviePlayer";
             thumbnailMoviePlayer.Rate=-1F;
-            thumbnailMoviePlayer.Size=new Size(25, 24);
+            thumbnailMoviePlayer.Size=new Size(29, 32);
             thumbnailMoviePlayer.TabIndex=97;
             thumbnailMoviePlayer.Time=0L;
             thumbnailMoviePlayer.Volume=-1;
@@ -582,8 +556,8 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { ファイルToolStripMenuItem, リストToolStripMenuItem, 設定ToolStripMenuItem, ヘルプToolStripMenuItem });
             menuStrip1.Location=new Point(0, 0);
             menuStrip1.Name="menuStrip1";
-            menuStrip1.Padding=new Padding(5, 2, 0, 2);
-            menuStrip1.Size=new Size(1024, 24);
+            menuStrip1.Padding=new Padding(6, 3, 0, 3);
+            menuStrip1.Size=new Size(1170, 30);
             menuStrip1.TabIndex=101;
             menuStrip1.Text="menuStrip1";
             menuStrip1.ItemClicked+=menuStrip1_ItemClicked;
@@ -592,19 +566,19 @@
             // 
             ファイルToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { リストLToolStripMenuItem, 開くOToolStripMenuItem });
             ファイルToolStripMenuItem.Name="ファイルToolStripMenuItem";
-            ファイルToolStripMenuItem.Size=new Size(67, 20);
+            ファイルToolStripMenuItem.Size=new Size(82, 24);
             ファイルToolStripMenuItem.Text="ファイル(&F)";
             // 
             // リストLToolStripMenuItem
             // 
             リストLToolStripMenuItem.Name="リストLToolStripMenuItem";
-            リストLToolStripMenuItem.Size=new Size(176, 22);
+            リストLToolStripMenuItem.Size=new Size(221, 26);
             リストLToolStripMenuItem.Text="リスト(&L)";
             // 
             // 開くOToolStripMenuItem
             // 
             開くOToolStripMenuItem.Name="開くOToolStripMenuItem";
-            開くOToolStripMenuItem.Size=new Size(176, 22);
+            開くOToolStripMenuItem.Size=new Size(221, 26);
             開くOToolStripMenuItem.Text="開く(リストに追加)(&O)";
             開くOToolStripMenuItem.Click+=開くOToolStripMenuItem_Click;
             // 
@@ -612,42 +586,42 @@
             // 
             リストToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 表示を回転ToolStripMenuItem, ページナビゲーションToolStripMenuItem, ズームToolStripMenuItem, 再生ToolStripMenuItem, セカンドモニター操作ToolStripMenuItem });
             リストToolStripMenuItem.Name="リストToolStripMenuItem";
-            リストToolStripMenuItem.Size=new Size(58, 20);
+            リストToolStripMenuItem.Size=new Size(72, 24);
             リストToolStripMenuItem.Text="表示(&V)";
             // 
             // 表示を回転ToolStripMenuItem
             // 
             表示を回転ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 元の表示ToolStripMenuItem, 右へ90回転ToolStripMenuItem, 左へ90回転ToolStripMenuItem, 回転ToolStripMenuItem });
             表示を回転ToolStripMenuItem.Name="表示を回転ToolStripMenuItem";
-            表示を回転ToolStripMenuItem.Size=new Size(180, 22);
+            表示を回転ToolStripMenuItem.Size=new Size(210, 26);
             表示を回転ToolStripMenuItem.Text="表示を回転";
             表示を回転ToolStripMenuItem.Click+=次へToolStripMenuItem_Click;
             // 
             // 元の表示ToolStripMenuItem
             // 
             元の表示ToolStripMenuItem.Name="元の表示ToolStripMenuItem";
-            元の表示ToolStripMenuItem.Size=new Size(137, 22);
+            元の表示ToolStripMenuItem.Size=new Size(171, 26);
             元の表示ToolStripMenuItem.Text="元の表示";
             元の表示ToolStripMenuItem.Click+=元の表示ToolStripMenuItem_Click;
             // 
             // 右へ90回転ToolStripMenuItem
             // 
             右へ90回転ToolStripMenuItem.Name="右へ90回転ToolStripMenuItem";
-            右へ90回転ToolStripMenuItem.Size=new Size(137, 22);
+            右へ90回転ToolStripMenuItem.Size=new Size(171, 26);
             右へ90回転ToolStripMenuItem.Text="右へ90°回転";
             右へ90回転ToolStripMenuItem.Click+=右へ90回転ToolStripMenuItem_Click;
             // 
             // 左へ90回転ToolStripMenuItem
             // 
             左へ90回転ToolStripMenuItem.Name="左へ90回転ToolStripMenuItem";
-            左へ90回転ToolStripMenuItem.Size=new Size(137, 22);
+            左へ90回転ToolStripMenuItem.Size=new Size(171, 26);
             左へ90回転ToolStripMenuItem.Text="左へ90°回転";
             左へ90回転ToolStripMenuItem.Click+=左へ90回転ToolStripMenuItem_Click;
             // 
             // 回転ToolStripMenuItem
             // 
             回転ToolStripMenuItem.Name="回転ToolStripMenuItem";
-            回転ToolStripMenuItem.Size=new Size(137, 22);
+            回転ToolStripMenuItem.Size=new Size(171, 26);
             回転ToolStripMenuItem.Text="180°回転";
             回転ToolStripMenuItem.Click+=回転ToolStripMenuItem_Click;
             // 
@@ -655,41 +629,41 @@
             // 
             ページナビゲーションToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 最初のページToolStripMenuItem, 次へToolStripMenuItem1, 前のページToolStripMenuItem, 最後のページToolStripMenuItem, ページ指定ToolStripMenuItem });
             ページナビゲーションToolStripMenuItem.Name="ページナビゲーションToolStripMenuItem";
-            ページナビゲーションToolStripMenuItem.Size=new Size(180, 22);
+            ページナビゲーションToolStripMenuItem.Size=new Size(210, 26);
             ページナビゲーションToolStripMenuItem.Text="ページナビゲーション";
             // 
             // 最初のページToolStripMenuItem
             // 
             最初のページToolStripMenuItem.Name="最初のページToolStripMenuItem";
-            最初のページToolStripMenuItem.Size=new Size(136, 22);
+            最初のページToolStripMenuItem.Size=new Size(168, 26);
             最初のページToolStripMenuItem.Text="最初のページ";
             最初のページToolStripMenuItem.Click+=最初のページToolStripMenuItem_Click;
             // 
             // 次へToolStripMenuItem1
             // 
             次へToolStripMenuItem1.Name="次へToolStripMenuItem1";
-            次へToolStripMenuItem1.Size=new Size(136, 22);
+            次へToolStripMenuItem1.Size=new Size(168, 26);
             次へToolStripMenuItem1.Text="次のページ";
             次へToolStripMenuItem1.Click+=次へToolStripMenuItem1_Click;
             // 
             // 前のページToolStripMenuItem
             // 
             前のページToolStripMenuItem.Name="前のページToolStripMenuItem";
-            前のページToolStripMenuItem.Size=new Size(136, 22);
+            前のページToolStripMenuItem.Size=new Size(168, 26);
             前のページToolStripMenuItem.Text="前のページ";
             前のページToolStripMenuItem.Click+=前のページToolStripMenuItem_Click;
             // 
             // 最後のページToolStripMenuItem
             // 
             最後のページToolStripMenuItem.Name="最後のページToolStripMenuItem";
-            最後のページToolStripMenuItem.Size=new Size(136, 22);
+            最後のページToolStripMenuItem.Size=new Size(168, 26);
             最後のページToolStripMenuItem.Text="最後のページ";
             最後のページToolStripMenuItem.Click+=最後のページToolStripMenuItem_Click;
             // 
             // ページ指定ToolStripMenuItem
             // 
             ページ指定ToolStripMenuItem.Name="ページ指定ToolStripMenuItem";
-            ページ指定ToolStripMenuItem.Size=new Size(136, 22);
+            ページ指定ToolStripMenuItem.Size=new Size(168, 26);
             ページ指定ToolStripMenuItem.Text="ページ指定";
             ページ指定ToolStripMenuItem.Click+=ページ指定ToolStripMenuItem_Click;
             // 
@@ -697,34 +671,34 @@
             // 
             ズームToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ウィンドウ幅に合わせるToolStripMenuItem, 全体を表示ToolStripMenuItem, 拡大ToolStripMenuItem, 縮小ToolStripMenuItem });
             ズームToolStripMenuItem.Name="ズームToolStripMenuItem";
-            ズームToolStripMenuItem.Size=new Size(180, 22);
+            ズームToolStripMenuItem.Size=new Size(210, 26);
             ズームToolStripMenuItem.Text="ズーム";
             // 
             // ウィンドウ幅に合わせるToolStripMenuItem
             // 
             ウィンドウ幅に合わせるToolStripMenuItem.Name="ウィンドウ幅に合わせるToolStripMenuItem";
-            ウィンドウ幅に合わせるToolStripMenuItem.Size=new Size(178, 22);
+            ウィンドウ幅に合わせるToolStripMenuItem.Size=new Size(224, 26);
             ウィンドウ幅に合わせるToolStripMenuItem.Text="ウィンドウ幅に合わせる";
             ウィンドウ幅に合わせるToolStripMenuItem.Click+=ウィンドウ幅に合わせるToolStripMenuItem_Click;
             // 
             // 全体を表示ToolStripMenuItem
             // 
             全体を表示ToolStripMenuItem.Name="全体を表示ToolStripMenuItem";
-            全体を表示ToolStripMenuItem.Size=new Size(178, 22);
+            全体を表示ToolStripMenuItem.Size=new Size(224, 26);
             全体を表示ToolStripMenuItem.Text="全体を表示";
             全体を表示ToolStripMenuItem.Click+=全体を表示ToolStripMenuItem_Click;
             // 
             // 拡大ToolStripMenuItem
             // 
             拡大ToolStripMenuItem.Name="拡大ToolStripMenuItem";
-            拡大ToolStripMenuItem.Size=new Size(178, 22);
+            拡大ToolStripMenuItem.Size=new Size(224, 26);
             拡大ToolStripMenuItem.Text="拡大";
             拡大ToolStripMenuItem.Click+=拡大ToolStripMenuItem_Click;
             // 
             // 縮小ToolStripMenuItem
             // 
             縮小ToolStripMenuItem.Name="縮小ToolStripMenuItem";
-            縮小ToolStripMenuItem.Size=new Size(178, 22);
+            縮小ToolStripMenuItem.Size=new Size(224, 26);
             縮小ToolStripMenuItem.Text="縮小";
             縮小ToolStripMenuItem.Click+=縮小ToolStripMenuItem_Click;
             // 
@@ -732,75 +706,100 @@
             // 
             再生ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 最初に移動ToolStripMenuItem, 再生開始ToolStripMenuItem, 再生停止ToolStripMenuItem, 早送りToolStripMenuItem, 巻き戻しToolStripMenuItem });
             再生ToolStripMenuItem.Name="再生ToolStripMenuItem";
-            再生ToolStripMenuItem.Size=new Size(180, 22);
+            再生ToolStripMenuItem.Size=new Size(210, 26);
             再生ToolStripMenuItem.Text="再生";
             // 
             // 最初に移動ToolStripMenuItem
             // 
             最初に移動ToolStripMenuItem.Name="最初に移動ToolStripMenuItem";
-            最初に移動ToolStripMenuItem.Size=new Size(131, 22);
+            最初に移動ToolStripMenuItem.Size=new Size(164, 26);
             最初に移動ToolStripMenuItem.Text="最初に移動";
             最初に移動ToolStripMenuItem.Click+=最初に移動ToolStripMenuItem_Click;
             // 
             // 再生開始ToolStripMenuItem
             // 
             再生開始ToolStripMenuItem.Name="再生開始ToolStripMenuItem";
-            再生開始ToolStripMenuItem.Size=new Size(131, 22);
+            再生開始ToolStripMenuItem.Size=new Size(164, 26);
             再生開始ToolStripMenuItem.Text="再生開始";
             再生開始ToolStripMenuItem.Click+=再生開始ToolStripMenuItem_Click;
             // 
             // 再生停止ToolStripMenuItem
             // 
             再生停止ToolStripMenuItem.Name="再生停止ToolStripMenuItem";
-            再生停止ToolStripMenuItem.Size=new Size(131, 22);
+            再生停止ToolStripMenuItem.Size=new Size(164, 26);
             再生停止ToolStripMenuItem.Text="一時停止";
             再生停止ToolStripMenuItem.Click+=再生停止ToolStripMenuItem_Click;
             // 
             // 早送りToolStripMenuItem
             // 
             早送りToolStripMenuItem.Name="早送りToolStripMenuItem";
-            早送りToolStripMenuItem.Size=new Size(131, 22);
+            早送りToolStripMenuItem.Size=new Size(164, 26);
             早送りToolStripMenuItem.Text="早送り";
             早送りToolStripMenuItem.Click+=早送りToolStripMenuItem_Click;
             // 
             // 巻き戻しToolStripMenuItem
             // 
             巻き戻しToolStripMenuItem.Name="巻き戻しToolStripMenuItem";
-            巻き戻しToolStripMenuItem.Size=new Size(131, 22);
+            巻き戻しToolStripMenuItem.Size=new Size(164, 26);
             巻き戻しToolStripMenuItem.Text="巻き戻し";
             巻き戻しToolStripMenuItem.Click+=巻き戻しToolStripMenuItem_Click;
             // 
+            // セカンドモニター操作ToolStripMenuItem
+            // 
+            セカンドモニター操作ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 表示ToolStripMenuItem, 表示終了ToolStripMenuItem, 背景表示ToolStripMenuItem });
+            セカンドモニター操作ToolStripMenuItem.Name="セカンドモニター操作ToolStripMenuItem";
+            セカンドモニター操作ToolStripMenuItem.Size=new Size(210, 26);
+            セカンドモニター操作ToolStripMenuItem.Text="セカンドモニター操作";
+            // 
+            // 表示ToolStripMenuItem
+            // 
+            表示ToolStripMenuItem.Name="表示ToolStripMenuItem";
+            表示ToolStripMenuItem.Size=new Size(224, 26);
+            表示ToolStripMenuItem.Text="表示";
+            // 
+            // 表示終了ToolStripMenuItem
+            // 
+            表示終了ToolStripMenuItem.Name="表示終了ToolStripMenuItem";
+            表示終了ToolStripMenuItem.Size=new Size(224, 26);
+            表示終了ToolStripMenuItem.Text="表示終了";
+            // 
+            // 背景表示ToolStripMenuItem
+            // 
+            背景表示ToolStripMenuItem.Name="背景表示ToolStripMenuItem";
+            背景表示ToolStripMenuItem.Size=new Size(224, 26);
+            背景表示ToolStripMenuItem.Text="背景表示";
+            // 
             // 設定ToolStripMenuItem
             // 
-            設定ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ディスプレイと背景色ToolStripMenuItem, 言語LToolStripMenuItem, リストの表示ToolStripMenuItem, リストの非表示ToolStripMenuItem });
+            設定ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ディスプレイと背景色ToolStripMenuItem, 言語LToolStripMenuItem, リストの表示ToolStripMenuItem, リストの非表示ToolStripMenuItem, 操作中に自動表示ToolStripMenuItem });
             設定ToolStripMenuItem.Name="設定ToolStripMenuItem";
-            設定ToolStripMenuItem.Size=new Size(57, 20);
+            設定ToolStripMenuItem.Size=new Size(71, 24);
             設定ToolStripMenuItem.Text="設定(&S)";
             // 
             // ディスプレイと背景色ToolStripMenuItem
             // 
             ディスプレイと背景色ToolStripMenuItem.Name="ディスプレイと背景色ToolStripMenuItem";
-            ディスプレイと背景色ToolStripMenuItem.Size=new Size(171, 22);
+            ディスプレイと背景色ToolStripMenuItem.Size=new Size(224, 26);
             ディスプレイと背景色ToolStripMenuItem.Text="ディスプレイと背景色";
             ディスプレイと背景色ToolStripMenuItem.Click+=ディスプレイと背景色ToolStripMenuItem_Click;
             // 
             // 言語LToolStripMenuItem
             // 
             言語LToolStripMenuItem.Name="言語LToolStripMenuItem";
-            言語LToolStripMenuItem.Size=new Size(171, 22);
+            言語LToolStripMenuItem.Size=new Size(224, 26);
             言語LToolStripMenuItem.Text="言語(&L)";
             // 
             // リストの表示ToolStripMenuItem
             // 
             リストの表示ToolStripMenuItem.Name="リストの表示ToolStripMenuItem";
-            リストの表示ToolStripMenuItem.Size=new Size(171, 22);
+            リストの表示ToolStripMenuItem.Size=new Size(224, 26);
             リストの表示ToolStripMenuItem.Text="リストの表示";
             リストの表示ToolStripMenuItem.Click+=リストの表示ToolStripMenuItem_Click;
             // 
             // リストの非表示ToolStripMenuItem
             // 
             リストの非表示ToolStripMenuItem.Name="リストの非表示ToolStripMenuItem";
-            リストの非表示ToolStripMenuItem.Size=new Size(171, 22);
+            リストの非表示ToolStripMenuItem.Size=new Size(224, 26);
             リストの非表示ToolStripMenuItem.Text="リストの非表示";
             リストの非表示ToolStripMenuItem.Click+=リストの非表示ToolStripMenuItem_Click;
             // 
@@ -808,13 +807,13 @@
             // 
             ヘルプToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { このアプリについてToolStripMenuItem });
             ヘルプToolStripMenuItem.Name="ヘルプToolStripMenuItem";
-            ヘルプToolStripMenuItem.Size=new Size(65, 20);
+            ヘルプToolStripMenuItem.Size=new Size(79, 24);
             ヘルプToolStripMenuItem.Text="ヘルプ(&H)";
             // 
             // このアプリについてToolStripMenuItem
             // 
             このアプリについてToolStripMenuItem.Name="このアプリについてToolStripMenuItem";
-            このアプリについてToolStripMenuItem.Size=new Size(171, 22);
+            このアプリについてToolStripMenuItem.Size=new Size(214, 26);
             このアプリについてToolStripMenuItem.Text="このアプリについて(&A)";
             このアプリについてToolStripMenuItem.Click+=このアプリについてToolStripMenuItem_Click;
             // 
@@ -834,29 +833,26 @@
             panel2.Controls.Add(Label2);
             panel2.Controls.Add(thumbnailMoviePlayer);
             panel2.Controls.Add(SeekTrackBar);
-            panel2.Location=new Point(250, 27);
-            panel2.Margin=new Padding(3, 2, 3, 2);
+            panel2.Location=new Point(286, 36);
             panel2.Name="panel2";
-            panel2.Size=new Size(745, 416);
+            panel2.Size=new Size(851, 555);
             panel2.TabIndex=103;
             // 
             // thumbnailDefaultPanel
             // 
             thumbnailDefaultPanel.BackColor=Color.FromArgb(0, 0, 192);
-            thumbnailDefaultPanel.Location=new Point(250, 48);
-            thumbnailDefaultPanel.Margin=new Padding(3, 2, 3, 2);
+            thumbnailDefaultPanel.Location=new Point(286, 64);
             thumbnailDefaultPanel.Name="thumbnailDefaultPanel";
-            thumbnailDefaultPanel.Size=new Size(461, 295);
+            thumbnailDefaultPanel.Size=new Size(527, 393);
             thumbnailDefaultPanel.TabIndex=102;
             thumbnailDefaultPanel.Visible=false;
             // 
             // ThumnailMovoToPanel
             // 
             ThumnailMovoToPanel.BackColor=Color.FromArgb(0, 0, 192);
-            ThumnailMovoToPanel.Location=new Point(14, 284);
-            ThumnailMovoToPanel.Margin=new Padding(3, 2, 3, 2);
+            ThumnailMovoToPanel.Location=new Point(16, 379);
             ThumnailMovoToPanel.Name="ThumnailMovoToPanel";
-            ThumnailMovoToPanel.Size=new Size(219, 121);
+            ThumnailMovoToPanel.Size=new Size(250, 161);
             ThumnailMovoToPanel.TabIndex=101;
             ThumnailMovoToPanel.Visible=false;
             // 
@@ -866,51 +862,26 @@
             SecondGroup.Controls.Add(AutoDisplayCheckBox);
             SecondGroup.Controls.Add(EndOfDisplayButton);
             SecondGroup.Controls.Add(BackgroundDisplayButton);
-            SecondGroup.Location=new Point(250, 520);
-            SecondGroup.Margin=new Padding(3, 2, 3, 2);
+            SecondGroup.Location=new Point(286, 693);
             SecondGroup.Name="SecondGroup";
-            SecondGroup.Padding=new Padding(3, 2, 3, 2);
-            SecondGroup.Size=new Size(430, 69);
+            SecondGroup.Size=new Size(491, 92);
             SecondGroup.TabIndex=104;
             SecondGroup.TabStop=false;
             SecondGroup.Text="セカンドモニター操作";
             // 
-            // セカンドモニター操作ToolStripMenuItem
-            // 
-            セカンドモニター操作ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 表示ToolStripMenuItem, 表示終了ToolStripMenuItem, 背景表示ToolStripMenuItem, 操作中に自動表示ToolStripMenuItem });
-            セカンドモニター操作ToolStripMenuItem.Name="セカンドモニター操作ToolStripMenuItem";
-            セカンドモニター操作ToolStripMenuItem.Size=new Size(180, 22);
-            セカンドモニター操作ToolStripMenuItem.Text="セカンドモニター操作";
-            // 
-            // 表示ToolStripMenuItem
-            // 
-            表示ToolStripMenuItem.Name="表示ToolStripMenuItem";
-            表示ToolStripMenuItem.Size=new Size(180, 22);
-            表示ToolStripMenuItem.Text="表示";
-            // 
-            // 表示終了ToolStripMenuItem
-            // 
-            表示終了ToolStripMenuItem.Name="表示終了ToolStripMenuItem";
-            表示終了ToolStripMenuItem.Size=new Size(180, 22);
-            表示終了ToolStripMenuItem.Text="表示終了";
-            // 
-            // 背景表示ToolStripMenuItem
-            // 
-            背景表示ToolStripMenuItem.Name="背景表示ToolStripMenuItem";
-            背景表示ToolStripMenuItem.Size=new Size(180, 22);
-            背景表示ToolStripMenuItem.Text="背景表示";
-            // 
             // 操作中に自動表示ToolStripMenuItem
             // 
+            操作中に自動表示ToolStripMenuItem.Checked=true;
+            操作中に自動表示ToolStripMenuItem.CheckState=CheckState.Checked;
             操作中に自動表示ToolStripMenuItem.Name="操作中に自動表示ToolStripMenuItem";
-            操作中に自動表示ToolStripMenuItem.Size=new Size(180, 22);
+            操作中に自動表示ToolStripMenuItem.Size=new Size(224, 26);
             操作中に自動表示ToolStripMenuItem.Text="操作中に自動表示";
             // 
             // OperationForm
             // 
-            AutoScaleDimensions=new SizeF(7F, 15F);
+            AutoScaleDimensions=new SizeF(8F, 20F);
             AutoScaleMode=AutoScaleMode.Font;
-            ClientSize=new Size(1024, 632);
+            ClientSize=new Size(1170, 843);
             Controls.Add(SecondGroup);
             Controls.Add(DeleteFilesFromListButton);
             Controls.Add(AddFilesButton);
@@ -921,6 +892,7 @@
             Controls.Add(menuStrip1);
             Icon=(Icon)resources.GetObject("$this.Icon");
             MainMenuStrip=menuStrip1;
+            Margin=new Padding(3, 4, 3, 4);
             Name="OperationForm";
             Text="ViewerBy2nd Monitor";
             FormClosed+=OperationForm_FormClosed;
