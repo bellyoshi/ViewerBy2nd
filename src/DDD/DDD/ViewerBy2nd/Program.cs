@@ -1,3 +1,5 @@
+//todo: 原稿部分の背景色を設定できるようにする。現状背景色と同じになる。
+//todo: パスワードつきpdfを開けるようにする。パスワードを入力するウインドウをつくる
 using ViewerBy2nd;
 
 namespace ViewerBy2nd
