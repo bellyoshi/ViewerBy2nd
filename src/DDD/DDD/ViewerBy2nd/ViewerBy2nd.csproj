@@ -23,14 +23,4 @@
     <ProjectReference Include="..\ViewerBy2nd.WinFormsControlLibrary\ViewerBy2nd.WinFormsControlLibrary.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="x64\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="x64\pdfium.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
