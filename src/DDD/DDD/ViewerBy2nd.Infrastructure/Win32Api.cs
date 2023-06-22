@@ -23,7 +23,7 @@ namespace ViewerBy2nd.Infrastructure
         public static extern void FPDF_DestroyLibrary();
 
         [DllImport("pdfium.dll", EntryPoint = "FPDF_LoadDocument", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr FPDF_LoadDocument(byte[] file_path, string password);
+        public static extern IntPtr FPDF_LoadDocument(string file_path, string password);
 
         [DllImport("pdfium.dll", EntryPoint = "FPDF_CloseDocument", CallingConvention = CallingConvention.Cdecl)]
         public static extern void FPDF_CloseDocument(IntPtr document);
