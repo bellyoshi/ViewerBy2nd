@@ -4,6 +4,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using ViewerBy2nd.Infrastructure;
+using ViewerBy2nd.Pdfium;
 using System.Diagnostics;
 
 namespace ViewerBy2ndLib
@@ -288,8 +289,7 @@ namespace ViewerBy2ndLib
             {
                 return new Bitmap(1, 1);
             }
-            PDFRender pDFRender = new(pdfDoc);
-            return pDFRender.RenderPage(PageIndex, renderSize.Width, renderSize.Height);
+            return pdfDoc.RenderPage(PageIndex, renderSize.Width, renderSize.Height);
 
         }
 

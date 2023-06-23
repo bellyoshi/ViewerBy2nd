@@ -105,6 +105,7 @@ namespace ViewerBy2nd
         private void OperationForm_Load(object sender, EventArgs e)
         {
             言語LToolStripMenuItem.Visible = false;//todo
+            操作中に自動表示ToolStripMenuItem.Visible =false;//todo
             Dispacher.RegistrationfrmOperation(this);
 
             AppSettingLoad();

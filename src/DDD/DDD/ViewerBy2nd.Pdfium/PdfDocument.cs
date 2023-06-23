@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
+using System.Drawing;
 
-namespace ViewerBy2nd.Infrastructure
+namespace ViewerBy2nd.Pdfium
 {
-    internal class PdfDocument
+    public class PdfDocument
     {
         static bool initialized = false;
         public string m_strOpenPath = @"C:\";
@@ -143,8 +144,11 @@ namespace ViewerBy2nd.Infrastructure
             m_aryDispMag[m_iPageAct] = mag;
         }
 
-
-
+        public Image RenderPage(int pageIndex, int renderWidth, int renderHeight)
+        {
+            PDFRender pDFRender = new(this);
+            return pDFRender.RenderPage(pageIndex, renderWidth, renderHeight);
+        }
 
 
 

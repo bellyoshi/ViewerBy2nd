@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 
-namespace ViewerBy2nd.Infrastructure
+namespace ViewerBy2nd.Pdfium
 {
     internal class PDFRender
     {
@@ -21,6 +21,9 @@ namespace ViewerBy2nd.Infrastructure
             IntPtr m_pdfPage = m_pdfPage = Win32Api.FPDF_LoadPage(m_pdfDoc, pageIndex);
             System.Drawing.Image image = new Bitmap(renderWidth, renderHeight);
             Graphics g = Graphics.FromImage(image);
+            // 背景を白色で塗りつぶす
+            g.FillRectangle(Brushes.White, g.VisibleClipBounds);
+
             IntPtr hDC = g.GetHdc();
             Win32Api.FPDF_RenderPage(hDC, m_pdfPage, 0, 0, renderWidth, renderHeight, 0, 0);
             g.ReleaseHdc();

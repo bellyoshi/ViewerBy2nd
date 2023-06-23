@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewerBy2nd", "ViewerBy2nd\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewerBy2nd.WinFormsControlLibrary", "ViewerBy2nd.WinFormsControlLibrary\ViewerBy2nd.WinFormsControlLibrary.csproj", "{525CC6C3-60FC-4A47-A760-3601F1A4C7C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewerBy2nd.Tests", "ViewerBy2nd.Tests\ViewerBy2nd.Tests.csproj", "{587DA622-AE90-431E-A983-79D8A428B42E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewerBy2nd.Tests", "ViewerBy2nd.Tests\ViewerBy2nd.Tests.csproj", "{587DA622-AE90-431E-A983-79D8A428B42E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewerBy2nd.Pdfium", "ViewerBy2nd.Pdfium\ViewerBy2nd.Pdfium.csproj", "{5E9C3505-7B65-4DA5-B267-357AC1B2C1F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{587DA622-AE90-431E-A983-79D8A428B42E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{587DA622-AE90-431E-A983-79D8A428B42E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{587DA622-AE90-431E-A983-79D8A428B42E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E9C3505-7B65-4DA5-B267-357AC1B2C1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E9C3505-7B65-4DA5-B267-357AC1B2C1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E9C3505-7B65-4DA5-B267-357AC1B2C1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E9C3505-7B65-4DA5-B267-357AC1B2C1F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

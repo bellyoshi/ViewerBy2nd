@@ -17,7 +17,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Svg" Version="3.4.3" />
-    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,9 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="pdfium.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\ViewerBy2nd.Pdfium\ViewerBy2nd.Pdfium.csproj" />
   </ItemGroup>
 
 </Project>
