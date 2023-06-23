@@ -18,7 +18,7 @@ namespace ViewerBy2nd.Pdfium
         {
 
             IntPtr m_pdfDoc = pdfDoc.m_pdfDoc;
-            IntPtr m_pdfPage = m_pdfPage = Win32Api.FPDF_LoadPage(m_pdfDoc, pageIndex);
+            IntPtr m_pdfPage = Win32Api.FPDF_LoadPage(m_pdfDoc, pageIndex);
             System.Drawing.Image image = new Bitmap(renderWidth, renderHeight);
             Graphics g = Graphics.FromImage(image);
             // 背景を白色で塗りつぶす
@@ -30,10 +30,6 @@ namespace ViewerBy2nd.Pdfium
             g.Dispose();
             return image;
         }
-        // ポイントをピクセル換算
-        private int PointToPixel(int Dpi, double value)
-        {
-            return (int)((value * Dpi) / 72);
-        }
+
     }
 }

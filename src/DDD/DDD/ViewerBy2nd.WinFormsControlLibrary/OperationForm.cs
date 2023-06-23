@@ -119,7 +119,7 @@ namespace ViewerBy2nd
 
         private void AppSettingLoad()
         {
-            AutoDisplayCheckBox.Checked = Default.chkUpdate;
+            AutoDisplayCheckBox.Checked = Default.AutoUpdate;
 
             NotifyBackColor();
 
@@ -159,7 +159,7 @@ namespace ViewerBy2nd
 
         private void AppSettingSave()
         {
-            Default.chkUpdate = AutoDisplayCheckBox.Checked;
+            Default.AutoUpdate = AutoDisplayCheckBox.Checked;
 
 
             List<FileViewParam> fvinfos = new();
@@ -1090,13 +1090,16 @@ namespace ViewerBy2nd
                 return;
             }
             int max = Document.PageCount;
-            Action<int> action = number =>
-            {
-                Document.SetPage(number);
-                UpdateViewIfChecked();
-            };
+
             var index = Convert.ToInt32(Document.PageVirtualIndex) + 1;
-            FormDispacher.GetInstance().ShowPageNumberForm(action, max, index);
+            FormDispacher.ShowPageNumberForm(
+                number =>
+                {
+                    Document.SetPage(number);
+                    UpdateViewIfChecked();
+                }
+                
+                , max, index);
         }
 
         private void PageNumberLabel_Click(object sender, EventArgs e)
@@ -1149,10 +1152,7 @@ namespace ViewerBy2nd
             FastReverseAction();
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
 
-        }
     }
 
 }

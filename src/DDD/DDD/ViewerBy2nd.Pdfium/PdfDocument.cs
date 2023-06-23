@@ -18,16 +18,19 @@ namespace ViewerBy2nd.Pdfium
         public IntPtr m_pdfPage = (IntPtr)0;
         public double m_pageWidth = 0;
         public double m_pageHeight = 0;
-        public double[] m_aryDispMag;  // ページごとの表示倍率
+
         public int m_iPageMax = 0;
         public int m_iPageAct = -1;
-        private byte[] data;
+        private byte[] data = Array.Empty<byte>();
         public static PdfDocument Load(string filename)
         {
             return new PdfDocument(filename);
         }
         private PdfDocument(string file) {
-            LoadFile(file);
+            // ファイルロード
+            CloseFile();  // 既にロード済みなら閉じる
+            m_strFile = file;
+            LoadFile();
         }
         public void End()
         {
@@ -35,40 +38,41 @@ namespace ViewerBy2nd.Pdfium
             Win32Api.FPDF_DestroyLibrary();
         }
        
-        private bool LoadFile(string file)
+        private bool LoadFile()
         {
-            // 拡張子チェック
-            if (!IsPdfFile(file))
-                return false;
+            Initialize();
 
-            // ファイルロード
-            CloseFile();  // 既にロード済みなら閉じる
-            m_strFile = file;
-            if (!initialized)
-                Win32Api.FPDF_InitLibrary();
+            data = File.ReadAllBytes(m_strFile);
 
-             data = File.ReadAllBytes(file);
-
-            m_pdfDoc = Win32Api.FPDF_LoadMemDocument(data,data.Length, null);
+            m_pdfDoc = Win32Api.FPDF_LoadMemDocument(data, data.Length, String.Empty);
             if (m_pdfDoc == (IntPtr)0)
             {
                 throw new Exception($"file open error code {Win32Api.FPDF_GetLastError()} code 2 is  file not found or could not be opened");
                 {
 
                 };
-                
-                System.Diagnostics.Debug.Assert(false);
-                return false;
+
+
+
             }
 
             m_iPageMax = Win32Api.FPDF_GetPageCount(m_pdfDoc);
-            InitPageDispMag(m_iPageMax);  // ページごとの拡大率を初期化
+
 
             // ページロード
             if (!LoadPage(0))
                 return false;
 
             return true;
+        }
+
+        private static void Initialize()
+        {
+            if (!initialized)
+            {
+                Win32Api.FPDF_InitLibrary();
+                initialized = true;
+            }
         }
 
         private bool LoadPage(int page)
@@ -102,47 +106,8 @@ namespace ViewerBy2nd.Pdfium
                 m_strFile = "";
             }
         }
-        private bool IsPdfFile(string file)
-        {
-            int pos = file.LastIndexOf('.');
-            string strExt = file.Substring(pos + 1);
-            if (strExt.ToLower() == "pdf")
-                return true;
-            return false;
-        }
-
-        
-        // 四捨五入して整数化
-        private int Marume(double d)
-        {
-            return Convert.ToInt32(d);
-        }
-        // ポイントをピクセル換算
-        private int PointToPixel(int Dpi, double value)
-        {
-            return (int)((value * Dpi) / 72);
-        }
 
 
-        // ページごとの表示倍率を初期化
-        private void InitPageDispMag(int iPageMax)
-        {
-            Array.Resize(ref m_aryDispMag, iPageMax);
-            for (int i = 0; i < iPageMax; i++)
-                m_aryDispMag[i] = 1.0;
-
-
-        }
-        // ページごとの表示倍率取得
-        private double GetActPageDispMag()
-        {
-            return m_aryDispMag[m_iPageAct];
-        }
-        // ページごとの表示倍率設定
-        private void SetActPageDispMag(double mag)
-        {
-            m_aryDispMag[m_iPageAct] = mag;
-        }
 
         public Image RenderPage(int pageIndex, int renderWidth, int renderHeight)
         {

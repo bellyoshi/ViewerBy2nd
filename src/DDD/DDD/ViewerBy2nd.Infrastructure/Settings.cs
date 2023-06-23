@@ -3,10 +3,10 @@
 public  class Settings
 {
 
-    public int? cmbDisplaySelectedIndex { get; set; }
+    public int? DisplaySelectedIndex { get; set; }
 
     public System.Drawing.Color? BackColor { get; set; }
 
-    public bool chkUpdate { get; set; }
+    public bool AutoUpdate { get; set; }
 
 }

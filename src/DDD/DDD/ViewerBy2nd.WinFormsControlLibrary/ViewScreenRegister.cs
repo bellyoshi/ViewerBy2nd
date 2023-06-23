@@ -21,18 +21,18 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         bool isEmpty => _viewScreen == null;
         private ViewScreenRegister()
         {
-            var idx = Default.cmbDisplaySelectedIndex;
+            var idx = Default.DisplaySelectedIndex;
             if(!IsValidValue())
             {
                 idx = null;
             }
-            Default.cmbDisplaySelectedIndex = idx ?? getDefaultSecondMonitorIndex();
-            index = Default.cmbDisplaySelectedIndex.Value;
+            Default.DisplaySelectedIndex = idx ?? getDefaultSecondMonitorIndex();
+            index = Default.DisplaySelectedIndex.Value;
             _viewScreen = Screen.AllScreens[index];
         }
         private bool IsValidValue()
         {
-            var idx = Default.cmbDisplaySelectedIndex;
+            var idx = Default.DisplaySelectedIndex;
             return 0 <= idx && idx <= Screen.AllScreens.Length;
         }
 
@@ -72,7 +72,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         {
             index = idx;
             _viewScreen = Screen.AllScreens[idx];
-            Default.cmbDisplaySelectedIndex = idx;
+            Default.DisplaySelectedIndex = idx;
             Notify();
         }
 

@@ -560,7 +560,6 @@
             menuStrip1.Size=new Size(1170, 30);
             menuStrip1.TabIndex=101;
             menuStrip1.Text="menuStrip1";
-            menuStrip1.ItemClicked+=menuStrip1_ItemClicked;
             // 
             // ファイルToolStripMenuItem
             // 
