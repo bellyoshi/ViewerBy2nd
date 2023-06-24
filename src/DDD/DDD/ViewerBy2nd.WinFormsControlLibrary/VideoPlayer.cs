@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ViewerBy2ndLib;
-using Vlc.DotNet.Forms;
+﻿using ViewerBy2ndLib;
 
 namespace ViewerBy2nd.WinFormsControlLibrary
 {
@@ -24,7 +12,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         int _volume;
         public int Volume
         {
-            get { return vlcControl1?.VlcMediaPlayer?.Audio?.Volume??-1; }
+            get { return VlcControl?.VlcMediaPlayer?.Audio?.Volume??-1; }
             set
             {
                 _volume = value;
@@ -34,65 +22,65 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         }
         public float Rate
         {
-            get { return vlcControl1.Rate; }
-            set { vlcControl1.Rate = value; }
+            get { return VlcControl.Rate; }
+            set { VlcControl.Rate = value; }
         }
-        public bool IsPlaying => vlcControl1.IsPlaying;
+        public bool IsPlaying => VlcControl.IsPlaying;
 
         private long _time;
         public long Time
         {
             get
             {
-                if (vlcControl1.Time <= 0) return _time;
-                return vlcControl1.Time;
+                if (VlcControl.Time <= 0) return _time;
+                return VlcControl.Time;
             }
             set
             {
                 _time = value;
 
                 if (0 > value)
-                    vlcControl1.Time = 0;
-                else if (value > vlcControl1.Length)
+                    VlcControl.Time = 0;
+                else if (value > VlcControl.Length)
                 {
-                    vlcControl1.Time = vlcControl1.Length -1;
+                    VlcControl.Time = VlcControl.Length -1;
                 }
                 else
-                    vlcControl1.Time = value;
+                    VlcControl.Time = value;
             }
         }
-        public long Length => vlcControl1.Length;
+        public long Length => VlcControl.Length;
 
-        public bool RequiredReload => vlcControl1.State == Vlc.DotNet.Core.Interops.Signatures.MediaStates.Ended;
+        public bool RequiredReload => VlcControl.State == Vlc.DotNet.Core.Interops.Signatures.MediaStates.Ended;
 
-        System.Windows.Forms.Timer loadTimer = new();
+        readonly System.Windows.Forms.Timer loadTimer = new();
 
 
-        private void vlcControl1_VlcLibDirectoryNeeded(object? sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
+        private void VlcControl1_VlcLibDirectoryNeeded(object? sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
         {
             e.VlcLibDirectory = VLCDirectoryGetter.GetVlcLibDirectory();
         }
 
         public void Stop()
         {
-            vlcControl1.Stop();
+            VlcControl.Stop();
         }
 
         public void Pause()
         {
-            if (vlcControl1.IsPlaying)
-                vlcControl1.Pause();
+            if (VlcControl.IsPlaying)
+                VlcControl.Pause();
         }
 
         public void Play()
         {
-            if (!vlcControl1.IsPlaying)
-                vlcControl1.Play();
+            if (!VlcControl.IsPlaying)
+                VlcControl.Play();
 
         }
         public void Play(string filename, params string[] options)
         {
-            vlcControl1.Play(new Uri($"file://{filename}"), options);
+            VlcControl.Play(new Uri($"file://{filename}"), options);
 
         }
         bool requirePause;
@@ -109,32 +97,32 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         {
             if (requirePause)
             {
-                if (vlcControl1.Time != 0)
+                if (VlcControl.Time != 0)
                 {
                     loadTimer.Stop();
-                    vlcControl1.Pause();
+                    VlcControl.Pause();
                     requirePause = false;
 
                 }
             }
             if (Volume != _volume)
             {
-                if (vlcControl1.VlcMediaPlayer == null) return;
-                vlcControl1.VlcMediaPlayer.Audio.Volume = _volume;
+                if (VlcControl.VlcMediaPlayer == null) return;
+                VlcControl.VlcMediaPlayer.Audio.Volume = _volume;
             }
         }
-        Vlc.DotNet.Forms.VlcControl vlcControl1 = new();
+        readonly Vlc.DotNet.Forms.VlcControl VlcControl = new();
         private void VideoPlayer_Load(object sender, EventArgs e)
         {
             if (DesignMode) return;
 
 
-            vlcControl1.BeginInit();
-            vlcControl1.VlcLibDirectoryNeeded += vlcControl1_VlcLibDirectoryNeeded;
-            vlcControl1.Dock = DockStyle.Fill;
-            vlcControl1.EndInit();
+            VlcControl.BeginInit();
+            VlcControl.VlcLibDirectoryNeeded += VlcControl1_VlcLibDirectoryNeeded;
+            VlcControl.Dock = DockStyle.Fill;
+            VlcControl.EndInit();
 
-            Controls.Add(vlcControl1);
+            Controls.Add(VlcControl);
 
         }
     }

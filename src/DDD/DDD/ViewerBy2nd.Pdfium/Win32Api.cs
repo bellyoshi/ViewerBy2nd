@@ -23,7 +23,7 @@ namespace ViewerBy2nd.Pdfium
         public static extern void FPDF_DestroyLibrary();
 
         [DllImport("pdfium.dll", EntryPoint = "FPDF_LoadDocument", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr FPDF_LoadDocument(string file_path, string password);
+        public static extern IntPtr FPDF_LoadDocument(Byte[] file_path, Byte[] password);
 
         [DllImport("pdfium.dll", EntryPoint = "FPDF_CloseDocument", CallingConvention = CallingConvention.Cdecl)]
         public static extern void FPDF_CloseDocument(IntPtr document);
@@ -56,7 +56,7 @@ namespace ViewerBy2nd.Pdfium
         public static extern uint FPDF_GetLastError();
 
         [DllImport("pdfium.dll", EntryPoint = "FPDF_LoadMemDocument", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr FPDF_LoadMemDocument(byte[] file_content,    int content_size,    string password);
+        public static extern IntPtr FPDF_LoadMemDocument(byte[] file_content,    int content_size,    byte[] password);
 
     }
 }

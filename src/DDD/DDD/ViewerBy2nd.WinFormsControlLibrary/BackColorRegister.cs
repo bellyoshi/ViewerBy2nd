@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ViewerBy2nd.WinFormsControlLibrary
+﻿namespace ViewerBy2nd.WinFormsControlLibrary
 {
     internal class BackColorRegister
     {
-        Settings Default => ConfigurationReader.Default;
+        static Settings Default => ConfigurationReader.Default;
 
         //singlton
-        private static BackColorRegister instance = new();
+        private readonly static BackColorRegister instance = new();
         static public BackColorRegister GetInstance()
         {
             return instance;
@@ -35,7 +29,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         }
 
 
-        private void Notify()
+        private static void Notify()
         {
             FormDispacher.GetInstance().NotifyBackColor();
         }

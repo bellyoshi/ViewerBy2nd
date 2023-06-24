@@ -1,11 +1,6 @@
-﻿using System;
-
-
+﻿using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Imaging;
-using ViewerBy2nd.Infrastructure;
 using ViewerBy2nd.Pdfium;
-using System.Diagnostics;
 
 namespace ViewerBy2ndLib
 {
@@ -28,10 +23,10 @@ namespace ViewerBy2ndLib
 
         readonly PdfDocument? pdfDoc;
 
-        public int PageCount => pdfDoc?.m_iPageMax??0;
+        public int PageCount => pdfDoc?.PagesCount??0;
 
-        private double PageWidth => pdfDoc?.m_pageWidth??0f;
-        private double PageHeight => pdfDoc?.m_pageHeight??0f;
+        private double PageWidth => pdfDoc?.PageWidth??0f;
+        private double PageHeight => pdfDoc?.PageHeight??0f;
 
         private SizeF PageSize => new((float)PageWidth,(float) PageHeight);
 
@@ -79,7 +74,7 @@ namespace ViewerBy2ndLib
         public void Rotate(RotateFlipType flip) {
 
 
-            FileViewParam.rotateFlipType = flip;
+            FileViewParam.RotateFlipType = flip;
             RotatedImage = null;
             requireInitZoomHeight = true;
             UpdateImage();
@@ -95,7 +90,7 @@ namespace ViewerBy2ndLib
             {
                 image = OpenImageFile(FileViewParam.FileName);
             }
-            image?.RotateFlip(FileViewParam.rotateFlipType);
+            image?.RotateFlip(FileViewParam.RotateFlipType);
             this.RotatedImage = image;
         }
         public void UpdateImage()
@@ -382,12 +377,12 @@ namespace ViewerBy2ndLib
 
             Debug.Assert(RotatedImage != null);
             int ImageY;
-            if(FileViewParam.scrollBarValue + GetSetWinImageHeight() > (RotatedImage.Height)) {
+            if(FileViewParam.ScrollBarValue + GetSetWinImageHeight() > (RotatedImage.Height)) {
                 ImageY = Convert.ToInt32(RotatedImage.Height - GetSetWinImageHeight());
             }
             else
             {
-                ImageY = FileViewParam.scrollBarValue;
+                ImageY = FileViewParam.ScrollBarValue;
             }
 
             var rect = new Rectangle(0, ImageY, RotatedImage.Width, GetSetWinImageHeight());

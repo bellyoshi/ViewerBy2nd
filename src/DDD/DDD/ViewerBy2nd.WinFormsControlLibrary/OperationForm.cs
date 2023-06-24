@@ -104,8 +104,8 @@ namespace ViewerBy2nd
 
         private void OperationForm_Load(object sender, EventArgs e)
         {
-            言語LToolStripMenuItem.Visible = false;//todo
-            操作中に自動表示ToolStripMenuItem.Visible =false;//todo
+            言語LToolStripMenuItem.Visible = false;//todo 言語LToolStripMenuItem機能追加
+            操作中に自動表示ToolStripMenuItem.Visible =false;//todo 操作中に自動表示ToolStripMenuItem機能追加
             Dispacher.RegistrationfrmOperation(this);
 
             AppSettingLoad();
@@ -437,7 +437,7 @@ namespace ViewerBy2nd
             {
                 if (System.IO.File.Exists(PreviewFile?.FileName))
                 {
-                    var doc = PreviewFile?.document;
+                    var doc = PreviewFile?.Document;
                     if (doc != null)
                     {
                         return doc;
@@ -484,7 +484,7 @@ namespace ViewerBy2nd
             if (PreviewFile.IsZoom)
             {
                 InPageScrollBar.Value = 0;
-                PreviewFile.scrollBarValue = 0;
+                PreviewFile.ScrollBarValue = 0;
             }
         }
 
@@ -576,7 +576,7 @@ namespace ViewerBy2nd
             if (PreviewFile == null)
                 return;
             Debug.Assert(Document != null);
-            PreviewFile.scrollBarValue = InPageScrollBar.Value;
+            PreviewFile.ScrollBarValue = InPageScrollBar.Value;
             Document.UpdateImage();
             UpdateViewIfChecked();
         }
@@ -592,7 +592,7 @@ namespace ViewerBy2nd
             InPageScrollBar.Minimum = 0;
             var clientWidth = Document?.OutPutImage?.Height??0;
             InPageScrollBar.Maximum = Document?.OriginalImageHeight??0;
-            InPageScrollBar.Value = PreviewFile.scrollBarValue;
+            InPageScrollBar.Value = PreviewFile.ScrollBarValue;
 
             InPageScrollBar.LargeChange = clientWidth;
         }
@@ -606,7 +606,7 @@ namespace ViewerBy2nd
         {
             Debug.Assert(PreviewFile != null);
             Debug.Assert(Document != null);
-            PreviewFile.scrollBarValue = 0;
+            PreviewFile.ScrollBarValue = 0;
             PreviewFile.IsZoom = true;
             PreviewFile.ZoomHeight = Document.GetZoomImageHeightMin();
             Document.UpdateImage();
@@ -899,7 +899,7 @@ namespace ViewerBy2nd
         {
             Debug.Assert(PreviewFile != null);
             Document?.ZoomUp();
-            PreviewFile.scrollBarValue = 0;
+            PreviewFile.ScrollBarValue = 0;
             Document?.UpdateImage();
             ControlEnable();
             VScrollBar1Init();
@@ -915,7 +915,7 @@ namespace ViewerBy2nd
         {
             Debug.Assert(PreviewFile != null);
             Document?.ZoomDown();
-            PreviewFile.scrollBarValue = 0;
+            PreviewFile.ScrollBarValue = 0;
             Document?.UpdateImage();
             ControlEnable();
             VScrollBar1Init();
