@@ -1,22 +1,11 @@
-﻿using ExCSS;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace ViewerBy2nd.WinFormsControlLibrary
+﻿namespace ViewerBy2nd.WinFormsControlLibrary
 {
     public partial class PageNumberForm : Form
     {
 
         public Action<int> SetPageNumberAction { get; internal set; }
         public int PageNumberMax { get; internal set; }
-        private int PageNumberIndex;
+        private readonly int PageNumberIndex;
         public PageNumberForm(Action<int> action, int max, int index)
         {
             SetPageNumberAction = action;

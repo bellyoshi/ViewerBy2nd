@@ -1,26 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.InteropServices;
-using System.Drawing.Drawing2D;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace ViewerBy2nd.Pdfium
 {
     public class PdfDocument
     {
-        static bool initialized = false;
-        public string m_strOpenPath = @"C:\";
-        public string m_strFile;  // PDFファイル名
-        public IntPtr m_pdfDoc = (IntPtr)0;
-        public IntPtr m_pdfPage = (IntPtr)0;
-        public double m_pageWidth = 0;
-        public double m_pageHeight = 0;
+        private static bool initialized = false;
+        private string filePath;  // PDFファイル名
+        private IntPtr PdfDocumentPtr = (IntPtr)0;
+        private IntPtr m_pdfPage = (IntPtr)0;
+        public double PageWidth { get; private set; } = 0;
+        public double PageHeight { get; private set; } = 0;
 
-        public int m_iPageMax = 0;
-        public int m_iPageAct = -1;
+        public int PagesCount { get; private set; } = 0;
+        public int PageIndex { get; set; } = -1;
         private byte[] data = Array.Empty<byte>();
         public static PdfDocument Load(string filename)
         {
@@ -29,7 +21,7 @@ namespace ViewerBy2nd.Pdfium
         private PdfDocument(string file) {
             // ファイルロード
             CloseFile();  // 既にロード済みなら閉じる
-            m_strFile = file;
+            filePath = file;
             LoadFile();
         }
         public void End()
@@ -42,21 +34,21 @@ namespace ViewerBy2nd.Pdfium
         {
             Initialize();
 
-            data = File.ReadAllBytes(m_strFile);
+            //FPDF_LoadDocumentはマルチバイトのファイル名のファイルを読み込むことができず
+            //Error code 2となるため
+            //LoadMemDocumentを使用する。
+            data = File.ReadAllBytes(filePath);
+            PdfDocumentPtr = Win32Api.FPDF_LoadMemDocument(data, data.Length, Array.Empty<byte>());
 
-            m_pdfDoc = Win32Api.FPDF_LoadMemDocument(data, data.Length, String.Empty);
-            if (m_pdfDoc == (IntPtr)0)
+            if (PdfDocumentPtr == (IntPtr)0)
             {
                 throw new Exception($"file open error code {Win32Api.FPDF_GetLastError()} code 2 is  file not found or could not be opened");
                 {
 
                 };
-
-
-
             }
 
-            m_iPageMax = Win32Api.FPDF_GetPageCount(m_pdfDoc);
+            PagesCount = Win32Api.FPDF_GetPageCount(PdfDocumentPtr);
 
 
             // ページロード
@@ -77,15 +69,14 @@ namespace ViewerBy2nd.Pdfium
 
         private bool LoadPage(int page)
         {
-            if (page < 0 || m_iPageMax <= page)  // ページ範囲外
-                return false;
+            System.Diagnostics.Debug.Assert(0 <= page  && page < PagesCount);
 
-            m_iPageAct = page;
+            PageIndex = page;
 
             ClosePage();
-            m_pdfPage = Win32Api.FPDF_LoadPage(m_pdfDoc, m_iPageAct);
-            m_pageWidth = Win32Api.FPDF_GetPageWidth(m_pdfPage);
-            m_pageHeight = Win32Api.FPDF_GetPageHeight(m_pdfPage);
+            m_pdfPage = Win32Api.FPDF_LoadPage(PdfDocumentPtr, PageIndex);
+            PageWidth = Win32Api.FPDF_GetPageWidth(m_pdfPage);
+            PageHeight = Win32Api.FPDF_GetPageHeight(m_pdfPage);
             return true;
         }
         private void ClosePage()
@@ -99,11 +90,11 @@ namespace ViewerBy2nd.Pdfium
         private void CloseFile()
         {
             ClosePage();
-            if (m_pdfDoc != (IntPtr)0)
+            if (PdfDocumentPtr != (IntPtr)0)
             {
-                Win32Api.FPDF_CloseDocument(m_pdfDoc);
-                m_pdfDoc = (IntPtr)0;
-                m_strFile = "";
+                Win32Api.FPDF_CloseDocument(PdfDocumentPtr);
+                PdfDocumentPtr = (IntPtr)0;
+                filePath = "";
             }
         }
 
@@ -111,7 +102,7 @@ namespace ViewerBy2nd.Pdfium
 
         public Image RenderPage(int pageIndex, int renderWidth, int renderHeight)
         {
-            PDFRender pDFRender = new(this);
+            PDFRender pDFRender = new(this.PdfDocumentPtr);
             return pDFRender.RenderPage(pageIndex, renderWidth, renderHeight);
         }
 

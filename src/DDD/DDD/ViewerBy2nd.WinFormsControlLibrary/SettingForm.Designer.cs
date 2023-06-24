@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             lblFormColor=new Label();
-            btnColorChange=new Button();
+            ColorChangeButton=new Button();
             Label1=new Label();
-            cmbDisplay=new ComboBox();
+            DisplayComboBox=new ComboBox();
             ColorDialog1=new ColorDialog();
-            button1=new Button();
+            OkButton=new Button();
             SuspendLayout();
             // 
             // lblFormColor
@@ -46,15 +46,15 @@
             lblFormColor.TabIndex=9;
             lblFormColor.Text="　　";
             // 
-            // btnColorChange
+            // ColorChangeButton
             // 
-            btnColorChange.Location=new Point(420, 21);
-            btnColorChange.Name="btnColorChange";
-            btnColorChange.Size=new Size(93, 41);
-            btnColorChange.TabIndex=8;
-            btnColorChange.Text="背景色変更";
-            btnColorChange.UseVisualStyleBackColor=true;
-            btnColorChange.Click+=btnColorChange_Click_1;
+            ColorChangeButton.Location=new Point(420, 21);
+            ColorChangeButton.Name="ColorChangeButton";
+            ColorChangeButton.Size=new Size(93, 41);
+            ColorChangeButton.TabIndex=8;
+            ColorChangeButton.Text="背景色変更";
+            ColorChangeButton.UseVisualStyleBackColor=true;
+            ColorChangeButton.Click+=ColorChangeButton_Click;
             // 
             // Label1
             // 
@@ -65,39 +65,39 @@
             Label1.TabIndex=7;
             Label1.Text="表示するディスプレイ";
             // 
-            // cmbDisplay
+            // DisplayComboBox
             // 
-            cmbDisplay.DropDownStyle=ComboBoxStyle.DropDownList;
-            cmbDisplay.FormattingEnabled=true;
-            cmbDisplay.Location=new Point(172, 22);
-            cmbDisplay.Name="cmbDisplay";
-            cmbDisplay.Size=new Size(163, 28);
-            cmbDisplay.TabIndex=6;
-            cmbDisplay.SelectedIndexChanged+=cmbDisplay_SelectedIndexChanged;
+            DisplayComboBox.DropDownStyle=ComboBoxStyle.DropDownList;
+            DisplayComboBox.FormattingEnabled=true;
+            DisplayComboBox.Location=new Point(172, 22);
+            DisplayComboBox.Name="DisplayComboBox";
+            DisplayComboBox.Size=new Size(163, 28);
+            DisplayComboBox.TabIndex=6;
+            DisplayComboBox.SelectedIndexChanged+=DisplayComboBox_SelectedIndexChanged;
             // 
-            // button1
+            // OkButton
             // 
-            button1.Location=new Point(640, 83);
-            button1.Name="button1";
-            button1.Size=new Size(94, 29);
-            button1.TabIndex=10;
-            button1.Text="OK";
-            button1.UseVisualStyleBackColor=true;
-            button1.Click+=button1_Click;
+            OkButton.Location=new Point(640, 83);
+            OkButton.Name="OkButton";
+            OkButton.Size=new Size(94, 29);
+            OkButton.TabIndex=10;
+            OkButton.Text="OK";
+            OkButton.UseVisualStyleBackColor=true;
+            OkButton.Click+=OkButton_Click;
             // 
-            // frmSetting
+            // SettingForm
             // 
             AutoScaleDimensions=new SizeF(8F, 20F);
             AutoScaleMode=AutoScaleMode.Font;
             ClientSize=new Size(790, 141);
-            Controls.Add(button1);
+            Controls.Add(OkButton);
             Controls.Add(lblFormColor);
-            Controls.Add(btnColorChange);
+            Controls.Add(ColorChangeButton);
             Controls.Add(Label1);
-            Controls.Add(cmbDisplay);
-            Name="frmSetting";
+            Controls.Add(DisplayComboBox);
+            Name="SettingForm";
             Text="設定";
-            Load+=frmSetting_Load;
+            Load+=SettingForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -105,10 +105,10 @@
         #endregion
 
         internal Label lblFormColor;
-        internal Button btnColorChange;
+        internal Button ColorChangeButton;
         internal Label Label1;
-        internal ComboBox cmbDisplay;
+        internal ComboBox DisplayComboBox;
         internal ColorDialog ColorDialog1;
-        private Button button1;
+        private Button OkButton;
     }
 }

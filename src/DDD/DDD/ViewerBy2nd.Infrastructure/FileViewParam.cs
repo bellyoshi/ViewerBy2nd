@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ViewerBy2ndLib
+﻿namespace ViewerBy2ndLib
 {
     public class FileViewParam
     {
@@ -28,12 +22,9 @@ namespace ViewerBy2ndLib
         }
 
         private Document? _document;
-        public Document document {
+        public Document Document {
             get {
-                if (_document == null)
-                {
-                    _document = new Document(this);
-                }
+                _document ??= new Document(this);
                 return _document;
             }
         }
@@ -42,8 +33,8 @@ namespace ViewerBy2ndLib
 
         public bool IsZoom { get; set; }
 
-        public int scrollBarValue { get;  set; }
+        public int ScrollBarValue { get;  set; }
 
-        public System.Drawing.RotateFlipType  rotateFlipType { get; set; }
+        public System.Drawing.RotateFlipType  RotateFlipType { get; set; }
     }
 }
