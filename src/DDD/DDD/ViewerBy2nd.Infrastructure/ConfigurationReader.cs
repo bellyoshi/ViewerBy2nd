@@ -1,17 +1,20 @@
 ﻿using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace ViewerBy2nd.Infrastructure
 {
     public class ConfigurationReader
     {
+        const string fileName = "appsettings.json";
         public static Settings Default { get; } = GetDefault();
-        
-        static string fileName = "appsettings.json";
+
+
         private static Settings GetDefault()
         {
             Settings settings;
             try
             {
+                Debug.Assert(fileName != null);
                 string jsonString = File.ReadAllText(fileName);
                 settings = JsonConvert.DeserializeObject<Settings>(jsonString)??new();
             } catch (Exception )
