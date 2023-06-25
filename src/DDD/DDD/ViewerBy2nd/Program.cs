@@ -1,6 +1,6 @@
 //todo: 原稿部分の背景色を設定できるようにする。現状背景色と同じになる。
 //todo: パスワードつきpdfを開けるようにする。パスワードを入力するウインドウをつくる
-//todo: 設定が保存されなくなっている？
+
 namespace ViewerBy2nd
 {
     internal static class Program
