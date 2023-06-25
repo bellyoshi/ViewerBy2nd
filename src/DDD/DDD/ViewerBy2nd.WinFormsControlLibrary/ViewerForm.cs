@@ -1,15 +1,5 @@
 ﻿//todo::デザイナーで表示できないため作り直す
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using ViewerBy2nd.WinFormsControlLibrary;
-using ViewerBy2ndLib;
 
 namespace ViewerBy2nd
 {
@@ -21,18 +11,18 @@ namespace ViewerBy2nd
             InitializeComponent();
         }
 
-        public void frmOperation_MouseWheel(object? sender, MouseEventArgs e)
+        public void OperationForm_MouseWheel(object? sender, MouseEventArgs e)
         {
             var dispacher = FormDispacher.GetInstance();
             dispacher.OperationForm_MouseWheel(sender, e);
         }
 
-        private void frmViewer_Load(object sender, EventArgs e)
+        private void ViewerForm_Load(object sender, EventArgs e)
         {
-            this.MouseWheel +=  new MouseEventHandler(this.frmOperation_MouseWheel);
+            this.MouseWheel +=  new MouseEventHandler(this.OperationForm_MouseWheel);
         }
 
-        private void frmViewer_VisibleChanged(object sender, EventArgs e)
+        private void ViewerForm_VisibleChanged(object sender, EventArgs e)
         {
             if (this.Visible == false)
                 VideoPlayer1.Pause();
@@ -44,7 +34,7 @@ namespace ViewerBy2nd
             StartPosition = FormStartPosition.Manual;
             Location = bounds.Location;
             Size = bounds.Size;
-            
+
         }
 
         internal void ShowImage(Image image)

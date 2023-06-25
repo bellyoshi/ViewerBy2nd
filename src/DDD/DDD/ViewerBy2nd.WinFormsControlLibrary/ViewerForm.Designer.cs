@@ -65,8 +65,8 @@
             this.Name = "frmViewer";
             this.Text = "Viewer Screen";
 
-            this.Load += new System.EventHandler(this.frmViewer_Load);
-            this.VisibleChanged += new System.EventHandler(this.frmViewer_VisibleChanged);
+            this.Load += new System.EventHandler(this.ViewerForm_Load);
+            this.VisibleChanged += new System.EventHandler(this.ViewerForm_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
             this.ResumeLayout(false);
 
