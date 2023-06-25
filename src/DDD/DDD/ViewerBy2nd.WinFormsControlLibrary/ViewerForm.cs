@@ -1,5 +1,4 @@
-﻿//todo::デザイナーで表示できないため作り直す
-using ViewerBy2nd.WinFormsControlLibrary;
+﻿using ViewerBy2nd.WinFormsControlLibrary;
 
 namespace ViewerBy2nd
 {
