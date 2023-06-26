@@ -69,9 +69,9 @@
             VersionLabel.AutoSize=true;
             VersionLabel.Location=new Point(235, 19);
             VersionLabel.Name="VersionLabel";
-            VersionLabel.Size=new Size(50, 20);
+            VersionLabel.Size=new Size(80, 20);
             VersionLabel.TabIndex=2;
-            VersionLabel.Text="label3";
+            VersionLabel.Text="--Version--";
             // 
             // OkButton
             // 
