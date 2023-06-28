@@ -8,17 +8,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LibVLCSharp.WinForms.Sample {
-    
-    
+namespace LibVLCSharp.WinForms.Sample
+{
+
+
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
-    internal sealed partial class packages : global::System.Configuration.ApplicationSettingsBase {
-        
+    internal sealed partial class packages : global::System.Configuration.ApplicationSettingsBase
+    {
+
         private static packages defaultInstance = ((packages)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new packages())));
-        
-        public static packages Default {
-            get {
+
+        public static packages Default
+        {
+            get
+            {
                 return defaultInstance;
             }
         }
