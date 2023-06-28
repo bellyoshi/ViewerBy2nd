@@ -1,4 +1,4 @@
-namespace LibVLCSharp.WinForms.Sample
+namespace LibVLCSharpSample
 {
     internal static class Program
     {
