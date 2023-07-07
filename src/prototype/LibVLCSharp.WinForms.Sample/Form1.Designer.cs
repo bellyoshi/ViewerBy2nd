@@ -1,4 +1,6 @@
-﻿namespace LibVLCSharp.WinForms.Sample
+﻿using LibVLCSharp.WinForms;
+
+namespace LibVLCSharpSample
 {
     partial class Form1
     {
@@ -30,7 +32,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.videoView1 = new LibVLCSharp.WinForms.VideoView();
+            this.videoView1 = new ();
             ((System.ComponentModel.ISupportInitialize)(this.videoView1)).BeginInit();
             this.SuspendLayout();
             // 

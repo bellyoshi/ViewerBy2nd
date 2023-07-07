@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using LibVLCSharp.Shared;
 
-namespace LibVLCSharp.WinForms.Sample
+namespace LibVLCSharpSample
 {
     public partial class Form1 : Form
     {
