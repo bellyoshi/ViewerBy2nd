@@ -17,10 +17,10 @@ namespace LibVLCCSharp.Sample.net6
             }
 
             InitializeComponent();
-            _libVLC = new LibVLC();
-            _mp = new MediaPlayer(_libVLC);
-            videoView1.MediaPlayer = _mp;
-            Load += Form1_Load;
+            //_libVLC = new LibVLC();
+            //_mp = new MediaPlayer(_libVLC);
+            //videoView1.MediaPlayer = _mp;
+            //Load += Form1_Load;
         }
 
         private void Form1_Load(object sender, EventArgs e)
