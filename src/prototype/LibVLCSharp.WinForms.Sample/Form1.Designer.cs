@@ -32,7 +32,7 @@ namespace LibVLCSharpSample
         /// </summary>
         private void InitializeComponent()
         {
-            this.videoView1 = new ();
+            this.videoView1 = new VideoView();
             ((System.ComponentModel.ISupportInitialize)(this.videoView1)).BeginInit();
             this.SuspendLayout();
             // 
