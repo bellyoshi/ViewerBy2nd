@@ -1092,13 +1092,18 @@ namespace ViewerBy2nd
             int max = Document.PageCount;
 
             var index = Convert.ToInt32(Document.PageVirtualIndex) + 1;
+            ShowPageNumberForm(max, index);
+        }
+
+        private void ShowPageNumberForm(int max, int index)
+        {
             FormDispacher.ShowPageNumberForm(
                 number =>
                 {
                     Document.SetPage(number);
                     UpdateViewIfChecked();
                 }
-                
+
                 , max, index);
         }
 
