@@ -10,9 +10,20 @@ namespace ViewerBy2nd
     public partial class OperationForm : Form
     {
         static Settings Default => ConfigurationReader.Default;
+
+        OperationViewModel model;
         public OperationForm()
         {
+            model = new();
+            model.FileListChanged += Model_FileListChanged;
             InitializeComponent();
+        }
+
+        private void Model_FileListChanged()
+        {
+            FilesList.DataSource = model.FileList;
+
+            MenuListUpdate();
         }
 
         private void ControlEnable()
@@ -263,6 +274,8 @@ namespace ViewerBy2nd
         }
         private void AddFilesButton_Click(object sender, EventArgs e)
         {
+            model.AddFileRange(GetAddFiles().Select(param => param.FileName));
+            return;
             try
             {
                 AddFiles();
@@ -297,7 +310,7 @@ namespace ViewerBy2nd
             FilesList_SelectedValueChanged(null, null);
         }
 
-        private void AddFiles()
+        private IEnumerable<FileViewParam> GetAddFiles()
         {
             OpenFileDialog1.Multiselect = true;
             OpenFileDialog1.Filter = FileTypes.CreateFilter();
@@ -306,10 +319,17 @@ namespace ViewerBy2nd
             if (ret == DialogResult.Cancel)
                 throw new OperationCanceledException();
 
+            return OpenFileDialog1.FileNames.Select<string, FileViewParam>(
+                filename => new FileViewParam(filename, ViewScreenRegister.GetInstance().Size));
+        }
+        
+        private void AddFiles()
+        {
             var items = FilesList.Items;
 
-            foreach (var filename in OpenFileDialog1.FileNames)
-                items.Add(new FileViewParam(filename, ViewScreenRegister.GetInstance().Size));
+            
+            foreach (var param in GetAddFiles())
+                items.Add(param);
 
             MenuListUpdate();
         }
@@ -924,9 +944,10 @@ namespace ViewerBy2nd
 
         private void このアプリについてToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new VersionForm();
-            frm.ShowDialog();
+            Dispacher.ShowVersion();
         }
+
+
 
         private void ディスプレイと背景色ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1097,6 +1118,7 @@ namespace ViewerBy2nd
 
         private void ShowPageNumberForm(int max, int index)
         {
+            Debug.Assert(Document != null);
             FormDispacher.ShowPageNumberForm(
                 number =>
                 {
