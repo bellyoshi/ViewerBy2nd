@@ -8,6 +8,7 @@ public class OperationViewModel
 
     // FileList property is made private set to control its modification through the AddFile method
     public IList<FileViewParam> FileList { get; set; } = new List<FileViewParam>();
+    public int SelectedIndex { get; internal set; } = -1;
 
     // Event that is fired whenever a file is added
     public event Action? FileListChanged;
@@ -20,5 +21,21 @@ public class OperationViewModel
         FileListChanged?.Invoke();
     }
 
+    public void AddFiles(IEnumerable<string> files)
+    {
+        foreach (var file in files)
+        {
+            FileList.Add(new FileViewParam(file, bound));
+        }
+        FileListChanged?.Invoke();
+    }
 
+    internal void DeleteFiles(List<FileViewParam> list)
+    {
+        foreach (var file in list)
+        {
+            FileList.Remove(file);
+        }
+        FileListChanged?.Invoke();
+    }
 }

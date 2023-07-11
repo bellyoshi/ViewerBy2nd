@@ -112,5 +112,12 @@ namespace ViewerBy2nd
             frm.Show();
         }
 
+        internal void ShowVersion()
+        {
+            
+            var frm = new VersionForm();
+            frm.ShowDialog();
+            
+        }
     }
 }

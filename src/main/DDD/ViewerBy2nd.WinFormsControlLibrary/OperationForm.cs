@@ -10,9 +10,31 @@ namespace ViewerBy2nd
     public partial class OperationForm : Form
     {
         static Settings Default => ConfigurationReader.Default;
+
+        OperationViewModel model;
         public OperationForm()
         {
+            model = new();
+            model.FileListChanged += Model_FileListChanged;
             InitializeComponent();
+        }
+
+        private void Model_FileListChanged()
+        {
+            FilesListUpdate();
+
+            MenuListUpdate();
+        }
+
+        private void FilesListUpdate()
+        {
+            var items = FilesList.Items;
+            items.Clear();
+            foreach (var item in model.FileList)
+            {
+                items.Add(item);
+            }
+            FilesList.SelectedIndex = model.SelectedIndex;
         }
 
         private void ControlEnable()
@@ -137,8 +159,8 @@ namespace ViewerBy2nd
                 if (deserialize != null)
                 {
                     List<FileViewParam> fvinfos = (List<FileViewParam>)deserialize;
-                    foreach (var info in fvinfos)
-                        FilesList.Items.Add(info);
+
+                    model.AddFiles(fvinfos.Select(param => param.FileName));
                 }
                 MenuListUpdate();
             }
@@ -191,15 +213,16 @@ namespace ViewerBy2nd
                 return;
 
             var list = FilesList.SelectedItems.Cast<FileViewParam>().ToList();
-            foreach (var i in list)
-                FilesList.Items.Remove(i);
+            model.DeleteFiles(list);
+            //foreach (var i in list)
+            //    FilesList.Items.Remove(i);
 
-            if (DispFile != null && list.Contains(DispFile))
-            {
-                UpdateView();
-                ControlEnable();
-            }
-            MenuListUpdate();
+            // todo: if (DispFile != null && list.Contains(DispFile))
+            //{
+            //    UpdateView();
+            //    ControlEnable();
+            //}
+            //MenuListUpdate();
         }
 
         private void FilesList_Click(object sender, EventArgs e)
@@ -263,6 +286,12 @@ namespace ViewerBy2nd
         }
         private void AddFilesButton_Click(object sender, EventArgs e)
         {
+            model.AddFiles(
+                GetAddFiles().Select(param => param.FileName)
+                );
+            
+            ;
+            return;
             try
             {
                 AddFiles();
@@ -297,7 +326,7 @@ namespace ViewerBy2nd
             FilesList_SelectedValueChanged(null, null);
         }
 
-        private void AddFiles()
+        private IEnumerable<FileViewParam> GetAddFiles()
         {
             OpenFileDialog1.Multiselect = true;
             OpenFileDialog1.Filter = FileTypes.CreateFilter();
@@ -306,10 +335,17 @@ namespace ViewerBy2nd
             if (ret == DialogResult.Cancel)
                 throw new OperationCanceledException();
 
+            return OpenFileDialog1.FileNames.Select<string, FileViewParam>(
+                filename => new FileViewParam(filename, ViewScreenRegister.GetInstance().Size));
+        }
+        
+        private void AddFiles()
+        {
             var items = FilesList.Items;
 
-            foreach (var filename in OpenFileDialog1.FileNames)
-                items.Add(new FileViewParam(filename, ViewScreenRegister.GetInstance().Size));
+            
+            foreach (var param in GetAddFiles())
+                items.Add(param);
 
             MenuListUpdate();
         }
@@ -924,9 +960,10 @@ namespace ViewerBy2nd
 
         private void このアプリについてToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var frm = new VersionForm();
-            frm.ShowDialog();
+            Dispacher.ShowVersion();
         }
+
+
 
         private void ディスプレイと背景色ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -976,12 +1013,11 @@ namespace ViewerBy2nd
 
         private void MenuListUpdate()
         {
-            var list = FilesList.Items;
+            var list = model.FileList;
             var listMenu = リストLToolStripMenuItem;
             listMenu.DropDownItems.Clear();
-            foreach (var item in list)
+            foreach (var fileViewParam in list)
             {
-                if (item is not FileViewParam fileViewParam) { continue; }
                 ToolStripMenuItem fileMenu = new(fileViewParam.FileName)
                 {
                     Tag = fileViewParam
@@ -1097,6 +1133,7 @@ namespace ViewerBy2nd
 
         private void ShowPageNumberForm(int max, int index)
         {
+            Debug.Assert(Document != null);
             FormDispacher.ShowPageNumberForm(
                 number =>
                 {
