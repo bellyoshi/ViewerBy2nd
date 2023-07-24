@@ -2,6 +2,7 @@
 //todo: パスワードつきpdfを開けるようにする。パスワードを入力するウインドウをつくる
 //todo: 操作ウインドウのサイズ、標準、小、最小を用意する。
 
+
 namespace ViewerBy2nd
 {
     internal static class Program
