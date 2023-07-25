@@ -160,9 +160,9 @@ namespace ViewerBy2nd
                 {
                     List<FileViewParam> fvinfos = (List<FileViewParam>)deserialize;
 
-                    model.AddFiles(fvinfos.Select(param => param.FileName));
+                    model.Initialize(fvinfos);
                 }
-                MenuListUpdate();
+                Model_FileListChanged();
             }
             catch (Exception ex)
             {
@@ -347,7 +347,6 @@ namespace ViewerBy2nd
             foreach (var param in GetAddFiles())
                 items.Add(param);
 
-            MenuListUpdate();
         }
 
         private void DeselectFiles_Click(object sender, EventArgs e)

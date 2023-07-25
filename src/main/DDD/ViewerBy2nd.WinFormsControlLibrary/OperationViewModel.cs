@@ -13,12 +13,14 @@ public class OperationViewModel
     // Event that is fired whenever a file is added
     public event Action? FileListChanged;
 
-    public void AddFile(string file)
-    {
-        FileList.Add(new FileViewParam(file, bound));
 
-        // Invoke the FileListChanged event whenever a file is added
-        FileListChanged?.Invoke();
+
+    public void Initialize(IEnumerable<FileViewParam> files)
+    {
+        foreach (var file in files)
+        {
+            FileList.Add(file);
+        }
     }
 
     public void AddFiles(IEnumerable<string> files)
