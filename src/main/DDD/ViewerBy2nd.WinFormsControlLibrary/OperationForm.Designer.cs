@@ -109,13 +109,13 @@
             言語LToolStripMenuItem=new ToolStripMenuItem();
             リストの表示ToolStripMenuItem=new ToolStripMenuItem();
             リストの非表示ToolStripMenuItem=new ToolStripMenuItem();
+            操作中に自動表示ToolStripMenuItem=new ToolStripMenuItem();
             ヘルプToolStripMenuItem=new ToolStripMenuItem();
             このアプリについてToolStripMenuItem=new ToolStripMenuItem();
             panel2=new Panel();
             thumbnailDefaultPanel=new Panel();
             ThumnailMovoToPanel=new Panel();
             SecondGroup=new GroupBox();
-            操作中に自動表示ToolStripMenuItem=new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)SeekTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbThumbnail).BeginInit();
             pnlMovie.SuspendLayout();
@@ -434,6 +434,7 @@
             FilesList.Size=new Size(255, 564);
             FilesList.TabIndex=67;
             FilesList.Click+=FilesList_Click;
+            FilesList.SelectedIndexChanged+=FilesList_SelectedIndexChanged;
             FilesList.SelectedValueChanged+=FilesList_SelectedValueChanged;
             FilesList.DragDrop+=FilesList_DragDrop;
             FilesList.DragEnter+=FilesList_DragEnter;
@@ -753,19 +754,19 @@
             // 表示ToolStripMenuItem
             // 
             表示ToolStripMenuItem.Name="表示ToolStripMenuItem";
-            表示ToolStripMenuItem.Size=new Size(224, 26);
+            表示ToolStripMenuItem.Size=new Size(152, 26);
             表示ToolStripMenuItem.Text="表示";
             // 
             // 表示終了ToolStripMenuItem
             // 
             表示終了ToolStripMenuItem.Name="表示終了ToolStripMenuItem";
-            表示終了ToolStripMenuItem.Size=new Size(224, 26);
+            表示終了ToolStripMenuItem.Size=new Size(152, 26);
             表示終了ToolStripMenuItem.Text="表示終了";
             // 
             // 背景表示ToolStripMenuItem
             // 
             背景表示ToolStripMenuItem.Name="背景表示ToolStripMenuItem";
-            背景表示ToolStripMenuItem.Size=new Size(224, 26);
+            背景表示ToolStripMenuItem.Size=new Size(152, 26);
             背景表示ToolStripMenuItem.Text="背景表示";
             // 
             // 設定ToolStripMenuItem
@@ -778,29 +779,37 @@
             // ディスプレイと背景色ToolStripMenuItem
             // 
             ディスプレイと背景色ToolStripMenuItem.Name="ディスプレイと背景色ToolStripMenuItem";
-            ディスプレイと背景色ToolStripMenuItem.Size=new Size(224, 26);
+            ディスプレイと背景色ToolStripMenuItem.Size=new Size(212, 26);
             ディスプレイと背景色ToolStripMenuItem.Text="ディスプレイと背景色";
             ディスプレイと背景色ToolStripMenuItem.Click+=ディスプレイと背景色ToolStripMenuItem_Click;
             // 
             // 言語LToolStripMenuItem
             // 
             言語LToolStripMenuItem.Name="言語LToolStripMenuItem";
-            言語LToolStripMenuItem.Size=new Size(224, 26);
+            言語LToolStripMenuItem.Size=new Size(212, 26);
             言語LToolStripMenuItem.Text="言語(&L)";
             // 
             // リストの表示ToolStripMenuItem
             // 
             リストの表示ToolStripMenuItem.Name="リストの表示ToolStripMenuItem";
-            リストの表示ToolStripMenuItem.Size=new Size(224, 26);
+            リストの表示ToolStripMenuItem.Size=new Size(212, 26);
             リストの表示ToolStripMenuItem.Text="リストの表示";
             リストの表示ToolStripMenuItem.Click+=リストの表示ToolStripMenuItem_Click;
             // 
             // リストの非表示ToolStripMenuItem
             // 
             リストの非表示ToolStripMenuItem.Name="リストの非表示ToolStripMenuItem";
-            リストの非表示ToolStripMenuItem.Size=new Size(224, 26);
+            リストの非表示ToolStripMenuItem.Size=new Size(212, 26);
             リストの非表示ToolStripMenuItem.Text="リストの非表示";
             リストの非表示ToolStripMenuItem.Click+=リストの非表示ToolStripMenuItem_Click;
+            // 
+            // 操作中に自動表示ToolStripMenuItem
+            // 
+            操作中に自動表示ToolStripMenuItem.Checked=true;
+            操作中に自動表示ToolStripMenuItem.CheckState=CheckState.Checked;
+            操作中に自動表示ToolStripMenuItem.Name="操作中に自動表示ToolStripMenuItem";
+            操作中に自動表示ToolStripMenuItem.Size=new Size(212, 26);
+            操作中に自動表示ToolStripMenuItem.Text="操作中に自動表示";
             // 
             // ヘルプToolStripMenuItem
             // 
@@ -867,14 +876,6 @@
             SecondGroup.TabIndex=104;
             SecondGroup.TabStop=false;
             SecondGroup.Text="セカンドモニター操作";
-            // 
-            // 操作中に自動表示ToolStripMenuItem
-            // 
-            操作中に自動表示ToolStripMenuItem.Checked=true;
-            操作中に自動表示ToolStripMenuItem.CheckState=CheckState.Checked;
-            操作中に自動表示ToolStripMenuItem.Name="操作中に自動表示ToolStripMenuItem";
-            操作中に自動表示ToolStripMenuItem.Size=new Size(224, 26);
-            操作中に自動表示ToolStripMenuItem.Text="操作中に自動表示";
             // 
             // OperationForm
             // 

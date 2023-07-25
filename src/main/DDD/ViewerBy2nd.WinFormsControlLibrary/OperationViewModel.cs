@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using ViewerBy2ndLib;
 
 public class OperationViewModel
@@ -8,11 +9,32 @@ public class OperationViewModel
 
     // FileList property is made private set to control its modification through the AddFile method
     public IList<FileViewParam> FileList { get; set; } = new List<FileViewParam>();
-    public int SelectedIndex { get; internal set; } = -1;
+    private int _selectedIndex = -1;
+    public int SelectedIndex
+    {
+        get => _selectedIndex;
+        set
+        {
+            _selectedIndex = value;
+            SelectedIndexChanged?.Invoke();
+        }
+    }
+    public void SelectFileViewParam(FileViewParam fileViewParam)
+    {
+        for (int i = 0; i < FileList.Count; i++)
+        {
+            if (FileList[i] == fileViewParam)
+            {
+                SelectedIndex = i;
+                return;
+            }
+        }
+    }
 
     // Event that is fired whenever a file is added
     public event Action? FileListChanged;
 
+    public event Action? SelectedIndexChanged;
 
 
     public void Initialize(IEnumerable<FileViewParam> files)

@@ -16,6 +16,7 @@ namespace ViewerBy2nd
         {
             model = new();
             model.FileListChanged += Model_FileListChanged;
+            model.SelectedIndexChanged += Model_SelectedIndexChanged;
             InitializeComponent();
         }
 
@@ -24,6 +25,25 @@ namespace ViewerBy2nd
             FilesListUpdate();
 
             MenuListUpdate();
+        }
+
+        private void Model_SelectedIndexChanged()
+        {
+            SelectedIndexChanged_ReasonIsMenu = true;
+            FilesList.ClearSelected();
+            FilesList.SelectedIndex = model.SelectedIndex;
+            SelectedIndexChanged_ReasonIsMenu = false;
+
+            if (FilesList.SelectedItem == null)
+            {
+                player?.Stop();
+            }
+            ControlEnable();
+            if (!IsMovie)
+                Document?.UpdateImage();
+            UpdateViewIfChecked();
+            if (FitToWindowWidthButton.Enabled)
+                VScrollBar1Init();
         }
 
         private void FilesListUpdate()
@@ -289,7 +309,7 @@ namespace ViewerBy2nd
             model.AddFiles(
                 GetAddFiles().Select(param => param.FileName)
                 );
-            
+
             ;
             return;
             try
@@ -312,19 +332,12 @@ namespace ViewerBy2nd
             }
             if (last != null)
             {
-                SelectFileViewParam(last);
+                model.SelectFileViewParam(last);
             }
         }
 
 
-        private void SelectFileViewParam(FileViewParam fileViewParam)
-        {
 
-            FilesList.ClearSelected();
-
-            FilesList.SelectedItem = fileViewParam;
-            FilesList_SelectedValueChanged(null, null);
-        }
 
         private IEnumerable<FileViewParam> GetAddFiles()
         {
@@ -338,12 +351,12 @@ namespace ViewerBy2nd
             return OpenFileDialog1.FileNames.Select(
                 filename => new FileViewParam(filename, ViewScreenRegister.GetInstance().Size));
         }
-        
+
         private void AddFiles()
         {
             var items = FilesList.Items;
 
-            
+
             foreach (var param in GetAddFiles())
                 items.Add(param);
 
@@ -818,16 +831,9 @@ namespace ViewerBy2nd
 
         private void FilesList_SelectedValueChanged(object? sender, EventArgs? e)
         {
-            if (FilesList.SelectedItem == null)
-            {
-                player?.Stop();
-            }
-            ControlEnable();
-            if (!IsMovie)
-                Document?.UpdateImage();
-            UpdateViewIfChecked();
-            if (FitToWindowWidthButton.Enabled)
-                VScrollBar1Init();
+
+
+
         }
 
         private void AllFilesSelectButton_Click(object sender, EventArgs e)
@@ -1031,10 +1037,9 @@ namespace ViewerBy2nd
         private void FileMenu_Click(object? sender, EventArgs e)
 
         {
-            if (sender is not ToolStripMenuItem ab) return;
-
-            var fileViewParam = (FileViewParam)ab.Tag;
-            SelectFileViewParam(fileViewParam);
+            if (sender is not ToolStripMenuItem FileMenu) return;
+            if (FileMenu.Tag is not FileViewParam FileViewParam) return;
+            model.SelectFileViewParam(FileViewParam);
         }
 
         private void 次へToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1193,6 +1198,15 @@ namespace ViewerBy2nd
             FastReverseAction();
         }
 
+        private void FilesList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(SelectedIndexChanged_ReasonIsMenu)
+            {
+                return;
+            }
+            model.SelectedIndex = FilesList.SelectedIndex;
+        }
+        bool SelectedIndexChanged_ReasonIsMenu = false;
 
     }
 
