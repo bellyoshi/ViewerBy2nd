@@ -13,7 +13,7 @@ public class OperationViewModel
     // Event that is fired whenever a file is added
     public event Action? FileListChanged;
 
-    public void AddFile(string file)
+    public void AddFile(string file)//todo: 不必要？
     {
         FileList.Add(new FileViewParam(file, bound));
 
