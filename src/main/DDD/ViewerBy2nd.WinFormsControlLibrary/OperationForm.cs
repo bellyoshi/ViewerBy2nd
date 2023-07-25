@@ -335,7 +335,7 @@ namespace ViewerBy2nd
             if (ret == DialogResult.Cancel)
                 throw new OperationCanceledException();
 
-            return OpenFileDialog1.FileNames.Select<string, FileViewParam>(
+            return OpenFileDialog1.FileNames.Select(
                 filename => new FileViewParam(filename, ViewScreenRegister.GetInstance().Size));
         }
         

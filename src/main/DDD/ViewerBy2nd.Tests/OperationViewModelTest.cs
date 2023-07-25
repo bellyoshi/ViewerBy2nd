@@ -18,7 +18,7 @@ namespace ViewerBy2nd.Tests
         {
             OperationViewModel model = new();
             string file = "testfile.pdf";
-            model.AddFile(file);
+            model.AddFiles(new List<string> { file });
             Assert.AreEqual(1, model.FileList.Count);
             Assert.AreEqual("testfile.pdf", model.FileList[0].FileName);
 
@@ -31,7 +31,7 @@ namespace ViewerBy2nd.Tests
             var eventRaised = false;
             _viewModel.FileListChanged += () => eventRaised = true;
 
-            _viewModel.AddFile("testfile");
+            _viewModel.AddFiles(new List<string> { "testfile" });
 
             Assert.IsTrue(eventRaised, "FileListChanged event was not raised after adding a file");
         }
