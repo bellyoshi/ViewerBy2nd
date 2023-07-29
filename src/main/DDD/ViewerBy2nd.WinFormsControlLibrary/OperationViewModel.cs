@@ -16,19 +16,26 @@ public class OperationViewModel
         set
         {
             _selectedIndex = value;
+
             SelectedIndexChanged?.Invoke();
         }
     }
+
+    public bool MultiSelected { get; set; }
+
     public void SelectFileViewParam(FileViewParam fileViewParam)
     {
         for (int i = 0; i < FileList.Count; i++)
         {
             if (FileList[i] == fileViewParam)
             {
+                this.MultiSelected = false;
                 SelectedIndex = i;
+
                 return;
             }
         }
+
     }
 
     // Event that is fired whenever a file is added
