@@ -29,10 +29,9 @@ namespace ViewerBy2nd
 
         private void Model_SelectedIndexChanged()
         {
-            SelectedIndexChanged_ReasonIsMenu = true;
-            FilesList.ClearSelected();
-            FilesList.SelectedIndex = model.SelectedIndex;
-            SelectedIndexChanged_ReasonIsMenu = false;
+            FilesListSelectedIndexUpdate();
+
+            MenuListSlectedIndexUpdate();
 
             if (FilesList.SelectedItem == null)
             {
@@ -44,6 +43,15 @@ namespace ViewerBy2nd
             UpdateViewIfChecked();
             if (FitToWindowWidthButton.Enabled)
                 VScrollBar1Init();
+        }
+
+        private void FilesListSelectedIndexUpdate()
+        {
+            //todo 全選択ができない。
+            SelectedIndexChanged_ReasonIsMenu = true;
+            FilesList.ClearSelected();
+            FilesList.SelectedIndex = model.SelectedIndex;
+            SelectedIndexChanged_ReasonIsMenu = false;
         }
 
         private void FilesListUpdate()
@@ -1018,10 +1026,9 @@ namespace ViewerBy2nd
 
         private void MenuListUpdate()
         {
-            var list = model.FileList;
             var listMenu = リストLToolStripMenuItem;
             listMenu.DropDownItems.Clear();
-            foreach (var fileViewParam in list)
+            foreach (var fileViewParam in model.FileList)
             {
                 ToolStripMenuItem fileMenu = new(fileViewParam.FileName)
                 {
@@ -1030,6 +1037,23 @@ namespace ViewerBy2nd
                 ;
                 fileMenu.Click += FileMenu_Click;
                 listMenu.DropDownItems.Add(fileMenu);
+
+            }
+        }
+        private void MenuListSlectedIndexUpdate()
+        {
+            var listMenu = リストLToolStripMenuItem;
+            int i = 0;
+            foreach (ToolStripMenuItem fileMenu in listMenu.DropDownItems)
+            {
+                if(i == model.SelectedIndex)
+                {
+                    fileMenu.Checked = true;
+                }else
+                {
+                    fileMenu.Checked = false;
+                }
+                i++;
 
             }
         }
