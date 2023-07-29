@@ -19,6 +19,9 @@ public class OperationViewModel
             SelectedIndexChanged?.Invoke();
         }
     }
+
+    public bool MultiSelected { get; set; }
+
     public void SelectFileViewParam(FileViewParam fileViewParam)
     {
         for (int i = 0; i < FileList.Count; i++)

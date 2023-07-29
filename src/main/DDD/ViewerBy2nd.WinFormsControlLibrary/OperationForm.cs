@@ -47,7 +47,7 @@ namespace ViewerBy2nd
 
         private void FilesListSelectedIndexUpdate()
         {
-            //todo 全選択ができない。
+            if (model.MultiSelected) return;
             SelectedIndexChanged_ReasonIsMenu = true;
             FilesList.ClearSelected();
             FilesList.SelectedIndex = model.SelectedIndex;
@@ -837,12 +837,7 @@ namespace ViewerBy2nd
             UpdateViewIfChecked();
         }
 
-        private void FilesList_SelectedValueChanged(object? sender, EventArgs? e)
-        {
 
-
-
-        }
 
         private void AllFilesSelectButton_Click(object sender, EventArgs e)
         {
@@ -1046,7 +1041,7 @@ namespace ViewerBy2nd
             int i = 0;
             foreach (ToolStripMenuItem fileMenu in listMenu.DropDownItems)
             {
-                if(i == model.SelectedIndex)
+                if(i == model.SelectedIndex && !model.MultiSelected)
                 {
                     fileMenu.Checked = true;
                 }else
@@ -1228,7 +1223,9 @@ namespace ViewerBy2nd
             {
                 return;
             }
+            model.MultiSelected = FilesList.SelectedItems.Count > 1;
             model.SelectedIndex = FilesList.SelectedIndex;
+ 
         }
         bool SelectedIndexChanged_ReasonIsMenu = false;
 

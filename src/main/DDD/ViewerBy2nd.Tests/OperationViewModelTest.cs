@@ -35,6 +35,21 @@ namespace ViewerBy2nd.Tests
 
             Assert.IsTrue(eventRaised, "FileListChanged event was not raised after adding a file");
         }
+
+        [TestMethod]
+        public void MultiSelected()
+        {
+            OperationViewModel model = new();
+            Assert.IsFalse(model.MultiSelected);
+        }
+
+        [TestMethod]
+        public void AddSelectionMultiSelectedTrue()
+        {
+            OperationViewModel model = new();
+            model.MultiSelected = true;
+            Assert.IsTrue(model.MultiSelected);
+        }
     }
 
 }

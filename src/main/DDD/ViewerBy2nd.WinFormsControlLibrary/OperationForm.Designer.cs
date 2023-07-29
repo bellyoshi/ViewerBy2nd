@@ -435,7 +435,6 @@
             FilesList.TabIndex=67;
             FilesList.Click+=FilesList_Click;
             FilesList.SelectedIndexChanged+=FilesList_SelectedIndexChanged;
-            FilesList.SelectedValueChanged+=FilesList_SelectedValueChanged;
             FilesList.DragDrop+=FilesList_DragDrop;
             FilesList.DragEnter+=FilesList_DragEnter;
             // 
