@@ -592,7 +592,7 @@
             // 
             表示を回転ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 元の表示ToolStripMenuItem, 右へ90回転ToolStripMenuItem, 左へ90回転ToolStripMenuItem, 回転ToolStripMenuItem });
             表示を回転ToolStripMenuItem.Name="表示を回転ToolStripMenuItem";
-            表示を回転ToolStripMenuItem.Size=new Size(210, 26);
+            表示を回転ToolStripMenuItem.Size=new Size(224, 26);
             表示を回転ToolStripMenuItem.Text="表示を回転";
             表示を回転ToolStripMenuItem.Click+=次へToolStripMenuItem_Click;
             // 
@@ -628,7 +628,7 @@
             // 
             ページナビゲーションToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 最初のページToolStripMenuItem, 次へToolStripMenuItem1, 前のページToolStripMenuItem, 最後のページToolStripMenuItem, ページ指定ToolStripMenuItem });
             ページナビゲーションToolStripMenuItem.Name="ページナビゲーションToolStripMenuItem";
-            ページナビゲーションToolStripMenuItem.Size=new Size(210, 26);
+            ページナビゲーションToolStripMenuItem.Size=new Size(224, 26);
             ページナビゲーションToolStripMenuItem.Text="ページナビゲーション";
             // 
             // 最初のページToolStripMenuItem
@@ -670,7 +670,7 @@
             // 
             ズームToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { ウィンドウ幅に合わせるToolStripMenuItem, 全体を表示ToolStripMenuItem, 拡大ToolStripMenuItem, 縮小ToolStripMenuItem });
             ズームToolStripMenuItem.Name="ズームToolStripMenuItem";
-            ズームToolStripMenuItem.Size=new Size(210, 26);
+            ズームToolStripMenuItem.Size=new Size(224, 26);
             ズームToolStripMenuItem.Text="ズーム";
             // 
             // ウィンドウ幅に合わせるToolStripMenuItem
@@ -705,41 +705,41 @@
             // 
             再生ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 最初に移動ToolStripMenuItem, 再生開始ToolStripMenuItem, 再生停止ToolStripMenuItem, 早送りToolStripMenuItem, 巻き戻しToolStripMenuItem });
             再生ToolStripMenuItem.Name="再生ToolStripMenuItem";
-            再生ToolStripMenuItem.Size=new Size(210, 26);
+            再生ToolStripMenuItem.Size=new Size(224, 26);
             再生ToolStripMenuItem.Text="再生";
             // 
             // 最初に移動ToolStripMenuItem
             // 
             最初に移動ToolStripMenuItem.Name="最初に移動ToolStripMenuItem";
-            最初に移動ToolStripMenuItem.Size=new Size(164, 26);
+            最初に移動ToolStripMenuItem.Size=new Size(224, 26);
             最初に移動ToolStripMenuItem.Text="最初に移動";
             最初に移動ToolStripMenuItem.Click+=最初に移動ToolStripMenuItem_Click;
             // 
             // 再生開始ToolStripMenuItem
             // 
             再生開始ToolStripMenuItem.Name="再生開始ToolStripMenuItem";
-            再生開始ToolStripMenuItem.Size=new Size(164, 26);
+            再生開始ToolStripMenuItem.Size=new Size(224, 26);
             再生開始ToolStripMenuItem.Text="再生開始";
             再生開始ToolStripMenuItem.Click+=再生開始ToolStripMenuItem_Click;
             // 
             // 再生停止ToolStripMenuItem
             // 
             再生停止ToolStripMenuItem.Name="再生停止ToolStripMenuItem";
-            再生停止ToolStripMenuItem.Size=new Size(164, 26);
+            再生停止ToolStripMenuItem.Size=new Size(224, 26);
             再生停止ToolStripMenuItem.Text="一時停止";
             再生停止ToolStripMenuItem.Click+=再生停止ToolStripMenuItem_Click;
             // 
             // 早送りToolStripMenuItem
             // 
             早送りToolStripMenuItem.Name="早送りToolStripMenuItem";
-            早送りToolStripMenuItem.Size=new Size(164, 26);
+            早送りToolStripMenuItem.Size=new Size(224, 26);
             早送りToolStripMenuItem.Text="早送り";
             早送りToolStripMenuItem.Click+=早送りToolStripMenuItem_Click;
             // 
             // 巻き戻しToolStripMenuItem
             // 
             巻き戻しToolStripMenuItem.Name="巻き戻しToolStripMenuItem";
-            巻き戻しToolStripMenuItem.Size=new Size(164, 26);
+            巻き戻しToolStripMenuItem.Size=new Size(224, 26);
             巻き戻しToolStripMenuItem.Text="巻き戻し";
             巻き戻しToolStripMenuItem.Click+=巻き戻しToolStripMenuItem_Click;
             // 
@@ -747,26 +747,29 @@
             // 
             セカンドモニター操作ToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { 表示ToolStripMenuItem, 表示終了ToolStripMenuItem, 背景表示ToolStripMenuItem });
             セカンドモニター操作ToolStripMenuItem.Name="セカンドモニター操作ToolStripMenuItem";
-            セカンドモニター操作ToolStripMenuItem.Size=new Size(210, 26);
+            セカンドモニター操作ToolStripMenuItem.Size=new Size(224, 26);
             セカンドモニター操作ToolStripMenuItem.Text="セカンドモニター操作";
             // 
             // 表示ToolStripMenuItem
             // 
             表示ToolStripMenuItem.Name="表示ToolStripMenuItem";
-            表示ToolStripMenuItem.Size=new Size(152, 26);
+            表示ToolStripMenuItem.Size=new Size(224, 26);
             表示ToolStripMenuItem.Text="表示";
+            表示ToolStripMenuItem.Click+=表示ToolStripMenuItem_Click;
             // 
             // 表示終了ToolStripMenuItem
             // 
             表示終了ToolStripMenuItem.Name="表示終了ToolStripMenuItem";
-            表示終了ToolStripMenuItem.Size=new Size(152, 26);
+            表示終了ToolStripMenuItem.Size=new Size(224, 26);
             表示終了ToolStripMenuItem.Text="表示終了";
+            表示終了ToolStripMenuItem.Click+=表示終了ToolStripMenuItem_Click;
             // 
             // 背景表示ToolStripMenuItem
             // 
             背景表示ToolStripMenuItem.Name="背景表示ToolStripMenuItem";
-            背景表示ToolStripMenuItem.Size=new Size(152, 26);
+            背景表示ToolStripMenuItem.Size=new Size(224, 26);
             背景表示ToolStripMenuItem.Text="背景表示";
+            背景表示ToolStripMenuItem.Click+=背景表示ToolStripMenuItem_Click;
             // 
             // 設定ToolStripMenuItem
             // 

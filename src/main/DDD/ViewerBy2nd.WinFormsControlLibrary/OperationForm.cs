@@ -273,6 +273,11 @@ namespace ViewerBy2nd
 
         private void DisplayButton_Click(object sender, EventArgs e)
         {
+            DisplayButtonAction();
+        }
+
+        private void DisplayButtonAction()
+        {
             if (IsMovie)
             {
                 PlayPlayer();
@@ -379,6 +384,11 @@ namespace ViewerBy2nd
 
         private void EndOfDisplayButton_Click(object sender, EventArgs e)
         {
+            EndOfDisplayAction();
+        }
+
+        private void EndOfDisplayAction()
+        {
             Dispacher.CloseViewers();
             DispFile = null;
             thumbnailMoviePlayer.Pause();
@@ -387,6 +397,11 @@ namespace ViewerBy2nd
         }
 
         private void BackgroundDisplay_Click(object sender, EventArgs e)
+        {
+            BackgroundDisplayAction();
+        }
+
+        private void BackgroundDisplayAction()
         {
             FilesList.SelectedItem = null;
             pbThumbnail.Image = null;
@@ -1041,10 +1056,11 @@ namespace ViewerBy2nd
             int i = 0;
             foreach (ToolStripMenuItem fileMenu in listMenu.DropDownItems)
             {
-                if(i == model.SelectedIndex && !model.MultiSelected)
+                if (i == model.SelectedIndex && !model.MultiSelected)
                 {
                     fileMenu.Checked = true;
-                }else
+                }
+                else
                 {
                     fileMenu.Checked = false;
                 }
@@ -1219,17 +1235,31 @@ namespace ViewerBy2nd
 
         private void FilesList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(SelectedIndexChanged_ReasonIsMenu)
+            if (SelectedIndexChanged_ReasonIsMenu)
             {
                 return;
             }
             model.MultiSelected = FilesList.SelectedItems.Count > 1;
 
             model.SelectedIndex = FilesList.SelectedIndex;
- 
+
         }
         bool SelectedIndexChanged_ReasonIsMenu = false;
 
+        private void 表示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DisplayButtonAction();
+        }
+
+        private void 表示終了ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EndOfDisplayAction();
+        }
+
+        private void 背景表示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BackgroundDisplayAction();
+        }
     }
 
 }
