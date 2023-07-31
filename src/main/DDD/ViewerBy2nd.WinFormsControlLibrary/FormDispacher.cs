@@ -30,7 +30,7 @@ namespace ViewerBy2nd
         public void NotifyViewerBound()
         {
 
-            _frmViewer?.SetViewerBounds();
+            _frmViewer?.SetViewerBoundsFullScreen();
             _frmOperation?.SetThumnailSize();
         }
 
@@ -75,7 +75,7 @@ namespace ViewerBy2nd
             ViewerForm frm;
             frm = new ViewerForm();
             frm.NotifyBackColor();
-            frm.SetViewerBounds();
+            frm.SetViewerBoundsFullScreen();
             frm.FormClosed += new FormClosedEventHandler(this.Form_Closed);
             return frm;
         }

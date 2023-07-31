@@ -28,53 +28,56 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.VideoPlayer1 = new ViewerBy2nd.WinFormsControlLibrary.VideoPlayer();
-            this.PictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).BeginInit();
-            this.SuspendLayout();
+            VideoPlayer1=new WinFormsControlLibrary.VideoPlayer();
+            PictureBox1=new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)PictureBox1).BeginInit();
+            SuspendLayout();
             // 
             // VideoPlayer1
             // 
-            this.VideoPlayer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.VideoPlayer1.Location = new System.Drawing.Point(0, 0);
-            this.VideoPlayer1.Name = "VideoPlayer1";
-            this.VideoPlayer1.Rate = -1F;
-            this.VideoPlayer1.Size = new System.Drawing.Size(800, 450);
-            this.VideoPlayer1.TabIndex = 6;
-            this.VideoPlayer1.Time = ((long)(-1));
-            this.VideoPlayer1.Volume = -1;
+            VideoPlayer1.Dock=DockStyle.Fill;
+            VideoPlayer1.Location=new Point(0, 0);
+            VideoPlayer1.Margin=new Padding(3, 4, 3, 4);
+            VideoPlayer1.Name="VideoPlayer1";
+            VideoPlayer1.Rate=-1F;
+            VideoPlayer1.Size=new Size(800, 600);
+            VideoPlayer1.TabIndex=6;
+            VideoPlayer1.Time=-1L;
+            VideoPlayer1.Volume=-1;
+            VideoPlayer1.MouseDoubleClick+=VideoPlayer1_MouseDoubleClick;
+            VideoPlayer1.MouseDown+=VideoPlayer1_MouseDown;
             // 
             // PictureBox1
             // 
-            this.PictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.PictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.PictureBox1.Name = "PictureBox1";
-            this.PictureBox1.Size = new System.Drawing.Size(800, 450);
-            this.PictureBox1.TabIndex = 7;
-            this.PictureBox1.TabStop = false;
+            PictureBox1.Dock=DockStyle.Fill;
+            PictureBox1.Location=new Point(0, 0);
+            PictureBox1.Name="PictureBox1";
+            PictureBox1.Size=new Size(800, 600);
+            PictureBox1.TabIndex=7;
+            PictureBox1.TabStop=false;
+            PictureBox1.MouseDoubleClick+=VideoPlayer1_MouseDoubleClick;
+            PictureBox1.MouseDown+=VideoPlayer1_MouseDown;
             // 
-            // frmViewer
+            // ViewerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.VideoPlayer1);
-            this.Controls.Add(this.PictureBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "frmViewer";
-            this.Text = "Viewer Screen";
-
-            this.Load += new System.EventHandler(this.ViewerForm_Load);
-            this.VisibleChanged += new System.EventHandler(this.ViewerForm_VisibleChanged);
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions=new SizeF(8F, 20F);
+            AutoScaleMode=AutoScaleMode.Font;
+            ClientSize=new Size(800, 600);
+            Controls.Add(VideoPlayer1);
+            Controls.Add(PictureBox1);
+            FormBorderStyle=FormBorderStyle.None;
+            Margin=new Padding(3, 4, 3, 4);
+            Name="ViewerForm";
+            Text="Viewer Screen";
+            Load+=ViewerForm_Load;
+            VisibleChanged+=ViewerForm_VisibleChanged;
+            ((System.ComponentModel.ISupportInitialize)PictureBox1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
 
         internal ViewerBy2nd.WinFormsControlLibrary.VideoPlayer VideoPlayer1;
-        internal System.Windows.Forms.PictureBox PictureBox1;
+        internal PictureBox PictureBox1;
     }
 }
