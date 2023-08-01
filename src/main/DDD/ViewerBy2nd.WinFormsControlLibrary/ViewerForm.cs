@@ -47,18 +47,26 @@ namespace ViewerBy2nd
             var bounds = ViewScreenRegister.GetInstance().Bounds;
             StartPosition = FormStartPosition.Manual;
             Location = bounds.Location;
-            Size = bounds.Size;
+
             this.FormBorderStyle = FormBorderStyle.None;
+            Size = bounds.Size;//FormBorderStyleを変更してからsize変更する順番大事
+            ControlBox = true;
         }
         internal void SetViewerBoundsWindowScreen()
         {
             var bounds = ViewScreenRegister.GetInstance().Bounds;
             StartPosition = FormStartPosition.Manual;
-            Location = bounds.Location;
+            //todo:とりあえずの初期値(位置を覚えておくように要修正)
+            Point point = bounds.Location;
+            point.X += 100;
+            point.Y += 50;
+            Location = point;
+
             Size = bounds.Size / 2;
             ControlBox = false;
             Text = "";
             this.FormBorderStyle = FormBorderStyle.Sizable;
+            SizeGripStyle = SizeGripStyle.Hide;
 
         }
 
@@ -98,7 +106,9 @@ namespace ViewerBy2nd
         }
         async Task DoNclButtonDown()
         {
-            await Task.Delay(200);
+            //マウスのダブルクリックを有効にするため少し時間を置く
+            await Task.Delay(250);
+
             if (mouseDoubleClicked)
             {
                 return;
