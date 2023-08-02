@@ -11,6 +11,8 @@ namespace ViewerBy2nd
         {
             InitializeComponent();
             WindowMode.FullScreenChanged += WindowMode_FullScreenChanged;
+            formResizer = new FormDragResizer(this, FormDragResizer.ResizeDirection.All, 8, new Control [] { this, PictureBox1 });
+            formMover = new FormDragMover(this, 8, new Control[] { this, PictureBox1 });
         }
 
         private void WindowMode_FullScreenChanged()
@@ -66,11 +68,13 @@ namespace ViewerBy2nd
             Size = bounds.Size / 2;
             ControlBox = false;
             Text = "";
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            SizeGripStyle = SizeGripStyle.Hide;
+            this.FormBorderStyle = FormBorderStyle.None;
+
+
 
         }
-
+        private FormDragResizer formResizer;
+        private FormDragMover formMover;
         internal void ShowImage(Image image)
         {
             PictureBox1.Image = image;
@@ -102,8 +106,8 @@ namespace ViewerBy2nd
 
         private void VideoPlayer1_MouseDown(object sender, MouseEventArgs e)
         {
-            mouseDoubleClicked = false;
-            Task doNclButtonDown = DoNclButtonDown();
+            //mouseDoubleClicked = false;
+            //Task doNclButtonDown = DoNclButtonDown();
         }
         async Task DoNclButtonDown()
         {
