@@ -49,7 +49,8 @@ namespace ViewerBy2nd
             Location = bounds.Location;
 
             this.FormBorderStyle = FormBorderStyle.None;
-            Size = bounds.Size;//FormBorderStyleを変更してからsize変更する順番大事
+            //FormBorderStyleを変更してからsize変更する順番が重要
+            Size = bounds.Size;
             ControlBox = true;
         }
         internal void SetViewerBoundsWindowScreen()

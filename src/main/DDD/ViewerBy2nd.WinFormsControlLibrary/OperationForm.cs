@@ -78,8 +78,8 @@ namespace ViewerBy2nd
         private void MenuControlEnabled()
         {
 
-            リストの表示ToolStripMenuItem.Enabled = !FilesList.Visible;
-            リストの非表示ToolStripMenuItem.Enabled = FilesList.Visible;
+            スリムToolStripMenuItem.Checked = !FilesList.Visible;
+            標準ToolStripMenuItem.Checked = FilesList.Visible;
 
         }
 
@@ -1097,18 +1097,12 @@ namespace ViewerBy2nd
 
         private void リストの表示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //todo: 大きく表示という名前のメニューがよいかもしれない
-            FilesList.Visible = true;
-            ControlRelocation();
-            ControlEnable();
+
         }
 
         private void リストの非表示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //todo: たてに細長く表示という名前のメニューが良いかもしれない
-            FilesList.Visible = false;
-            ControlRelocation();
-            ControlEnable();
+
         }
 
         private void 元の表示ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1259,6 +1253,27 @@ namespace ViewerBy2nd
         private void 背景表示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             BackgroundDisplayAction();
+        }
+
+        private void ウインドウサイズToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void スリムToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //todo: 大きく表示という名前のメニューがよいかもしれない
+            FilesList.Visible = false;
+            ControlRelocation();
+            ControlEnable();
+        }
+
+        private void 標準ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //todo: たてに細長く表示という名前のメニューが良いかもしれない
+            FilesList.Visible = true;
+            ControlRelocation();
+            ControlEnable();
         }
     }
 
