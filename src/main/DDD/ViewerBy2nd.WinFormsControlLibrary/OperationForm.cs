@@ -1262,7 +1262,6 @@ namespace ViewerBy2nd
 
         private void スリムToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //todo: 大きく表示という名前のメニューがよいかもしれない
             FilesList.Visible = false;
             ControlRelocation();
             ControlEnable();
@@ -1270,7 +1269,6 @@ namespace ViewerBy2nd
 
         private void 標準ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //todo: たてに細長く表示という名前のメニューが良いかもしれない
             FilesList.Visible = true;
             ControlRelocation();
             ControlEnable();

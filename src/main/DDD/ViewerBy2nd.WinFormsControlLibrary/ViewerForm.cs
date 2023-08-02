@@ -122,5 +122,7 @@ namespace ViewerBy2nd
             //ウインドウ内のどこをクリックしてもマウスでウインドウを動かせるようにする。
             TitleBarClick.DoNclButtonDown(this.Handle);
         }
+
+
     }
 }
