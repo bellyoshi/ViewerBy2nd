@@ -244,17 +244,18 @@ namespace ViewerBy2nd
             if (FilesList.SelectedItem == null)
                 return;
 
-            var list = FilesList.SelectedItems.Cast<FileViewParam>().ToList();
-            model.DeleteFiles(list);
-            //foreach (var i in list)
-            //    FilesList.Items.Remove(i);
+            var deleteList = FilesList.SelectedItems.Cast<FileViewParam>().ToList();
+            model.DeleteFiles(deleteList);
 
-            // todo: if (DispFile != null && list.Contains(DispFile))
-            //{
-            //    UpdateView();
-            //    ControlEnable();
-            //}
-            //MenuListUpdate();
+
+            //削除したときに残っていれば表示を消す。
+            if(DispFile != null && deleteList.Contains(DispFile))
+            {
+                pbThumbnail.Image = null;
+                UpdateView();
+                ControlEnable();
+            }
+
         }
 
         private void FilesList_Click(object sender, EventArgs e)
@@ -332,7 +333,10 @@ namespace ViewerBy2nd
         }
         private void AddFilesAndSelect()
         {
-            AddFiles();
+                    model.AddFiles(
+            GetAddFiles().Select(param => param.FileName)
+            );
+
             FileViewParam? last = null;
             foreach (FileViewParam item in FilesList.Items)
             {
