@@ -20,10 +20,18 @@ namespace ViewerBy2nd
             WindowMode.FullScreenChanged += WindowMode_FullScreenChanged;
             formResizer = new FormDragResizer(this, FormDragResizer.ResizeDirection.All, 8, controls);
             formMover = new FormDragMover(this, 8, controls);
+            formMoverResizeEnabledInitialize();
+        }
+
+        void formMoverResizeEnabledInitialize()
+        {
+            formResizer.Enabled = !WindowMode.IsFullScreen;
+            formMover.Enabled = !WindowMode.IsFullScreen;
         }
 
         private void WindowMode_FullScreenChanged()
         {
+            formMoverResizeEnabledInitialize();
             if (WindowMode.IsFullScreen)
             {
                 SetViewerBoundsFullScreen();
@@ -80,8 +88,8 @@ namespace ViewerBy2nd
 
 
         }
-        private FormDragResizer formResizer;
-        private FormDragMover formMover;
+        private readonly FormDragResizer formResizer;
+        private readonly FormDragMover formMover;
         internal void ShowImage(Image image)
         {
             PictureBox1.Image = image;
@@ -111,6 +119,7 @@ namespace ViewerBy2nd
         private void ウインドウモードToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WindowMode.IsFullScreen = false;
+
         }
 
         private void フルスクリーンToolStripMenuItem_Click(object sender, EventArgs e)

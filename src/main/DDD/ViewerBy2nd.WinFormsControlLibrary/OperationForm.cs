@@ -323,16 +323,7 @@ namespace ViewerBy2nd
                 GetAddFiles().Select(param => param.FileName)
                 );
 
-            ;
-            return;
-            try
-            {
-                AddFiles();
-            }
-            catch (OperationCanceledException)
-            {
-                //no operation
-            }
+            
 
         }
         private void AddFilesAndSelect()

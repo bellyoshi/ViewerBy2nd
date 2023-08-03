@@ -11,17 +11,16 @@ namespace ViewerBy2nd.WinFormsControlLibrary
     /// </summary>
     class FormDragMover
     {
+        public bool Enabled { get; set; } = true;
         // 移動の対象となるフォーム
-        Form moveForm;
+        readonly Form moveForm;
 
         // 移動中を表す状態
         bool moveStatus;
 
         // ドラッグを無効とする幅（フォームの端をサイズ変更に使うときなど）
-        int noDragAreaWidth;
+        readonly int noDragAreaWidth;
 
-        // 標準のカーソル
-        Cursor defaultCursor;
 
         // マウスをクリックした位置
         Point lastMouseDownPoint;
@@ -37,14 +36,14 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             this.noDragAreaWidth = noDragAreaWidth;
 
             // 現時点でのカーソルを保存しておく
-            defaultCursor = moveForm.Cursor;
+            //defaultCursor = moveForm.Cursor;
 
             foreach (Control control in controls)
             {
                 // イベントハンドラを追加
-                control.MouseDown += new MouseEventHandler(moveForm_MouseDown);
-                control.MouseMove += new MouseEventHandler(moveForm_MouseMove);
-                control.MouseUp += new MouseEventHandler(moveForm_MouseUp);
+                control.MouseDown += new MouseEventHandler(MoveForm_MouseDown);
+                control.MouseMove += new MouseEventHandler(MoveForm_MouseMove);
+                control.MouseUp += new MouseEventHandler(MoveForm_MouseUp);
             }
 
         }
@@ -52,15 +51,19 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         /// <summary>
         /// マウスボタン押下イベントハンドラ
         /// </summary>
-        void moveForm_MouseDown(object sender, MouseEventArgs e)
+        void MoveForm_MouseDown(object? sender, MouseEventArgs e)
         {
+            if (!Enabled)
+            {
+                return;
+            }
             // 左クリック時のみ処理する。左クリックでなければ何もしない
             if ((e.Button & MouseButtons.Left) != MouseButtons.Left) return;
 
             // 移動が有効になる範囲
             // 例えばフォームの端から何ドットかをサイズ変更用の領域として使用する場合、
             // そこを避けるために使う。
-            Rectangle moveArea = new Rectangle(
+            Rectangle moveArea = new(
                 noDragAreaWidth, noDragAreaWidth,
                 moveForm.Width - (noDragAreaWidth * 2), moveForm.Height - (noDragAreaWidth * 2));
 
@@ -85,8 +88,12 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         /// <summary>
         /// マウス移動イベントハンドラ
         /// </summary>
-        void moveForm_MouseMove(object sender, MouseEventArgs e)
+        void MoveForm_MouseMove(object? sender, MouseEventArgs e)
         {
+            if (!Enabled)
+            {
+                return;
+            }
             // 移動中の場合のみ処理。移動中でなければ何もせず終わる
             if (moveStatus == false) return;
 
@@ -108,8 +115,12 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         /// <summary>
         /// マウスボタン押上イベントハンドラ
         /// </summary>
-        void moveForm_MouseUp(object sender, MouseEventArgs e)
+        void MoveForm_MouseUp(object? sender, MouseEventArgs e)
         {
+            if (!Enabled)
+            {
+                return;
+            }
             // 左ボタンのみ処理する。左ボタンではないときは何もしない。
             if ((e.Button & MouseButtons.Left) != MouseButtons.Left) return;
 

@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using ViewerBy2ndLib;
 
+namespace ViewerBy2nd.WinFormsControlLibrary;
 public class OperationViewModel
 {
-    private Size bound;
+    public Size Bound { get; set; }
 
     // FileList property is made private set to control its modification through the AddFile method
     public IList<FileViewParam> FileList { get; set; } = new List<FileViewParam>();
@@ -56,7 +57,7 @@ public class OperationViewModel
     {
         foreach (var file in files)
         {
-            FileList.Add(new FileViewParam(file, bound));
+            FileList.Add(new FileViewParam(file, Bound));
         }
         FileListChanged?.Invoke();
     }

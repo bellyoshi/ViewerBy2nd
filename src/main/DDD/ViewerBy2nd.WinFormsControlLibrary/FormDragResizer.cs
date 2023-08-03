@@ -11,8 +11,9 @@ namespace ViewerBy2nd.WinFormsControlLibrary
     /// </summary>
     class FormDragResizer
     {
+        public bool Enabled { get; set; } = true;
         // サイズ変更の対象となるフォーム
-        Form resizeForm;
+        readonly Form resizeForm;
 
         /// <summary>
         /// サイズ変更の対象となる枠の位置
@@ -28,16 +29,16 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         }
 
         // サイズ変更が有効になる枠
-        ResizeDirection resizeDirection;
+        readonly ResizeDirection resizeDirection;
 
         // サイズ変更中を表す状態
         ResizeDirection resizeStatus;
 
         // サイズ変更が有効になる範囲の幅
-        int resizeAreaWidth;
+        readonly int resizeAreaWidth;
 
         // 標準のカーソル
-        Cursor defaultCursor;
+        readonly Cursor defaultCursor;
 
         // マウスをクリックした位置
         Point lastMouseDownPoint;
@@ -63,9 +64,9 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             foreach (Control control in controls)
             {
                 // イベントハンドラを追加
-                control.MouseDown += new MouseEventHandler(resizeForm_MouseDown);
-                control.MouseMove += new MouseEventHandler(resizeForm_MouseMove);
-                control.MouseUp += new MouseEventHandler(resizeForm_MouseUp);
+                control.MouseDown += new MouseEventHandler(ResizeForm_MouseDown);
+                control.MouseMove += new MouseEventHandler(ResizeForm_MouseMove);
+                control.MouseUp += new MouseEventHandler(ResizeForm_MouseUp);
             }
 
         }
@@ -73,8 +74,12 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         /// <summary>
         /// マウスボタン押下イベントハンドラ
         /// </summary>
-        void resizeForm_MouseDown(object sender, MouseEventArgs e)
+        void ResizeForm_MouseDown(object? sender, MouseEventArgs e)
         {
+            if (!Enabled)
+            {
+                return;
+            }
             // クリックしたポイントを保存する
             lastMouseDownPoint = e.Location;
 
@@ -87,7 +92,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             // 上の判定
             if ((resizeDirection & ResizeDirection.Top) == ResizeDirection.Top)
             {
-                Rectangle topRect = new Rectangle(0, 0, resizeForm.Width, resizeAreaWidth);
+                Rectangle topRect = new(0, 0, resizeForm.Width, resizeAreaWidth);
                 if (topRect.Contains(e.Location))
                 {
                     resizeStatus |= ResizeDirection.Top;
@@ -97,7 +102,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             // 左の判定
             if ((resizeDirection & ResizeDirection.Left) == ResizeDirection.Left)
             {
-                Rectangle leftRect = new Rectangle(0, 0, resizeAreaWidth, resizeForm.Height);
+                Rectangle leftRect = new(0, 0, resizeAreaWidth, resizeForm.Height);
                 if (leftRect.Contains(e.Location))
                 {
                     resizeStatus |= ResizeDirection.Left;
@@ -107,7 +112,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             // 下の判定
             if ((resizeDirection & ResizeDirection.Bottom) == ResizeDirection.Bottom)
             {
-                Rectangle bottomRect = new Rectangle(0, resizeForm.Height - resizeAreaWidth, resizeForm.Width, resizeAreaWidth);
+                Rectangle bottomRect = new(0, resizeForm.Height - resizeAreaWidth, resizeForm.Width, resizeAreaWidth);
                 if (bottomRect.Contains(e.Location))
                 {
                     resizeStatus |= ResizeDirection.Bottom;
@@ -117,7 +122,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             // 右の判定
             if ((resizeDirection & ResizeDirection.Right) == ResizeDirection.Right)
             {
-                Rectangle rightRect = new Rectangle(resizeForm.Width - resizeAreaWidth, 0, resizeAreaWidth, resizeForm.Height);
+                Rectangle rightRect = new(resizeForm.Width - resizeAreaWidth, 0, resizeAreaWidth, resizeForm.Height);
                 if (rightRect.Contains(e.Location))
                 {
                     resizeStatus |= ResizeDirection.Right;
@@ -134,8 +139,12 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         /// <summary>
         /// マウス移動イベントハンドラ
         /// </summary>
-        void resizeForm_MouseMove(object sender, MouseEventArgs e)
+        void ResizeForm_MouseMove(object? sender, MouseEventArgs e)
         {
+            if (!Enabled)
+            {
+                return;
+            }
             // サイズ変更が有効になる枠の上にカーソルが乗ったら
             // マウスカーソルをサイズ変更用のものに変更する
 
@@ -145,7 +154,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             // 上の判定
             if ((resizeDirection & ResizeDirection.Top) == ResizeDirection.Top)
             {
-                Rectangle topRect = new Rectangle(0, 0, resizeForm.Width, resizeAreaWidth);
+                Rectangle topRect = new(0, 0, resizeForm.Width, resizeAreaWidth);
                 if (topRect.Contains(e.Location))
                 {
                     cursorPos |= ResizeDirection.Top;
@@ -155,7 +164,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             // 左の判定
             if ((resizeDirection & ResizeDirection.Left) == ResizeDirection.Left)
             {
-                Rectangle leftRect = new Rectangle(0, 0, resizeAreaWidth, resizeForm.Height);
+                Rectangle leftRect = new(0, 0, resizeAreaWidth, resizeForm.Height);
                 if (leftRect.Contains(e.Location))
                 {
                     cursorPos |= ResizeDirection.Left;
@@ -165,7 +174,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             // 下の判定
             if ((resizeDirection & ResizeDirection.Bottom) == ResizeDirection.Bottom)
             {
-                Rectangle bottomRect = new Rectangle(0, resizeForm.Height - resizeAreaWidth, resizeForm.Width, resizeAreaWidth);
+                Rectangle bottomRect = new (0, resizeForm.Height - resizeAreaWidth, resizeForm.Width, resizeAreaWidth);
                 if (bottomRect.Contains(e.Location))
                 {
                     cursorPos |= ResizeDirection.Bottom;
@@ -175,7 +184,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             // 右の判定
             if ((resizeDirection & ResizeDirection.Right) == ResizeDirection.Right)
             {
-                Rectangle rightRect = new Rectangle(resizeForm.Width - resizeAreaWidth, 0, resizeAreaWidth, resizeForm.Height);
+                Rectangle rightRect = new (resizeForm.Width - resizeAreaWidth, 0, resizeAreaWidth, resizeForm.Height);
                 if (rightRect.Contains(e.Location))
                 {
                     cursorPos |= ResizeDirection.Right;
@@ -279,8 +288,12 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         /// <summary>
         /// マウスボタン押上イベントハンドラ
         /// </summary>
-        void resizeForm_MouseUp(object sender, MouseEventArgs e)
+        void ResizeForm_MouseUp(object? sender, MouseEventArgs e)
         {
+            if (!Enabled)
+            {
+                return;
+            }
             // マウスキャプチャーを終了する
             resizeForm.Capture = false;
         }
