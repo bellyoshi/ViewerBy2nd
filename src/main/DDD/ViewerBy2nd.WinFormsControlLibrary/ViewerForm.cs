@@ -27,6 +27,8 @@ namespace ViewerBy2nd
         {
             formResizer.Enabled = !WindowMode.IsFullScreen;
             formMover.Enabled = !WindowMode.IsFullScreen;
+            ウインドウモードToolStripMenuItem.Enabled = WindowMode.IsFullScreen;
+            フルスクリーンToolStripMenuItem.Enabled = !WindowMode.IsFullScreen;
         }
 
         private void WindowMode_FullScreenChanged()
