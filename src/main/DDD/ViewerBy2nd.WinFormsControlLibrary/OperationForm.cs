@@ -62,7 +62,11 @@ namespace ViewerBy2nd
             {
                 items.Add(item);
             }
-            FilesList.SelectedIndex = model.SelectedIndex;
+            if(items.Count > 0)
+            {
+                FilesList.SelectedIndex = model.SelectedIndex;
+            }
+           
         }
 
         private void ControlEnable()
