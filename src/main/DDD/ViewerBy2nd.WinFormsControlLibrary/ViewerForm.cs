@@ -9,10 +9,17 @@ namespace ViewerBy2nd
 
         public ViewerForm()
         {
+
             InitializeComponent();
+
+            Control[] controls = { this, PictureBox1, VideoPlayer1 };
+            foreach (Control control in controls)
+            {
+                control.ContextMenuStrip = contextMenuStrip1;
+            }
             WindowMode.FullScreenChanged += WindowMode_FullScreenChanged;
-            formResizer = new FormDragResizer(this, FormDragResizer.ResizeDirection.All, 8, new Control [] { this, PictureBox1 });
-            formMover = new FormDragMover(this, 8, new Control[] { this, PictureBox1 });
+            formResizer = new FormDragResizer(this, FormDragResizer.ResizeDirection.All, 8, controls);
+            formMover = new FormDragMover(this, 8, controls);
         }
 
         private void WindowMode_FullScreenChanged()
@@ -97,36 +104,18 @@ namespace ViewerBy2nd
             BackColor = BackColorRegister.GetInstance().BackColor;
         }
 
-        private bool mouseDoubleClicked = false;
-        private void VideoPlayer1_MouseDoubleClick(object sender, MouseEventArgs e)
+
+
+
+
+        private void ウインドウモードToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mouseDoubleClicked = true;
-            WindowMode.IsFullScreen = !WindowMode.IsFullScreen;
+            WindowMode.IsFullScreen = false;
         }
 
-        private void VideoPlayer1_MouseDown(object sender, MouseEventArgs e)
+        private void フルスクリーンToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //mouseDoubleClicked = false;
-            //Task doNclButtonDown = DoNclButtonDown();
+            WindowMode.IsFullScreen = true;
         }
-        async Task DoNclButtonDown()
-        {
-            //マウスのダブルクリックを有効にするため少し時間を置く
-            await Task.Delay(250);
-
-            if (mouseDoubleClicked)
-            {
-                return;
-            }
-            if ((Control.MouseButtons & MouseButtons.Left) != MouseButtons.Left)
-            {
-                return;
-            }
-            //タイトルバーをクリックしたことにすることによって
-            //ウインドウ内のどこをクリックしてもマウスでウインドウを動かせるようにする。
-            TitleBarClick.DoNclButtonDown(this.Handle);
-        }
-
-
     }
 }

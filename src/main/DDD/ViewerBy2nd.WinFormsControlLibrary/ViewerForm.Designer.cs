@@ -28,9 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components=new System.ComponentModel.Container();
             VideoPlayer1=new WinFormsControlLibrary.VideoPlayer();
             PictureBox1=new PictureBox();
+            contextMenuStrip1=new ContextMenuStrip(components);
+            フルスクリーンToolStripMenuItem=new ToolStripMenuItem();
+            ウインドウモードToolStripMenuItem=new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)PictureBox1).BeginInit();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // VideoPlayer1
@@ -44,8 +49,6 @@
             VideoPlayer1.TabIndex=6;
             VideoPlayer1.Time=-1L;
             VideoPlayer1.Volume=-1;
-            VideoPlayer1.MouseDoubleClick+=VideoPlayer1_MouseDoubleClick;
-            VideoPlayer1.MouseDown+=VideoPlayer1_MouseDown;
             // 
             // PictureBox1
             // 
@@ -55,8 +58,27 @@
             PictureBox1.Size=new Size(800, 600);
             PictureBox1.TabIndex=7;
             PictureBox1.TabStop=false;
-            PictureBox1.MouseDoubleClick+=VideoPlayer1_MouseDoubleClick;
-            PictureBox1.MouseDown+=VideoPlayer1_MouseDown;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize=new Size(20, 20);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { フルスクリーンToolStripMenuItem, ウインドウモードToolStripMenuItem });
+            contextMenuStrip1.Name="contextMenuStrip1";
+            contextMenuStrip1.Size=new Size(211, 80);
+            // 
+            // フルスクリーンToolStripMenuItem
+            // 
+            フルスクリーンToolStripMenuItem.Name="フルスクリーンToolStripMenuItem";
+            フルスクリーンToolStripMenuItem.Size=new Size(210, 24);
+            フルスクリーンToolStripMenuItem.Text="フルスクリーン";
+            フルスクリーンToolStripMenuItem.Click+=フルスクリーンToolStripMenuItem_Click;
+            // 
+            // ウインドウモードToolStripMenuItem
+            // 
+            ウインドウモードToolStripMenuItem.Name="ウインドウモードToolStripMenuItem";
+            ウインドウモードToolStripMenuItem.Size=new Size(210, 24);
+            ウインドウモードToolStripMenuItem.Text="ウインドウモード";
+            ウインドウモードToolStripMenuItem.Click+=ウインドウモードToolStripMenuItem_Click;
             // 
             // ViewerForm
             // 
@@ -72,6 +94,7 @@
             Load+=ViewerForm_Load;
             VisibleChanged+=ViewerForm_VisibleChanged;
             ((System.ComponentModel.ISupportInitialize)PictureBox1).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -79,5 +102,8 @@
 
         internal ViewerBy2nd.WinFormsControlLibrary.VideoPlayer VideoPlayer1;
         internal PictureBox PictureBox1;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem フルスクリーンToolStripMenuItem;
+        private ToolStripMenuItem ウインドウモードToolStripMenuItem;
     }
 }
