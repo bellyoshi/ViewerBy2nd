@@ -6,7 +6,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
 {
     public partial class VideoPlayer : UserControl
     {
-
+        public VideoView View => videoView1;
         private LibVLC libVLC;
         private MediaPlayer Player;
 

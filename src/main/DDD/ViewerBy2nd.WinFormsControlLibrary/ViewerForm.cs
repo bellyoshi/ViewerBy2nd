@@ -12,7 +12,7 @@ namespace ViewerBy2nd
 
             InitializeComponent();
 
-            Control[] controls = { this, PictureBox1, VideoPlayer1 };
+            Control[] controls = { this, PictureBox1, VideoPlayer1, VideoPlayer1.View };
             foreach (Control control in controls)
             {
                 control.ContextMenuStrip = contextMenuStrip1;
