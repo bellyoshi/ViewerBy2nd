@@ -672,7 +672,9 @@ namespace ViewerBy2nd
             InPageScrollBar.Minimum = 0;
             var clientWidth = Document?.OutPutImage?.Height??0;
             InPageScrollBar.Maximum = Document?.OriginalImageHeight??0;
-            InPageScrollBar.Value = PreviewFile.ScrollBarValue;
+            var scrolbarValue = Math.Min(PreviewFile.ScrollBarValue, InPageScrollBar.Maximum);
+
+            InPageScrollBar.Value = Math.Max(0, scrolbarValue);
 
             InPageScrollBar.LargeChange = clientWidth;
         }
