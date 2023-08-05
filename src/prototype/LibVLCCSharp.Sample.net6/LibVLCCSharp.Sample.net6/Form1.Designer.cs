@@ -18,7 +18,7 @@ namespace LibVLCCSharp.Sample.net6
             if (disposing && (components != null))
             {
                 components.Dispose();
-                this._mp?.Dispose();
+                this.Player?.Dispose();
                 this._libVLC?.Dispose();
             }
             base.Dispose(disposing);
@@ -32,31 +32,33 @@ namespace LibVLCCSharp.Sample.net6
         /// </summary>
         private void InitializeComponent()
         {
-            this.videoView1 = new LibVLCSharp.WinForms.VideoView();
-            ((System.ComponentModel.ISupportInitialize)(this.videoView1)).BeginInit();
-            this.SuspendLayout();
+            videoView1=new VideoView();
+            ((System.ComponentModel.ISupportInitialize)videoView1).BeginInit();
+            SuspendLayout();
             // 
             // videoView1
             // 
-            this.videoView1.BackColor = System.Drawing.Color.Black;
-            this.videoView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.videoView1.Location = new System.Drawing.Point(0, 0);
-            this.videoView1.MediaPlayer = null;
-            this.videoView1.Name = "videoView1";
-            this.videoView1.Size = new System.Drawing.Size(800, 450);
-            this.videoView1.TabIndex = 0;
+            videoView1.BackColor=Color.Black;
+            videoView1.Dock=DockStyle.Fill;
+            videoView1.Location=new Point(0, 0);
+            videoView1.Margin=new Padding(4, 5, 4, 5);
+            videoView1.MediaPlayer=null;
+            videoView1.Name="videoView1";
+            videoView1.Size=new Size(1067, 692);
+            videoView1.TabIndex=0;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.videoView1);
-            this.Name = "Form1";
-            this.Text = "LibVLCSharp.WinForms";
-            ((System.ComponentModel.ISupportInitialize)(this.videoView1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions=new SizeF(8F, 20F);
+            AutoScaleMode=AutoScaleMode.Font;
+            ClientSize=new Size(1067, 692);
+            Controls.Add(videoView1);
+            FormBorderStyle=FormBorderStyle.None;
+            Margin=new Padding(4, 5, 4, 5);
+            Name="Form1";
+            Text="LibVLCSharp.WinForms";
+            ((System.ComponentModel.ISupportInitialize)videoView1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
