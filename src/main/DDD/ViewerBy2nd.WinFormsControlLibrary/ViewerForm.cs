@@ -20,10 +20,10 @@ namespace ViewerBy2nd
             WindowMode.FullScreenChanged += WindowMode_FullScreenChanged;
             formResizer = new FormDragResizer(this, FormDragResizer.ResizeDirection.All, 8, controls);
             formMover = new FormDragMover(this, 8, controls);
-            formMoverResizeEnabledInitialize();
+            FormMoverResizeEnabledInitialize();
         }
 
-        void formMoverResizeEnabledInitialize()
+        void FormMoverResizeEnabledInitialize()
         {
             formResizer.Enabled = !WindowMode.IsFullScreen;
             formMover.Enabled = !WindowMode.IsFullScreen;
@@ -33,7 +33,7 @@ namespace ViewerBy2nd
 
         private void WindowMode_FullScreenChanged()
         {
-            formMoverResizeEnabledInitialize();
+            FormMoverResizeEnabledInitialize();
             if (WindowMode.IsFullScreen)
             {
                 SetViewerBoundsFullScreen();

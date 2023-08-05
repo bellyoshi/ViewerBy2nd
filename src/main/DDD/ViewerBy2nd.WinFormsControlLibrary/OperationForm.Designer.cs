@@ -336,9 +336,9 @@
             // 
             // InPageScrollBar
             // 
-            InPageScrollBar.Location=new Point(818, 47);
+            InPageScrollBar.Location=new Point(816, 64);
             InPageScrollBar.Name="InPageScrollBar";
-            InPageScrollBar.Size=new Size(23, 400);
+            InPageScrollBar.Size=new Size(23, 393);
             InPageScrollBar.TabIndex=78;
             InPageScrollBar.Scroll+=VScrollBar1_Scroll;
             // 
@@ -804,6 +804,7 @@
             操作中に自動表示ToolStripMenuItem.Name="操作中に自動表示ToolStripMenuItem";
             操作中に自動表示ToolStripMenuItem.Size=new Size(212, 26);
             操作中に自動表示ToolStripMenuItem.Text="操作中に自動表示";
+            操作中に自動表示ToolStripMenuItem.Click+=操作中に自動表示ToolStripMenuItem_Click;
             // 
             // ウインドウサイズToolStripMenuItem
             // 
@@ -859,7 +860,7 @@
             panel2.Controls.Add(SeekTrackBar);
             panel2.Location=new Point(286, 36);
             panel2.Name="panel2";
-            panel2.Size=new Size(851, 555);
+            panel2.Size=new Size(851, 570);
             panel2.TabIndex=103;
             // 
             // thumbnailDefaultPanel

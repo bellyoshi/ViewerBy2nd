@@ -168,7 +168,6 @@ namespace ViewerBy2nd
         private void OperationForm_Load(object sender, EventArgs e)
         {
             言語LToolStripMenuItem.Visible = false;//todo 言語LToolStripMenuItem機能追加
-            操作中に自動表示ToolStripMenuItem.Visible =false;//todo 操作中に自動表示ToolStripMenuItem機能追加
             Dispacher.RegistrationfrmOperation(this);
 
             AppSettingLoad();
@@ -183,6 +182,7 @@ namespace ViewerBy2nd
         private void AppSettingLoad()
         {
             AutoDisplayCheckBox.Checked = Default.AutoUpdate;
+            操作中に自動表示ToolStripMenuItem.Checked = AutoDisplayCheckBox.Checked;
 
             NotifyBackColor();
 
@@ -449,6 +449,7 @@ namespace ViewerBy2nd
 
         private void AutoDisplayCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            操作中に自動表示ToolStripMenuItem.Checked = AutoDisplayCheckBox.Checked;
             UpdateViewIfChecked();
             ControlEnable();
         }
@@ -1038,6 +1039,17 @@ namespace ViewerBy2nd
                 pbThumbnail.Bounds = ThumnailMovoToPanel.Bounds;
                 SecondGroup.Location = new Point(0, 550);
             }
+
+            //スクロールバーをサムネイルの右となりに配置
+            InPageScrollBar.Top = pbThumbnail.Top - 20;
+            InPageScrollBar.Left = pbThumbnail.Right + 5;
+            InPageScrollBar.Height = pbThumbnail.Height + 40;
+
+            //シークトラックバーをサムネイルの下に配置
+            SeekTrackBar.Top = pbThumbnail.Bottom + 10;
+            SeekTrackBar.Left = pbThumbnail.Left;
+            SeekTrackBar.Width = pbThumbnail.Width;
+
         }
 
 
@@ -1295,6 +1307,11 @@ namespace ViewerBy2nd
         private void DisplayOfSmallButton_Click(object sender, EventArgs e)
         {
             DisplayButtonAction();
+        }
+
+        private void 操作中に自動表示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AutoDisplayCheckBox.Checked = !AutoDisplayCheckBox.Checked;
         }
     }
 
