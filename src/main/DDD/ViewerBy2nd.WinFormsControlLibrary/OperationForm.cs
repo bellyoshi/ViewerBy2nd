@@ -62,11 +62,11 @@ namespace ViewerBy2nd
             {
                 items.Add(item);
             }
-            if(items.Count > 0)
+            if (items.Count > 0)
             {
                 FilesList.SelectedIndex = model.SelectedIndex;
             }
-           
+
         }
 
         private void ControlEnable()
@@ -91,6 +91,10 @@ namespace ViewerBy2nd
         {
             DeleteFilesFromListButton.Enabled = 0 < FilesList.SelectedItems.Count;
             DeselectFilesButton.Enabled = 0 < FilesList.SelectedItems.Count;
+            DeleteFilesFromListButton.Visible = FilesList.Visible;
+            AddFilesButton.Visible = FilesList.Visible;
+            AllFilesSelectButton.Visible = FilesList.Visible;
+            DeselectFilesButton.Visible = FilesList.Visible;
         }
 
         public bool IsMovie
@@ -102,6 +106,11 @@ namespace ViewerBy2nd
         {
             DisplayButton.Enabled = !AutoDisplayCheckBox.Checked || !Dispacher.ViewerVisible || IsMovie;
             DisplayButton.Text = IsMovie ? "再生" : "表示";
+
+            SecondGroup.Visible = FilesList.Visible;
+            SecondOfSmallPanel.Visible = !FilesList.Visible;
+
+
         }
 
         public void CtlPdf1ControlEnabled()
@@ -249,7 +258,7 @@ namespace ViewerBy2nd
 
 
             //削除したときに残っていれば表示を消す。
-            if(DispFile != null && deleteList.Contains(DispFile))
+            if (DispFile != null && deleteList.Contains(DispFile))
             {
                 pbThumbnail.Image = null;
                 UpdateView();
@@ -328,14 +337,14 @@ namespace ViewerBy2nd
                 GetAddFiles().Select(param => param.FileName)
                 );
 
-            
+
 
         }
         private void AddFilesAndSelect()
         {
-                    model.AddFiles(
-            GetAddFiles().Select(param => param.FileName)
-            );
+            model.AddFiles(
+    GetAddFiles().Select(param => param.FileName)
+    );
 
             FileViewParam? last = null;
             foreach (FileViewParam item in FilesList.Items)
@@ -1271,6 +1280,21 @@ namespace ViewerBy2nd
             FilesList.Visible = true;
             ControlRelocation();
             ControlEnable();
+        }
+
+        private void BackgroundDisplayOfSmallButton_Click(object sender, EventArgs e)
+        {
+            BackgroundDisplayAction();
+        }
+
+        private void EndOfDisplayOfSmallButton_Click(object sender, EventArgs e)
+        {
+            EndOfDisplayAction();
+        }
+
+        private void DisplayOfSmallButton_Click(object sender, EventArgs e)
+        {
+            DisplayButtonAction();
         }
     }
 

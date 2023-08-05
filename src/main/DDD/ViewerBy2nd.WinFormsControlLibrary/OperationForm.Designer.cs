@@ -117,6 +117,10 @@
             thumbnailDefaultPanel=new Panel();
             ThumnailMovoToPanel=new Panel();
             SecondGroup=new GroupBox();
+            DisplayOfSmallButton=new Button();
+            EndOfDisplayOfSmallButton=new Button();
+            BackgroundDisplayOfSmallButton=new Button();
+            SecondOfSmallPanel=new Panel();
             ((System.ComponentModel.ISupportInitialize)SeekTrackBar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbThumbnail).BeginInit();
             pnlMovie.SuspendLayout();
@@ -125,6 +129,7 @@
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
             SecondGroup.SuspendLayout();
+            SecondOfSmallPanel.SuspendLayout();
             SuspendLayout();
             // 
             // DisplayButton
@@ -782,14 +787,14 @@
             // ディスプレイと背景色ToolStripMenuItem
             // 
             ディスプレイと背景色ToolStripMenuItem.Name="ディスプレイと背景色ToolStripMenuItem";
-            ディスプレイと背景色ToolStripMenuItem.Size=new Size(224, 26);
+            ディスプレイと背景色ToolStripMenuItem.Size=new Size(212, 26);
             ディスプレイと背景色ToolStripMenuItem.Text="ディスプレイと背景色";
             ディスプレイと背景色ToolStripMenuItem.Click+=ディスプレイと背景色ToolStripMenuItem_Click;
             // 
             // 言語LToolStripMenuItem
             // 
             言語LToolStripMenuItem.Name="言語LToolStripMenuItem";
-            言語LToolStripMenuItem.Size=new Size(224, 26);
+            言語LToolStripMenuItem.Size=new Size(212, 26);
             言語LToolStripMenuItem.Text="言語(&L)";
             // 
             // 操作中に自動表示ToolStripMenuItem
@@ -797,28 +802,28 @@
             操作中に自動表示ToolStripMenuItem.Checked=true;
             操作中に自動表示ToolStripMenuItem.CheckState=CheckState.Checked;
             操作中に自動表示ToolStripMenuItem.Name="操作中に自動表示ToolStripMenuItem";
-            操作中に自動表示ToolStripMenuItem.Size=new Size(224, 26);
+            操作中に自動表示ToolStripMenuItem.Size=new Size(212, 26);
             操作中に自動表示ToolStripMenuItem.Text="操作中に自動表示";
             // 
             // ウインドウサイズToolStripMenuItem
             // 
             ウインドウサイズToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { スリムToolStripMenuItem, 標準ToolStripMenuItem });
             ウインドウサイズToolStripMenuItem.Name="ウインドウサイズToolStripMenuItem";
-            ウインドウサイズToolStripMenuItem.Size=new Size(224, 26);
+            ウインドウサイズToolStripMenuItem.Size=new Size(212, 26);
             ウインドウサイズToolStripMenuItem.Text="操作画面サイズ";
             ウインドウサイズToolStripMenuItem.Click+=ウインドウサイズToolStripMenuItem_Click;
             // 
             // スリムToolStripMenuItem
             // 
             スリムToolStripMenuItem.Name="スリムToolStripMenuItem";
-            スリムToolStripMenuItem.Size=new Size(224, 26);
+            スリムToolStripMenuItem.Size=new Size(126, 26);
             スリムToolStripMenuItem.Text="スリム";
             スリムToolStripMenuItem.Click+=スリムToolStripMenuItem_Click;
             // 
             // 標準ToolStripMenuItem
             // 
             標準ToolStripMenuItem.Name="標準ToolStripMenuItem";
-            標準ToolStripMenuItem.Size=new Size(224, 26);
+            標準ToolStripMenuItem.Size=new Size(126, 26);
             標準ToolStripMenuItem.Text="標準";
             標準ToolStripMenuItem.Click+=標準ToolStripMenuItem_Click;
             // 
@@ -888,11 +893,52 @@
             SecondGroup.TabStop=false;
             SecondGroup.Text="セカンドモニター操作";
             // 
+            // DisplayOfSmallButton
+            // 
+            DisplayOfSmallButton.Location=new Point(8, 5);
+            DisplayOfSmallButton.Name="DisplayOfSmallButton";
+            DisplayOfSmallButton.Size=new Size(55, 51);
+            DisplayOfSmallButton.TabIndex=26;
+            DisplayOfSmallButton.Text="表示";
+            DisplayOfSmallButton.UseVisualStyleBackColor=true;
+            DisplayOfSmallButton.Click+=DisplayOfSmallButton_Click;
+            // 
+            // EndOfDisplayOfSmallButton
+            // 
+            EndOfDisplayOfSmallButton.Location=new Point(71, 5);
+            EndOfDisplayOfSmallButton.Name="EndOfDisplayOfSmallButton";
+            EndOfDisplayOfSmallButton.Size=new Size(49, 51);
+            EndOfDisplayOfSmallButton.TabIndex=27;
+            EndOfDisplayOfSmallButton.Text="表示\r\n終了";
+            EndOfDisplayOfSmallButton.UseVisualStyleBackColor=true;
+            EndOfDisplayOfSmallButton.Click+=EndOfDisplayOfSmallButton_Click;
+            // 
+            // BackgroundDisplayOfSmallButton
+            // 
+            BackgroundDisplayOfSmallButton.Location=new Point(126, 5);
+            BackgroundDisplayOfSmallButton.Name="BackgroundDisplayOfSmallButton";
+            BackgroundDisplayOfSmallButton.Size=new Size(51, 51);
+            BackgroundDisplayOfSmallButton.TabIndex=28;
+            BackgroundDisplayOfSmallButton.Text="背景\r\n表示";
+            BackgroundDisplayOfSmallButton.UseVisualStyleBackColor=true;
+            BackgroundDisplayOfSmallButton.Click+=BackgroundDisplayOfSmallButton_Click;
+            // 
+            // SecondOfSmallPanel
+            // 
+            SecondOfSmallPanel.Controls.Add(DisplayOfSmallButton);
+            SecondOfSmallPanel.Controls.Add(EndOfDisplayOfSmallButton);
+            SecondOfSmallPanel.Controls.Add(BackgroundDisplayOfSmallButton);
+            SecondOfSmallPanel.Location=new Point(5, 608);
+            SecondOfSmallPanel.Name="SecondOfSmallPanel";
+            SecondOfSmallPanel.Size=new Size(186, 70);
+            SecondOfSmallPanel.TabIndex=105;
+            // 
             // OperationForm
             // 
             AutoScaleDimensions=new SizeF(8F, 20F);
             AutoScaleMode=AutoScaleMode.Font;
             ClientSize=new Size(1170, 843);
+            Controls.Add(SecondOfSmallPanel);
             Controls.Add(SecondGroup);
             Controls.Add(DeleteFilesFromListButton);
             Controls.Add(AddFilesButton);
@@ -920,6 +966,7 @@
             panel2.PerformLayout();
             SecondGroup.ResumeLayout(false);
             SecondGroup.PerformLayout();
+            SecondOfSmallPanel.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -1014,6 +1061,10 @@
         private ToolStripMenuItem ウインドウサイズToolStripMenuItem;
         private ToolStripMenuItem スリムToolStripMenuItem;
         private ToolStripMenuItem 標準ToolStripMenuItem;
+        internal Button DisplayOfSmallButton;
+        internal Button EndOfDisplayOfSmallButton;
+        internal Button BackgroundDisplayOfSmallButton;
+        private Panel SecondOfSmallPanel;
     }
 }
 
