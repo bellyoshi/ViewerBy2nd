@@ -34,6 +34,7 @@
             contextMenuStrip1=new ContextMenuStrip(components);
             フルスクリーンToolStripMenuItem=new ToolStripMenuItem();
             ウインドウモードToolStripMenuItem=new ToolStripMenuItem();
+            表示終了ToolStripMenuItem=new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)PictureBox1).BeginInit();
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
@@ -62,9 +63,9 @@
             // contextMenuStrip1
             // 
             contextMenuStrip1.ImageScalingSize=new Size(20, 20);
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { フルスクリーンToolStripMenuItem, ウインドウモードToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { フルスクリーンToolStripMenuItem, ウインドウモードToolStripMenuItem, 表示終了ToolStripMenuItem });
             contextMenuStrip1.Name="contextMenuStrip1";
-            contextMenuStrip1.Size=new Size(211, 80);
+            contextMenuStrip1.Size=new Size(211, 104);
             // 
             // フルスクリーンToolStripMenuItem
             // 
@@ -79,6 +80,13 @@
             ウインドウモードToolStripMenuItem.Size=new Size(210, 24);
             ウインドウモードToolStripMenuItem.Text="ウインドウモード";
             ウインドウモードToolStripMenuItem.Click+=ウインドウモードToolStripMenuItem_Click;
+            // 
+            // 表示終了ToolStripMenuItem
+            // 
+            表示終了ToolStripMenuItem.Name="表示終了ToolStripMenuItem";
+            表示終了ToolStripMenuItem.Size=new Size(210, 24);
+            表示終了ToolStripMenuItem.Text="表示終了";
+            表示終了ToolStripMenuItem.Click+=表示終了ToolStripMenuItem_Click;
             // 
             // ViewerForm
             // 
@@ -105,5 +113,6 @@
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem フルスクリーンToolStripMenuItem;
         private ToolStripMenuItem ウインドウモードToolStripMenuItem;
+        private ToolStripMenuItem 表示終了ToolStripMenuItem;
     }
 }

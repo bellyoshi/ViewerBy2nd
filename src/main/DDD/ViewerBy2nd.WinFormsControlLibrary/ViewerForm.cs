@@ -130,6 +130,7 @@ namespace ViewerBy2nd
             WindowMode.IsFullScreen = true;
         }
 
+
         private void 表示終了ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             dispacher.CloseViewers();

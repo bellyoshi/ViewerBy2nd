@@ -253,15 +253,17 @@ namespace ViewerBy2nd
             if (FilesList.SelectedItem == null)
                 return;
 
+
             var deleteList = FilesList.SelectedItems.Cast<FileViewParam>().ToList();
+            var isDeletePreview = DispFile != null && deleteList.Contains(DispFile) || PreviewFile != null && deleteList.Contains(PreviewFile);
             model.DeleteFiles(deleteList);
 
 
             //削除したときに残っていれば表示を消す。
-            if (DispFile != null && deleteList.Contains(DispFile))
+            if (isDeletePreview)
             {
                 pbThumbnail.Image = null;
-                UpdateView();
+                UpdateViewIfChecked();
                 ControlEnable();
             }
 
@@ -333,9 +335,17 @@ namespace ViewerBy2nd
         }
         private void AddFilesButton_Click(object sender, EventArgs e)
         {
-            model.AddFiles(
-                GetAddFiles().Select(param => param.FileName)
-                );
+            try
+            {
+                model.AddFiles(
+                     GetAddFiles().Select(param => param.FileName)
+                     );
+            }
+            catch (OperationCanceledException)
+            {
+                //no operaton
+            }
+
 
 
 
@@ -1289,6 +1299,7 @@ namespace ViewerBy2nd
         private void スリムToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FilesList.Visible = false;
+            Width = 350;
             ControlRelocation();
             ControlEnable();
         }
@@ -1296,6 +1307,7 @@ namespace ViewerBy2nd
         private void 標準ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FilesList.Visible = true;
+            Width = 1180;
             ControlRelocation();
             ControlEnable();
         }
