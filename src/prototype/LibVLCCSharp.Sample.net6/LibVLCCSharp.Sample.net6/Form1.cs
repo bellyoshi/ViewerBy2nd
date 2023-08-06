@@ -37,7 +37,8 @@ namespace LibVLCCSharp.Sample.net6
 
         private void Form1_Load(object? sender, EventArgs e)
         {
-            Player.Play(new Media(_libVLC, "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", FromType.FromLocation));
+            Player.Play(
+                new Media(_libVLC, "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4", FromType.FromLocation));
 
         }
 
