@@ -395,9 +395,13 @@ namespace ViewerBy2nd
             EndOfDisplayAction();
         }
 
-        private void EndOfDisplayAction()
+        public void EndOfDisplayAction()
         {
             Dispacher.CloseViewers();
+        }
+
+        public void CloseViewerAfterAction()
+        {
             DispFile = null;
             thumbnailMoviePlayer.Pause();
             player?.Pause();

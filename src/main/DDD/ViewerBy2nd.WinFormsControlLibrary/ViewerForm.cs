@@ -5,6 +5,7 @@ namespace ViewerBy2nd
 {
     public partial class ViewerForm : Form
     {
+        private FormDispacher dispacher = FormDispacher.GetInstance();
         public ViewerWindowMode WindowMode { get; set; } = new();
 
         public ViewerForm()
@@ -46,7 +47,7 @@ namespace ViewerBy2nd
 
         public void OperationForm_MouseWheel(object? sender, MouseEventArgs e)
         {
-            var dispacher = FormDispacher.GetInstance();
+
             dispacher.OperationForm_MouseWheel(sender, e);
         }
 
@@ -127,6 +128,11 @@ namespace ViewerBy2nd
         private void フルスクリーンToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WindowMode.IsFullScreen = true;
+        }
+
+        private void 表示終了ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dispacher.CloseViewers();
         }
     }
 }

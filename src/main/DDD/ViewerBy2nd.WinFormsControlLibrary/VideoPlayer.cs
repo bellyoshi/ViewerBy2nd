@@ -1,5 +1,4 @@
-﻿using ViewerBy2ndLib;
-using LibVLCSharp.Shared;
+﻿using LibVLCSharp.Shared;
 using LibVLCSharp.WinForms;
 
 namespace ViewerBy2nd.WinFormsControlLibrary
@@ -12,8 +11,12 @@ namespace ViewerBy2nd.WinFormsControlLibrary
 
         public VideoPlayer()
         {
-            InitializeComponent();
+            if (!DesignMode)
+            {
+                Core.Initialize();
+            }
 
+            InitializeComponent();
 
             libVLC = new LibVLC();
             Player = new MediaPlayer(libVLC);
@@ -39,7 +42,9 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         public float Rate
         {
             get { return Player.Rate; }
-            set { } //todo:Player.Rate = value; }
+            set {
+                Player.SetRate(value);
+            } 
         }
         public bool IsPlaying => Player.IsPlaying;
 
@@ -67,15 +72,12 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         }
         public long Length => Player.Length;
 
-        public bool RequiredReload => false;//todo: Player.State == Vlc.DotNet.Core.Interops.Signatures.MediaStates.Ended;
+        public bool RequiredReload => Player.State == VLCState.Ended;
 
         readonly System.Windows.Forms.Timer loadTimer = new();
 
 
-        private void VlcControl1_VlcLibDirectoryNeeded(object? sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
-        {
-            e.VlcLibDirectory = VLCDirectoryGetter.GetVlcLibDirectory();
-        }
+
 
         public void Stop()
         {

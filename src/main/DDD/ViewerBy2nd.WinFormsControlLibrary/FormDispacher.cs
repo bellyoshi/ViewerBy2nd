@@ -87,6 +87,7 @@ namespace ViewerBy2nd
         {
             if (_frmViewer == null) return;
             _frmViewer.Close();
+            _frmOperation?.CloseViewerAfterAction();
         }
 
         internal void ShowSetting()
