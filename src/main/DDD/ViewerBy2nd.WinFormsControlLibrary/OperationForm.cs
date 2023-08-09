@@ -12,12 +12,15 @@ namespace ViewerBy2nd
         static Settings Default => ConfigurationReader.Default;
 
         OperationViewModel model;
+
+        private VideoPlayer thumbnailMoviePlayer;
         public OperationForm()
         {
             model = new();
             model.FileListChanged += Model_FileListChanged;
             model.SelectedIndexChanged += Model_SelectedIndexChanged;
             InitializeComponent();
+            thumbnailMoviePlayer = new(videoView1);
         }
 
         private void Model_FileListChanged()
@@ -144,7 +147,7 @@ namespace ViewerBy2nd
             PauseButton.Enabled = IsMovie;
             FastForwardButton.Enabled = IsMovie;
             AutoDisplayCheckBox.Enabled = !IsMovie;
-            thumbnailMoviePlayer.Visible = IsMovie;
+            videoView1.Visible = IsMovie;
             SeekTrackBar.Enabled = IsMovie;
             SeekTrackBar.Visible = IsMovie;
             if (!IsMovie)
@@ -238,7 +241,7 @@ namespace ViewerBy2nd
         public void SetThumnailSize()
         {
             pbThumbnail.Height = GetThumnailWidth(pbThumbnail.Width);
-            thumbnailMoviePlayer.Height = GetThumnailWidth(thumbnailMoviePlayer.Width);
+            videoView1.Height = GetThumnailWidth(videoView1.Width);
         }
         private static int GetThumnailWidth(int thumWidth)
         {
@@ -618,7 +621,7 @@ namespace ViewerBy2nd
             else
                 PageNumberLabel.Visible = false;
             pbThumbnail.Visible = !IsMovie;
-            thumbnailMoviePlayer.Visible = IsMovie;
+            videoView1.Visible = IsMovie;
 
             if (IsMovie)
             {
@@ -1044,14 +1047,14 @@ namespace ViewerBy2nd
                 FilesList.Width = 260;
                 panel2.Location = new Point(270, 30);
                 SecondGroup.Location = new Point(288, 550);
-                thumbnailMoviePlayer.Bounds = thumbnailDefaultPanel.Bounds;
+                videoView1.Bounds = thumbnailDefaultPanel.Bounds;
                 pbThumbnail.Bounds = thumbnailDefaultPanel.Bounds;
             }
             else
             {
 
                 panel2.Location = new Point(0, 30);
-                thumbnailMoviePlayer.Bounds = ThumnailMovoToPanel.Bounds;
+                videoView1.Bounds = ThumnailMovoToPanel.Bounds;
                 pbThumbnail.Bounds = ThumnailMovoToPanel.Bounds;
                 SecondGroup.Location = new Point(0, 550);
             }

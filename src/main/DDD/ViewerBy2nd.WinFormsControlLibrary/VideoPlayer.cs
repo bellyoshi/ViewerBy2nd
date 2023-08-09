@@ -3,20 +3,17 @@ using LibVLCSharp.WinForms;
 
 namespace ViewerBy2nd.WinFormsControlLibrary
 {
-    public partial class VideoPlayer : UserControl
+    public partial class VideoPlayer 
     {
-        public VideoView View => videoView1;
+        private VideoView videoView1 { get; set; }
         private LibVLC libVLC;
         private MediaPlayer Player;
 
-        public VideoPlayer()
+        public VideoPlayer(VideoView videoView)
         {
-            if (!DesignMode)
-            {
-                Core.Initialize();
-            }
+            videoView1 = videoView;
+            Core.Initialize();
 
-            InitializeComponent();
 
             libVLC = new LibVLC();
             Player = new MediaPlayer(libVLC);
@@ -131,11 +128,6 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             }
         }
 
-        private void VideoPlayer_Load(object sender, EventArgs e)
-        {
-            if (DesignMode) return;
 
-
-        }
     }
 }
