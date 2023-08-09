@@ -3,28 +3,26 @@ using LibVLCSharp.WinForms;
 
 namespace ViewerBy2nd.WinFormsControlLibrary
 {
-    public partial class VideoPlayer : UserControl
+    public partial class VideoPlayer 
     {
-        public VideoView View => videoView1;
-        private LibVLC libVLC;
-        private MediaPlayer Player;
+        private VideoView VideoView1 { get; set; }
+        private readonly LibVLC libVLC;
+        private readonly MediaPlayer Player;
 
-        public VideoPlayer()
+        public VideoPlayer(VideoView videoView)
         {
-            if (!DesignMode)
+            VideoView1 = videoView;
+            Core.Initialize();
+
+
+            libVLC = new();
+            Player = new (libVLC)
             {
-                Core.Initialize();
-            }
+                EnableKeyInput = false,
+                EnableMouseInput = false
+            };
 
-            InitializeComponent();
-
-            libVLC = new LibVLC();
-            Player = new MediaPlayer(libVLC);
-
-            Player.EnableKeyInput = false;
-            Player.EnableMouseInput = false;
-
-            videoView1.MediaPlayer = Player;
+            VideoView1.MediaPlayer = Player;
 
             loadTimer.Tick += LoadTimer_Tick;
         }
@@ -131,11 +129,6 @@ namespace ViewerBy2nd.WinFormsControlLibrary
             }
         }
 
-        private void VideoPlayer_Load(object sender, EventArgs e)
-        {
-            if (DesignMode) return;
 
-
-        }
     }
 }

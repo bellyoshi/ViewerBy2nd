@@ -1,19 +1,24 @@
-﻿using System.Runtime.CompilerServices;
+﻿using LibVLCSharp.Shared;
+using LibVLCSharp.WinForms;
+using System.Runtime.CompilerServices;
 using ViewerBy2nd.WinFormsControlLibrary;
 
 namespace ViewerBy2nd
 {
     public partial class ViewerForm : Form
     {
-        private FormDispacher dispacher = FormDispacher.GetInstance();
+        private readonly FormDispacher dispacher = FormDispacher.GetInstance();
         public ViewerWindowMode WindowMode { get; set; } = new();
 
+        private readonly VideoPlayer VideoPlayer1;
         public ViewerForm()
         {
 
             InitializeComponent();
 
-            Control[] controls = { this, PictureBox1, VideoPlayer1, VideoPlayer1.View };
+            VideoPlayer1 = new(videoView1);
+
+            Control[] controls = { this, PictureBox1,  videoView1 };
             foreach (Control control in controls)
             {
                 control.ContextMenuStrip = contextMenuStrip1;
@@ -98,7 +103,7 @@ namespace ViewerBy2nd
             PictureBox1.Image = image;
             PictureBox1.Visible = true;
             PictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            VideoPlayer1.Visible = false;
+            videoView1.Visible = false;
             VideoPlayer1.Stop();
         }
 
@@ -106,7 +111,7 @@ namespace ViewerBy2nd
         {
 
             PictureBox1.Visible = false;
-            VideoPlayer1.Visible = true;
+            videoView1.Visible = true;
             return VideoPlayer1;
         }
 

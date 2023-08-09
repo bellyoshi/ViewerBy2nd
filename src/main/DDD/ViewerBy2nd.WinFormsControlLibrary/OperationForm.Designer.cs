@@ -1,4 +1,6 @@
-﻿namespace ViewerBy2nd
+﻿using LibVLCSharp.WinForms;
+
+namespace ViewerBy2nd
 {
     partial class OperationForm
     {
@@ -72,7 +74,7 @@
             ZoomOutButton=new Button();
             ZoomInButton=new Button();
             pnlPage=new Panel();
-            thumbnailMoviePlayer=new WinFormsControlLibrary.VideoPlayer();
+            videoView1 = new VideoView();
             menuStrip1=new MenuStrip();
             ファイルToolStripMenuItem=new ToolStripMenuItem();
             リストLToolStripMenuItem=new ToolStripMenuItem();
@@ -545,16 +547,13 @@
             pnlPage.Size=new Size(262, 104);
             pnlPage.TabIndex=100;
             // 
-            // thumbnailMoviePlayer
+            // videoView1
             // 
-            thumbnailMoviePlayer.BackColor=Color.FromArgb(192, 0, 0);
-            thumbnailMoviePlayer.Location=new Point(766, 481);
-            thumbnailMoviePlayer.Name="thumbnailMoviePlayer";
-            thumbnailMoviePlayer.Rate=-1F;
-            thumbnailMoviePlayer.Size=new Size(29, 32);
-            thumbnailMoviePlayer.TabIndex=97;
-            thumbnailMoviePlayer.Time=0L;
-            thumbnailMoviePlayer.Volume=-1;
+            videoView1.BackColor=Color.FromArgb(192, 0, 0);
+            videoView1.Location=new Point(766, 481);
+            videoView1.Name="videoView1";
+            videoView1.Size=new Size(29, 32);
+            videoView1.TabIndex=97;
             // 
             // menuStrip1
             // 
@@ -856,7 +855,7 @@
             panel2.Controls.Add(txtPDFFileName);
             panel2.Controls.Add(InPageScrollBar);
             panel2.Controls.Add(Label2);
-            panel2.Controls.Add(thumbnailMoviePlayer);
+            panel2.Controls.Add(videoView1);
             panel2.Controls.Add(SeekTrackBar);
             panel2.Location=new Point(286, 36);
             panel2.Name="panel2";
@@ -1012,7 +1011,7 @@
         internal PictureBox pbThumbnail;
         internal Button DeselectFilesButton;
         internal Button DeleteFilesFromListButton;
-        internal ViewerBy2nd.WinFormsControlLibrary.VideoPlayer thumbnailMoviePlayer;
+        internal VideoView videoView1;
         private Panel pnlMovie;
         private Panel pnlDispOption;
         private Panel pnlPage;

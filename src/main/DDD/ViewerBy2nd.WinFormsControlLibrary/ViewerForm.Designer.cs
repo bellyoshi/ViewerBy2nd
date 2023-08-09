@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components=new System.ComponentModel.Container();
-            VideoPlayer1=new WinFormsControlLibrary.VideoPlayer();
+            videoView1 = new LibVLCSharp.WinForms.VideoView();
             PictureBox1=new PictureBox();
             contextMenuStrip1=new ContextMenuStrip(components);
             フルスクリーンToolStripMenuItem=new ToolStripMenuItem();
@@ -39,17 +39,14 @@
             contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // VideoPlayer1
+            // videoView1
             // 
-            VideoPlayer1.Dock=DockStyle.Fill;
-            VideoPlayer1.Location=new Point(0, 0);
-            VideoPlayer1.Margin=new Padding(3, 4, 3, 4);
-            VideoPlayer1.Name="VideoPlayer1";
-            VideoPlayer1.Rate=-1F;
-            VideoPlayer1.Size=new Size(800, 600);
-            VideoPlayer1.TabIndex=6;
-            VideoPlayer1.Time=-1L;
-            VideoPlayer1.Volume=-1;
+            videoView1.Dock=DockStyle.Fill;
+            videoView1.Location=new Point(0, 0);
+            videoView1.Margin=new Padding(3, 4, 3, 4);
+            videoView1.Name="videoView1";
+            videoView1.Size=new Size(800, 600);
+            videoView1.TabIndex=6;
             // 
             // PictureBox1
             // 
@@ -93,7 +90,7 @@
             AutoScaleDimensions=new SizeF(8F, 20F);
             AutoScaleMode=AutoScaleMode.Font;
             ClientSize=new Size(800, 600);
-            Controls.Add(VideoPlayer1);
+            Controls.Add(videoView1);
             Controls.Add(PictureBox1);
             FormBorderStyle=FormBorderStyle.None;
             Margin=new Padding(3, 4, 3, 4);
@@ -108,7 +105,7 @@
 
         #endregion
 
-        internal ViewerBy2nd.WinFormsControlLibrary.VideoPlayer VideoPlayer1;
+        internal LibVLCSharp.WinForms.VideoView videoView1;
         internal PictureBox PictureBox1;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem フルスクリーンToolStripMenuItem;
