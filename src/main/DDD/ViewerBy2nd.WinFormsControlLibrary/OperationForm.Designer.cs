@@ -74,7 +74,7 @@ namespace ViewerBy2nd
             ZoomOutButton=new Button();
             ZoomInButton=new Button();
             pnlPage=new Panel();
-            videoView1 = new VideoView();
+            videoView1=new VideoView();
             menuStrip1=new MenuStrip();
             ファイルToolStripMenuItem=new ToolStripMenuItem();
             リストLToolStripMenuItem=new ToolStripMenuItem();
@@ -128,6 +128,7 @@ namespace ViewerBy2nd
             pnlMovie.SuspendLayout();
             pnlDispOption.SuspendLayout();
             pnlPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)videoView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel2.SuspendLayout();
             SecondGroup.SuspendLayout();
@@ -422,7 +423,7 @@ namespace ViewerBy2nd
             // 
             // AddFilesButton
             // 
-            AddFilesButton.Location=new Point(160, 608);
+            AddFilesButton.Location=new Point(159, 608);
             AddFilesButton.Name="AddFilesButton";
             AddFilesButton.Size=new Size(101, 40);
             AddFilesButton.TabIndex=70;
@@ -457,7 +458,7 @@ namespace ViewerBy2nd
             // pbThumbnail
             // 
             pbThumbnail.BackColor=Color.Red;
-            pbThumbnail.Location=new Point(801, 481);
+            pbThumbnail.Location=new Point(770, 484);
             pbThumbnail.Name="pbThumbnail";
             pbThumbnail.Size=new Size(24, 32);
             pbThumbnail.TabIndex=77;
@@ -550,7 +551,8 @@ namespace ViewerBy2nd
             // videoView1
             // 
             videoView1.BackColor=Color.FromArgb(192, 0, 0);
-            videoView1.Location=new Point(766, 481);
+            videoView1.Location=new Point(717, 508);
+            videoView1.MediaPlayer=null;
             videoView1.Name="videoView1";
             videoView1.Size=new Size(29, 32);
             videoView1.TabIndex=97;
@@ -865,9 +867,9 @@ namespace ViewerBy2nd
             // thumbnailDefaultPanel
             // 
             thumbnailDefaultPanel.BackColor=Color.FromArgb(0, 0, 192);
-            thumbnailDefaultPanel.Location=new Point(286, 64);
+            thumbnailDefaultPanel.Location=new Point(292, 64);
             thumbnailDefaultPanel.Name="thumbnailDefaultPanel";
-            thumbnailDefaultPanel.Size=new Size(527, 393);
+            thumbnailDefaultPanel.Size=new Size(527, 410);
             thumbnailDefaultPanel.TabIndex=102;
             thumbnailDefaultPanel.Visible=false;
             // 
@@ -960,6 +962,7 @@ namespace ViewerBy2nd
             pnlMovie.ResumeLayout(false);
             pnlDispOption.ResumeLayout(false);
             pnlPage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)videoView1).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             panel2.ResumeLayout(false);

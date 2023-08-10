@@ -67,7 +67,7 @@ namespace ViewerBy2nd
             }
             if (items.Count > 0)
             {
-                FilesList.SelectedIndex = model.SelectedIndex;
+                FilesList.SelectedIndex = Math.Min(model.SelectedIndex, items.Count - 1);
             }
 
         }
