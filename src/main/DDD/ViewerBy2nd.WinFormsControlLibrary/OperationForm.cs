@@ -266,7 +266,12 @@ namespace ViewerBy2nd
             if (isDeletePreview)
             {
                 pbThumbnail.Image = null;
-                UpdateViewIfChecked();
+                SetPreview();
+                if (Dispacher.ViewerVisible)
+                {
+                    UpdateView();
+                }
+
                 ControlEnable();
             }
 
@@ -418,6 +423,7 @@ namespace ViewerBy2nd
             DispFile = null;
             thumbnailMoviePlayer.Pause();
             player?.Pause();
+            player = null;
             ControlEnable();
         }
 
