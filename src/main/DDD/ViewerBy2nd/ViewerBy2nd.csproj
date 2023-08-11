@@ -7,7 +7,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <ApplicationIcon>pdfsecond.ico</ApplicationIcon>
-    <VersionPrefix>1.20.1</VersionPrefix>
+    <VersionPrefix>1.20.2</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
