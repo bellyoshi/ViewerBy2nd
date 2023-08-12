@@ -49,10 +49,10 @@
             ReleasesLinkLabel.AutoSize=true;
             ReleasesLinkLabel.Location=new Point(11, 77);
             ReleasesLinkLabel.Name="ReleasesLinkLabel";
-            ReleasesLinkLabel.Size=new Size(342, 20);
+            ReleasesLinkLabel.Size=new Size(348, 20);
             ReleasesLinkLabel.TabIndex=1;
             ReleasesLinkLabel.TabStop=true;
-            ReleasesLinkLabel.Text="https://ja.osdn.net/projects/viewerby2nd/releases/";
+            ReleasesLinkLabel.Text="https://github.com/bellyoshi/ViewerBy2nd/releases";
             ReleasesLinkLabel.LinkClicked+=ReleasesLinkLabel_LinkClicked;
             // 
             // label2
