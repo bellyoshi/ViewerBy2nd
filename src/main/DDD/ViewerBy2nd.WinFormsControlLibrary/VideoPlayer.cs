@@ -1,35 +1,48 @@
 ﻿using LibVLCSharp.Shared;
 using LibVLCSharp.WinForms;
+using System.Diagnostics;
 
 namespace ViewerBy2nd.WinFormsControlLibrary
 {
     public partial class VideoPlayer 
     {
         private VideoView VideoView1 { get; set; }
-        private readonly LibVLC libVLC;
-        private readonly MediaPlayer Player;
+        private LibVLC? libVLC;
+        private MediaPlayer? Player;
 
         public VideoPlayer(VideoView videoView)
         {
             VideoView1 = videoView;
+
+
+            loadTimer.Tick += LoadTimer_Tick;
+        }
+
+        private bool IsInitilaized = false;
+        void InitializeLib()
+        {
+            if(IsInitilaized)
+            {
+                return;
+            }
+            IsInitilaized = true;
             Core.Initialize();
 
 
             libVLC = new();
-            Player = new (libVLC)
+            Player = new(libVLC)
             {
                 EnableKeyInput = false,
                 EnableMouseInput = false
             };
 
             VideoView1.MediaPlayer = Player;
-
-            loadTimer.Tick += LoadTimer_Tick;
         }
+
         int _volume;
         public int Volume
         {
-            get { return Player.Volume; }
+            get { return Player?.Volume??0; }
             set
             {
                 _volume = value;
@@ -39,27 +52,31 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         }
         public float Rate
         {
-            get { return Player.Rate; }
+            get { return Player?.Rate ?? 0; }
             set {
-                Player.SetRate(value);
+                Player?.SetRate(value);
             } 
         }
-        public bool IsPlaying => Player.IsPlaying;
+        public bool IsPlaying => Player?.IsPlaying??false;
 
         private long _time;
         public long Time
         {
             get
             {
-                if (Player.Time <= 0) return _time;
-                return Player.Time;
+                if (Player?.Time <= 0) return _time;
+                return Player?.Time ?? 0;
             }
             set
             {
                 _time = value;
 
                 if (0 > value)
-                    Player.Time = 0;
+                {
+                    if(Player != null)
+                        Player.Time = 0;
+                }
+
                 else if (value > Player.Length)
                 {
                     Player.Time = Player.Length -1;
@@ -68,9 +85,9 @@ namespace ViewerBy2nd.WinFormsControlLibrary
                     Player.Time = value;
             }
         }
-        public long Length => Player.Length;
+        public long Length => Player?.Length ?? 0;
 
-        public bool RequiredReload => Player.State == VLCState.Ended;
+        public bool RequiredReload => Player?.State == VLCState.Ended;
 
         readonly System.Windows.Forms.Timer loadTimer = new();
 
@@ -79,23 +96,26 @@ namespace ViewerBy2nd.WinFormsControlLibrary
 
         public void Stop()
         {
-            Player.Stop();
+            Player?.Stop();
         }
 
         public void Pause()
         {
-            if (Player.IsPlaying)
+            if (Player?.IsPlaying == true)
                 Player.Pause();
         }
 
         public void Play()
         {
-            if (!Player.IsPlaying)
+            InitializeLib();
+            if (Player?.IsPlaying == false)
                 Player.Play();
 
         }
         public void Play(string filename, params string[] options)
         {
+            InitializeLib();
+            Debug.Assert(libVLC != null);
             var media = new Media(libVLC, new Uri(filename), options);
             Player.Play(media);
 
@@ -114,10 +134,10 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         {
             if (requirePause)
             {
-                if (Player.Time != 0)
+                if (Player?.Time != 0)
                 {
                     loadTimer.Stop();
-                    Player.Pause();
+                    Player?.Pause();
                     requirePause = false;
 
                 }
