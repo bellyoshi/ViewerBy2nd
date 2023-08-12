@@ -127,6 +127,7 @@ namespace ViewerBy2nd
             PreviousHalfPageOfPDFButton.Enabled = isPdf;
             NextHalfPageOfPDFButton.Enabled = isPdf;
             pnlPage.Visible = isPdf || Document == null;
+            PageNumberLabel.Visible = isPdf;
 
             bool canSetWin = (Document != null) && (Document.FileType.IsPDFExt || Document.FileType.IsImageExt || Document.FileType.IsSVGExt);
             FitToWindowWidthButton.Enabled = canSetWin;
@@ -619,13 +620,10 @@ namespace ViewerBy2nd
         {
             txtPDFFileName.Text = "" + PreviewFile?.FileName;
 
-            if (Document?.FileType?.IsPDFExt??false)
-            {
-                PageNumberLabel.Visible = true;
-                PageNumberLabel.Text = $"ページ{Document.PageVirtualIndex + 1}/{Document.PageCount}";
-            }
-            else
-                PageNumberLabel.Visible = false;
+            PageNumberLabel.Text = $"ページ{Document?.PageVirtualIndex + 1}/{Document?.PageCount}";
+
+
+
             pbThumbnail.Visible = !IsMovie;
             videoView1.Visible = IsMovie;
 
@@ -1051,18 +1049,16 @@ namespace ViewerBy2nd
             if (FilesList.Visible)
             {
                 FilesList.Width = 260;
-                panel2.Location = new Point(270, 30);
-                SecondGroup.Location = new Point(288, 550);
+                MainPanel.Location = new Point(270, 30);
                 videoView1.Bounds = thumbnailDefaultPanel.Bounds;
                 pbThumbnail.Bounds = thumbnailDefaultPanel.Bounds;
             }
             else
             {
 
-                panel2.Location = new Point(0, 30);
+                MainPanel.Location = new Point(0, 30);
                 videoView1.Bounds = ThumnailMovoToPanel.Bounds;
                 pbThumbnail.Bounds = ThumnailMovoToPanel.Bounds;
-                SecondGroup.Location = new Point(0, 550);
             }
 
             //スクロールバーをサムネイルの右となりに配置
@@ -1071,9 +1067,18 @@ namespace ViewerBy2nd
             InPageScrollBar.Height = pbThumbnail.Height + 40;
 
             //シークトラックバーをサムネイルの下に配置
-            SeekTrackBar.Top = pbThumbnail.Bottom + 10;
+            SeekTrackBar.Top = pbThumbnail.Bottom + 5;
             SeekTrackBar.Left = pbThumbnail.Left;
             SeekTrackBar.Width = pbThumbnail.Width;
+
+            //時間をシークトラックの下に
+            MovieTimeLabel.Top = SeekTrackBar.Bottom;
+            var center = (SeekTrackBar.Left + SeekTrackBar.Right)/2;
+            MovieTimeLabel.Left = center - (MovieTimeLabel.Width) / 2;
+
+            //ページをシークトラックバーと同じ場所に
+            PageNumberLabel.Left = center - PageNumberLabel.Width /2;
+            PageNumberLabel.Top = SeekTrackBar.Top;
 
         }
 

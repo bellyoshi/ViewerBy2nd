@@ -115,7 +115,7 @@ namespace ViewerBy2nd
             標準ToolStripMenuItem=new ToolStripMenuItem();
             ヘルプToolStripMenuItem=new ToolStripMenuItem();
             このアプリについてToolStripMenuItem=new ToolStripMenuItem();
-            panel2=new Panel();
+            MainPanel=new Panel();
             thumbnailDefaultPanel=new Panel();
             ThumnailMovoToPanel=new Panel();
             SecondGroup=new GroupBox();
@@ -130,7 +130,7 @@ namespace ViewerBy2nd
             pnlPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)videoView1).BeginInit();
             menuStrip1.SuspendLayout();
-            panel2.SuspendLayout();
+            MainPanel.SuspendLayout();
             SecondGroup.SuspendLayout();
             SecondOfSmallPanel.SuspendLayout();
             SuspendLayout();
@@ -218,9 +218,9 @@ namespace ViewerBy2nd
             // 
             // PageNumberLabel
             // 
-            PageNumberLabel.Location=new Point(475, 460);
+            PageNumberLabel.Location=new Point(479, 485);
             PageNumberLabel.Name="PageNumberLabel";
-            PageNumberLabel.Size=new Size(267, 20);
+            PageNumberLabel.Size=new Size(86, 28);
             PageNumberLabel.TabIndex=91;
             PageNumberLabel.Text="- page -";
             PageNumberLabel.Click+=PageNumberLabel_Click;
@@ -367,7 +367,7 @@ namespace ViewerBy2nd
             // 
             // SeekTrackBar
             // 
-            SeekTrackBar.Location=new Point(447, 460);
+            SeekTrackBar.Location=new Point(453, 422);
             SeekTrackBar.Name="SeekTrackBar";
             SeekTrackBar.Size=new Size(317, 56);
             SeekTrackBar.TabIndex=85;
@@ -843,33 +843,33 @@ namespace ViewerBy2nd
             このアプリについてToolStripMenuItem.Text="このアプリについて(&A)";
             このアプリについてToolStripMenuItem.Click+=このアプリについてToolStripMenuItem_Click;
             // 
-            // panel2
+            // MainPanel
             // 
-            panel2.Controls.Add(pnlMovie);
-            panel2.Controls.Add(pbThumbnail);
-            panel2.Controls.Add(thumbnailDefaultPanel);
-            panel2.Controls.Add(ThumnailMovoToPanel);
-            panel2.Controls.Add(PageNumberLabel);
-            panel2.Controls.Add(MovieTimeLabel);
-            panel2.Controls.Add(pnlPage);
-            panel2.Controls.Add(Label6);
-            panel2.Controls.Add(pnlDispOption);
-            panel2.Controls.Add(txtPDFFileName);
-            panel2.Controls.Add(InPageScrollBar);
-            panel2.Controls.Add(Label2);
-            panel2.Controls.Add(videoView1);
-            panel2.Controls.Add(SeekTrackBar);
-            panel2.Location=new Point(286, 36);
-            panel2.Name="panel2";
-            panel2.Size=new Size(851, 570);
-            panel2.TabIndex=103;
+            MainPanel.Controls.Add(pnlMovie);
+            MainPanel.Controls.Add(pbThumbnail);
+            MainPanel.Controls.Add(thumbnailDefaultPanel);
+            MainPanel.Controls.Add(ThumnailMovoToPanel);
+            MainPanel.Controls.Add(PageNumberLabel);
+            MainPanel.Controls.Add(MovieTimeLabel);
+            MainPanel.Controls.Add(pnlPage);
+            MainPanel.Controls.Add(Label6);
+            MainPanel.Controls.Add(pnlDispOption);
+            MainPanel.Controls.Add(txtPDFFileName);
+            MainPanel.Controls.Add(InPageScrollBar);
+            MainPanel.Controls.Add(Label2);
+            MainPanel.Controls.Add(videoView1);
+            MainPanel.Controls.Add(SeekTrackBar);
+            MainPanel.Location=new Point(286, 36);
+            MainPanel.Name="MainPanel";
+            MainPanel.Size=new Size(851, 564);
+            MainPanel.TabIndex=103;
             // 
             // thumbnailDefaultPanel
             // 
             thumbnailDefaultPanel.BackColor=Color.FromArgb(0, 0, 192);
             thumbnailDefaultPanel.Location=new Point(292, 64);
             thumbnailDefaultPanel.Name="thumbnailDefaultPanel";
-            thumbnailDefaultPanel.Size=new Size(527, 410);
+            thumbnailDefaultPanel.Size=new Size(527, 319);
             thumbnailDefaultPanel.TabIndex=102;
             thumbnailDefaultPanel.Visible=false;
             // 
@@ -888,7 +888,7 @@ namespace ViewerBy2nd
             SecondGroup.Controls.Add(AutoDisplayCheckBox);
             SecondGroup.Controls.Add(EndOfDisplayButton);
             SecondGroup.Controls.Add(BackgroundDisplayButton);
-            SecondGroup.Location=new Point(286, 693);
+            SecondGroup.Location=new Point(268, 508);
             SecondGroup.Name="SecondGroup";
             SecondGroup.Size=new Size(491, 92);
             SecondGroup.TabIndex=104;
@@ -947,7 +947,7 @@ namespace ViewerBy2nd
             Controls.Add(DeselectFilesButton);
             Controls.Add(AllFilesSelectButton);
             Controls.Add(FilesList);
-            Controls.Add(panel2);
+            Controls.Add(MainPanel);
             Controls.Add(menuStrip1);
             Icon=(Icon)resources.GetObject("$this.Icon");
             MainMenuStrip=menuStrip1;
@@ -965,8 +965,8 @@ namespace ViewerBy2nd
             ((System.ComponentModel.ISupportInitialize)videoView1).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            MainPanel.ResumeLayout(false);
+            MainPanel.PerformLayout();
             SecondGroup.ResumeLayout(false);
             SecondGroup.PerformLayout();
             SecondOfSmallPanel.ResumeLayout(false);
@@ -1025,7 +1025,7 @@ namespace ViewerBy2nd
         private ToolStripMenuItem ディスプレイと背景色ToolStripMenuItem;
         private ToolStripMenuItem ヘルプToolStripMenuItem;
         private ToolStripMenuItem このアプリについてToolStripMenuItem;
-        private Panel panel2;
+        private Panel MainPanel;
         private ToolStripMenuItem リストToolStripMenuItem;
         private Panel ThumnailMovoToPanel;
         private Panel thumbnailDefaultPanel;
