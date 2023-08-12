@@ -1,5 +1,6 @@
 ﻿using LibVLCSharp.Shared;
 using LibVLCSharp.WinForms;
+using System.ComponentModel;
 using System.Diagnostics;
 
 namespace ViewerBy2nd.WinFormsControlLibrary
@@ -13,13 +14,17 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         public VideoPlayer(VideoView videoView)
         {
             VideoView1 = videoView;
-
-
+            Init();
             loadTimer.Tick += LoadTimer_Tick;
         }
 
+        async void Init()
+        {
+            await Task.Run(() => InitializeLibVLC());
+            VideoView1.MediaPlayer = Player;
+        }
         private bool IsInitilaized = false;
-        void InitializeLib()
+        void InitializeLibVLC()
         {
             if(IsInitilaized)
             {
@@ -36,7 +41,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
                 EnableMouseInput = false
             };
 
-            VideoView1.MediaPlayer = Player;
+
         }
 
         int _volume;
@@ -107,14 +112,12 @@ namespace ViewerBy2nd.WinFormsControlLibrary
 
         public void Play()
         {
-            InitializeLib();
             if (Player?.IsPlaying == false)
                 Player.Play();
 
         }
         public void Play(string filename, params string[] options)
         {
-            InitializeLib();
             Debug.Assert(libVLC != null);
             var media = new Media(libVLC, new Uri(filename), options);
             Player.Play(media);
