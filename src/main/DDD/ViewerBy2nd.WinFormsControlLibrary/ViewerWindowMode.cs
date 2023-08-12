@@ -8,12 +8,19 @@ namespace ViewerBy2nd.WinFormsControlLibrary
 {
     public class ViewerWindowMode
     {
+        static Settings Default => ConfigurationReader.Default;
         public event Action? FullScreenChanged;
 
-        private bool isFullScreen = true;
+        public ViewerWindowMode()
+        {
+            isFullScreen = Default.IsFullScreen??true;
+
+        }
+        private bool isFullScreen;
         public bool IsFullScreen { get => isFullScreen; 
             set 
             {
+                Default.IsFullScreen = value;
                 if (isFullScreen != value)
                 {
                     isFullScreen = value;

@@ -27,6 +27,7 @@ namespace ViewerBy2nd
             formResizer = new FormDragResizer(this, FormDragResizer.ResizeDirection.All, 8, controls);
             formMover = new FormDragMover(this, 8, controls);
             FormMoverResizeEnabledInitialize();
+            WindowMode_FullScreenChanged();
         }
 
         void FormMoverResizeEnabledInitialize()

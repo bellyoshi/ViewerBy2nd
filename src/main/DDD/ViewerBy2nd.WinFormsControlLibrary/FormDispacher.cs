@@ -75,7 +75,6 @@ namespace ViewerBy2nd
             ViewerForm frm;
             frm = new ViewerForm();
             frm.NotifyBackColor();
-            frm.SetViewerBoundsFullScreen();
             frm.FormClosed += new FormClosedEventHandler(this.Form_Closed);
             return frm;
         }

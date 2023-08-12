@@ -8,5 +8,5 @@ public  class Settings
     public System.Drawing.Color? BackColor { get; set; }
 
     public bool AutoUpdate { get; set; }
-
+    public bool? IsFullScreen { get; set; }
 }
