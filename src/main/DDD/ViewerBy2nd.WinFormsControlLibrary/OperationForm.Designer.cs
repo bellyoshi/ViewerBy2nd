@@ -457,7 +457,7 @@ namespace ViewerBy2nd
             // 
             // pbThumbnail
             // 
-            pbThumbnail.BackColor=Color.Red;
+            pbThumbnail.BackColor=Color.Black;
             pbThumbnail.Location=new Point(770, 484);
             pbThumbnail.Name="pbThumbnail";
             pbThumbnail.Size=new Size(24, 32);
@@ -550,7 +550,7 @@ namespace ViewerBy2nd
             // 
             // videoView1
             // 
-            videoView1.BackColor=Color.FromArgb(192, 0, 0);
+            videoView1.BackColor=Color.Black;
             videoView1.Location=new Point(717, 508);
             videoView1.MediaPlayer=null;
             videoView1.Name="videoView1";
