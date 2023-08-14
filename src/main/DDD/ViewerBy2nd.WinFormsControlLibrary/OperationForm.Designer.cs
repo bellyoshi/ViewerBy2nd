@@ -30,7 +30,6 @@ namespace ViewerBy2nd
         /// </summary>
         private void InitializeComponent()
         {
-            components=new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OperationForm));
             DisplayButton=new Button();
             BackgroundDisplayButton=new Button();
@@ -58,7 +57,6 @@ namespace ViewerBy2nd
             SeekTrackBar=new TrackBar();
             Rotate0Button=new Button();
             OpenFileDialog1=new OpenFileDialog();
-            SeekTimer=new System.Windows.Forms.Timer(components);
             BackgroundWorker1=new System.ComponentModel.BackgroundWorker();
             Rotate270Button=new Button();
             Rotate180Button=new Button();
@@ -287,9 +285,9 @@ namespace ViewerBy2nd
             // 
             // PauseButton
             // 
-            PauseButton.Location=new Point(222, 19);
+            PauseButton.Location=new Point(233, 19);
             PauseButton.Name="PauseButton";
-            PauseButton.Size=new Size(51, 60);
+            PauseButton.Size=new Size(40, 60);
             PauseButton.TabIndex=81;
             PauseButton.Text="||";
             PauseButton.UseVisualStyleBackColor=true;
@@ -309,9 +307,9 @@ namespace ViewerBy2nd
             // FastForwardButton
             // 
             FastForwardButton.Font=new Font("MS UI Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
-            FastForwardButton.Location=new Point(167, 19);
+            FastForwardButton.Location=new Point(161, 19);
             FastForwardButton.Name="FastForwardButton";
-            FastForwardButton.Size=new Size(51, 60);
+            FastForwardButton.Size=new Size(66, 60);
             FastForwardButton.TabIndex=83;
             FastForwardButton.Text="▶▶";
             FastForwardButton.UseVisualStyleBackColor=true;
@@ -322,7 +320,7 @@ namespace ViewerBy2nd
             PlayButton.Font=new Font("MS UI Gothic", 13.8F, FontStyle.Regular, GraphicsUnit.Point);
             PlayButton.Location=new Point(112, 19);
             PlayButton.Name="PlayButton";
-            PlayButton.Size=new Size(51, 60);
+            PlayButton.Size=new Size(43, 60);
             PlayButton.TabIndex=84;
             PlayButton.Text="▶";
             PlayButton.UseVisualStyleBackColor=true;
@@ -371,8 +369,6 @@ namespace ViewerBy2nd
             SeekTrackBar.Name="SeekTrackBar";
             SeekTrackBar.Size=new Size(317, 56);
             SeekTrackBar.TabIndex=85;
-            SeekTrackBar.Scroll+=SeekTrackBar_Scroll;
-            SeekTrackBar.MouseDown+=SeekTrackBar_MouseDown;
             // 
             // Rotate0Button
             // 
@@ -387,10 +383,6 @@ namespace ViewerBy2nd
             // OpenFileDialog1
             // 
             OpenFileDialog1.FileName="OpenFileDialog1";
-            // 
-            // SeekTimer
-            // 
-            SeekTimer.Tick+=SeekTimer_Tick;
             // 
             // Rotate270Button
             // 
@@ -1003,7 +995,6 @@ namespace ViewerBy2nd
         internal Button Rotate0Button;
         internal OpenFileDialog OpenFileDialog1;
         internal CheckBox AutoDisplayCheckBox;
-        internal System.Windows.Forms.Timer SeekTimer;
         internal System.ComponentModel.BackgroundWorker BackgroundWorker1;
         internal Button Rotate270Button;
         internal Button Rotate180Button;

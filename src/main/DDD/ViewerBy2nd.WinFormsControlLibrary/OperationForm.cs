@@ -13,6 +13,8 @@ namespace ViewerBy2nd
 
         OperationViewModel model;
 
+        TrackbarMouseDownScroller trackbarMouseDownScroller;
+
         private VideoPlayer thumbnailMoviePlayer;
         public OperationForm()
         {
@@ -21,6 +23,40 @@ namespace ViewerBy2nd
             model.SelectedIndexChanged += Model_SelectedIndexChanged;
             InitializeComponent();
             thumbnailMoviePlayer = new(videoView1);
+
+            trackbarMouseDownScroller = new(SeekTrackBar);
+            trackbarMouseDownScroller.TrackBarScrollRequire += TrackbarMouseDownScroller_TrackBarScrollRequire;
+            trackbarMouseDownScroller.TrackBarScrolled += TrackbarMouseDownScroller_TrackBarScrolled;
+        }
+
+        private void TrackbarMouseDownScroller_TrackBarScrolled()
+        {
+            if (PreviewFile == null)
+                return;
+            var seek_time = Convert.ToInt32(SeekTrackBar.Value * 100);
+            if (thumbnailMoviePlayer.RequiredReload)
+            {
+                var op = new string[] { $"start-time={seek_time / 1000}" };
+                thumbnailMoviePlayer.Play(PreviewFile.FileName, op);
+            }
+            thumbnailMoviePlayer.Time = seek_time;
+            if (player != null)
+                player.Time = thumbnailMoviePlayer.Time;
+            SeekTimer_Tick();
+        }
+
+        private void TrackbarMouseDownScroller_TrackBarScrollRequire()
+        {
+
+            if (PreviewFile == null)
+                return;
+            SeekTrackBar.Maximum = (int)thumbnailMoviePlayer.Length / 100;
+            var value = (int)thumbnailMoviePlayer.Time / 100;
+            if (0 <= value && value <= SeekTrackBar.Maximum)
+            {
+                SeekTrackBar.Value = value;
+            }
+            SeekTimer_Tick();
         }
 
         private void Model_FileListChanged()
@@ -84,10 +120,8 @@ namespace ViewerBy2nd
 
         private void MenuControlEnabled()
         {
-
             スリムToolStripMenuItem.Checked = !FilesList.Visible;
             標準ToolStripMenuItem.Checked = FilesList.Visible;
-
         }
 
         public void ListControlEnabled()
@@ -177,8 +211,7 @@ namespace ViewerBy2nd
             AppSettingLoad();
             ControlRelocation();
             ControlEnable();
-            SeekTimer.Interval = 100;
-            SeekTimer.Start();
+
 
             this.MouseWheel +=  new MouseEventHandler(this.OperationForm_MouseWheel);
         }
@@ -216,9 +249,6 @@ namespace ViewerBy2nd
         }
 
 
-
-
-
         private void OperationForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             AppSettingSave();
@@ -227,7 +257,6 @@ namespace ViewerBy2nd
         private void AppSettingSave()
         {
             Default.AutoUpdate = AutoDisplayCheckBox.Checked;
-
 
             List<FileViewParam> fvinfos = new();
             foreach (FileViewParam info in FilesList.Items)
@@ -802,12 +831,10 @@ namespace ViewerBy2nd
             }
         }
 
-        private bool trackBarSeek_Scrolled = false;
 
-        private void SeekTimer_Tick(object sender, EventArgs e)
+
+        private void SeekTimer_Tick()
         {
-
-            Trackbar_Seek();
             MovieTimeLabelUpdate();
             ControlEnable();
             SyncThumbnail();
@@ -815,37 +842,7 @@ namespace ViewerBy2nd
 
         }
 
-        private void Trackbar_Seek()
-        {
-            if (PreviewFile == null)
-                return;
-
-            if (trackBarSeek_Scrolled)
-            {
-                var seek_time = Convert.ToInt32(SeekTrackBar.Value * 100);
-                if (thumbnailMoviePlayer.RequiredReload)
-                {
-                    var op = new string[] { $"start-time={seek_time / 1000}" };
-                    thumbnailMoviePlayer.Play(PreviewFile.FileName, op);
-                }
-                thumbnailMoviePlayer.Time = seek_time;
-                if (player != null)
-                    player.Time = thumbnailMoviePlayer.Time;
-                trackBarSeek_Scrolled = false;
-            }
-            else
-            {
-                SeekTrackBar.Maximum = (int)thumbnailMoviePlayer.Length / 100;
-                var value = (int)thumbnailMoviePlayer.Time / 100;
-                if (0 <= value && value <= SeekTrackBar.Maximum)
-                {
-                    SeekTrackBar.Value = value;
-                }
-
-
-            }
-
-        }
+       
 
         private void SyncThumbnail()
         {
@@ -865,10 +862,7 @@ namespace ViewerBy2nd
             MovieTimeLabel.Text = ts.ToString(@"hh\:mm\:ss");
         }
 
-        private void SeekTrackBar_Scroll(object sender, EventArgs e)
-        {
-            trackBarSeek_Scrolled = true;
-        }
+
 
         private void ShowWholeButton_Click(object sender, EventArgs e)
         {
@@ -893,25 +887,7 @@ namespace ViewerBy2nd
                 FilesList.SetSelected(i, true);
         }
 
-        private void SeekTrackBar_MouseDown(object sender, MouseEventArgs e)
-        {
-            var TrackBar1 = SeekTrackBar;
-            if (e.Button != MouseButtons.Left || e.X < 0 || e.X > TrackBar1.Width || e.Y < 0 || e.Y > TrackBar1.Height)
-                return;
 
-            if (e.X < 8)
-                TrackBar1.Value = TrackBar1.Minimum;
-            else if (e.X > TrackBar1.Width - 8)
-                TrackBar1.Value = TrackBar1.Maximum;
-            else
-            {
-                double seekWidth = TrackBar1.Width - 16;
-                double ticWidth = seekWidth / (TrackBar1.Maximum - TrackBar1.Minimum);
-                TrackBar1.Value = System.Convert.ToInt32((e.X - 8) / ticWidth) + TrackBar1.Minimum;
-            }
-            trackBarSeek_Scrolled = true;
-            Trackbar_Seek();
-        }
 
         private void MouseWheelScrollLine(int delta)
         {
