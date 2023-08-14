@@ -36,5 +36,7 @@
         public int ScrollBarValue { get;  set; }
 
         public System.Drawing.RotateFlipType  RotateFlipType { get; set; }
+
+        public int TrackBarValue { get; set; }
     }
 }

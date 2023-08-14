@@ -116,17 +116,21 @@ namespace ViewerBy2nd.WinFormsControlLibrary
                 Player.Play();
 
         }
-        public void Play(string filename, params string[] options)
+        public void Play(string filename, int starttime, params string[] options)
         {
             Debug.Assert(libVLC != null);
-            var media = new Media(libVLC, new Uri(filename), options);
+            Debug.Assert(Player != null);
+            var newOption = options.Append($"start-time={starttime/1000}");
+
+            var media = new Media(libVLC, new Uri(filename), newOption.ToArray());
             Player.Play(media);
 
         }
         bool requirePause;
-        public void LoadFile(string filename, params string[] options)
+        public void LoadFile(string filename, int starttime = 0)
         {
-            Play(filename, options);
+            var options = new string[] { "no-audio" };
+            Play(filename, starttime, options);
             loadTimer.Interval = 10;
             loadTimer.Start();
 

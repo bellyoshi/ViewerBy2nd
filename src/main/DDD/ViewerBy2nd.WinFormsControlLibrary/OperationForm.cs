@@ -31,18 +31,24 @@ namespace ViewerBy2nd
 
         private void TrackbarMouseDownScroller_TrackBarScrolled()
         {
+            
             if (PreviewFile == null)
                 return;
-            var seek_time = Convert.ToInt32(SeekTrackBar.Value * 100);
+            PreviewFile.TrackBarValue = SeekTrackBar.Value;
+            var seek_time = GetSeekTimeFromTrackBarValue(SeekTrackBar.Value);
             if (thumbnailMoviePlayer.RequiredReload)
             {
-                var op = new string[] { $"start-time={seek_time / 1000}" };
-                thumbnailMoviePlayer.Play(PreviewFile.FileName, op);
+                thumbnailMoviePlayer.Play(PreviewFile.FileName, seek_time);
             }
             thumbnailMoviePlayer.Time = seek_time;
             if (player != null)
                 player.Time = thumbnailMoviePlayer.Time;
-            SeekTimer_Tick();
+            SeekAfterProcess();
+        }
+
+        private int GetSeekTimeFromTrackBarValue(int value)
+        {
+            return Convert.ToInt32(value * 100);
         }
 
         private void TrackbarMouseDownScroller_TrackBarScrollRequire()
@@ -56,7 +62,7 @@ namespace ViewerBy2nd
             {
                 SeekTrackBar.Value = value;
             }
-            SeekTimer_Tick();
+            SeekAfterProcess();
         }
 
         private void Model_FileListChanged()
@@ -288,7 +294,7 @@ namespace ViewerBy2nd
 
 
             var deleteList = FilesList.SelectedItems.Cast<FileViewParam>().ToList();
-            var isDeletePreview = DispFile != null && deleteList.Contains(DispFile) || PreviewFile != null && deleteList.Contains(PreviewFile);
+            var isDeletePreview = DisplayFile != null && deleteList.Contains(DisplayFile) || PreviewFile != null && deleteList.Contains(PreviewFile);
             model.DeleteFiles(deleteList);
 
 
@@ -347,13 +353,12 @@ namespace ViewerBy2nd
         {
             Debug.Assert(PreviewFile != null);
             var vlc = Dispacher.ShowMovie();
-            int starttime = Convert.ToInt32(thumbnailMoviePlayer.Time / (double)1000);
-            var op = new string[] { $"start-time={starttime}" };
+            int starttime = Convert.ToInt32(thumbnailMoviePlayer.Time);
             vlc.Volume = 100;
-            vlc.Play(PreviewFile.FileName, op);
+            vlc.Play(PreviewFile.FileName, starttime);
             player = vlc;
             player.Rate = 1.0f;
-            DispFile = PreviewFile;
+            DisplayFile = PreviewFile;
         }
 
         private VideoPlayer? player;
@@ -450,7 +455,7 @@ namespace ViewerBy2nd
 
         public void CloseViewerAfterAction()
         {
-            DispFile = null;
+            DisplayFile = null;
             thumbnailMoviePlayer.Pause();
             player?.Pause();
             player = null;
@@ -469,7 +474,7 @@ namespace ViewerBy2nd
             SetPreview();
             UpdateView();
             ControlEnable();
-            DispFile = null;
+            DisplayFile = null;
         }
 
         private void FilesList_DragEnter(object sender, DragEventArgs e)
@@ -545,7 +550,7 @@ namespace ViewerBy2nd
         {
             ImageDisposer.DisplayImage = pbThumbnail.Image;
             Dispacher.ShowImage(ImageDisposer.DisplayImage);
-            DispFile = PreviewFile;
+            DisplayFile = PreviewFile;
         }
 
         private FileViewParam? PreviewFile
@@ -562,7 +567,7 @@ namespace ViewerBy2nd
             }
         }
 
-        private FileViewParam? DispFile;
+        private FileViewParam? DisplayFile;
 
         private Document? Document
         {
@@ -658,10 +663,12 @@ namespace ViewerBy2nd
 
             if (IsMovie)
             {
-                var op = new string[] { "no-audio" };
                 string filename = PreviewFile?.FileName??string.Empty;
-                thumbnailMoviePlayer.LoadFile(filename, op);
-                player?.LoadFile(filename, op);
+                thumbnailMoviePlayer.LoadFile(filename,
+                    GetSeekTimeFromTrackBarValue(PreviewFile?.TrackBarValue??0));
+                player?.LoadFile(filename);
+                
+
 
             }
             else
@@ -833,7 +840,7 @@ namespace ViewerBy2nd
 
 
 
-        private void SeekTimer_Tick()
+        private void SeekAfterProcess()
         {
             MovieTimeLabelUpdate();
             ControlEnable();
