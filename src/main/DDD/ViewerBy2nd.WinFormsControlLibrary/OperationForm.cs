@@ -16,22 +16,32 @@ namespace ViewerBy2nd
         TrackbarMouseDownScroller trackbarMouseDownScroller;
 
         private VideoPlayer thumbnailMoviePlayer;
+
+        private bool initilizing;
         public OperationForm()
         {
-            model = new();
-            model.FileListChanged += Model_FileListChanged;
-            model.SelectedIndexChanged += Model_SelectedIndexChanged;
+            initilizing = true;
+
             InitializeComponent();
+
             thumbnailMoviePlayer = new(videoView1);
 
             trackbarMouseDownScroller = new(SeekTrackBar);
             trackbarMouseDownScroller.TrackBarScrollRequire += TrackbarMouseDownScroller_TrackBarScrollRequire;
             trackbarMouseDownScroller.TrackBarScrolled += TrackbarMouseDownScroller_TrackBarScrolled;
+
+            model = new();
+            model.FileListChanged += Model_FileListChanged;
+            model.SelectedIndexChanged += Model_SelectedIndexChanged;
+
+            initilizing = false;
         }
+
+
 
         private void TrackbarMouseDownScroller_TrackBarScrolled()
         {
-            
+
             if (PreviewFile == null)
                 return;
             PreviewFile.TrackBarValue = SeekTrackBar.Value;
@@ -116,6 +126,7 @@ namespace ViewerBy2nd
 
         private void ControlEnable()
         {
+            if (initilizing) return;
             MenuControlEnabled();
             CtlPdf1ControlEnabled();
             CtlMovie1ControlEnabled();
@@ -667,7 +678,7 @@ namespace ViewerBy2nd
                 thumbnailMoviePlayer.LoadFile(filename,
                     GetSeekTimeFromTrackBarValue(PreviewFile?.TrackBarValue??0));
                 player?.LoadFile(filename);
-                
+
 
 
             }
@@ -849,7 +860,7 @@ namespace ViewerBy2nd
 
         }
 
-       
+
 
         private void SyncThumbnail()
         {
@@ -1327,6 +1338,11 @@ namespace ViewerBy2nd
         private void 操作中に自動表示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AutoDisplayCheckBox.Checked = !AutoDisplayCheckBox.Checked;
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 
