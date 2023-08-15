@@ -16,17 +16,22 @@ namespace ViewerBy2nd
         TrackbarMouseDownScroller trackbarMouseDownScroller;
 
         private VideoPlayer thumbnailMoviePlayer;
+
+        private bool initilizing;
         public OperationForm()
         {
-            model = new();
-            model.FileListChanged += Model_FileListChanged;
-            model.SelectedIndexChanged += Model_SelectedIndexChanged;
+            initilizing = true;
             InitializeComponent();
             thumbnailMoviePlayer = new(videoView1);
 
             trackbarMouseDownScroller = new(SeekTrackBar);
             trackbarMouseDownScroller.TrackBarScrollRequire += TrackbarMouseDownScroller_TrackBarScrollRequire;
             trackbarMouseDownScroller.TrackBarScrolled += TrackbarMouseDownScroller_TrackBarScrolled;
+
+            model = new();
+            model.FileListChanged += Model_FileListChanged;
+            model.SelectedIndexChanged += Model_SelectedIndexChanged;
+            initilizing = false;
         }
 
         private void TrackbarMouseDownScroller_TrackBarScrolled()
@@ -116,6 +121,7 @@ namespace ViewerBy2nd
 
         private void ControlEnable()
         {
+            if (initilizing) return;
             MenuControlEnabled();
             CtlPdf1ControlEnabled();
             CtlMovie1ControlEnabled();
