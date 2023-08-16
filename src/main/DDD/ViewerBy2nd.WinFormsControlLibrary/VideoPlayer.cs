@@ -26,11 +26,9 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         private bool IsInitilaized = false;
         void InitializeLibVLC()
         {
-            if(IsInitilaized)
-            {
-                return;
-            }
-            IsInitilaized = true;
+            //このメソッドは一回だけ呼び出してください。
+
+
             Core.Initialize();
 
 
@@ -41,7 +39,16 @@ namespace ViewerBy2nd.WinFormsControlLibrary
                 EnableMouseInput = false
             };
 
+            IsInitilaized = true;
+        }
 
+        private void WaitInitialize()
+        {
+            while (!IsInitilaized)
+            {
+                Thread.Sleep(1);
+            }
+            Debug.Assert(Player != null);
         }
 
         int _volume;
@@ -112,12 +119,14 @@ namespace ViewerBy2nd.WinFormsControlLibrary
 
         public void Play()
         {
+            WaitInitialize();
             if (Player?.IsPlaying == false)
                 Player.Play();
 
         }
         public void Play(string filename, int starttime, params string[] options)
         {
+            WaitInitialize();
             Debug.Assert(libVLC != null);
             Debug.Assert(Player != null);
             var newOption = options.Append($"start-time={starttime/1000}");
@@ -129,6 +138,7 @@ namespace ViewerBy2nd.WinFormsControlLibrary
         bool requirePause;
         public void LoadFile(string filename, int starttime = 0)
         {
+            WaitInitialize();
             var options = new string[] { "no-audio" };
             Play(filename, starttime, options);
             loadTimer.Interval = 10;
