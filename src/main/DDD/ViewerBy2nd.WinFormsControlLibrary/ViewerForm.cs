@@ -1,7 +1,4 @@
-﻿using LibVLCSharp.Shared;
-using LibVLCSharp.WinForms;
-using System.Runtime.CompilerServices;
-using ViewerBy2nd.WinFormsControlLibrary;
+﻿using ViewerBy2nd.WinFormsControlLibrary;
 
 namespace ViewerBy2nd
 {
@@ -73,11 +70,8 @@ namespace ViewerBy2nd
             var bounds = ViewScreenRegister.GetInstance().Bounds;
             StartPosition = FormStartPosition.Manual;
             Location = bounds.Location;
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            //FormBorderStyleを変更してからsize変更する順番が重要
             Size = bounds.Size;
-            ControlBox = true;
+
         }
         internal void SetViewerBoundsWindowScreen()
         {
@@ -90,11 +84,6 @@ namespace ViewerBy2nd
             Location = point;
 
             Size = bounds.Size / 2;
-            ControlBox = false;
-            Text = "";
-            this.FormBorderStyle = FormBorderStyle.None;
-
-
 
         }
         private readonly FormDragResizer formResizer;
@@ -121,10 +110,6 @@ namespace ViewerBy2nd
             BackColor = BackColorRegister.GetInstance().BackColor;
         }
 
-
-
-
-
         private void ウインドウモードToolStripMenuItem_Click(object sender, EventArgs e)
         {
             WindowMode.IsFullScreen = false;
@@ -135,7 +120,6 @@ namespace ViewerBy2nd
         {
             WindowMode.IsFullScreen = true;
         }
-
 
         private void 表示終了ToolStripMenuItem_Click(object sender, EventArgs e)
         {
