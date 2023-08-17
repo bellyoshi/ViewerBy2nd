@@ -1299,11 +1299,6 @@ namespace ViewerBy2nd
             BackgroundDisplayAction();
         }
 
-        private void ウインドウサイズToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void スリムToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FilesList.Visible = false;
@@ -1340,10 +1335,7 @@ namespace ViewerBy2nd
             AutoDisplayCheckBox.Checked = !AutoDisplayCheckBox.Checked;
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
 
-        }
     }
 
 }

@@ -559,7 +559,6 @@ namespace ViewerBy2nd
             menuStrip1.Size=new Size(1170, 30);
             menuStrip1.TabIndex=101;
             menuStrip1.Text="menuStrip1";
-            menuStrip1.ItemClicked+=menuStrip1_ItemClicked;
             // 
             // ファイルToolStripMenuItem
             // 
@@ -806,7 +805,6 @@ namespace ViewerBy2nd
             ウインドウサイズToolStripMenuItem.Name="ウインドウサイズToolStripMenuItem";
             ウインドウサイズToolStripMenuItem.Size=new Size(212, 26);
             ウインドウサイズToolStripMenuItem.Text="操作画面サイズ";
-            ウインドウサイズToolStripMenuItem.Click+=ウインドウサイズToolStripMenuItem_Click;
             // 
             // スリムToolStripMenuItem
             // 
