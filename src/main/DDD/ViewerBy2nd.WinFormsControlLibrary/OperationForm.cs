@@ -437,16 +437,6 @@ namespace ViewerBy2nd
                 filename => new FileViewParam(filename, ViewScreenRegister.GetInstance().Size));
         }
 
-        private void AddFiles()
-        {
-            var items = FilesList.Items;
-
-
-            foreach (var param in GetAddFiles())
-                items.Add(param);
-
-        }
-
         private void DeselectFiles_Click(object sender, EventArgs e)
         {
             FilesList.SelectedItem = null;
