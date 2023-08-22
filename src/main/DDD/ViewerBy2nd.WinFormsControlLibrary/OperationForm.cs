@@ -1253,7 +1253,7 @@ namespace ViewerBy2nd
 
         private void 再生開始ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PauseAction();
+            PlayAction();
         }
 
         private void 再生停止ToolStripMenuItem_Click(object sender, EventArgs e)
