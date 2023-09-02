@@ -1,25 +1,12 @@
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Imaging;
-using Microsoft.UI.Xaml.Navigation;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Storage.Pickers;
-using Windows.Storage;
-using System.Reflection.Metadata;
-using WinRT.Interop;
+using System.Threading.Tasks;
 using Windows.Data.Pdf;
-using Windows.Graphics.Imaging;
-
+using Windows.Foundation;
+using Windows.Storage;
+using Windows.Storage.Pickers;
+using WinRT.Interop;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -30,33 +17,35 @@ namespace ViewerBy2nd.WinUI3
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        private PdfDocument doc;
+        private PdfPage page;
+        private uint pageIndex;
         public MainWindow()
         {
             this.InitializeComponent();
             Handle = this;
+            
         }
         public static MainWindow Handle { get; private set; }
 
-        private async void myButton_Click(object sender, RoutedEventArgs e)
+        private async void MyButton_Click(object sender, RoutedEventArgs e)
         {
-            var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
-            openPicker.ViewMode = PickerViewMode.List;
-            openPicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
-            openPicker.FileTypeFilter.Add(".pdf");
-            InitializeWithWindow.Initialize(openPicker,
-             WindowNative.GetWindowHandle(MainWindow.Handle));
-            IAsyncOperation<StorageFile> asyncOp = openPicker.PickSingleFileAsync();
-            StorageFile file = await asyncOp;
-            if (file == null)
-            {
-                return;
-            }
-            var doc = await PdfDocument.LoadFromFileAsync(file);
-            var page = doc.GetPage(0);
+            StorageFile file = await GetFile();
+            if (file == null) return;
+
+            doc = await PdfDocument.LoadFromFileAsync(file);
+            pageIndex = 0;
+
+            await DispPage();
+        }
+
+        private async Task DispPage()
+        {
+            page = doc.GetPage(pageIndex);
             // ビットマップイメージの作成
             var stream = new Windows.Storage.Streams.InMemoryRandomAccessStream();
             await page.RenderToStreamAsync(stream);
-            BitmapImage src = new BitmapImage();
+            BitmapImage src = new ();
 
             // Imageオブジェクトにsrcをセット
             imgPdf.Source = src;
@@ -65,6 +54,37 @@ namespace ViewerBy2nd.WinUI3
             await src.SetSourceAsync(stream);
         }
 
+        private static async Task<StorageFile> GetFile()
+        {
+            var openPicker = new FileOpenPicker
+            {
+                ViewMode = PickerViewMode.List,
+                SuggestedStartLocation = PickerLocationId.DocumentsLibrary
+            };
+            openPicker.FileTypeFilter.Add(".pdf");
+            InitializeWithWindow.Initialize(openPicker,
+             WindowNative.GetWindowHandle(MainWindow.Handle));
+            IAsyncOperation<StorageFile> asyncOp = openPicker.PickSingleFileAsync();
+            StorageFile file = await asyncOp;
+            return file;
+        }
+
+        private async void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (doc.PageCount <= pageIndex + 1)
+                return;
+            
+                pageIndex++;
+                await DispPage();
+            
+        }
+
+        private async void PreviousButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(pageIndex <= 0) return;
+            pageIndex--;
+            await DispPage();
+        }
 
     }
 }
