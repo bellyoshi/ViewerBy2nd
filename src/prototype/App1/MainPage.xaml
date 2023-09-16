@@ -10,10 +10,12 @@
 
     <Grid>
         <StackPanel>
-            <Button Content="Yes"></Button>
-            <Button Content="No"></Button>
-            <TextBlock> Hello World</TextBlock>
+            <Button x:Name="OpenButton" Click="OpenButton_Click">ファイル選択</Button>
+            <Button x:Name="PreviousButton" Click="PreviousButton_Click">前へ</Button>
+            <Button x:Name="NextButton" Click="NextButton_Click">次へ</Button>
+            <Button x:Name="DispButton" Click="DispButton_Click">表示</Button>
         </StackPanel>
+
 
     </Grid>
 </Page>
