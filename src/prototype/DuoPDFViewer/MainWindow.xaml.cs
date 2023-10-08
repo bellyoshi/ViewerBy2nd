@@ -21,7 +21,7 @@ namespace DuoPDFViewer
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        BlankWindow1 newWindow;
+        ViewerWindow newWindow;
         public MainWindow()
         {
             this.InitializeComponent();
@@ -36,7 +36,7 @@ namespace DuoPDFViewer
             //newWindow.Activate();
 
             //BlankWindow1‚ðŠJ‚­
-            newWindow = new BlankWindow1();
+            newWindow = new ViewerWindow();
             newWindow.Activate();
         }
         private void Window_Closed(object sender, WindowEventArgs e)
