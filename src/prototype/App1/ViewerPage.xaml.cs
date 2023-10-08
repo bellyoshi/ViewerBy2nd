@@ -21,7 +21,8 @@ namespace App1
         public ViewerPage()
         {
             this.InitializeComponent();
-
+            Windows.UI.ViewManagement.ApplicationView
+  .GetForCurrentView().TryEnterFullScreenMode();
         }
 
 

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DuoPDFViewer (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "DuoPDFViewer (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
