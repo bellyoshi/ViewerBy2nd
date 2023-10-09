@@ -53,7 +53,7 @@ namespace DuoPDFViewer
         }
 
         private static RectInt32 CreateDisplayRect( DisplayArea displayArea)
-            => new RectInt32()
+            => new()
         {
             X = 0,
             Y = 0,

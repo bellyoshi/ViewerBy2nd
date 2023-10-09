@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 namespace DuoPDFViewer
 {
     public delegate void MyEventHandler(BitmapImage bitmapImage);
-    internal class model
+    internal class Model
     {
 
         public event MyEventHandler MyEvent;
-        static model _model = new model();
-        public static model getInstance()
+        static readonly Model _model = new();
+        public static Model GetInstance()
         {
             return _model;
         }

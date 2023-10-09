@@ -24,7 +24,7 @@ namespace DuoPDFViewer
     /// </summary>
     public sealed partial class BlankPage1 : Page
     {
-        model model = model.getInstance();
+        readonly Model model = Model.GetInstance();
         public BlankPage1()
         {
             this.InitializeComponent();

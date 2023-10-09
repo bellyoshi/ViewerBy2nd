@@ -68,7 +68,7 @@ namespace DuoPDFViewer
 
             // Imageオブジェクトにsrcをセット
             //imgPdf.Source = src;
-            model.getInstance().SetSource(src);
+            Model.GetInstance().SetSource(src);
 
             // srcに作成したビットマップイメージを流し込む
             await src.SetSourceAsync(stream);
