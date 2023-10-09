@@ -1,6 +1,7 @@
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media.Imaging;
+using System;
 using Windows.Graphics;
 
 
@@ -16,6 +17,7 @@ namespace DuoPDFViewer
         public ViewerWindow()
         {
             InitializeComponent();
+            MainFrame.Navigate(typeof(BlankPage1));
 
             var appWindow = GetAppWindow();
 
@@ -94,10 +96,7 @@ namespace DuoPDFViewer
             
         }
 
-        internal void SetSource(BitmapImage src)
-        {
-            imgPdf.Source = src;
-        }
+
     }
 
 }
