@@ -16,16 +16,18 @@ using WinRT.Interop;
 
 namespace DuoPDFViewer
 {
+
     /// <summary>
     /// An empty window that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        
+        private MainViewModel ViewModel { get; } = new();
         ViewerWindow newWindow;
         public MainWindow()
         {
             this.InitializeComponent();
+
             Handle = this;
         }
 

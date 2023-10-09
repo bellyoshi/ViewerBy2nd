@@ -29,6 +29,7 @@ namespace DuoPDFViewer
         {
             this.InitializeComponent();
             model.MyEvent += Model_MyEvent;
+            
         }
 
         private void Model_MyEvent(BitmapImage bitmapImage)

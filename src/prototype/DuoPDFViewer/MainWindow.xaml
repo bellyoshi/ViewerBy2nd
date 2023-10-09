@@ -17,6 +17,13 @@
             <Button x:Name="PreviousButton" Click="PreviousButton_Click">前へ</Button>
             <Button x:Name="NextButton" Click="NextButton_Click">次へ</Button>
             <Image x:Name="imgPdf"></Image>
+            <TextBlock Text="Hello, World!"></TextBlock>
+            <TextBox Text="{x:Bind ViewModel.Input.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock Text="{x:Bind ViewModel.InputErrorMessage.Value, Mode=OneWay}" Foreground="Red" />
+            <Button Content="Reset" Command="{x:Bind ViewModel.ResetCommand}" />
+            <TextBlock Text="{x:Bind ViewModel.Output.Value, Mode=OneWay}" />
         </StackPanel>
+
+        
     </StackPanel>
 </Window>
