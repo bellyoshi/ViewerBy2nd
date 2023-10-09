@@ -21,6 +21,7 @@ namespace DuoPDFViewer
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        
         ViewerWindow newWindow;
         public MainWindow()
         {
@@ -30,12 +31,6 @@ namespace DuoPDFViewer
 
         private void SecondButton_Click(object sender, RoutedEventArgs e)
         {
-            //var newWindow = WindowHelper.CreateWindow();
-            //var rootPage = new BlankPage1();
-            //newWindow.Content = rootPage;
-            //newWindow.Activate();
-
-            //BlankWindow1を開く
             newWindow = new ViewerWindow();
             newWindow.Activate();
         }
@@ -72,7 +67,8 @@ namespace DuoPDFViewer
             BitmapImage src = new();
 
             // Imageオブジェクトにsrcをセット
-            imgPdf.Source = src;
+            //imgPdf.Source = src;
+            newWindow.SetSource(src);
 
             // srcに作成したビットマップイメージを流し込む
             await src.SetSourceAsync(stream);

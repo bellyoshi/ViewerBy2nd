@@ -1,5 +1,6 @@
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Media.Imaging;
 using Windows.Graphics;
 
 
@@ -83,14 +84,19 @@ namespace DuoPDFViewer
         public AppWindow GetAppWindow()
         {
             
-                // WinUI3のウインドウのハンドルを取得
-                var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
-                // そのウインドウのIDを取得
-                Microsoft.UI.WindowId windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
-                // そこからAppWindowを取得する
-                Microsoft.UI.Windowing.AppWindow appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+            // WinUI3のウインドウのハンドルを取得
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(this);
+            // そのウインドウのIDを取得
+            Microsoft.UI.WindowId windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
+            // そこからAppWindowを取得する
+            AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
                 return appWindow;
             
+        }
+
+        internal void SetSource(BitmapImage src)
+        {
+            imgPdf.Source = src;
         }
     }
 
