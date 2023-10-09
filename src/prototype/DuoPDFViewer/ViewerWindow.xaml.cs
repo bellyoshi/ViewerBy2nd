@@ -17,7 +17,7 @@ namespace DuoPDFViewer
         public ViewerWindow()
         {
             InitializeComponent();
-            MainFrame.Navigate(typeof(BlankPage1));
+            MainFrame.Navigate(typeof(ViewerPage));
 
             var appWindow = GetAppWindow();
 
