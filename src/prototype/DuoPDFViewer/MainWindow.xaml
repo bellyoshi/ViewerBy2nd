@@ -10,20 +10,13 @@
     mc:Ignorable="d"
     Closed="Window_Closed">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="SecondButton" Click="SecondButton_Click">セカンド表示</Button>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="OpenButton" Click="OpenButton_Click">ファイル選択</Button>
-            <Button x:Name="PreviousButton" Click="PreviousButton_Click">前へ</Button>
-            <Button x:Name="NextButton" Click="NextButton_Click">次へ</Button>
-            <Image x:Name="imgPdf"></Image>
-            <TextBlock Text="Hello, World!"></TextBlock>
-            <TextBox Text="{x:Bind ViewModel.Input.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock Text="{x:Bind ViewModel.InputErrorMessage.Value, Mode=OneWay}" Foreground="Red" />
-            <Button Content="Reset" Command="{x:Bind ViewModel.ResetCommand}" />
-            <TextBlock Text="{x:Bind ViewModel.Output.Value, Mode=OneWay}" />
-        </StackPanel>
+    <NavigationView>
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="Nav Item A"/>
+            <NavigationViewItem Content="Nav Item B"/>
+            <NavigationViewItem Content="Nav Item C"/>
+        </NavigationView.MenuItems>
 
-        
-    </StackPanel>
+        <Frame x:Name="ContentFrame"/>
+    </NavigationView>
 </Window>
