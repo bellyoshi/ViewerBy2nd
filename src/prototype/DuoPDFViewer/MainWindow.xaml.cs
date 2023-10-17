@@ -32,11 +32,42 @@ namespace DuoPDFViewer
         {
             this.InitializeComponent();
             Handle = this;
+            ContentFrame.Navigate(typeof(OperationPage));
 
         }
         private void Window_Closed(object sender, WindowEventArgs e)
         {
             NewWindow?.Close();
+        }
+
+        private void NavigationView_ItemInvoked(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewItemInvokedEventArgs args)
+        {
+            var navItemTag = args.InvokedItemContainer.Tag.ToString();
+            if(args.IsSettingsInvoked)
+            {
+                navItemTag = "SettingsPage";
+            }
+            Navigate(navItemTag);
+        }
+        private void Navigate(string navItemTag)
+        {
+            Type _pageType = null;
+
+            switch (navItemTag)
+            {
+                case "Operaton":
+                    _pageType = typeof(OperationPage);
+                    break;
+
+                case "SettingsPage":
+                    _pageType = typeof(SettingsPage);
+                    break;
+            }
+
+            if (_pageType != null && ContentFrame.CurrentSourcePageType != _pageType)
+            {
+                ContentFrame.Navigate(_pageType);
+            }
         }
     }
 }

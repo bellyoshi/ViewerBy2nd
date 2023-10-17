@@ -10,11 +10,9 @@
     mc:Ignorable="d"
     Closed="Window_Closed">
 
-    <NavigationView>
+    <NavigationView ItemInvoked="NavigationView_ItemInvoked">
         <NavigationView.MenuItems>
-            <NavigationViewItem Content="Nav Item A"/>
-            <NavigationViewItem Content="Nav Item B"/>
-            <NavigationViewItem Content="Nav Item C"/>
+            <NavigationViewItem Content="Operation" Tag="Operaton"/>
         </NavigationView.MenuItems>
 
         <Frame x:Name="ContentFrame"/>
