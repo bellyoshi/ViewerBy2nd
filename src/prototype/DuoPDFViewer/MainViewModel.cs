@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//todo: this is a sample, not a real implementation
 namespace DuoPDFViewer
 {
     internal class MainViewModel

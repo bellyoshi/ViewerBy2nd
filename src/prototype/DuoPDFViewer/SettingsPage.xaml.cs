@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Forms;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -23,9 +24,11 @@ namespace DuoPDFViewer
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
+        SettingsViewModel ViewModel = new();
         public SettingsPage()
         {
             this.InitializeComponent();
+            DataContext = ViewModel;
         }
     }
 }

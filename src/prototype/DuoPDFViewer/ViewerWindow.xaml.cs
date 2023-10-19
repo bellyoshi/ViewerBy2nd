@@ -4,7 +4,9 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using System;
 using Windows.Graphics;
 
-
+using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
+using System.Reactive.Disposables;
 
 
 namespace DuoPDFViewer
@@ -14,11 +16,28 @@ namespace DuoPDFViewer
     /// </summary>
     public sealed partial class ViewerWindow : Window
     {
+        ScreenModel screenModel = ScreenModel.GetInstance();
+
+
+
         public ViewerWindow()
         {
             InitializeComponent();
             MainFrame.Navigate(typeof(ViewerPage));
 
+            screenModel.ObserveProperty(x => x.IsFullScreen)
+                .Subscribe(isFS =>
+                {
+                    if (isFS) EnterFullScreen();
+                    else ExitFullScreen();
+                });
+
+
+
+        }
+
+        private void EnterFullScreen()
+        {
             var appWindow = GetAppWindow();
 
             RectInt32 rect = GetRect();
@@ -30,8 +49,16 @@ namespace DuoPDFViewer
             //フルスクリーンプレゼンターを挿入する
             var fp = FullScreenPresenter.Create();
             appWindow.SetPresenter(fp);
-
         }
+
+        public void ExitFullScreen()
+        {
+            var appWindow = GetAppWindow();
+
+            OverlappedPresenter olp = OverlappedPresenterCreate();
+            appWindow.SetPresenter(olp);
+        }
+
 
         private static RectInt32 GetRect()
         {

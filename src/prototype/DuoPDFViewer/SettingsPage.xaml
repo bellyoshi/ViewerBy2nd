@@ -12,5 +12,7 @@
     <Grid>
         <TextBlock>設定
         </TextBlock>
+        <ToggleSwitch IsOn="{x:Bind ViewModel.IsFullScreen.Value , Mode=TwoWay}">
+        </ToggleSwitch>
     </Grid>
 </Page>
