@@ -28,7 +28,7 @@ namespace DuoPDFViewer
         public SettingsPage()
         {
             this.InitializeComponent();
-            DataContext = ViewModel;
+           // DataContext = ViewModel;
         }
     }
 }

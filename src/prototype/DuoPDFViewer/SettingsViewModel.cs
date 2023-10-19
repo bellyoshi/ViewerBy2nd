@@ -12,11 +12,11 @@ namespace DuoPDFViewer
     internal class SettingsViewModel
     {
         ScreenModel screenModel = ScreenModel.GetInstance();
-        public ReactivePropertySlim<bool> IsFullScreen { get; } = new ReactivePropertySlim<bool>(false);
+        public ReactivePropertySlim<bool> IsFullScreen { get; }//= new ReactivePropertySlim<bool>(false);
 
         public SettingsViewModel()
         {
-            //IsFullScreen = screenModel.ToReactivePropertySlimAsSynchronized(x => x.IsFullScreen);
+            IsFullScreen = screenModel.ToReactivePropertySlimAsSynchronized(x => x.IsFullScreen);
             
             IsFullScreen.Subscribe(IsFullScreen =>
             {
