@@ -18,6 +18,10 @@ namespace DuoPDFViewer
 
         public ReactiveCommand ResetCommand { get; }
 
+        private ReactiveCollection<string> _items;
+
+        public ReactiveCollection<string> Items { get; set; }
+
         public MainViewModel()
         {
             Input = new ReactiveProperty<string>("",
@@ -33,6 +37,13 @@ namespace DuoPDFViewer
             ResetCommand = Input.Select(x => !string.IsNullOrEmpty(x))
                 .ToReactiveCommand()
                 .WithSubscribe(() => Input.Value = "");
+
+            Items = new ReactiveCollection<string>
+            {
+                "Item 1",
+                "Item 2",
+                "Item 3"
+            };
         }
     }
 }
