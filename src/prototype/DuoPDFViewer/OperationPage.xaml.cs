@@ -57,10 +57,10 @@ namespace DuoPDFViewer
             StorageFile file = await GetFile();
             if (file == null) return;
 
-            doc = await PdfDocument.LoadFromFileAsync(file);
-            pageIndex = 0;
 
-            await DispPage();
+
+            ViewModel.Items.Add(file.Path);
+ 
         }
 
         private async Task DispPage()
@@ -108,6 +108,17 @@ namespace DuoPDFViewer
         {
             if (pageIndex <= 0) return;
             pageIndex--;
+            await DispPage();
+        }
+
+        private async void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var filename = FileListBox.SelectedItem.ToString();
+            //filename to IStorageFile
+            var file = await StorageFile.GetFileFromPathAsync(filename);
+
+            doc = await PdfDocument.LoadFromFileAsync(file);
+            pageIndex = 0;
             await DispPage();
         }
     }
