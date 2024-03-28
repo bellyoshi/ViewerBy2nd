@@ -6,12 +6,17 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>pdfsecond.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="MonitorInfo.cs" />
     <Compile Remove="NativeMethods.cs" />
     <Compile Remove="ViewModels\PageNumberViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="pdfsecond.ico" />
   </ItemGroup>
 
   <ItemGroup>
