@@ -36,6 +36,13 @@ Closing="Window_Closing"
                ContextMenu ="{StaticResource MyContextMenu}">
 
             </Image>
+
+        </Border>
+        <Border Background="{Binding ImageBackgroundColor.Value}">
+            <MediaElement  x:Name="viewerMediaElement" Source="{Binding VideoPath.Value}" 
+                              Visibility="{Binding IsMovie.Value}"
+                              LoadedBehavior="Manual">
+            </MediaElement>
         </Border>
     </Grid>
 </Window>

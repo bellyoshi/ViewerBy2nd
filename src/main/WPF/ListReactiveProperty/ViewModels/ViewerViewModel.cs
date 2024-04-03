@@ -15,7 +15,8 @@ namespace ListReactiveProperty.ViewModels
         public ReactiveProperty<System.Windows.Media.Imaging.BitmapSource?> ImageSource { get; }
 
 
-
+        public ReactiveProperty<TimeSpan> MediaPosition { get; } = new ReactiveProperty<TimeSpan>();
+        public ReactiveProperty<TimeSpan> MediaLength { get; } = new ReactiveProperty<TimeSpan>();
 
 
 

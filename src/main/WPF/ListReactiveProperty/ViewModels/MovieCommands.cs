@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace ListReactiveProperty.ViewModels
 {
     public class MovieCommands
     {
+
         // 再生
         public ReactiveCommand CreateMoveToStartCommand() { 
             var command = new ReactiveCommand();
@@ -39,6 +41,7 @@ namespace ListReactiveProperty.ViewModels
 
         public MovieCommands(ReactiveProperty<FileViewParams.FileViewParam> file)
         {
+
 
         }
 

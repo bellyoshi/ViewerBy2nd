@@ -14,7 +14,7 @@ namespace ListReactiveProperty
     /// </summary>
     public partial class ViewerWindow : Window
     {
-
+        private bool hasMediaLength = false;
         public ViewerWindow()
         {
 
@@ -43,7 +43,20 @@ namespace ListReactiveProperty
 
 
             //ウインドウがDPIの違うモニタ―を移動することは考慮していない。
+            _viewModel.MediaPosition.Subscribe(position =>
+            {
+                if (viewerMediaElement.NaturalDuration.HasTimeSpan && !hasMediaLength)
+                {
+                    _viewModel.MediaLength.Value = viewerMediaElement.NaturalDuration.TimeSpan;
+                    hasMediaLength = true;
+                }
 
+                // UIスレッドでMediaElementのPositionを更新する必要があります。
+                Dispatcher.Invoke(() =>
+                {
+                    viewerMediaElement.Position = position; ;
+                });
+            });
 
         }
 
