@@ -188,7 +188,15 @@
                     <Label Content="/"></Label>
                     <Label Content="{Binding PageCount.Value}"></Label>
                 </StackPanel>
-
+                <StackPanel>
+                    <Slider x:Name="trackBar" Minimum="0" Maximum="{Binding LengthValue.Value}" 
+                Value="{Binding PositionValue.Value}" 
+                Orientation="Horizontal" VerticalAlignment="Bottom">
+                        <behaviors:Interaction.Behaviors>
+                            <b:SliderClickMoveBehavior />
+                            </behaviors:Interaction.Behaviors>
+                    </Slider>
+                </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Button Content="表示" Command="{Binding ShowOnSecondMonitorCommand}">
