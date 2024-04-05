@@ -175,10 +175,13 @@
                 <Image Source="{Binding PreviewImage.Value}" Visibility="{Binding IsImage.Value}"></Image>
                 </Border>
                 <Border Background="{Binding ImageBackgroundColor.Value}">
-                <MediaElement Source="{Binding VideoPath.Value}" 
-                              Visibility="{Binding IsMovie.Value}"
-                              LoadedBehavior="Manual">
-                </MediaElement>
+                    <MediaElement x:Name="mainMediaElement" LoadedBehavior="Manual" Source="{Binding VideoPath.Value}" 
+                                  Visibility="{Binding IsMovie.Value}">
+                        <behaviors:Interaction.Behaviors>
+                            <b:MediaSyncBehavior IsPlaying="{Binding IsMediaPlaying.Value}"
+                                          MediaPosition="{Binding MediaPosition.Value, Mode=TwoWay}"/>
+                            </behaviors:Interaction.Behaviors>
+                    </MediaElement>
                 </Border>
                 <StackPanel Orientation="Horizontal" Visibility="{Binding IsPdf}">
                     <Label Content="{Binding CurrentPage.Value}"></Label>

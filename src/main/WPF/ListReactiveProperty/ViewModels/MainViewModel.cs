@@ -24,14 +24,14 @@ namespace ListReactiveProperty.ViewModels;
 internal class MainViewModel : ISliderViewModel
 {
     public ReactiveProperty<double> RequiredValue { get; } = new();
-    public ReactiveProperty<bool> IsMediaPlaying { get; } = new ReactiveProperty<bool>();
+    public ReactiveProperty<bool> IsMediaPlaying { get; }
     public ReactiveProperty<TimeSpan> MediaPosition { get; } = new ReactiveProperty<TimeSpan>();
     public ReactiveProperty<TimeSpan> MediaLength { get; } = new ReactiveProperty<TimeSpan>();
 
     public ReactiveProperty<double> PositionValue { get; } = new ReactiveProperty<double>(500);
     public ReactiveProperty<double> LengthValue { get; } = new ReactiveProperty<double>(1000);
 
-    public ReactiveProperty<Uri> Source { get; } = new(new Uri(@"C:\Users\catik\OneDrive\www\video\hanatokingdom.mp4", UriKind.Relative));
+
 
 
 
@@ -123,23 +123,7 @@ internal class MainViewModel : ISliderViewModel
 
     public MainViewModel()
     {
-        IsMediaPlaying.Subscribe(_ => UpdateMediaPosition());
 
-        MediaPosition.Subscribe(position =>
-        {
-            PositionValue.Value = position.TotalMilliseconds;
-            Debug.WriteLine($"MediaPosition: {position}");
-        });
-        MediaLength.Subscribe(length =>
-        {
-            LengthValue.Value = length.TotalMilliseconds;
-        });
-        RequiredValue.Subscribe(value =>
-        {
-            MediaPosition.Value = TimeSpan.FromMilliseconds(value);
-            Debug.WriteLine($"ここで処理: {value}");
-
-        });
 
         ImageBackgroundColor = DisplayModel.GetInstance().ToReactivePropertyAsSynchronized(x => x.BackColor);
 
@@ -214,12 +198,28 @@ internal class MainViewModel : ISliderViewModel
 
 
         MoveToStartCommand = MovieCommands.CreateMoveToStartCommand();
-        StartPlayingCommand = MovieCommands.CreateMoveToStartCommand();
-        PausePlayingCommand = MovieCommands.CreateMoveToStartCommand();
-        FastForwardCommand = MovieCommands.CreateMoveToStartCommand();
-        RewindCommand = MovieCommands.CreateMoveToStartCommand();
+        StartPlayingCommand = MovieCommands.CreateStartPlayingCommand();
+        PausePlayingCommand = MovieCommands.CreatePausePlayingCommand();
+        FastForwardCommand = MovieCommands.CreateFastForwardCommand();
+        RewindCommand = MovieCommands.CreateRewindCommand();
 
+        IsMediaPlaying = MovieCommands.IsMediaPlaying;
 
+        MediaPosition.Subscribe(position =>
+        {
+            PositionValue.Value = position.TotalMilliseconds;
+            Debug.WriteLine($"MediaPosition: {position}");
+        });
+        MediaLength.Subscribe(length =>
+        {
+            LengthValue.Value = length.TotalMilliseconds;
+        });
+        RequiredValue.Subscribe(value =>
+        {
+            MediaPosition.Value = TimeSpan.FromMilliseconds(value);
+            Debug.WriteLine($"ここで処理: {value}");
+
+        });
 
         DisplaySettingsCommand.Subscribe(_ => ExecuteDisplaySettings());
         SlimSizeCommand.Subscribe(_ => ExecuteSlimSize());

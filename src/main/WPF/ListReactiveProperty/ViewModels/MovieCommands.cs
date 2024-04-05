@@ -10,7 +10,7 @@ namespace ListReactiveProperty.ViewModels
 {
     public class MovieCommands
     {
-
+        public ReactiveProperty<bool> IsMediaPlaying { get; } = new (false);
         // 再生
         public ReactiveCommand CreateMoveToStartCommand() { 
             var command = new ReactiveCommand();
@@ -48,16 +48,19 @@ namespace ListReactiveProperty.ViewModels
         private void ExecuteMoveToStart()
         {
             // 「最初に移動」の処理
+
         }
 
         private void ExecuteStartPlaying()
         {
             // 「再生開始」の処理
+            IsMediaPlaying.Value = true;
         }
 
         private void ExecutePausePlaying()
         {
             // 「一時停止」の処理
+            IsMediaPlaying.Value = false;
         }
 
         private void ExecuteFastForward()
