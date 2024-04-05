@@ -1,6 +1,7 @@
 ﻿using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,12 @@ namespace ListReactiveProperty.ViewModels
     public class MovieCommands
     {
         public ReactiveProperty<bool> IsMediaPlaying { get; } = new (false);
+        public ReactiveProperty<TimeSpan> MediaPosition { get; } = new (TimeSpan.Zero);
+        public ReactiveProperty<double> RequiredValue { get; } = new();
+        public ReactiveProperty<TimeSpan> MediaLength { get; } = new ();
+
+        public ReactiveProperty<double> PositionValue { get; } = new ReactiveProperty<double>(500);
+        public ReactiveProperty<double> LengthValue { get; } = new ReactiveProperty<double>(1000);
         // 再生
         public ReactiveCommand CreateMoveToStartCommand() { 
             var command = new ReactiveCommand();
@@ -42,12 +49,28 @@ namespace ListReactiveProperty.ViewModels
         public MovieCommands(ReactiveProperty<FileViewParams.FileViewParam> file)
         {
 
+            MediaPosition.Subscribe(position =>
+            {
+                PositionValue.Value = position.TotalMilliseconds;
+                Debug.WriteLine($"MediaPosition: {position}");
+            });
+            MediaLength.Subscribe(length =>
+            {
+                LengthValue.Value = length.TotalMilliseconds;
+            });
 
+            RequiredValue.Subscribe(value =>
+            {
+                MediaPosition.Value = TimeSpan.FromMilliseconds(value);
+                Debug.WriteLine($"ここで処理: {value}");
+
+            });
         }
 
         private void ExecuteMoveToStart()
         {
             // 「最初に移動」の処理
+            MediaPosition.Value = TimeSpan.Zero;
 
         }
 

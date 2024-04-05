@@ -23,13 +23,7 @@ namespace ListReactiveProperty.ViewModels;
 
 internal class MainViewModel : ISliderViewModel
 {
-    public ReactiveProperty<double> RequiredValue { get; } = new();
-    public ReactiveProperty<bool> IsMediaPlaying { get; }
-    public ReactiveProperty<TimeSpan> MediaPosition { get; } = new ReactiveProperty<TimeSpan>();
-    public ReactiveProperty<TimeSpan> MediaLength { get; } = new ReactiveProperty<TimeSpan>();
 
-    public ReactiveProperty<double> PositionValue { get; } = new ReactiveProperty<double>(500);
-    public ReactiveProperty<double> LengthValue { get; } = new ReactiveProperty<double>(1000);
 
 
 
@@ -95,6 +89,13 @@ internal class MainViewModel : ISliderViewModel
     public ReactiveCommand ZoomOutCommand { get; } = new ();
 
     private MovieCommands MovieCommands { get; }
+    public ReactiveProperty<double> RequiredValue { get; } 
+    public ReactiveProperty<bool> IsMediaPlaying { get; }
+    public ReactiveProperty<TimeSpan> MediaPosition { get; } 
+    public ReactiveProperty<TimeSpan> MediaLength { get; } 
+
+    public ReactiveProperty<double> PositionValue { get; } 
+    public ReactiveProperty<double> LengthValue { get; }
 
     // 再生
     public ReactiveCommand MoveToStartCommand { get; } 
@@ -204,22 +205,14 @@ internal class MainViewModel : ISliderViewModel
         RewindCommand = MovieCommands.CreateRewindCommand();
 
         IsMediaPlaying = MovieCommands.IsMediaPlaying;
+        MediaPosition = MovieCommands.MediaPosition;
+        MediaLength = MovieCommands.MediaLength;
+        PositionValue = MovieCommands.PositionValue;
+        LengthValue = MovieCommands.LengthValue;
+        RequiredValue = MovieCommands.RequiredValue;
 
-        MediaPosition.Subscribe(position =>
-        {
-            PositionValue.Value = position.TotalMilliseconds;
-            Debug.WriteLine($"MediaPosition: {position}");
-        });
-        MediaLength.Subscribe(length =>
-        {
-            LengthValue.Value = length.TotalMilliseconds;
-        });
-        RequiredValue.Subscribe(value =>
-        {
-            MediaPosition.Value = TimeSpan.FromMilliseconds(value);
-            Debug.WriteLine($"ここで処理: {value}");
 
-        });
+
 
         DisplaySettingsCommand.Subscribe(_ => ExecuteDisplaySettings());
         SlimSizeCommand.Subscribe(_ => ExecuteSlimSize());
