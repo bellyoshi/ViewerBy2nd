@@ -17,11 +17,24 @@ namespace ViewerBy2nd.Windows;
 /// </summary>
 public partial class MainWindow : Window
 {
+    private bool hasMediaLength = false;
     public MainWindow()
     {
         InitializeComponent();
 
         //メイン操作ウィンドウを閉じたらアプリケーションを終了する
         this.Closed += (s, e) => Application.Current.Shutdown();
+        var _viewModel = DataContext as MainViewModel;
+        System.Diagnostics.Debug.Assert(_viewModel != null);
+        _viewModel.MediaPosition.Subscribe(position =>
+        {
+            if (mainMediaElement.NaturalDuration.HasTimeSpan && !hasMediaLength)
+            {
+                _viewModel.MediaLength.Value = mainMediaElement.NaturalDuration.TimeSpan;
+                hasMediaLength = true;
+            }
+
+
+        });
     }
 }
