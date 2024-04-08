@@ -14,7 +14,7 @@ namespace ViewerBy2nd
     /// </summary>
     public partial class ViewerWindow : Window
     {
-        private bool hasMediaLength = false;
+
         public ViewerWindow()
         {
 
@@ -38,18 +38,11 @@ namespace ViewerBy2nd
             // このウィンドウに対応するDPI情報を取得
             //var dpiInfo = VisualTreeHelper.GetDpi(this);
 
-            //_viewModel.SetDpiScale(dpiInfo.DpiScaleX, dpiInfo.DpiScaleY);
-
-
-
+            //_viewModel.SetDpiScale(dpiInfo.DpiScaleX, dpiInfo.DpiScale
             //ウインドウがDPIの違うモニタ―を移動することは考慮していない。
+
             _viewModel.MediaPosition.Subscribe(position =>
             {
-                if (viewerMediaElement.NaturalDuration.HasTimeSpan && !hasMediaLength)
-                {
-                    _viewModel.MediaLength.Value = viewerMediaElement.NaturalDuration.TimeSpan;
-                    hasMediaLength = true;
-                }
 
                 // UIスレッドでMediaElementのPositionを更新する必要があります。
                 Dispatcher.Invoke(() =>
