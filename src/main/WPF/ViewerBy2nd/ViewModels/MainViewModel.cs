@@ -126,7 +126,7 @@ internal class MainViewModel : ISliderViewModel
     {
 
 
-        ImageBackgroundColor = DisplayModel.GetInstance().ToReactivePropertyAsSynchronized(x => x.BackColor);
+
 
         fileListsCommands = new(PreviewFile);
         FilesList = fileListsCommands.FilesList;
@@ -144,6 +144,7 @@ internal class MainViewModel : ISliderViewModel
 
 
         DisplayModel display = DisplayModel.GetInstance();
+        ImageBackgroundColor = display.ToReactivePropertyAsSynchronized(x => x.BackColor);
         PreviewImage = display.ToReactivePropertyAsSynchronized(x => x.PreviewImage);
         DisplayImage = display.ToReactivePropertyAsSynchronized(x => x.DisplayImage);
 
@@ -154,6 +155,8 @@ internal class MainViewModel : ISliderViewModel
         EndShowOnSecondMonitorCommand = SecondMonitorCommands.CreateEndShowOnSecondMonitorCommand();
         ShowBackgroundOnSecondMonitorCommand = SecondMonitorCommands.CreateShowBackgroundOnSecondMonitorCommand();
 
+        MovieModel movieModel = MovieModel.Instance;
+        VideoPath = movieModel.ToReactivePropertyAsSynchronized(x => x.VideoPath);
 
         PreviewFile.Subscribe(file =>
         {

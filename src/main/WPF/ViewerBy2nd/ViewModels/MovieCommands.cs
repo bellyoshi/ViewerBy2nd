@@ -6,13 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using ViewerBy2nd.Models;
+using Reactive.Bindings.Extensions;
 
 namespace ViewerBy2nd.ViewModels
 {
     public class MovieCommands
     {
-        public ReactiveProperty<bool> IsMediaPlaying { get; } = new (false);
-        public ReactiveProperty<TimeSpan> MediaPosition { get; } = new (TimeSpan.Zero);
+        public ReactiveProperty<bool> IsMediaPlaying { get; }
+        public ReactiveProperty<TimeSpan> MediaPosition { get; } 
         public ReactiveProperty<double> RequiredValue { get; } = new();
         public ReactiveProperty<TimeSpan> MediaLength { get; } = new ();
 
@@ -49,10 +51,15 @@ namespace ViewerBy2nd.ViewModels
         public MovieCommands(ReactiveProperty<FileViewParams.FileViewParam> file)
         {
 
+            var model = MovieModel.Instance;
+            MediaPosition = model.ToReactivePropertyAsSynchronized(x => x.MediaPosition);
+            IsMediaPlaying = model.ToReactivePropertyAsSynchronized(x => x.IsMediaPlaying);
+            IsMediaPlaying.Value = false;
+
+
             MediaPosition.Subscribe(position =>
             {
                 PositionValue.Value = position.TotalMilliseconds;
-                Debug.WriteLine($"MediaPosition: {position}");
             });
             MediaLength.Subscribe(length =>
             {
@@ -62,7 +69,6 @@ namespace ViewerBy2nd.ViewModels
             RequiredValue.Subscribe(value =>
             {
                 MediaPosition.Value = TimeSpan.FromMilliseconds(value);
-                Debug.WriteLine($"ここで処理: {value}");
 
             });
         }

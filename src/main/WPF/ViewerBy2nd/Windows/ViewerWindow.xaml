@@ -31,17 +31,20 @@ Closing="Window_Closing"
     </Window.Resources>
 
     <Grid>
-        <Border Background="{Binding Background.Value}">
+        <Border Background="{Binding ImageBackgroundColor.Value}" Visibility="{Binding IsImage.Value}">
             <Image Source="{Binding ImageSource.Value}"
                ContextMenu ="{StaticResource MyContextMenu}">
 
             </Image>
 
         </Border>
-        <Border Background="{Binding ImageBackgroundColor.Value}">
-            <MediaElement  x:Name="viewerMediaElement" Source="{Binding VideoPath.Value}" 
-                              Visibility="{Binding IsMovie.Value}"
-                              LoadedBehavior="Manual">
+        <Border Background="{Binding ImageBackgroundColor.Value}" Visibility="{Binding IsMovie.Value}">
+            <MediaElement x:Name="viewerMediaElement" LoadedBehavior="Manual" UnloadedBehavior="Stop" Source="{Binding VideoPath.Value}">
+                <behaviors:Interaction.Behaviors>
+                    <b:MediaSyncBehavior IsPlaying="{Binding IsMediaPlaying.Value}"                              
+                                         MediaPosition="{Binding MediaPosition.Value, Mode=TwoWay}"
+                               />
+                </behaviors:Interaction.Behaviors>
             </MediaElement>
         </Border>
     </Grid>

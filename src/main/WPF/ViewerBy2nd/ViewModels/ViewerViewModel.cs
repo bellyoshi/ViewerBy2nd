@@ -7,6 +7,8 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using ViewerBy2nd.FileViewParams;
+using System.Diagnostics;
 
 namespace ViewerBy2nd.ViewModels
 {
@@ -18,9 +20,12 @@ namespace ViewerBy2nd.ViewModels
         public ReactiveProperty<TimeSpan> MediaPosition { get; } = new ReactiveProperty<TimeSpan>();
         public ReactiveProperty<TimeSpan> MediaLength { get; } = new ReactiveProperty<TimeSpan>();
 
+        public ReactiveProperty<bool> IsMediaPlaying { get; } = new ReactiveProperty<bool>();
 
+        public ReactiveProperty<string> VideoPath { get; } = new ReactiveProperty<string>();
 
-
+        public ReactiveProperty<Visibility> IsMovie { get; } = new();
+        public ReactiveProperty<Visibility> IsImage { get; } = new();
         public ReactiveCommand FullScreenCommand { get;  } = new();
         public ReactiveCommand WindowModeCommand { get; } = new();
         public ReactiveCommand CloseDisplayCommand { get; } = new();
@@ -48,15 +53,60 @@ namespace ViewerBy2nd.ViewModels
             Background = displayModel.ToReactivePropertyAsSynchronized(x => x.BackColor);
 
             var screenModel = ScreenModel.GetInstance();
-            
+
             //var isFullscreen = screenModel.ToReactivePropertyAsSynchronized(x => x.IsFullScreen).
             //    Subscribe(_=> SetScreenSize());
 
 
 
             CloseDisplayCommand.Subscribe(_ => ExecuteCloseDisplay());
+
+            MovieModel movieModel = MovieModel.Instance;
+            movieModel.ObserveProperty(moviemodel => moviemodel.MediaPosition)
+                .Subscribe(x =>
+                {
+                    if( (MediaPosition.Value - x).Duration() > TimeSpan.FromMilliseconds(100))
+                    {
+                        MediaPosition.Value = x;
+                    }
+                }
+                
+                );
+
+            VideoPath = movieModel.ToReactivePropertyAsSynchronized(
+                x => x.VideoPath
+                );
+            IsMediaPlaying = movieModel.ToReactivePropertyAsSynchronized(x => x.IsMediaPlaying);
+
+            IsMediaPlaying.Subscribe(x =>
+            {
+                Debug.WriteLine("IsPlaying:" + x);
+                Debug.WriteLine("VideoPath:" + VideoPath.Value);
+                Debug.WriteLine("MediaPosition:" + MediaPosition.Value);
+                SetVisibility();
+            });
+
+            MediaPosition.Subscribe(x =>
+            {
+                Debug.WriteLine("MediaPosition:" + x);
+            });
         }
 
+        void SetVisibility()
+        {
+            if (!IsMediaPlaying.Value)
+            {
+                IsMovie.Value = Visibility.Collapsed;
+                IsImage.Value = Visibility.Visible;
+            }
+            else
+            {
+                IsMovie.Value = Visibility.Visible;
+                IsImage.Value = Visibility.Collapsed;
+
+            }
+
+        }
 
 
 

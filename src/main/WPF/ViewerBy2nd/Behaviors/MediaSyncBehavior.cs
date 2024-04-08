@@ -87,7 +87,6 @@ public class MediaSyncBehavior : Behavior<MediaElement>
             {
                 MediaPosition = newPosition;
             }
-            Debug.WriteLine($"MediaPosition: {newPosition}");
         };
     }
 }
