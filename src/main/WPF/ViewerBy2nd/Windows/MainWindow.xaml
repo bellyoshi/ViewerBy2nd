@@ -176,7 +176,7 @@
                 </Border>
                 <Border Background="{Binding ImageBackgroundColor.Value}">
                     <MediaElement x:Name="mainMediaElement" LoadedBehavior="Manual" Source="{Binding VideoPath.Value}" 
-                                  Visibility="{Binding IsMovie.Value}">
+                                  Visibility="{Binding IsMovie.Value}" Volume="0">
                         <behaviors:Interaction.Behaviors>
                             <b:MediaSyncBehavior IsPlaying="{Binding IsMediaPlaying.Value}"
                                           MediaPosition="{Binding MediaPosition.Value, Mode=TwoWay}"/>
