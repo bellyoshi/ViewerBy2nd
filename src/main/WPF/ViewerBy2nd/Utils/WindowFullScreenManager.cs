@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Drawing;
 using Reactive.Bindings;
 using System.Windows;
+using System.Diagnostics;
+using System.Configuration;
 
 
 namespace ViewerBy2nd.Utils;
@@ -17,19 +19,14 @@ interface IWindowFullScreenManager
 }
 internal class WindowFullScreenManager: IWindowFullScreenManager
 {
-
+    private Win32Api.WindowBoundsManager _windowBoundsManager;
 
     public WindowFullScreenManager(Window window)
     {
+        _windowBoundsManager = new(window);
 
-        if (top == 0 && left == 0 && height == 0 && width == 0)
-        {
-            top = window.Top;
-            left = window.Left;
-            height = window.Height;
-            width = window.Width;
-        }
-        SetCloseEvent(window);
+
+        SetEvents(window);
         System.Diagnostics.Debug.Assert(_window == window); //SetCloseEventで設定済み。
 
     }
@@ -49,17 +46,18 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
     public Window Window { get => _window;
         set
         {
-            SetCloseEvent(value);
-            SetWindowBound(top, left, height, width);
+            _windowBoundsManager = new(value);
+            SetEvents(value);
         }
     }
 
-    private void SetCloseEvent(Window value)
+    private void SetEvents(Window value)
     {
         // 以前に設定されたWindowのClosedイベントからハンドラを削除
         if (_window != null)
         {
             _window.Closed -= Window_Closed;
+            _window.Loaded -= Window_Loaded;
         }
 
 
@@ -69,9 +67,12 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
         // 新しく設定されたWindowに対してClosedイベントハンドラを登録
         if (_window != null)
         {
-            _window.Closed += Window_Closed;
+            _window.Closing += Window_Closed;
+            _window.Loaded += Window_Loaded;
         }
     }
+
+
 
     private double top;
     private double left;
@@ -103,10 +104,7 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
         // Set the window to full screen
         if (!_IsFullScreen)
         {
-            this.BakupHeight = Window.Height;
-            this.BakupWidth = Window.Width;
-            this.BackupLeft = Window.Left;
-            this.BackupTop = Window.Top;
+            (BackupTop, BackupLeft, BakupHeight, BakupWidth) = _windowBoundsManager.GetWindowBound();
 
         }
 
@@ -127,10 +125,7 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
         this.height = height;
         this.width =  width;
 
-            Window.Top = top;
-            Window.Left = left;
-            Window.Height = height;
-            Window.Width = width;
+        _windowBoundsManager.SetWindowBound(top, left, height, width);
         
     }
 
@@ -150,10 +145,24 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
         // Windowが閉じたときに行いたい処理をここに実装
         if (_window != null)
         {
-            top = _window.Top;
-            left = _window.Left;
-            height = _window.Height;
-            width = _window.Width;
+            (top, left, height, width) = _windowBoundsManager.GetWindowBound();
+            Debug.WriteLine($"Window_Closed: top={top}, left={left}, height={height}, width={width}");
+        }
+    }
+
+    //Window Load イベント
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+        // Windowがロードされたときに行いたい処理をここに実装
+        if (_window == null) return;
+        if (top == 0 && left == 0 && height == 0 && width == 0)
+        {
+            
+           (top, left, height, width) = _windowBoundsManager.GetWindowBound();
+            
+
+        } else {
+            SetWindowBound(top, left, height, width);
         }
     }
 
