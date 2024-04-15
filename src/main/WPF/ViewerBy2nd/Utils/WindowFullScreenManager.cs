@@ -27,7 +27,7 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
 
 
         SetEvents(window);
-        System.Diagnostics.Debug.Assert(_window == window); //SetCloseEventで設定済み。
+        _window = window;
 
     }
 
@@ -54,22 +54,18 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
     private void SetEvents(Window value)
     {
         // 以前に設定されたWindowのClosedイベントからハンドラを削除
-        if (_window != null)
+        if(_window != null)
         {
             _window.Closed -= Window_Closed;
             _window.Loaded -= Window_Loaded;
         }
 
 
-        _window = value;
-
-
         // 新しく設定されたWindowに対してClosedイベントハンドラを登録
-        if (_window != null)
-        {
-            _window.Closing += Window_Closed;
-            _window.Loaded += Window_Loaded;
-        }
+
+        value.Closing += Window_Closed;
+        value.Loaded += Window_Loaded;
+        
     }
 
 
@@ -154,15 +150,21 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
     {
         // Windowがロードされたときに行いたい処理をここに実装
         if (_window == null) return;
-        if (top == 0 && left == 0 && height == 0 && width == 0)
+        if (IsPreinitialization())
         {
-            
-           (top, left, height, width) = _windowBoundsManager.GetWindowBound();
-            
 
-        } else {
+            (top, left, height, width) = _windowBoundsManager.GetWindowBound();
+
+
+        }
+        else
+        {
             SetWindowBound(top, left, height, width);
         }
     }
 
+    private bool IsPreinitialization()
+    {
+        return top == 0 && left == 0 && height == 0 && width == 0;
+    }
 }
