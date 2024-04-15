@@ -146,7 +146,6 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
         if (_window != null)
         {
             (top, left, height, width) = _windowBoundsManager.GetWindowBound();
-            Debug.WriteLine($"Window_Closed: top={top}, left={left}, height={height}, width={width}");
         }
     }
 

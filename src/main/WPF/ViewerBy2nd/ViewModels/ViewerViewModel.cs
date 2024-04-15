@@ -62,16 +62,19 @@ namespace ViewerBy2nd.ViewModels
             CloseDisplayCommand.Subscribe(_ => ExecuteCloseDisplay());
 
             MovieModel movieModel = MovieModel.Instance;
-            movieModel.ObserveProperty(moviemodel => moviemodel.MediaPosition)
-                .Subscribe(x =>
-                {
-                    if( (MediaPosition.Value - x).Duration() > TimeSpan.FromMilliseconds(100))
-                    {
-                        MediaPosition.Value = x;
-                    }
-                }
+            //movieModel.ObserveProperty(moviemodel => moviemodel.MediaPosition)
+            //    .Subscribe(x =>
+            //    {
+            //        if( (MediaPosition.Value - x).Duration() > TimeSpan.FromMilliseconds(100))
+            //        {
+            //            MediaPosition.Value = x;
+            //        }
+            //    }
                 
-                );
+            //    );
+            MediaPosition = movieModel.ToReactivePropertyAsSynchronized(
+                               x => x.ViewerMediaPostion
+                                              );
 
             VideoPath = movieModel.ToReactivePropertyAsSynchronized(
                 x => x.VideoPath
@@ -80,16 +83,9 @@ namespace ViewerBy2nd.ViewModels
 
             IsMediaPlaying.Subscribe(x =>
             {
-                Debug.WriteLine("IsPlaying:" + x);
-                Debug.WriteLine("VideoPath:" + VideoPath.Value);
-                Debug.WriteLine("MediaPosition:" + MediaPosition.Value);
                 SetVisibility();
             });
 
-            MediaPosition.Subscribe(x =>
-            {
-                Debug.WriteLine("MediaPosition:" + x);
-            });
         }
 
         void SetVisibility()
