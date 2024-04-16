@@ -1,34 +1,17 @@
-﻿    using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reactive.Bindings;
-using System.Reactive.Linq;
-using System.Configuration;
+﻿using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
-using ViewerBy2nd.Models;
+using System.Collections.ObjectModel;
+using System.Reactive.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using ViewerBy2nd.Windows;
-using ViewerBy2nd.Utils;
-using ViewerBy2nd.FileViewParams;
 using System.Windows.Media;
-using System.Diagnostics;
+using System.Windows.Media.Imaging;
+using ViewerBy2nd.FileViewParams;
+using ViewerBy2nd.Models;
 
 namespace ViewerBy2nd.ViewModels;
 
 internal class MainViewModel : ISliderViewModel
 {
-
-
-
-
-
-
 
     private void UpdateMediaPosition()
     {

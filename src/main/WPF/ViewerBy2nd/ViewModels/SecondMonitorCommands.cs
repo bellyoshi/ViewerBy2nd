@@ -1,9 +1,8 @@
-﻿using ViewerBy2nd.Models;
-using ViewerBy2nd.Utils;
-using Reactive.Bindings;
+﻿using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using System.Reactive.Linq;
 using System.Windows.Media.Imaging;
+using ViewerBy2nd.Models;
 
 
 namespace ViewerBy2nd.ViewModels

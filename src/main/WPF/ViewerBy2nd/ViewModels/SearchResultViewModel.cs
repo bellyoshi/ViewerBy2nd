@@ -21,11 +21,11 @@ public class SearchResultViewModel
             }
         }
     }
-    protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+    protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
     public FileViewParam FileViewParam { get; }
 
@@ -36,6 +36,4 @@ public class SearchResultViewModel
     }
 
 
-
-    // その他のプロパティやメソッド
 }

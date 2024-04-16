@@ -1,13 +1,6 @@
 ﻿using Reactive.Bindings;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Threading;
-using ViewerBy2nd.Models;
 using Reactive.Bindings.Extensions;
+using ViewerBy2nd.Models;
 
 namespace ViewerBy2nd.ViewModels
 {

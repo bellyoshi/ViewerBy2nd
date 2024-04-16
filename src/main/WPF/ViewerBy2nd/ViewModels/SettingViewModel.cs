@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Reactive.Bindings;
+using Reactive.Bindings.Extensions;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
 using ViewerBy2nd.Models;
 using ViewerBy2nd.Utils;
-using Reactive.Bindings;
-using Reactive.Bindings.Extensions;
 
 
 namespace ViewerBy2nd.ViewModels

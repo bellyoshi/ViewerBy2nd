@@ -1,14 +1,10 @@
-﻿using ViewerBy2nd.Models;
-using ViewerBy2nd.Utils;
-using Reactive.Bindings;
+﻿using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using System.Reactive.Linq;
 using System.Windows;
-using System.Windows.Forms;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using ViewerBy2nd.FileViewParams;
-using System.Diagnostics;
+using ViewerBy2nd.Models;
+using ViewerBy2nd.Utils;
 
 namespace ViewerBy2nd.ViewModels
 {
@@ -52,26 +48,14 @@ namespace ViewerBy2nd.ViewModels
             ImageSource = displayModel.ToReactivePropertyAsSynchronized(x => x.DisplayImage);
             Background = displayModel.ToReactivePropertyAsSynchronized(x => x.BackColor);
 
-            var screenModel = ScreenModel.GetInstance();
 
-            //var isFullscreen = screenModel.ToReactivePropertyAsSynchronized(x => x.IsFullScreen).
-            //    Subscribe(_=> SetScreenSize());
 
 
 
             CloseDisplayCommand.Subscribe(_ => ExecuteCloseDisplay());
 
             MovieModel movieModel = MovieModel.Instance;
-            //movieModel.ObserveProperty(moviemodel => moviemodel.MediaPosition)
-            //    .Subscribe(x =>
-            //    {
-            //        if( (MediaPosition.Value - x).Duration() > TimeSpan.FromMilliseconds(100))
-            //        {
-            //            MediaPosition.Value = x;
-            //        }
-            //    }
-                
-            //    );
+
             MediaPosition = movieModel.ToReactivePropertyAsSynchronized(
                                x => x.ViewerMediaPostion
                                               );
@@ -103,10 +87,6 @@ namespace ViewerBy2nd.ViewModels
             }
 
         }
-
-
-
-
 
 
         private void ExecuteCloseDisplay()
