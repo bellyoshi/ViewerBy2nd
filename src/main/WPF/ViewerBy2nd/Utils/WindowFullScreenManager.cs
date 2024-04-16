@@ -8,6 +8,7 @@ using Reactive.Bindings;
 using System.Windows;
 using System.Diagnostics;
 using System.Configuration;
+using ViewerBy2nd.Windows;
 
 
 
@@ -37,19 +38,22 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
         get => _screenIndex;
         set { 
             _screenIndex = value;
-            SetFullScreen();
+            IsFullScreen = true;
         }
     }
 
     private Window _window;
-    public Window Window { get => _window;
-        set
-        {
-            DeleteEvents();
-            _windowBoundsManager = new(value);
-            _window = value;
-            SetEvents();
-        }
+    public Window Window { 
+        get => _window;
+        set => SetWindow(value);
+    }
+
+    private void SetWindow(Window value)
+    {
+        DeleteEvents();
+        _windowBoundsManager = new(value);
+        _window = value;
+        SetEvents();
     }
 
     private void SetEvents()
@@ -64,103 +68,87 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
         _window.Loaded -= Window_Loaded;
     }
 
-
-
     private double top;
     private double left;
     private double height;
     private double width;
 
-    private double BakupHeight { get; set; }
-    private double BakupWidth { get; set; }
-
-    private double BackupTop { get; set; }
-    private double BackupLeft { get; set; }
 
     private bool _IsFullScreen;
     public bool IsFullScreen
     {
         get => _IsFullScreen;
-        set
-        {
-            if (value)
-                SetFullScreen();
-            else
-                SetNormalScreen();
+        set => SetIsFullScreen(value);
+    }
 
+    private void SetIsFullScreen(bool value)
+    {
+        if(value && !_IsFullScreen)
+        {
+            //windowモードからフルスクリーンに切り替えられたときに前の状態保持
+            BackupWindowBound();
+        }
+        if (value)
+        {
+            _IsFullScreen = true;
+            SetFullScreenBound();
+        }
+        else
+        {
+            _IsFullScreen = false;
+            SetWindowBound();
         }
     }
 
-    private void SetFullScreen()
+    private void BackupWindowBound()
     {
-        // Set the window to full screen
-        if (!_IsFullScreen)
-        {
-            (BackupTop, BackupLeft, BakupHeight, BakupWidth) = _windowBoundsManager.GetWindowBound();
-
-        }
-
-        SetWindowBound(
-            FullScreenWindowLayout.Top,
-            FullScreenWindowLayout.Left,
-            FullScreenWindowLayout.Height,
-            FullScreenWindowLayout.Width);
-        
-
-        _IsFullScreen = true;
+        (top, left, height, width) = _windowBoundsManager.GetWindowBound();
     }
-
-    private void SetWindowBound(double top, double left, double height, double width)
+    
+    private void SetWindowBound()
     {
-        this.top = top;
-        this.left = left;
-        this.height = height;
-        this.width =  width;
 
         _windowBoundsManager.SetWindowBound(top, left, height, width);
         
     }
-
-    private void SetNormalScreen()
+    private void SetFullScreenBound()
     {
-        if (_IsFullScreen)
-        {
-            SetWindowBound(BackupTop, BackupLeft, BakupHeight, BakupWidth);
-        }
-
-        // Set the window to normal screen
-        _IsFullScreen = false;
+        _windowBoundsManager.SetWindowBound(
+            FullScreenWindowLayout.Top,
+            FullScreenWindowLayout.Left,
+            FullScreenWindowLayout.Height,
+            FullScreenWindowLayout.Width
+        );
     }
+
+
 
     private void Window_Closed(object? sender, EventArgs e)
     {
-        // Windowが閉じたときに行いたい処理をここに実装
-        if (_window != null)
-        {
-            (top, left, height, width) = _windowBoundsManager.GetWindowBound();
-        }
+        if (_IsFullScreen) return;
+        BackupWindowBound();
     }
 
     //Window Load イベント
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        // Windowがロードされたときに行いたい処理をここに実装
-        if (_window == null) return;
-        if (IsPreinitialization())
+        if (_IsFullScreen)
         {
-
-            (top, left, height, width) = _windowBoundsManager.GetWindowBound();
-
-
+            SetFullScreenBound();
+            return;
+        }
+        if (hasBoundBackup())
+        {
+            SetWindowBound();
         }
         else
         {
-            SetWindowBound(top, left, height, width);
+            BackupWindowBound();
         }
     }
 
-    private bool IsPreinitialization()
+    private bool hasBoundBackup()
     {
-        return top == 0 && left == 0 && height == 0 && width == 0;
+        return top != 0 || left != 0 || height != 0 || width != 0;
     }
 }
