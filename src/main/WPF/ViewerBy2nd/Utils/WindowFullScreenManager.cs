@@ -81,9 +81,11 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
         set => SetIsFullScreen(value);
     }
 
+    private bool IsWindowMode => !_IsFullScreen;
+
     private void SetIsFullScreen(bool value)
     {
-        if(value && !_IsFullScreen)
+        if(value && IsWindowMode)
         {
             //windowモードからフルスクリーンに切り替えられたときに前の状態保持
             BackupWindowBound();
@@ -121,12 +123,13 @@ internal class WindowFullScreenManager: IWindowFullScreenManager
         );
     }
 
-
-
     private void Window_Closed(object? sender, EventArgs e)
     {
-        if (_IsFullScreen) return;
-        BackupWindowBound();
+        if (IsWindowMode)
+        {
+            BackupWindowBound();
+        }
+
     }
 
     //Window Load イベント
