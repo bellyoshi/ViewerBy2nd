@@ -36,6 +36,9 @@ namespace ViewerBy2nd.FileViewParams
 
         private double _angle = 0;
 
+        /// <summary>
+        /// 回転角度
+        /// </summary>
         public double Angle
         {
             get { return _angle; }
@@ -45,6 +48,8 @@ namespace ViewerBy2nd.FileViewParams
                 ExecuteDisplay();
             }
         }
+
+        public double Scale { get; set; } = 100;//%
 
         public abstract BitmapSource GetImageFromFile();
         

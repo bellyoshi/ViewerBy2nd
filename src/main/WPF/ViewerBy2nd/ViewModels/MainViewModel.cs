@@ -66,6 +66,7 @@ internal class MainViewModel : ISliderViewModel
     public ReactiveCommand SpecifyPageCommand { get; } 
 
     // ズーム
+    private ZoomCommands ZoomCommands { get; }
     public ReactiveCommand FitWidthCommand { get; } = new ();
     public ReactiveCommand ShowAllCommand { get; } = new ();
     public ReactiveCommand ZoomInCommand { get; } = new ();
@@ -176,10 +177,11 @@ internal class MainViewModel : ISliderViewModel
         LastPageCommand = pdfCommands.CreateLastPageCommand();
         SpecifyPageCommand = pdfCommands.CreateSpecifyPageCommand();
 
-        FitWidthCommand.Subscribe(_ => ExecuteFitWidth());
-        ShowAllCommand.Subscribe(_ => ExecuteShowAll());
-        ZoomInCommand.Subscribe(_ => ExecuteZoomIn());
-        ZoomOutCommand.Subscribe(_ => ExecuteZoomOut());
+        ZoomCommands = new(PreviewFile);
+        FitWidthCommand = ZoomCommands.FitWidthCommand;
+        ShowAllCommand = ZoomCommands.ShowAllCommand;
+        ZoomInCommand = ZoomCommands.CreateZoomInCommand();
+        ZoomOutCommand = ZoomCommands.CreateZoomInCommand();
 
         MovieCommands = new(PreviewFile);
 
@@ -219,25 +221,8 @@ internal class MainViewModel : ISliderViewModel
 
     
 
-    private void ExecuteFitWidth()
-    {
-        // 「ウィンドウ幅に合わせる」のズーム処理
-    }
 
-    private void ExecuteShowAll()
-    {
-        // 「全体を表示」のズーム処理
-    }
 
-    private void ExecuteZoomIn()
-    {
-        // 「拡大」のズーム処理
-    }
-
-    private void ExecuteZoomOut()
-    {
-        // 「縮小」のズーム処理
-    }
 
   
 
