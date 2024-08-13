@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using pdfiumWrapper2;
 
 
 namespace ViewerBy2nd.FileViewParams
@@ -17,17 +18,16 @@ namespace ViewerBy2nd.FileViewParams
             return ImageCreater.GetImageFromFile(this);
         }
 
-        public pdfiumWrapper2.PDFDocumentWrapper PDFDocumentWrapper { get; }
+        public pdfiumWrapper2.PDFDocument PDFDocument { get; }
         public int CurrentPage
         {
             get;
             set;
         } = 0;
-        public int PageCount { get; set; } = 1;
+        public int PageCount  => PDFDocument.PageCount;
         public PdfFileViewParam(string filename) : base(filename)
         {
-            PDFDocumentWrapper = new pdfiumWrapper2.PDFDocumentWrapper(filename);
-            PageCount = PDFDocumentWrapper.PageCount;
+            PDFDocument = new pdfiumWrapper2.PDFDocument(filename);
         }
 
 

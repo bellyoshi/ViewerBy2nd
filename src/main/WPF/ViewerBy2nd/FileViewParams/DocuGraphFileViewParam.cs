@@ -30,7 +30,7 @@ namespace ViewerBy2nd.FileViewParams
             TransformedBitmap transformedBitmap = new TransformedBitmap(image, rotateTransform);
 
             // ImageコントロールのSourceプロパティに設定する
-   
+
             _display.SetImageSource(transformedBitmap);
         }
 
@@ -41,7 +41,7 @@ namespace ViewerBy2nd.FileViewParams
         /// </summary>
         public double Angle
         {
-            get { return _angle; }
+            get => _angle; 
             set
             {
                 _angle = value;
@@ -49,7 +49,18 @@ namespace ViewerBy2nd.FileViewParams
             }
         }
 
-        public double Scale { get; set; } = 100;//%
+        public double _scale = 100;
+        public double Scale
+        {
+            get => _scale;
+            set
+            {
+                _scale = value; 
+                ExecuteDisplay();
+            }
+        }
+               
+
 
         public abstract BitmapSource GetImageFromFile();
         

@@ -12,8 +12,9 @@ internal class ImageCreater
 {
     public static BitmapSource GetImageFromFile(PdfFileViewParam pdfFileViewParam)
     {
-        return pdfFileViewParam.PDFDocumentWrapper.GetImage( 
-            pdfFileViewParam.CurrentPage);
+        return pdfFileViewParam.PDFDocument.GetImage( 
+            pdfFileViewParam.CurrentPage,
+            pdfFileViewParam.Scale);
     }
     public static BitmapSource GetImageFromFile(SvgFileViewParam svgFileViewParam)
     {
