@@ -19,6 +19,7 @@ namespace ViewerBy2nd.ViewModels
 
             FitWidthCommand.Subscribe(_ => ExecuteFitWidth());
             ShowAllCommand.Subscribe(_ => ExecuteShowAll());
+            selectedFile.Subscribe(_ => SetFlag());
         }
 
         private ReactiveProperty<bool> CanZoomIn { get; } = new ReactiveProperty<bool>(false);
@@ -50,6 +51,7 @@ namespace ViewerBy2nd.ViewModels
         {
             if (docuGraphFileViewParam == null) return;
             docuGraphFileViewParam.Scale = Scales.TakeWhile(x => x < docuGraphFileViewParam?.Scale).Last();
+            SetFlag();
         }
 
         public ReactiveCommand FitWidthCommand { get; private set; } = new();
@@ -62,6 +64,7 @@ namespace ViewerBy2nd.ViewModels
             // 「ウィンドウ幅に合わせる」のズーム処理
             if( docuGraphFileViewParam == null) return;
             docuGraphFileViewParam.Scale = 100; //todo:適切な値を設定
+            SetFlag();
         }
 
         private void ExecuteShowAll()
@@ -70,6 +73,7 @@ namespace ViewerBy2nd.ViewModels
             // 「全体を表示」のズーム処理
             if (docuGraphFileViewParam == null) return;
             docuGraphFileViewParam.Scale = 100; //todo:適切な値を設定
+            SetFlag();
         }
 
         private void SetFlag()
