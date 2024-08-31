@@ -181,7 +181,7 @@ internal class MainViewModel : ISliderViewModel
         FitWidthCommand = ZoomCommands.FitWidthCommand;
         ShowAllCommand = ZoomCommands.ShowAllCommand;
         ZoomInCommand = ZoomCommands.CreateZoomInCommand();
-        ZoomOutCommand = ZoomCommands.CreateZoomInCommand();
+        ZoomOutCommand = ZoomCommands.CreateZoomOutCommand();
 
         MovieCommands = new(PreviewFile);
 
