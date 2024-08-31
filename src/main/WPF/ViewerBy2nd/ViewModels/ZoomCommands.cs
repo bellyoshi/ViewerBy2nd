@@ -19,7 +19,7 @@ namespace ViewerBy2nd.ViewModels
 
             FitWidthCommand.Subscribe(_ => ExecuteFitWidth());
             ShowAllCommand.Subscribe(_ => ExecuteShowAll());
-            SetFlag();
+            selectedFile.Subscribe(_ => SetFlag());
         }
 
         private ReactiveProperty<bool> CanZoomIn { get; } = new ReactiveProperty<bool>(false);
