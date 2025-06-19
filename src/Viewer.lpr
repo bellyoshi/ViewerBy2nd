@@ -1,4 +1,4 @@
-﻿program Viewer;
+program Viewer;
 
 {$mode ObjFPC}{$H+}
 
@@ -63,5 +63,4 @@ begin
   SettingLoader.ApplySettings;
 
   Application.Run;
-end.
-
+end. 

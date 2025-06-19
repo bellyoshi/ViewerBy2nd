@@ -37,7 +37,7 @@
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Forms\Main\frmoperation.pas"/>
+        <Filename Value="Forms\Main\frmoperation.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="OperationForm"/>
         <HasResources Value="True"/>
@@ -45,7 +45,7 @@
         <UnitName Value="frmOperation"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Forms\Main\frmviewer.pas"/>
+        <Filename Value="Forms\Main\frmviewer.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ViewerForm"/>
         <HasResources Value="True"/>
@@ -53,16 +53,16 @@
         <UnitName Value="frmViewer"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Core\pdfimagecreator.pas"/>
+        <Filename Value="Core\pdfimagecreator.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="PdfImageCreator"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Models\ViewerModel.pas"/>
+        <Filename Value="Models\ViewerModel.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Forms\Dialogs\pageformunit.pas"/>
+        <Filename Value="Forms\Dialogs\pageformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="PageForm"/>
         <HasResources Value="True"/>
@@ -70,12 +70,12 @@
         <UnitName Value="PageFormUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Utils\iviewunit.pas"/>
+        <Filename Value="Utils\iviewunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="IViewUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Forms\Dialogs\settingformunit.pas"/>
+        <Filename Value="Forms\Dialogs\settingformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="SettingForm"/>
         <HasResources Value="True"/>
@@ -83,57 +83,57 @@
         <UnitName Value="SettingFormUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Services\formsizecustomizerunit.pas"/>
+        <Filename Value="Services\formsizecustomizerunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FormSizeCustomizerUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Utils\imagecreatorunit.pas"/>
+        <Filename Value="Utils\imagecreatorunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ImageCreatorUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Core\zoomunit.pas"/>
+        <Filename Value="Core\zoomunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ZoomUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Core\zoomcacheunit.pas"/>
+        <Filename Value="Core\zoomcacheunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ZoomCacheUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Utils\rotateimagecreatorunit.pas"/>
+        <Filename Value="Utils\rotateimagecreatorunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="RotateImageCreatorUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Utils\timagecreatorunit.pas"/>
+        <Filename Value="Utils\timagecreatorunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TImageCreatorUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Models\filesparam.pas"/>
+        <Filename Value="Models\filesparam.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="FilesParam"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Core\background.pas"/>
+        <Filename Value="Core\background.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="Background"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Models\repogitoryunit.pas"/>
+        <Filename Value="Models\repogitoryunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="RepogitoryUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Utils\resizebilinearunit.pas"/>
+        <Filename Value="Utils\resizebilinearunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ReSizeBilinearUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Forms\Dialogs\aboutunit.pas"/>
+        <Filename Value="Forms\Dialogs\aboutunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="AboutForm"/>
         <HasResources Value="True"/>
@@ -141,12 +141,12 @@
         <UnitName Value="AboutUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Services\settingloaderunit.pas"/>
+        <Filename Value="Services\settingloaderunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="SettingLoaderUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Forms\Dialogs\zoomrateformunit.pas"/>
+        <Filename Value="Forms\Dialogs\zoomrateformunit.pas"/>
         <IsPartOfProject Value="True"/>
         <ComponentName Value="ZoomRateForm"/>
         <HasResources Value="True"/>
@@ -154,27 +154,27 @@
         <UnitName Value="ZoomRateFormUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Controllers\uformcontroller.pas"/>
+        <Filename Value="Controllers\uformcontroller.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="UFormController"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Utils\viewerby2ndfiletypes.pas"/>
+        <Filename Value="Utils\viewerby2ndfiletypes.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ViewerBy2ndFileTypes"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Services\viewerby2ndplayer.pas"/>
+        <Filename Value="Services\viewerby2ndplayer.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="ViewerBy2ndPlayer"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Utils\tmovieimagecreatorunit.pas"/>
+        <Filename Value="Utils\tmovieimagecreatorunit.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TMovieImageCreatorUnit"/>
       </Unit>
       <Unit>
-        <Filename Value="src\Controllers\FormDispatcherUnit.pas"/>
+        <Filename Value="Controllers\FormDispatcherUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
     </Units>
@@ -183,11 +183,11 @@
     <Version Value="11"/>
     <PathDelim Value="\"/>
     <Target>
-      <Filename Value="viewer"/>
+      <Filename Value="..\viewer"/>
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+      <UnitOutputDirectory Value="..\lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
       <Debugging>
@@ -200,17 +200,4 @@
       </Options>
     </Linking>
   </CompilerOptions>
-  <Debugging>
-    <Exceptions>
-      <Item>
-        <Name Value="EAbort"/>
-      </Item>
-      <Item>
-        <Name Value="ECodetoolError"/>
-      </Item>
-      <Item>
-        <Name Value="EFOpenError"/>
-      </Item>
-    </Exceptions>
-  </Debugging>
-</CONFIG>
+</CONFIG> 
