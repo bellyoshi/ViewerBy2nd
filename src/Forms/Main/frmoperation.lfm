@@ -1,0 +1,469 @@
+object OperationForm: TOperationForm
+  Left = 721
+  Height = 609
+  Top = 169
+  Width = 1051
+  AllowDropFiles = True
+  Caption = 'Viewer By 2nd Monitor 操作画面'
+  ClientHeight = 609
+  ClientWidth = 1051
+  DesignTimePPI = 120
+  Font.Height = -15
+  Menu = MainMenu
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnDropFiles = FormDropFiles
+  OnResize = FormResize
+  object NextButton: TButton
+    Left = 750
+    Height = 31
+    Top = 297
+    Width = 54
+    Caption = '次へ'
+    TabOrder = 0
+    OnClick = NextButtonClick
+  end
+  object PreviousButton: TButton
+    Left = 684
+    Height = 31
+    Top = 297
+    Width = 61
+    Caption = '前へ'
+    TabOrder = 1
+    OnClick = PreviousButtonClick
+  end
+  object ViewerGroupBox: TGroupBox
+    Left = 248
+    Height = 91
+    Top = 472
+    Width = 544
+    Caption = 'スクリーン操作'
+    ClientHeight = 66
+    ClientWidth = 540
+    TabOrder = 2
+    object ViewerDisplayButton: TButton
+      Left = 24
+      Height = 31
+      Top = 16
+      Width = 132
+      Caption = 'スクリーンに表示'
+      TabOrder = 0
+      OnClick = ViewerDisplayButtonClick
+    end
+    object ViewerCloseButton: TButton
+      Left = 164
+      Height = 31
+      Top = 18
+      Width = 94
+      Caption = '表示終了'
+      TabOrder = 1
+      OnClick = ViewerCloseButtonClick
+    end
+    object BackGroundDisplayButton: TButton
+      Left = 272
+      Height = 31
+      Top = 16
+      Width = 94
+      Caption = '背景表示'
+      TabOrder = 2
+      OnClick = BackGroundDisplayButtonClick
+    end
+    object AutoUpdateCheckBox: TCheckBox
+      Left = 376
+      Height = 24
+      Top = 16
+      Width = 138
+      Caption = '操作中に自動表示'
+      TabOrder = 3
+      OnChange = AutoUpdateCheckBoxChange
+    end
+  end
+  object FileInfoLabel: TLabel
+    Left = 464
+    Height = 20
+    Top = 8
+    Width = 85
+    Caption = 'FileInfoLabel'
+  end
+  object LastPageButton: TButton
+    Left = 804
+    Height = 31
+    Top = 297
+    Width = 71
+    Caption = '最後'
+    TabOrder = 3
+    OnClick = LastPageButtonClick
+  end
+  object FirstPageButton: TButton
+    Left = 611
+    Height = 31
+    Top = 297
+    Width = 64
+    Caption = '最初'
+    TabOrder = 4
+    OnClick = FirstPageButtonClick
+  end
+  object ZoomInButton: TButton
+    Left = 636
+    Height = 31
+    Top = 249
+    Width = 94
+    Caption = '拡大'
+    TabOrder = 5
+    OnClick = ZoomInButtonClick
+  end
+  object ZoomOutButton: TButton
+    Left = 744
+    Height = 31
+    Top = 249
+    Width = 94
+    Caption = '縮小'
+    TabOrder = 6
+    OnClick = ZoomOutButtonClick
+  end
+  object ZoomRateLabel: TLabel
+    Left = 720
+    Height = 20
+    Top = 209
+    Width = 24
+    Caption = '100'
+    OnClick = ZoomRateLabelClick
+  end
+  object FitWindowButton: TButton
+    Left = 688
+    Height = 31
+    Top = 151
+    Width = 150
+    Caption = 'ウインドウ幅に合わせる'
+    TabOrder = 7
+    OnClick = FitWindowButtonClick
+  end
+  object ViewAllButton: TButton
+    Left = 584
+    Height = 31
+    Top = 151
+    Width = 104
+    Caption = '全体を表示'
+    TabOrder = 8
+    OnClick = ViewAllButtonClick
+  end
+  object Rotate000Button: TButton
+    Left = 682
+    Height = 32
+    Top = 48
+    Width = 114
+    Caption = '元の位置'
+    TabOrder = 9
+    OnClick = Rotate000ButtonClick
+  end
+  object Rotate090Button: TButton
+    Left = 735
+    Height = 32
+    Top = 81
+    Width = 122
+    Caption = '右回転'
+    TabOrder = 10
+    OnClick = Rotate090ButtonClick
+  end
+  object Rotate180Button: TButton
+    Left = 648
+    Height = 32
+    Top = 118
+    Width = 131
+    Caption = '180°回転'
+    TabOrder = 11
+    OnClick = Rotate180ButtonClick
+  end
+  object Rotate270Button: TButton
+    Left = 591
+    Height = 32
+    Top = 81
+    Width = 128
+    Caption = '左回転'
+    TabOrder = 12
+    OnClick = Rotate270ButtonClick
+  end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Height = 29
+    Top = 580
+    Width = 1051
+    Panels = <>
+  end
+  object PreviewPanel: TPanel
+    Left = 248
+    Height = 432
+    Top = 32
+    Width = 328
+    Caption = 'PreviewPanel'
+    ClientHeight = 432
+    ClientWidth = 328
+    TabOrder = 14
+    OnResize = PreviewPanelResize
+    object ThumbnailPanel: TPanel
+      Left = 18
+      Height = 207
+      Top = 56
+      Width = 300
+      Caption = 'ThumbnailPanel'
+      ClientHeight = 207
+      ClientWidth = 300
+      Color = clRed
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 0
+      object Image1: TImage
+        Left = 64
+        Height = 184
+        Top = 8
+        Width = 188
+        OnMouseDown = Image1MouseDown
+        OnMouseLeave = Image1MouseLeave
+        OnMouseMove = Image1MouseMove
+        OnMouseUp = Image1MouseUp
+        OnMouseWheel = Image1MouseWheel
+      end
+    end
+    object Label1: TLabel
+      Left = 128
+      Height = 20
+      Top = 16
+      Width = 81
+      Caption = '表示プレビュー'
+      OnClick = Label1Click
+    end
+    object PageCountLabel: TLabel
+      Left = 104
+      Height = 20
+      Top = 272
+      Width = 108
+      Caption = 'PageCountLabel'
+      OnClick = PageCountLabelClick
+    end
+    object VideoPositionTrackBar: TTrackBar
+      Left = -2
+      Height = 25
+      Top = 296
+      Width = 320
+      Max = 1000
+      Position = 0
+      OnChange = VideoPositionTrackBarChange
+      Enabled = False
+      TabOrder = 1
+      OnMouseDown = VideoPositionTrackBarMouseDown
+    end
+  end
+  object FilesListPanel: TPanel
+    Left = 8
+    Height = 576
+    Top = 0
+    Width = 227
+    Caption = 'FilesListPanel'
+    ClientHeight = 576
+    ClientWidth = 227
+    TabOrder = 15
+    object OpenButton: TButton
+      Left = 104
+      Height = 31
+      Top = 513
+      Width = 102
+      Caption = '開く'
+      TabOrder = 0
+      OnClick = OpenButtonClick
+    end
+    object SelectAllButton: TButton
+      Left = 2
+      Height = 31
+      Top = 480
+      Width = 94
+      Caption = '全選択'
+      TabOrder = 1
+      OnClick = SelectAllButtonClick
+    end
+    object DelteButton: TButton
+      Left = 2
+      Height = 31
+      Top = 512
+      Width = 94
+      Caption = 'リストから削除'
+      TabOrder = 2
+      OnClick = DelteButtonClick
+    end
+    object DeselectButton: TButton
+      Left = 104
+      Height = 31
+      Top = 480
+      Width = 102
+      Caption = '選択解除'
+      TabOrder = 3
+      OnClick = DeselectButtonClick
+    end
+    object FilesListBox: TListBox
+      Left = 0
+      Height = 465
+      Top = 8
+      Width = 221
+      DragMode = dmAutomatic
+      ItemHeight = 0
+      MultiSelect = True
+      TabOrder = 4
+      OnSelectionChange = FilesListBoxSelectionChange
+    end
+  end
+  object PlayButton: TButton
+    Left = 616
+    Height = 25
+    Top = 344
+    Width = 75
+    Caption = 'Play'
+    Enabled = False
+    TabOrder = 16
+    OnClick = PlayButtonClick
+  end
+  object StopButton: TButton
+    Left = 704
+    Height = 25
+    Top = 344
+    Width = 75
+    Caption = 'Stop'
+    Enabled = False
+    TabOrder = 17
+    OnClick = StopButtonClick
+  end
+  object OpenDialog1: TOpenDialog
+    Left = 912
+    Top = 464
+  end
+  object MainMenu: TMainMenu
+    Left = 848
+    Top = 456
+    object FileMenu: TMenuItem
+      Caption = 'ファイル(&F)'
+      object ListMenu: TMenuItem
+        Caption = 'リスト(&L)'
+      end
+      object OpenMenu: TMenuItem
+        Caption = '開く(&O)'
+        OnClick = OpenMenuClick
+      end
+    end
+    object DisplayMenu: TMenuItem
+      Caption = '表示(&V)'
+      object RotateMenu: TMenuItem
+        Caption = '回転(&R)'
+        object Rotate000Menu: TMenuItem
+          Caption = '元の位置'
+          OnClick = Rotate000MenuClick
+        end
+        object Rotate090Menu: TMenuItem
+          Caption = '右へ90°'
+          OnClick = Rotate090MenuClick
+        end
+        object Rotate180Menu: TMenuItem
+          Caption = '180°'
+          OnClick = Rotate180MenuClick
+        end
+        object Rotate270Menu: TMenuItem
+          Caption = '右へ270°'
+          OnClick = Rotate270MenuClick
+        end
+      end
+      object PageNavigationMenu: TMenuItem
+        Caption = 'ページ(&P)'
+        object FirstPageMenu: TMenuItem
+          Caption = '最初のページ'
+          OnClick = FirstPageMenuClick
+        end
+        object NextPageMenu: TMenuItem
+          Caption = '次のページ'
+          OnClick = NextPageMenuClick
+        end
+        object PreviousPageMenu: TMenuItem
+          Caption = '前のページ'
+          OnClick = PreviousPageMenuClick
+        end
+        object LastPageMenu: TMenuItem
+          Caption = '最後のページ'
+          OnClick = LastPageMenuClick
+        end
+        object PageIndexMenu: TMenuItem
+          Caption = 'ページを指定'
+          OnClick = PageIndexMenuClick
+        end
+      end
+      object ZoomMenu: TMenuItem
+        Caption = '拡大縮小'
+        object ZoomInMenuItem: TMenuItem
+          Caption = '拡大'
+          OnClick = ZoomInMenuItemClick
+        end
+        object ZoomOutMenuItem: TMenuItem
+          Caption = '縮小'
+          OnClick = ZoomOutMenuItemClick
+        end
+        object ZoomRateMenuItem: TMenuItem
+          Caption = '拡大率を指定'
+          OnClick = ZoomRateMenuItemClick
+        end
+      end
+      object VideoPlayMenu: TMenuItem
+        Caption = 'video'
+      end
+      object ViewerMenu: TMenuItem
+        Caption = 'スクリーン操作'
+        object ViewerDisplayMenu: TMenuItem
+          Caption = 'スクリーンに表示'
+          OnClick = ViewerDisplayMenuClick
+        end
+        object ViewerCloseMenu: TMenuItem
+          Caption = '表示終了'
+          OnClick = ViewerCloseMenuClick
+        end
+        object BackgroundDisplayMenu: TMenuItem
+          Caption = '背景表示'
+          OnClick = BackgroundDisplayMenuClick
+        end
+      end
+    end
+    object SettingMenu: TMenuItem
+      Caption = '設定(&S)'
+      object DisplaySettingMenu: TMenuItem
+        Caption = 'モニターと背景画像'
+        OnClick = DisplaySettingMenuClick
+      end
+      object AutoUpdateSettingMenu: TMenuItem
+        Caption = '操作中に自動表示'
+        OnClick = AutoUpdateSettingMenuClick
+      end
+      object OperationFormSizeMenu: TMenuItem
+        Caption = '操作画面サイズ'
+        object DefaultSizeMenu: TMenuItem
+          Caption = 'DefaultSizeMenu'
+          OnClick = DefaultSizeMenuClick
+        end
+        object SlimSizeMenu: TMenuItem
+          Caption = 'SlimSizeMenu'
+          OnClick = SlimSizeMenuClick
+        end
+        object MinimumSizeMenu: TMenuItem
+          Caption = 'MinimumSizeMenu'
+          OnClick = MinimumSizeMenuClick
+        end
+      end
+    end
+    object HelpMenu: TMenuItem
+      Caption = 'ヘルプ(&H)'
+      object AboutMenu: TMenuItem
+        Caption = 'このアプリについて(&A)'
+        OnClick = AboutMenuClick
+      end
+    end
+  end
+  object Timer1: TTimer
+    Enabled = False
+    Interval = 100
+    OnTimer = Timer1Timer
+    Left = 824
+    Top = 368
+  end
+end

@@ -1,0 +1,65 @@
+object ViewerForm: TViewerForm
+  Left = 213
+  Height = 410
+  Top = 214
+  Width = 509
+  Caption = 'スクリーン Viewer By 2nd Monitor'
+  ClientHeight = 410
+  ClientWidth = 509
+  DesignTimePPI = 120
+  PopupMenu = PopupMenu1
+  OnCreate = FormCreate
+  OnResize = FormResize
+  object Panel1: TPanel
+    Left = 32
+    Height = 352
+    Top = 24
+    Width = 437
+    Caption = 'Panel1'
+    ClientHeight = 352
+    ClientWidth = 437
+    PopupMenu = PopupMenu1
+    TabOrder = 0
+    object Image1: TImage
+      Left = 128
+      Height = 128
+      Top = 200
+      Width = 240
+      PopupMenu = PopupMenu1
+    end
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 189
+    Top = 23
+    object MenuItemWindowMode: TMenuItem
+      Caption = 'ウインドウ'
+      OnClick = MenuItemWindowModeClick
+    end
+    object MenuItemFullScreen: TMenuItem
+      Caption = 'フルスクリーン'
+      OnClick = MenuItemFullScreenClick
+    end
+    object Separator1: TMenuItem
+      Caption = '-'
+    end
+    object MenuItemTitleInVisible: TMenuItem
+      Caption = 'タイトルバーを隠す'
+      OnClick = MenuItemTitleInVisibleClick
+    end
+    object MenuItemTitleVisible: TMenuItem
+      Caption = 'タイトルバーを表示する'
+      OnClick = MenuItemTitleVisibleClick
+    end
+    object Separator2: TMenuItem
+      Caption = '-'
+    end
+    object MenuItemOperation: TMenuItem
+      Caption = '操作ウインドウをトップに表示'
+      OnClick = MenuItemOperationClick
+    end
+    object MenuItemClose: TMenuItem
+      Caption = '閉じる'
+      OnClick = MenuItemCloseClick
+    end
+  end
+end
