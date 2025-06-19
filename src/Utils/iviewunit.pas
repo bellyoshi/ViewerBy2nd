@@ -52,7 +52,8 @@ var
 begin
   for View in FViews do
   begin
-    View.UpdateView; // 各フォームの UpdateView を呼び出す
+    If Assigned(View) then
+      View.UpdateView; // 各フォームの UpdateView を呼び出す
   end;
 end;
 

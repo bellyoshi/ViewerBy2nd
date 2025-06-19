@@ -89,6 +89,7 @@ var
 begin
 
 
+
   try
     // panel1のサイズ変更
     Panel1.Width := ClientWidth;
@@ -174,6 +175,7 @@ end;
 
 procedure TViewerForm.UpdateView();
 begin
+  if not Assigned(model) Then Exit;
   ControlEnabled();
   Image1.Visible := True;
   LoadBitmap();

@@ -44,6 +44,7 @@ begin
 
   player := TViewerBy2ndPlayer.Create;
 
+  Application.CreateForm(TOperationForm, OperationForm);
   Application.CreateForm(TViewerForm, ViewerForm);
   Application.CreateForm(TPageForm, PageForm);
   Application.CreateForm(TSettingForm, SettingForm);
@@ -56,6 +57,8 @@ begin
 
   FormController.RegisterForm(OperationForm);
   ViewerForm.Show();
+  OperationForm.Show();
+
   SettingLoader.ApplySettings;
 
   Application.Run;
