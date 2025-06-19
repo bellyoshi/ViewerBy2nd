@@ -3,7 +3,7 @@ object ViewerForm: TViewerForm
   Height = 410
   Top = 214
   Width = 509
-  Caption = 'スクリーン Viewer By 2nd Monitor'
+  Caption = 'Viewer By 2nd Monitor スクリーン'
   ClientHeight = 410
   ClientWidth = 509
   DesignTimePPI = 120

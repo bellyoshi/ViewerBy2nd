@@ -3,7 +3,7 @@ object ZoomRateForm: TZoomRateForm
   Height = 240
   Top = 190
   Width = 320
-  Caption = 'Form1'
+  Caption = 'Viewer By 2nd Monitor ズーム率'
   ClientHeight = 240
   ClientWidth = 320
   DesignTimePPI = 120

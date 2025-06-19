@@ -11,10 +11,7 @@ uses
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
   Forms,
-
-  frmOperation,
-  frmViewer,
-  ViewerModel,
+  frmViewer, frmOperation,
   RepogitoryUnit,
   FormSizeCustomizerUnit,
   PageFormUnit,
@@ -28,7 +25,7 @@ uses
   ViewerBy2ndPlayer,
   TMovieImageCreatorUnit,
   UFormController,
-  FormDispatcherUnit
+  FormDispatcherUnit, ViewerModel
   { you can add units after this };
 
 {$R *.res}
@@ -47,7 +44,6 @@ begin
 
   player := TViewerBy2ndPlayer.Create;
 
-  Application.CreateForm(TOperationForm, OperationForm);
   Application.CreateForm(TViewerForm, ViewerForm);
   Application.CreateForm(TPageForm, PageForm);
   Application.CreateForm(TSettingForm, SettingForm);

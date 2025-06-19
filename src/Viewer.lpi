@@ -187,6 +187,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
+      <OtherUnitFiles Value="Forms\Main;Forms\Dialogs;Models;Services;Utils;Controllers;Core"/>
       <UnitOutputDirectory Value="..\lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
@@ -200,4 +201,4 @@
       </Options>
     </Linking>
   </CompilerOptions>
-</CONFIG> 
+</CONFIG>

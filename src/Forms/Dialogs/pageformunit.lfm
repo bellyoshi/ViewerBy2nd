@@ -3,7 +3,7 @@ object PageForm: TPageForm
   Height = 93
   Top = 320
   Width = 275
-  Caption = 'Form3'
+  Caption = 'Viewer By 2nd Monitor ページ変更'
   ClientHeight = 93
   ClientWidth = 275
   DesignTimePPI = 120

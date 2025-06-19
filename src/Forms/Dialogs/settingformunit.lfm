@@ -3,7 +3,7 @@ object SettingForm: TSettingForm
   Height = 240
   Top = 392
   Width = 618
-  Caption = 'SettingForm'
+  Caption = 'Viewer By 2nd Monitor 設定画面'
   ClientHeight = 240
   ClientWidth = 618
   DesignTimePPI = 120
