@@ -247,7 +247,12 @@ end;
 
 function TViewerModel.GetViewBitmap(Width, Height: Integer): TBitmap;
 begin
-  if Assigned(Repogitory.ViewFile) then
+  If not Assigned(Repogitory) Then
+  begin
+    Result := nil;
+    Exit;
+  end;
+  if Assigned(Repogitory.ViewFile) and Assigned(Repogitory.ViewFile.Zoom) then
     Result := Repogitory.ViewFile.Zoom.GetBitmap(Width, Height)
   else
     Result := FBackground.GetBitmap(Width, Height);
@@ -255,7 +260,7 @@ end;
 
 function TViewerModel.GetThumbnailBitmap(Width, Height: Integer): TBitmap;
 begin
-  if Assigned(OperationFile) then
+  if Assigned(OperationFile) and Assigned(OperationFile.Zoom) then
     Result := OperationFile.Zoom.GetBitmap(Width, Height)
   else
     Result := FBackground.GetBitmap(Width, Height);
@@ -263,7 +268,7 @@ end;
 
 function TViewerModel.GetViewRatio: Double;
 begin
-  if Assigned(Repogitory.ViewFile) then
+  if Assigned(Repogitory.ViewFile) and Assigned(Repogitory.ViewFile.RotateImageCreator) then
   begin
     Result := Repogitory.ViewFile.RotateImageCreator.GetRatio();
   end
@@ -275,7 +280,7 @@ end;
 
 function TViewerModel.GetThumbnailRatio: Double;
 begin
-  if Assigned(OperationFile) then
+  if Assigned(OperationFile) and Assigned(OperationFile.RotateImageCreator) then
   begin
     Result := OperationFile.RotateImageCreator.GetRatio();
   end

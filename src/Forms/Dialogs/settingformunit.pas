@@ -19,6 +19,7 @@ type
     Panel1: TPanel;
     procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure FormShow(Sender: TObject);
     procedure OkButtonClick(Sender: TObject);
     procedure Panel1Click(Sender: TObject);
   private
@@ -51,8 +52,14 @@ end;
 
 procedure TSettingForm.FormCreate(Sender: TObject);
 begin
-  PopulateScreenList(ComboBox1); // フォーム作成時にスクリーン一覧を表示
-  Panel1.Color:=model.Background.Color;
+
+
+end;
+
+procedure TSettingForm.FormShow(Sender: TObject);
+begin
+    PopulateScreenList(ComboBox1);
+    Panel1.Color:=model.Background.Color;
 end;
 
 procedure TSettingForm.ComboBox1Change(Sender: TObject);

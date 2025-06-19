@@ -36,9 +36,25 @@ begin
   end else if IsPDFFile(AFileName) then
   begin
     ImageCreator := TPdfImageCreator.Create(AFileName);
+  end
+  else
+  begin
+    // ファイルタイプが認識されない場合は例外を発生させる
+    raise Exception.CreateFmt('Unsupported file type: %s', [AFileName]);
   end;
-  RotateImageCreator:= TRotateImageCreator.Create(ImageCreator);
-  Zoom := TZoom.Create(RotateImageCreator);
+  
+  // ImageCreatorが正常に作成された場合のみ、RotateImageCreatorとZoomを作成
+  if Assigned(ImageCreator) then
+  begin
+    RotateImageCreator := TRotateImageCreator.Create(ImageCreator);
+    Zoom := TZoom.Create(RotateImageCreator);
+  end
+  else
+  begin
+    // 万が一ImageCreatorがnilの場合は例外を発生させる
+    raise Exception.CreateFmt('Failed to create image creator for: %s', [AFileName]);
+  end;
+  
   Filename := AFileName;
   Selected := ASelected;
 end;

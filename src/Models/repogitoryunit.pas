@@ -148,15 +148,23 @@ begin
   begin
     Exit;
   end;
-  for i := 0 to FFilesList.Count - 1 do
-  begin
-    FFilesList.Items[i].Selected := False;
+  
+  try
+    for i := 0 to FFilesList.Count - 1 do
+    begin
+      FFilesList.Items[i].Selected := False;
+    end;
+    newFileParam := TFilesParam.Create(Filename, true);
+    FFilesList.Add(newFileParam);
+  except
+    on E: Exception do
+    begin
+      // エラーログを出力（デバッグ用）
+      WriteLn('Error adding file: ', E.Message);
+      // 必要に応じて例外を再発生させるか、エラーメッセージを表示する
+      raise;
+    end;
   end;
-  newFileParam := TFilesParam.Create(Filename, true);
-  FFilesList.Add(newFileParam);
-
-
-
 end;
 
 function TRepogitory.GetFileNames: TStringList;
