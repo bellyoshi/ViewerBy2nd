@@ -1,0 +1,34 @@
+object MessageForm: TMessageForm
+  Left = 552
+  Height = 240
+  Top = 37
+  Width = 400
+  Caption = 'メッセージ'
+  ClientHeight = 240
+  ClientWidth = 400
+  DesignTimePPI = 144
+  LCLVersion = '4.0.0.4'
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  object Memo1: TMemo
+    Left = 8
+    Height = 180
+    Top = 8
+    Width = 384
+    Anchors = [akTop, akLeft, akRight, akBottom]
+    ReadOnly = True
+    ScrollBars = ssVertical
+    TabOrder = 0
+  end
+  object Button1: TButton
+    Left = 317
+    Height = 25
+    Top = 200
+    Width = 75
+    Anchors = [akRight, akBottom]
+    Caption = 'OK'
+    Default = True
+    ModalResult = 1
+    TabOrder = 1
+  end
+end

@@ -177,6 +177,14 @@
         <Filename Value="Controllers\FormDispatcherUnit.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit>
+      <Unit>
+        <Filename Value="Forms\Dialogs\messageformunit.pas"/>
+        <IsPartOfProject Value="True"/>
+        <ComponentName Value="MessageForm"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="MessageFormUnit"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
