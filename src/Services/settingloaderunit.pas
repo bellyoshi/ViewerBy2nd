@@ -6,7 +6,7 @@ unit SettingLoaderUnit;
 interface
 
 uses
-  Classes, SysUtils, Forms, FormSizeCustomizerUnit,IniFiles;
+  Classes, SysUtils, Forms, FormSizeCustomizerUnit, IniFiles, Graphics, ViewerModel;
 
 {
 //Load
@@ -42,6 +42,7 @@ type
     FWindowLeft: Integer;
     FWindowWidth: Integer;
     FWindowHeight: Integer;
+    FBackgroundColor: TColor;
     FFileList: TStringList;
     FMissingFiles: TStringList;
     const
@@ -60,6 +61,9 @@ type
     function GetFileList: TStringList;
     procedure SetFileList(AFileList: TStringList);
     function GetMissingFiles: TStringList;
+    function GetBackgroundColor: TColor;
+    procedure SetBackgroundColor(AColor: TColor);
+    procedure CollectSettingsFromModel(AModel: TObject);
   end;
 
 var
@@ -94,11 +98,11 @@ begin
     FScreenIndex := 0; // プライマリモニターをデフォルトに設定
   end;
 
-
   FWindowTop := 100;
   FWindowLeft := 100;
   FWindowWidth := 800;
   FWindowHeight := 600;
+  FBackgroundColor := clBlack; // デフォルトは黒色
 end;
 
 procedure TSettingLoader.ApplySettings;
@@ -126,6 +130,7 @@ begin
     FWindowLeft := SettingsFile.ReadInteger('Window', 'Left', 100);
     FWindowWidth := SettingsFile.ReadInteger('Window', 'Width', 800);
     FWindowHeight := SettingsFile.ReadInteger('Window', 'Height', 600);
+    FBackgroundColor := SettingsFile.ReadInteger('Display', 'BackgroundColor', clBlack);
 
     ValidateSettings; // 設定の妥当性を確認
     LoadFileList; // ファイルリストを読み込み
@@ -156,7 +161,18 @@ begin
   FWindowLeft := FormSizeCustomizer.WindowModeSize.Left;
   FWindowWidth := FormSizeCustomizer.WindowModeSize.Width;
   FWindowHeight := FormSizeCustomizer.WindowModeSize.Height;
+end;
 
+procedure TSettingLoader.CollectSettingsFromModel(AModel: TObject);
+begin
+  // 基本設定を収集
+  CollectSettings;
+  
+  // モデルから背景色を取得（型キャストが必要）
+  if AModel is TViewerModel then
+  begin
+    FBackgroundColor := TViewerModel(AModel).Background.Color;
+  end;
 end;
 
 procedure TSettingLoader.Save;
@@ -171,6 +187,7 @@ begin
   try
     SettingsFile.WriteInteger('Display', 'ScreenIndex', FScreenIndex);
     SettingsFile.WriteBool('Display', 'IsFullScreen', FIsFullScreen);
+    SettingsFile.WriteInteger('Display', 'BackgroundColor', FBackgroundColor);
     SettingsFile.WriteInteger('Window', 'Top', FWindowTop);
     SettingsFile.WriteInteger('Window', 'Left', FWindowLeft);
     SettingsFile.WriteInteger('Window', 'Width', FWindowWidth);
@@ -249,6 +266,16 @@ end;
 function TSettingLoader.GetMissingFiles: TStringList;
 begin
   Result := FMissingFiles;
+end;
+
+function TSettingLoader.GetBackgroundColor: TColor;
+begin
+  Result := FBackgroundColor;
+end;
+
+procedure TSettingLoader.SetBackgroundColor(AColor: TColor);
+begin
+  FBackgroundColor := AColor;
 end;
 
 end.

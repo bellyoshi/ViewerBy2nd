@@ -284,6 +284,9 @@ begin
   player.RegisterThumbnail(Self, ThumbnailPanel);
   Timer1.Enabled := True;
   
+  // 保存された背景色を読み込む
+  model.Background.Color := SettingLoader.GetBackgroundColor;
+  
   // 保存されたファイルリストを読み込む
   SavedFileList := SettingLoader.GetFileList;
   if Assigned(SavedFileList) and (SavedFileList.Count > 0) then
@@ -857,6 +860,8 @@ begin
     CurrentFileList.Free;
   end;
   
+  // モデルから設定を収集してから保存
+  SettingLoader.CollectSettingsFromModel(model);
   SettingLoader.Save;
   FreeAndNil(player);
   model.Free;

@@ -20,7 +20,7 @@ object SettingForm: TSettingForm
     OnChange = ComboBox1Change
   end
   object OkButton: TButton
-    Left = 216
+    Left = 56
     Height = 31
     Top = 184
     Width = 94
@@ -28,15 +28,37 @@ object SettingForm: TSettingForm
     TabOrder = 1
     OnClick = OkButtonClick
   end
-  object Panel1: TPanel
-    Left = 464
+  object ViewerBackgroundColor: TPanel
+    Left = 96
     Height = 43
-    Top = 47
+    Top = 112
     Width = 77
     BorderStyle = bsSingle
     Caption = '背景色'
     TabOrder = 2
-    OnClick = Panel1Click
+    OnClick = ViewerBackgroundColorClick
+  end
+  object IsSimpleBackGroundColor: TRadioButton
+    Left = 32
+    Height = 24
+    Top = 120
+    Width = 51
+    Caption = '単色'
+    TabOrder = 3
+  end
+  object IsBackgroundImage: TRadioButton
+    Left = 200
+    Height = 24
+    Top = 120
+    Width = 81
+    Caption = '背景画像'
+    TabOrder = 4
+  end
+  object ViewerBackGroundImage: TImage
+    Left = 300
+    Height = 76
+    Top = 92
+    Width = 100
   end
   object ColorDialog1: TColorDialog
     Color = clBlack
@@ -63,6 +85,6 @@ object SettingForm: TSettingForm
       'ColorT=A4A0A0'
     )
     Left = 427
-    Top = 142
+    Top = 176
   end
 end

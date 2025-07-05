@@ -14,14 +14,17 @@ type
 
   TSettingForm = class(TForm)
     ColorDialog1: TColorDialog;
+    ViewerBackGroundImage: TImage;
+    IsBackgroundImage: TRadioButton;
     OkButton: TButton;
     ComboBox1: TComboBox;
-    Panel1: TPanel;
+    IsSimpleBackGroundColor: TRadioButton;
+    ViewerBackgroundColor: TPanel;
     procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure OkButtonClick(Sender: TObject);
-    procedure Panel1Click(Sender: TObject);
+    procedure ViewerBackgroundColorClick(Sender: TObject);
   private
 
   public
@@ -59,7 +62,7 @@ end;
 procedure TSettingForm.FormShow(Sender: TObject);
 begin
     PopulateScreenList(ComboBox1);
-    Panel1.Color:=model.Background.Color;
+    ViewerBackgroundColor.Color:=model.Background.Color;
 end;
 
 procedure TSettingForm.ComboBox1Change(Sender: TObject);
@@ -77,14 +80,14 @@ begin
   Close();
 end;
 
-procedure TSettingForm.Panel1Click(Sender: TObject);
+procedure TSettingForm.ViewerBackgroundColorClick(Sender: TObject);
 begin
   if not ColorDialog1.Execute then
   begin
     exit;
   end;
   model.Background.Color := ColorDialog1.Color;
-  Panel1.Color:=model.Background.Color;
+  ViewerBackgroundColor.Color:=model.Background.Color;
   formManager.Update;
 end;
 
