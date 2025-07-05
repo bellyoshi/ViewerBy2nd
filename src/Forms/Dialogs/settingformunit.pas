@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  FormSizeCustomizerUnit,  IViewUnit, ViewerModel;
+  ExtDlgs, FormSizeCustomizerUnit, IViewUnit, ViewerModel;
 
 type
 
@@ -14,6 +14,7 @@ type
 
   TSettingForm = class(TForm)
     ColorDialog1: TColorDialog;
+    OpenPictureDialog1: TOpenPictureDialog;
     ViewerBackGroundImage: TImage;
     IsBackgroundImage: TRadioButton;
     OkButton: TButton;
@@ -25,6 +26,9 @@ type
     procedure FormShow(Sender: TObject);
     procedure OkButtonClick(Sender: TObject);
     procedure ViewerBackgroundColorClick(Sender: TObject);
+    procedure ViewerBackGroundImageClick(Sender: TObject);
+    procedure IsSimpleBackGroundColorClick(Sender: TObject);
+    procedure IsBackgroundImageClick(Sender: TObject);
   private
 
   public
@@ -63,12 +67,25 @@ procedure TSettingForm.FormShow(Sender: TObject);
 begin
     PopulateScreenList(ComboBox1);
     ViewerBackgroundColor.Color:=model.Background.Color;
+    
+    // ラジオボタンの状態を背景の設定と同期
+    IsSimpleBackGroundColor.Checked := model.Background.IsSimpleColor;
+    IsBackgroundImage.Checked := model.Background.IsImage;
+    
+    // 背景画像が設定されている場合は表示
+    if model.Background.IsImage and (model.Background.ImagePath <> '') and FileExists(model.Background.ImagePath) then
+    begin
+      try
+        ViewerBackGroundImage.Picture.LoadFromFile(model.Background.ImagePath);
+      except
+        // 画像の読み込みに失敗した場合は何もしない
+      end;
+    end;
 end;
 
 procedure TSettingForm.ComboBox1Change(Sender: TObject);
 var
   i : Integer;
-  display : TMonitor;
 begin
   i := ComboBox1.ItemIndex;
   FormSizeCustomizer.ScreenIndex:=i;
@@ -88,6 +105,45 @@ begin
   end;
   model.Background.Color := ColorDialog1.Color;
   ViewerBackgroundColor.Color:=model.Background.Color;
+  formManager.Update;
+end;
+
+procedure TSettingForm.ViewerBackGroundImageClick(Sender: TObject);
+begin
+  if not OpenPictureDialog1.Execute then
+  begin
+    exit;
+  end;
+  
+  // 背景画像モードを有効にする
+  model.Background.IsImage := True;
+  IsBackgroundImage.Checked := True;
+  IsSimpleBackGroundColor.Checked := False;
+  
+  // 選択された画像ファイルを背景画像として設定
+  model.Background.ImagePath := OpenPictureDialog1.FileName;
+  
+  // 画像を表示用のImageコントロールに読み込み
+  try
+    ViewerBackGroundImage.Picture.LoadFromFile(OpenPictureDialog1.FileName);
+    formManager.Update;
+  except
+    on E: Exception do
+    begin
+      ShowMessage('画像ファイルの読み込みに失敗しました: ' + E.Message);
+    end;
+  end;
+end;
+
+procedure TSettingForm.IsSimpleBackGroundColorClick(Sender: TObject);
+begin
+  model.Background.IsSimpleColor := True;
+  formManager.Update;
+end;
+
+procedure TSettingForm.IsBackgroundImageClick(Sender: TObject);
+begin
+  model.Background.IsImage := True;
   formManager.Update;
 end;
 

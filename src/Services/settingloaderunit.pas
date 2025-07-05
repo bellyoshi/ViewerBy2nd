@@ -43,6 +43,8 @@ type
     FWindowWidth: Integer;
     FWindowHeight: Integer;
     FBackgroundColor: TColor;
+    FBackgroundImagePath: string;
+    FBackgroundUseImage: Boolean;
     FFileList: TStringList;
     FMissingFiles: TStringList;
     const
@@ -63,6 +65,10 @@ type
     function GetMissingFiles: TStringList;
     function GetBackgroundColor: TColor;
     procedure SetBackgroundColor(AColor: TColor);
+    function GetBackgroundImagePath: string;
+    procedure SetBackgroundImagePath(APath: string);
+    function GetBackgroundUseImage: Boolean;
+    procedure SetBackgroundUseImage(AUseImage: Boolean);
     procedure CollectSettingsFromModel(AModel: TObject);
   end;
 
@@ -103,6 +109,8 @@ begin
   FWindowWidth := 800;
   FWindowHeight := 600;
   FBackgroundColor := clBlack; // デフォルトは黒色
+  FBackgroundImagePath := ''; // デフォルトは空
+  FBackgroundUseImage := False; // デフォルトは背景色を使用
 end;
 
 procedure TSettingLoader.ApplySettings;
@@ -131,6 +139,8 @@ begin
     FWindowWidth := SettingsFile.ReadInteger('Window', 'Width', 800);
     FWindowHeight := SettingsFile.ReadInteger('Window', 'Height', 600);
     FBackgroundColor := SettingsFile.ReadInteger('Display', 'BackgroundColor', clBlack);
+    FBackgroundImagePath := SettingsFile.ReadString('Display', 'BackgroundImagePath', '');
+    FBackgroundUseImage := SettingsFile.ReadBool('Display', 'BackgroundUseImage', False);
 
     ValidateSettings; // 設定の妥当性を確認
     LoadFileList; // ファイルリストを読み込み
@@ -168,10 +178,12 @@ begin
   // 基本設定を収集
   CollectSettings;
   
-  // モデルから背景色を取得（型キャストが必要）
+  // モデルから背景設定を取得（型キャストが必要）
   if AModel is TViewerModel then
   begin
     FBackgroundColor := TViewerModel(AModel).Background.Color;
+    FBackgroundImagePath := TViewerModel(AModel).Background.ImagePath;
+    FBackgroundUseImage := TViewerModel(AModel).Background.UseImage;
   end;
 end;
 
@@ -188,6 +200,8 @@ begin
     SettingsFile.WriteInteger('Display', 'ScreenIndex', FScreenIndex);
     SettingsFile.WriteBool('Display', 'IsFullScreen', FIsFullScreen);
     SettingsFile.WriteInteger('Display', 'BackgroundColor', FBackgroundColor);
+    SettingsFile.WriteString('Display', 'BackgroundImagePath', FBackgroundImagePath);
+    SettingsFile.WriteBool('Display', 'BackgroundUseImage', FBackgroundUseImage);
     SettingsFile.WriteInteger('Window', 'Top', FWindowTop);
     SettingsFile.WriteInteger('Window', 'Left', FWindowLeft);
     SettingsFile.WriteInteger('Window', 'Width', FWindowWidth);
@@ -276,6 +290,26 @@ end;
 procedure TSettingLoader.SetBackgroundColor(AColor: TColor);
 begin
   FBackgroundColor := AColor;
+end;
+
+function TSettingLoader.GetBackgroundImagePath: string;
+begin
+  Result := FBackgroundImagePath;
+end;
+
+procedure TSettingLoader.SetBackgroundImagePath(APath: string);
+begin
+  FBackgroundImagePath := APath;
+end;
+
+function TSettingLoader.GetBackgroundUseImage: Boolean;
+begin
+  Result := FBackgroundUseImage;
+end;
+
+procedure TSettingLoader.SetBackgroundUseImage(AUseImage: Boolean);
+begin
+  FBackgroundUseImage := AUseImage;
 end;
 
 end.

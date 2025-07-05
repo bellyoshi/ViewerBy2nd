@@ -284,8 +284,10 @@ begin
   player.RegisterThumbnail(Self, ThumbnailPanel);
   Timer1.Enabled := True;
   
-  // 保存された背景色を読み込む
+  // 保存された背景設定を読み込む
   model.Background.Color := SettingLoader.GetBackgroundColor;
+  model.Background.ImagePath := SettingLoader.GetBackgroundImagePath;
+  model.Background.UseImage := SettingLoader.GetBackgroundUseImage;
   
   // 保存されたファイルリストを読み込む
   SavedFileList := SettingLoader.GetFileList;
