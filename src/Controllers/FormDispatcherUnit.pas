@@ -18,6 +18,7 @@ type
     
     // フォーム表示メソッド
     procedure ShowViewerForm;
+    procedure ShowBackgroundViewerForm;
     procedure ShowPageForm;
     procedure ShowSettingForm;
     procedure ShowAboutForm;
@@ -70,6 +71,11 @@ end;
 procedure TFormDispatcher.ShowViewerForm;
 begin
   ViewerForm.ShowDocument;
+end;
+
+procedure TFormDispatcher.ShowBackgroundViewerForm;
+begin
+  ViewerForm.ShowBackgroundOnly;
 end;
 
 procedure TFormDispatcher.ShowPageForm;

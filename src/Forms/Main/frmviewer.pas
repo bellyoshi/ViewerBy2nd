@@ -48,6 +48,7 @@ type
   public
     property IsFullScreen: Boolean read FIsFullScreen write SetIsFullScreen;
     procedure ShowDocument;
+    procedure ShowBackgroundOnly;
     procedure UpdateView();
   end;
 
@@ -166,6 +167,16 @@ end;
 procedure TViewerForm.ShowDocument;
 begin
   model.View();
+  UpdateView();
+  if not Visible then
+  begin
+    Show();
+  end;
+end;
+
+procedure TViewerForm.ShowBackgroundOnly;
+begin
+  // 背景表示のみを行う（model.View()は呼び出さない）
   UpdateView();
   if not Visible then
   begin

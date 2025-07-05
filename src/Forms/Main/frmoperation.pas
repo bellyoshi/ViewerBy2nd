@@ -569,8 +569,18 @@ end;
 
 procedure TOperationForm.BackGroundDisplayButtonClick(Sender: TObject);
 begin
-  model.DisselectAll;
-  FormDispatcher.ShowViewerForm;
+  // 操作中に自動表示がONの場合は選択解除する
+  if AutoUpdateCheckBox.Checked then
+  begin
+    model.DisselectAll;
+  end else
+  begin
+    // ビューワー画面のみ背景表示にする
+    model.ShowBackGround();
+    FormDispatcher.ShowBackgroundViewerForm;
+  end;
+  
+
 end;
 
 procedure TOperationForm.BackgroundDisplayMenuClick(Sender: TObject);

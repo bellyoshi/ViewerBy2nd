@@ -79,6 +79,7 @@ type
     function GetFileSelected(Index: Integer): Boolean;
     function GetFileCount: Integer;
     function GetFileName(Index: Integer): String;
+    procedure ShowBackGround();
   end;
 
 var
@@ -238,6 +239,11 @@ begin
   end;
 end;
 
+procedure TViewerModel.ShowBackGround;
+begin
+  Repogitory.ViewFile := nil;
+  FUpdated := True;
+end;
 
 procedure TViewerModel.View;
 begin
