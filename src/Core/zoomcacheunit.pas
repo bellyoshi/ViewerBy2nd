@@ -79,7 +79,7 @@ function TZoomCache.GetBitmap(Width, Height: Integer): TBitmap;
 var
   CachedBitmap: TBitmap;
 begin
-  { todo : width , height だけでなくPageIndexを気にする必要あり。
+  { TODO: width , height だけでなくPageIndexを気にする必要あり。
   CachedBitmap := FindInCache(Width, Height);
   if Assigned(CachedBitmap) then
     Exit(CachedBitmap);

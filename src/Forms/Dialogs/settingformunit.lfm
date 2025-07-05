@@ -47,21 +47,31 @@ object SettingForm: TSettingForm
     Caption = '単色'
     TabOrder = 3
   end
-  object IsBackgroundImage: TRadioButton
+  object UseBackgroundImage: TRadioButton
     Left = 200
     Height = 24
     Top = 120
     Width = 81
     Caption = '背景画像'
     TabOrder = 4
+    OnChange = UseBackgroundImageChange
   end
   object ViewerBackGroundImage: TImage
-    Left = 300
+    Left = 320
     Height = 124
-    Top = 92
+    Top = 96
     Width = 164
     Stretch = True
     OnClick = ViewerBackGroundImageClick
+  end
+  object Button1: TButton
+    Left = 200
+    Height = 36
+    Top = 152
+    Width = 114
+    Caption = '背泳画像選択'
+    TabOrder = 5
+    OnClick = Button1Click
   end
   object ColorDialog1: TColorDialog
     Color = clBlack

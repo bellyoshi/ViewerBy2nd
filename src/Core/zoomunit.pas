@@ -63,8 +63,8 @@ procedure TZoom.CenterClear();
 begin
   CenterX := 0.5;  // Center of the image
   CenterY := 0.5;  // Center of the image
-  //todo:Centerをクラスにする。
-  //todo:Rotateメソッドをつくる。 回転しても同じ位置を表示するようにする。
+  //TODO: Centerをクラスにする。
+  //TODO: Rotateメソッドをつくる。 回転しても同じ位置を表示するようにする。
 end;
 
 function RoundToStep(Value: Double; Step: Integer): Integer;

@@ -13,17 +13,20 @@ type
   { TSettingForm }
 
   TSettingForm = class(TForm)
+    Button1: TButton;
     ColorDialog1: TColorDialog;
     OpenPictureDialog1: TOpenPictureDialog;
     ViewerBackGroundImage: TImage;
-    IsBackgroundImage: TRadioButton;
+    UseBackgroundImage: TRadioButton;
     OkButton: TButton;
     ComboBox1: TComboBox;
     IsSimpleBackGroundColor: TRadioButton;
     ViewerBackgroundColor: TPanel;
+    procedure Button1Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure UseBackgroundImageChange(Sender: TObject);
     procedure OkButtonClick(Sender: TObject);
     procedure ViewerBackgroundColorClick(Sender: TObject);
     procedure ViewerBackGroundImageClick(Sender: TObject);
@@ -70,10 +73,10 @@ begin
     
     // ラジオボタンの状態を背景の設定と同期
     IsSimpleBackGroundColor.Checked := model.Background.IsSimpleColor;
-    IsBackgroundImage.Checked := model.Background.IsImage;
+    UseBackgroundImage.Checked := model.Background.UseImage;
     
     // 背景画像が設定されている場合は表示
-    if model.Background.IsImage and (model.Background.ImagePath <> '') and FileExists(model.Background.ImagePath) then
+    if model.Background.UseImage and (model.Background.ImagePath <> '') and FileExists(model.Background.ImagePath) then
     begin
       try
         ViewerBackGroundImage.Picture.LoadFromFile(model.Background.ImagePath);
@@ -83,6 +86,11 @@ begin
     end;
 end;
 
+procedure TSettingForm.UseBackgroundImageChange(Sender: TObject);
+begin
+  model.Background.UseImage:=UseBackgroundImage.Checked;
+end;
+
 procedure TSettingForm.ComboBox1Change(Sender: TObject);
 var
   i : Integer;
@@ -90,6 +98,11 @@ begin
   i := ComboBox1.ItemIndex;
   FormSizeCustomizer.ScreenIndex:=i;
   FormSizeCustomizer.IsFullScreen := True;
+end;
+
+procedure TSettingForm.Button1Click(Sender: TObject);
+begin
+    ViewerBackgroundColorClick(sender);
 end;
 
 procedure TSettingForm.OkButtonClick(Sender: TObject);
@@ -116,9 +129,7 @@ begin
   end;
   
   // 背景画像モードを有効にする
-  model.Background.IsImage := True;
-  IsBackgroundImage.Checked := True;
-  IsSimpleBackGroundColor.Checked := False;
+  UseBackgroundImage.Checked := True;
   
   // 選択された画像ファイルを背景画像として設定
   model.Background.ImagePath := OpenPictureDialog1.FileName;
@@ -143,7 +154,7 @@ end;
 
 procedure TSettingForm.IsBackgroundImageClick(Sender: TObject);
 begin
-  model.Background.IsImage := True;
+  UseBackgroundImage.Checked := True;
   formManager.Update;
 end;
 

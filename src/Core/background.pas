@@ -16,13 +16,14 @@ type
     FUseImage: Boolean;
     function GetIsSimpleColor: Boolean;
     procedure SetIsSimpleColor(Value: Boolean);
+    function GetUseImage : Boolean;
+    procedure SetUseImage(Value : Boolean);
   public
     constructor Create(AColor: TColor = clBlack);
     function GetBitmap(Width, Height: Integer): TBitmap;
     property Color: TColor read FColor write FColor;
     property ImagePath: string read FImagePath write FImagePath;
-    property UseImage: Boolean read FUseImage write FUseImage;
-    property IsImage: Boolean read FUseImage write FUseImage;
+    property UseImage: Boolean read GetUseImage write SetUseImage;
     property IsSimpleColor: Boolean read GetIsSimpleColor write SetIsSimpleColor;
 
 
@@ -79,6 +80,16 @@ end;
 procedure TBackground.SetIsSimpleColor(Value: Boolean);
 begin
   FUseImage := not Value;
+end;
+
+function TBackground.GetUseImage: Boolean;
+begin
+  Result := FUseImage;
+end;
+
+procedure TBackground.SetUseImage(Value: Boolean);
+begin
+  FUseImage := Value;
 end;
 
 end.
