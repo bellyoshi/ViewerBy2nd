@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewerBy2nd - マルチモニターPDF/メディアビューアー</title>
+    <style>
+        body {
+            font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+        .feature {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        .feature h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .download-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: #ecf0f1;
+            border-radius: 8px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .language-switch {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .language-switch a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .supported-formats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .format-item {
+            background: #e8f4fd;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-switch">
+            <a href="index.html">English</a>
+        </div>
+        
+        <h1>ViewerBy2nd</h1>
+        <div class="subtitle">
+            マルチモニターPDF・メディアビューアーツール
+        </div>
+
+        <div class="feature">
+            <h3>ViewerBy2ndとは？</h3>
+            <p>
+                ViewerBy2ndは、セカンドモニターでPDFドキュメント、画像、動画を表示しながら、
+                メインモニターを他の作業に使用できるマルチモニターツールです。
+                プレゼンテーション、文書レビュー、メディア視聴ワークフローに最適です。
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3>主な機能</h3>
+            <ul>
+                <li><strong>マルチモニター対応:</strong> セカンドモニターにコンテンツを表示し、メインモニターで操作</li>
+                <li><strong>PDF表示:</strong> ズーム、回転、ページナビゲーションを完全サポート</li>
+                <li><strong>画像サポート:</strong> 各種画像形式（BMP、JPG、PNG等）を表示</li>
+                <li><strong>動画再生:</strong> セカンドモニターで動画ファイルを再生</li>
+                <li><strong>カスタマイズ可能な背景:</strong> カスタム背景色と画像を設定</li>
+                <li><strong>ポータブル:</strong> インストール不要 - 任意の場所から実行可能</li>
+                <li><strong>設定の永続化:</strong> セッション間で設定を記憶</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>対応ファイル形式</h3>
+            <div class="supported-formats">
+                <div class="format-item">PDF文書</div>
+                <div class="format-item">BMP画像</div>
+                <div class="format-item">JPG/JPEG画像</div>
+                <div class="format-item">PNG画像</div>
+                <div class="format-item">動画ファイル</div>
+            </div>
+        </div>
+
+        <div class="feature">
+            <h3>使用方法</h3>
+            <ol>
+                <li>マルチモニター環境でViewerBy2ndを起動</li>
+                <li>メインモニターの操作パネルでビューアーを制御</li>
+                <li>コンテンツがセカンドモニターに表示されます</li>
+                <li>設定で背景色と画像をカスタマイズ</li>
+                <li>すべての設定は次回起動時に自動保存されます</li>
+            </ol>
+        </div>
+
+        <div class="download-section">
+            <h3>ダウンロード</h3>
+            <p>ViewerBy2ndはポータブルアプリケーション - ダウンロードしてすぐに実行できます！</p>
+            <a href="#" class="btn">最新版をダウンロード</a>
+            <p><small>Windowsシステム対応</small></p>
+        </div>
+
+        <div class="feature">
+            <h3>システム要件</h3>
+            <ul>
+                <li>Windowsオペレーティングシステム</li>
+                <li>マルチモニター設定</li>
+                <li>推奨メモリ4GB以上</li>
+                <li>マルチモニター出力対応グラフィックカード</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>アプリケーションについて</h3>
+            <p>
+                ViewerBy2ndはDelphi/Lazarusで開発され、マルチモニターコンテンツ表示のための
+                軽量で効率的なソリューションを提供します。アプリケーションはユーザーフレンドリーに
+                設計されており、プロフェッショナルな用途に強力な機能を提供します。
+            </p>
+        </div>
+    </div>
+</body>
+</html> 
