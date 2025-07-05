@@ -272,12 +272,57 @@ begin
 end;
 
 procedure TOperationForm.FormCreate(Sender: TObject);
+var
+  SavedFileList: TStringList;
+  MissingFiles: TStringList;
+  i: Integer;
+  MissingFilesMessage: String;
 begin
   Width := OPERATIONFORM_DEFAULT_WIDTH;
   Height := OPERATIONFORM_DEFAULT_HEIGHT;
   model := TViewerModel.Create;
   player.RegisterThumbnail(Self, ThumbnailPanel);
   Timer1.Enabled := True;
+  
+  // 保存されたファイルリストを読み込む
+  SavedFileList := SettingLoader.GetFileList;
+  if Assigned(SavedFileList) and (SavedFileList.Count > 0) then
+  begin
+    for i := 0 to SavedFileList.Count - 1 do
+    begin
+      model.Open(SavedFileList[i]);
+    end;
+  end;
+  
+  // 存在しないファイルについてユーザーに通知
+  MissingFiles := SettingLoader.GetMissingFiles;
+  if Assigned(MissingFiles) and (MissingFiles.Count > 0) then
+  begin
+    MissingFilesMessage := '以下のファイルが見つかりませんでした:' + #13#10;
+    
+    if MissingFiles.Count <= 10 then
+    begin
+      // 10件以下の場合は全て表示
+      for i := 0 to MissingFiles.Count - 1 do
+      begin
+        MissingFilesMessage := MissingFilesMessage + '・' + ExtractFileName(MissingFiles[i]) + #13#10;
+      end;
+    end
+    else
+    begin
+      // 10件を超える場合は最初の9件を表示し、残りを「その他」として表示
+      for i := 0 to 8 do
+      begin
+        MissingFilesMessage := MissingFilesMessage + '・' + ExtractFileName(MissingFiles[i]) + #13#10;
+      end;
+      MissingFilesMessage := MissingFilesMessage + '・その他 ' + IntToStr(MissingFiles.Count - 9) + '件' + #13#10;
+    end;
+    
+    MissingFilesMessage := MissingFilesMessage + #13#10 + 'ファイルが移動または削除された可能性があります。';
+    
+    ShowMessage(MissingFilesMessage);
+  end;
+  
   UpdateView;
 end;
 
@@ -324,7 +369,7 @@ begin
   ThumbnailPanel.Color:=model.Background.Color;
   if model.HasOperationDocument then
   begin
-    ZoomRateLabel.Caption:= FloatToStr(model.Zoom.Rate * 100) + '%';
+    ZoomRateLabel.Caption:= IntToStr(Round(model.Zoom.Rate * 100)) + '%';
   end
   else
   begin
@@ -801,7 +846,17 @@ begin
 end;
 
 procedure TOperationForm.FormClose(Sender: TObject; var CloseAction: TCloseAction);
+var
+  CurrentFileList: TStringList;
 begin
+  // 現在のファイルリストを保存
+  CurrentFileList := model.GetFileNames;
+  if Assigned(CurrentFileList) then
+  begin
+    SettingLoader.SetFileList(CurrentFileList);
+    CurrentFileList.Free;
+  end;
+  
   SettingLoader.Save;
   FreeAndNil(player);
   model.Free;

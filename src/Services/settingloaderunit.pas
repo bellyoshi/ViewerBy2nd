@@ -42,16 +42,24 @@ type
     FWindowLeft: Integer;
     FWindowWidth: Integer;
     FWindowHeight: Integer;
+    FFileList: TStringList;
+    FMissingFiles: TStringList;
     const
       SETTINGS_FILE = 'settings.ini';
     procedure LoadDefaults;
     procedure ValidateSettings;
     procedure CollectSettings;
+    procedure LoadFileList;
+    procedure SaveFileList;
   public
     constructor Create;
+    destructor Destroy; override;
     procedure Load;
     procedure Save;
     procedure ApplySettings;
+    function GetFileList: TStringList;
+    procedure SetFileList(AFileList: TStringList);
+    function GetMissingFiles: TStringList;
   end;
 
 var
@@ -61,7 +69,15 @@ implementation
 
 constructor TSettingLoader.Create;
 begin
-  //no op
+  FFileList := TStringList.Create;
+  FMissingFiles := TStringList.Create;
+end;
+
+destructor TSettingLoader.Destroy;
+begin
+  FFileList.Free;
+  FMissingFiles.Free;
+  inherited Destroy;
 end;
 
 procedure TSettingLoader.LoadDefaults;
@@ -112,6 +128,7 @@ begin
     FWindowHeight := SettingsFile.ReadInteger('Window', 'Height', 600);
 
     ValidateSettings; // 設定の妥当性を確認
+    LoadFileList; // ファイルリストを読み込み
   finally
     SettingsFile.Free;
   end;
@@ -159,11 +176,80 @@ begin
     SettingsFile.WriteInteger('Window', 'Width', FWindowWidth);
     SettingsFile.WriteInteger('Window', 'Height', FWindowHeight);
 
+    SaveFileList; // ファイルリストを保存
   finally
     SettingsFile.Free;
   end;
 end;
 
+
+procedure TSettingLoader.LoadFileList;
+var
+  SettingsFile: TIniFile;
+  i, Count: Integer;
+  FilePath: String;
+begin
+  if not FileExists(SETTINGS_FILE) then Exit;
+  
+  SettingsFile := TIniFile.Create(SETTINGS_FILE);
+  try
+    Count := SettingsFile.ReadInteger('FileList', 'Count', 0);
+    FFileList.Clear;
+    FMissingFiles.Clear;
+    
+    for i := 0 to Count - 1 do
+    begin
+      FilePath := SettingsFile.ReadString('FileList', 'File' + IntToStr(i), '');
+      if FilePath <> '' then
+      begin
+        if FileExists(FilePath) then
+        begin
+          FFileList.Add(FilePath);
+        end
+        else
+        begin
+          FMissingFiles.Add(FilePath);
+        end;
+      end;
+    end;
+  finally
+    SettingsFile.Free;
+  end;
+end;
+
+procedure TSettingLoader.SaveFileList;
+var
+  SettingsFile: TIniFile;
+  i: Integer;
+begin
+  SettingsFile := TIniFile.Create(SETTINGS_FILE);
+  try
+    SettingsFile.WriteInteger('FileList', 'Count', FFileList.Count);
+    
+    for i := 0 to FFileList.Count - 1 do
+    begin
+      SettingsFile.WriteString('FileList', 'File' + IntToStr(i), FFileList[i]);
+    end;
+  finally
+    SettingsFile.Free;
+  end;
+end;
+
+function TSettingLoader.GetFileList: TStringList;
+begin
+  Result := FFileList;
+end;
+
+procedure TSettingLoader.SetFileList(AFileList: TStringList);
+begin
+  FFileList.Clear;
+  FFileList.Assign(AFileList);
+end;
+
+function TSettingLoader.GetMissingFiles: TStringList;
+begin
+  Result := FMissingFiles;
+end;
 
 end.
 
