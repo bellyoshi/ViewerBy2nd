@@ -1,9 +1,174 @@
-<html>
-    <body>
-        <h1>Viewer by 2nd monitor</h1>
-        <p>
-            This is vb2nd home page.
-            vb2nd.exe is portable.
-        </p>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ViewerBy2nd - Multi-Monitor PDF/Media Viewer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+        .feature {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #3498db;
+        }
+        .feature h3 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+        .download-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: #ecf0f1;
+            border-radius: 8px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #2980b9;
+        }
+        .language-switch {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        .language-switch a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .supported-formats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .format-item {
+            background: #e8f4fd;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="language-switch">
+            <a href="index-ja.html">日本語</a>
+        </div>
+        
+        <h1>ViewerBy2nd</h1>
+        <div class="subtitle">
+            Multi-Monitor PDF and Media Viewer Tool
+        </div>
+
+        <div class="feature">
+            <h3>What is ViewerBy2nd?</h3>
+            <p>
+                ViewerBy2nd is a powerful multi-monitor tool designed for professionals who need to view PDF documents, 
+                images, and videos on a second monitor while keeping their main monitor free for other tasks. 
+                It's perfect for presentations, document review, and media viewing workflows.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3>Key Features</h3>
+            <ul>
+                <li><strong>Multi-Monitor Support:</strong> Display content on second monitor while operating on the main monitor</li>
+                <li><strong>PDF Viewing:</strong> Full PDF support with zoom, rotation, and page navigation</li>
+                <li><strong>Image Support:</strong> View various image formats (BMP, JPG, PNG, etc.)</li>
+                <li><strong>Video Playback:</strong> Play video files on the second monitor</li>
+                <li><strong>Customizable Background:</strong> Set custom background colors and images</li>
+                <li><strong>Portable:</strong> No installation required - runs from any location</li>
+                <li><strong>Settings Persistence:</strong> Remembers your preferences between sessions</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>Supported File Formats</h3>
+            <div class="supported-formats">
+                <div class="format-item">PDF Documents</div>
+                <div class="format-item">BMP Images</div>
+                <div class="format-item">JPG/JPEG Images</div>
+                <div class="format-item">PNG Images</div>
+                <div class="format-item">Video Files</div>
+            </div>
+        </div>
+
+        <div class="feature">
+            <h3>How to Use</h3>
+            <ol>
+                <li>Launch ViewerBy2nd on your system with multiple monitors</li>
+                <li>Use the operation panel on your main monitor to control the viewer</li>
+                <li>Content will be displayed on your second monitor</li>
+                <li>Customize background colors and images through the settings</li>
+                <li>All settings are automatically saved for your next session</li>
+            </ol>
+        </div>
+
+        <div class="download-section">
+            <h3>Download</h3>
+            <p>ViewerBy2nd is a portable application - simply download and run!</p>
+            <a href="#" class="btn">Download Latest Version</a>
+            <p><small>Compatible with Windows systems</small></p>
+        </div>
+
+        <div class="feature">
+            <h3>System Requirements</h3>
+            <ul>
+                <li>Windows operating system</li>
+                <li>Multiple monitors setup</li>
+                <li>Minimum 4GB RAM recommended</li>
+                <li>Graphics card supporting multi-monitor output</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <h3>About</h3>
+            <p>
+                ViewerBy2nd is developed using Delphi/Lazarus and provides a lightweight, 
+                efficient solution for multi-monitor content viewing. The application is designed 
+                to be user-friendly while offering powerful features for professional use cases.
+            </p>
+        </div>
+    </div>
+</body>
 </html>
