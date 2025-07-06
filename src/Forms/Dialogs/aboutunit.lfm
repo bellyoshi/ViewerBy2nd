@@ -1,22 +1,23 @@
 object AboutForm: TAboutForm
   Left = 316
-  Height = 240
+  Height = 367
   Top = 155
-  Width = 320
+  Width = 609
   Caption = 'Viewer By 2nd Monitor このアプリについて'
-  ClientHeight = 240
-  ClientWidth = 320
+  ClientHeight = 367
+  ClientWidth = 609
   DesignTimePPI = 120
   OnCreate = FormCreate
-  LCLVersion = '3.6.0.0'
   object Memo1: TMemo
-    Left = 40
-    Height = 113
-    Top = 32
-    Width = 188
+    Left = 8
+    Height = 351
+    Top = 8
+    Width = 593
+    Anchors = [akTop, akLeft, akRight, akBottom]
     Lines.Strings = (
       'Viewer By 2nd をご利用いただきありがとうございます。'
     )
+    ScrollBars = ssAutoBoth
     TabOrder = 0
   end
 end

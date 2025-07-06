@@ -9,7 +9,7 @@ uses
   Menus, ComCtrls, ViewerModel, Generics.Collections,
   FormSizeCustomizerUnit, IViewUnit,
   SettingLoaderUnit,  LCLType, LCLIntf, ViewerBy2ndFileTypes,
-  ViewerBy2ndPlayer, FormDispatcherUnit;
+  ViewerBy2ndPlayer, FormDispatcherUnit, FilesParam;
 
 const
   OPERATIONFORM_DEFAULT_WIDTH = 900;
@@ -186,6 +186,7 @@ type
     procedure LoadListBox(fileList : TStringList);
     procedure ProcessAutoUpdate;
     procedure ProcessVideoPosition;
+    procedure UpdateFileInfoLabel;
   public
 
   end;
@@ -389,6 +390,30 @@ begin
     end;
     PlayButton.Enabled := True;
     StopButton.Enabled := True;
+  end;
+  
+  UpdateFileInfoLabel;
+end;
+
+procedure TOperationForm.UpdateFileInfoLabel;
+var
+  SelectedFile: TFilesParam;
+begin
+  if model.HasOperationDocument then
+  begin
+    SelectedFile := model.GetSelectedFile;
+    if Assigned(SelectedFile) then
+    begin
+      FileInfoLabel.Caption := 'ファイル: ' + SelectedFile.Filename;
+    end
+    else
+    begin
+      FileInfoLabel.Caption := 'ファイル: 選択されていません';
+    end;
+  end
+  else
+  begin
+    FileInfoLabel.Caption := 'ファイル: なし';
   end;
 end;
 

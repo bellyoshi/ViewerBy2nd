@@ -79,7 +79,7 @@ object OperationForm: TOperationForm
     end
   end
   object FileInfoLabel: TLabel
-    Left = 464
+    Left = 256
     Height = 20
     Top = 8
     Width = 85

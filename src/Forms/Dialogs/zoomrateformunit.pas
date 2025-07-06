@@ -14,6 +14,7 @@ type
 
   TZoomRateForm = class(TForm)
     CancelButton: TButton;
+    Label1: TLabel;
     OkButton: TButton;
     ZoomRateTextBox: TEdit;
     procedure CancelButtonClick(Sender: TObject);
