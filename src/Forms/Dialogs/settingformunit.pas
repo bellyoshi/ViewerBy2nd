@@ -57,7 +57,16 @@ begin
       IntToStr(Screen.Monitors[i].Width) + 'x' +
       IntToStr(Screen.Monitors[i].Height) + ')');
   end;
-  ComboBox.ItemIndex := 0; // デフォルトで最初のスクリーンを選択
+  
+  //ComboBoxのインデックスを設定スクリーンが存在する場合
+  if FormSizeCustomizer.ScreenIndex < ComboBox.Items.Count then
+  begin
+    ComboBox.ItemIndex := FormSizeCustomizer.ScreenIndex;
+  end
+  else
+  begin
+    ComboBox.ItemIndex := 0;
+  end;
 end;
 
 procedure TSettingForm.FormCreate(Sender: TObject);
