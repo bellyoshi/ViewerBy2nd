@@ -11,17 +11,17 @@ object ViewerForm: TViewerForm
   LCLVersion = '4.0.0.4'
   OnCreate = FormCreate
   OnResize = FormResize
-  object Panel1: TPanel
+  object ViewerPanel: TPanel
     Left = 32
     Height = 352
     Top = 24
     Width = 437
-    Caption = 'Panel1'
+    Caption = 'ViewerPanel'
     ClientHeight = 352
     ClientWidth = 437
     PopupMenu = PopupMenu1
     TabOrder = 0
-    object Image1: TImage
+    object ViewerImage: TImage
       Left = 128
       Height = 128
       Top = 200

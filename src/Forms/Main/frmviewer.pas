@@ -14,14 +14,14 @@ type
   { TViewerForm }
 
   TViewerForm = class(TForm, IView)
-    Image1: TImage;
+    ViewerImage: TImage;
     MenuItemOperation: TMenuItem;
     MenuItemTitleVisible: TMenuItem;
     MenuItemTitleInVisible: TMenuItem;
     MenuItemFullScreen: TMenuItem;
     MenuItemWindowMode: TMenuItem;
     MenuItemClose: TMenuItem;
-    Panel1: TPanel;
+    ViewerPanel: TPanel;
     PopupMenu1: TPopupMenu;
     Separator1: TMenuItem;
     Separator2: TMenuItem;
@@ -73,11 +73,11 @@ procedure TViewerForm.FormCreate(Sender: TObject);
 begin
   FormSizeCustomizer := TFormSizeCustomizer.Create;
   FormSizeCustomizer.RegistForm(ViewerForm);
-  Image1.Visible := True;
+  ViewerImage.Visible := True;
   
   if Assigned(player) then
   begin
-    player.RegisterViewer(Self, Panel1);
+    player.RegisterViewer(Self, ViewerPanel);
   end;
 end;
 
@@ -92,20 +92,20 @@ begin
 
 
   try
-    // panel1のサイズ変更
-    Panel1.Width := ClientWidth;
-    Panel1.Height := ClientHeight;
-    Panel1.Left := 0;
-    Panel1.Top := 0;
+    // ViewerPanelのサイズ変更
+    ViewerPanel.Width := ClientWidth;
+    ViewerPanel.Height := ClientHeight;
+    ViewerPanel.Left := 0;
+    ViewerPanel.Top := 0;
 
     // PDFium ページを Delphi ビットマップに描画
     Bitmap := model.GetViewBitmap(ClientWidth, ClientHeight);
-    Image1.Width := Bitmap.Width;
-    Image1.Height := Bitmap.Height;
-    Image1.Left := (ClientWidth - Bitmap.Width) div 2;
-    Image1.Top := (ClientHeight - Bitmap.Height) div 2;
+    ViewerImage.Width := Bitmap.Width;
+    ViewerImage.Height := Bitmap.Height;
+    ViewerImage.Left := (ClientWidth - Bitmap.Width) div 2;
+    ViewerImage.Top := (ClientHeight - Bitmap.Height) div 2;
 
-    Image1.Picture.Bitmap.Assign(Bitmap);
+    ViewerImage.Picture.Bitmap.Assign(Bitmap);
   finally
     Bitmap.Free;
   end;
@@ -188,7 +188,7 @@ procedure TViewerForm.UpdateView();
 begin
   if not Assigned(model) Then Exit;
   ControlEnabled();
-  Image1.Visible := True;
+  ViewerImage.Visible := True;
   LoadBitmap();
   Self.Color := model.Background.Color;
 end;
