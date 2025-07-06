@@ -1,15 +1,16 @@
 object OperationForm: TOperationForm
   Left = 721
-  Height = 609
+  Height = 0
   Top = 169
-  Width = 1051
+  Width = 0
   AllowDropFiles = True
   Caption = 'Viewer By 2nd Monitor 操作画面'
-  ClientHeight = 609
-  ClientWidth = 1051
+  ClientHeight = 0
+  ClientWidth = 0
   DesignTimePPI = 120
   Font.Height = -15
   Menu = MainMenu
+  LCLVersion = '4.0.0.4'
   OnClose = FormClose
   OnCreate = FormCreate
   OnDropFiles = FormDropFiles
@@ -218,7 +219,6 @@ object OperationForm: TOperationForm
         Top = 8
         Width = 188
         OnMouseDown = Image1MouseDown
-        OnMouseLeave = Image1MouseLeave
         OnMouseMove = Image1MouseMove
         OnMouseUp = Image1MouseUp
         OnMouseWheel = Image1MouseWheel
@@ -230,7 +230,6 @@ object OperationForm: TOperationForm
       Top = 16
       Width = 81
       Caption = '表示プレビュー'
-      OnClick = Label1Click
     end
     object PageCountLabel: TLabel
       Left = 104

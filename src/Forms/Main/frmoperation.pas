@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ExtCtrls,
-  Menus, ComCtrls, ViewerModel, Generics.Collections,
+  Menus, ComCtrls, ViewerModel,
   FormSizeCustomizerUnit, IViewUnit,
   SettingLoaderUnit,  LCLType, LCLIntf, ViewerBy2ndFileTypes,
   ViewerBy2ndPlayer, FormDispatcherUnit, FilesParam;
@@ -108,7 +108,6 @@ type
     procedure FormResize(Sender: TObject);
     procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure Image1MouseLeave(Sender: TObject);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
       );
     procedure Image1MouseUp(Sender: TObject; Button: TMouseButton;
@@ -148,7 +147,6 @@ type
     procedure ViewerDisplayButtonClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
-    procedure Label1Click(Sender: TObject);
     procedure NextButtonClick(Sender: TObject);
     procedure PageCountLabelClick(Sender: TObject);
     procedure PreviousButtonClick(Sender: TObject);
@@ -187,6 +185,17 @@ type
     procedure ProcessAutoUpdate;
     procedure ProcessVideoPosition;
     procedure UpdateFileInfoLabel;
+    procedure InitializeForm;
+    procedure LoadSavedSettings;
+    procedure LoadSavedFileList;
+    procedure ShowMissingFilesWarning;
+    procedure SetPanelVisibility;
+    procedure SetRotateButtonsPosition;
+    procedure SetZoomButtonsPosition;
+    procedure SetPageNavigationButtonsPosition;
+    procedure SetPreviewPanelWidth;
+    function CalculateTrackBarPosition(X: Integer): Integer;
+    procedure SetTrackBarPosition(TrackBarPosition: Integer);
   public
 
   end;
@@ -271,23 +280,36 @@ begin
 end;
 
 procedure TOperationForm.FormCreate(Sender: TObject);
-var
-  SavedFileList: TStringList;
-  MissingFiles: TStringList;
-  i: Integer;
-  MissingFilesMessage: String;
+begin
+  InitializeForm;
+  LoadSavedSettings;
+  LoadSavedFileList;
+  ShowMissingFilesWarning;
+  UpdateView;
+end;
+
+procedure TOperationForm.InitializeForm;
 begin
   Width := OPERATIONFORM_DEFAULT_WIDTH;
   Height := OPERATIONFORM_DEFAULT_HEIGHT;
   model := TViewerModel.Create;
   player.RegisterThumbnail(Self, ThumbnailPanel);
   Timer1.Enabled := True;
-  
+end;
+
+procedure TOperationForm.LoadSavedSettings;
+begin
   // 保存された背景設定を読み込む
   model.Background.Color := SettingLoader.GetBackgroundColor;
   model.Background.ImagePath := SettingLoader.GetBackgroundImagePath;
   model.Background.UseImage := SettingLoader.GetBackgroundUseImage;
-  
+end;
+
+procedure TOperationForm.LoadSavedFileList;
+var
+  SavedFileList: TStringList;
+  i: Integer;
+begin
   // 保存されたファイルリストを読み込む
   SavedFileList := SettingLoader.GetFileList;
   if Assigned(SavedFileList) and (SavedFileList.Count > 0) then
@@ -297,7 +319,14 @@ begin
       model.Open(SavedFileList[i]);
     end;
   end;
-  
+end;
+
+procedure TOperationForm.ShowMissingFilesWarning;
+var
+  MissingFiles: TStringList;
+  i: Integer;
+  MissingFilesMessage: String;
+begin
   // 存在しないファイルについてユーザーに通知
   MissingFiles := SettingLoader.GetMissingFiles;
   if Assigned(MissingFiles) and (MissingFiles.Count > 0) then
@@ -326,13 +355,6 @@ begin
     
     ShowMessage(MissingFilesMessage);
   end;
-  
-  UpdateView;
-end;
-
-procedure TOperationForm.Label1Click(Sender: TObject);
-begin
-
 end;
 
 procedure TOperationForm.UpdateAuto();
@@ -687,11 +709,6 @@ begin
   end;
 end;
 
-procedure TOperationForm.Image1MouseLeave(Sender: TObject);
-begin
-
-end;
-
 procedure TOperationForm.Image1MouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
@@ -941,22 +958,39 @@ end;
 procedure TOperationForm.VideoPositionTrackBarMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 var
   NewPosition: Integer;
+begin
+  NewPosition := CalculateTrackBarPosition(X);
+  SetTrackBarPosition(NewPosition);
+end;
+
+function TOperationForm.CalculateTrackBarPosition(X: Integer): Integer;
+var
   SliderWidth: Integer;
+  CalculatedPosition: Integer;
 begin
   SliderWidth := VideoPositionTrackBar.Width - (MARGIN_WIDTH * 2);
   X := X - MARGIN_WIDTH;
+  
+  // X座標をスライダー範囲内に制限
   if X < 0 then X := 0;
   if X > SliderWidth then X := SliderWidth;
 
+  // 位置を計算
   if SliderWidth > 0 then
-    NewPosition := Round(X / SliderWidth * VideoPositionTrackBar.Max)
+    CalculatedPosition := Round(X / SliderWidth * VideoPositionTrackBar.Max)
   else
-    NewPosition := 0;
+    CalculatedPosition := 0;
 
-  if NewPosition < 0 then NewPosition := 0;
-  if NewPosition > VideoPositionTrackBar.Max then NewPosition := VideoPositionTrackBar.Max;
+  Result := CalculatedPosition;
+end;
 
-  VideoPositionTrackBar.Position := NewPosition;
+procedure TOperationForm.SetTrackBarPosition(TrackBarPosition: Integer);
+begin
+  // 位置を有効範囲内に制限
+  if TrackBarPosition < 0 then TrackBarPosition := 0;
+  if TrackBarPosition > VideoPositionTrackBar.Max then TrackBarPosition := VideoPositionTrackBar.Max;
+
+  VideoPositionTrackBar.Position := TrackBarPosition;
 end;
 
 function TOperationForm.IsSizeDefault: Boolean;
@@ -974,45 +1008,63 @@ begin
   Result := (Width <= OPERATIONFORM_SLIM_WIDTH) and (Height <= OPERATIONFORM_MINIMUM_HEIGHT);
 end;
 
+
 procedure TOperationForm.SetSizeModeControlVisible;
 begin
-  FilesListPanel.Visible:= IsSizeDefault;
+  SetPanelVisibility;
+  SetRotateButtonsPosition;
+  SetZoomButtonsPosition;
+  SetPageNavigationButtonsPosition;
+  SetPreviewPanelWidth;
+end;
+
+procedure TOperationForm.SetPanelVisibility;
+begin
+  FilesListPanel.Visible := IsSizeDefault;
 
   // FilesListPanel.VisibleがFalseの場合はPreviewPanelを一番右に表示
-
   if not FilesListPanel.Visible then
   begin
     PreviewPanel.Left := 0;
-
   end else
   begin
     PreviewPanel.Left := FilesListPanel.Width + MARGIN_WIDTH;
-
   end;
-    //Rotateボタンの位置を調整する
+end;
 
-    Rotate090Button.Left := PreviewPanel.Left + PreviewPanel.Width + MARGIN_WIDTH;
-    Rotate000Button.Left := Rotate090Button.Left + 50;
-    Rotate180Button.Left := Rotate000Button.Left ;
-    Rotate270Button.Left := Rotate090Button.Left + Rotate090Button.Width + MARGIN_WIDTH ;
-    //FitWindowボタンの位置を調整する
-    FitWindowButton.Left := Rotate090Button.Left;
-    ViewAllButton.Left := FitWindowButton.Left + FitWindowButton.Width + MARGIN_WIDTH;
-    //Zoomボタンの位置を調整する
-    ZoomInButton.Left := Rotate090Button.Left + 25;
-    ZoomOutButton.Left := ZoomInButton.Left + ZoomInButton.Width + MARGIN_WIDTH;
-    ZoomRateLabel.Left := Rotate000Button.Left + 25;
-    //ページ移動ボタンの位置を調整する　最初→前へ→次へ→最後
-    FirstPageButton.Left := Rotate090Button.Left;
-    PreviousButton.Left := FirstPageButton.Left + FirstPageButton.Width + MARGIN_WIDTH;
-    NextButton.Left := PreviousButton.Left + PreviousButton.Width + MARGIN_WIDTH;
-    LastPageButton.Left := NextButton.Left + NextButton.Width + MARGIN_WIDTH;
+procedure TOperationForm.SetRotateButtonsPosition;
+begin
+  Rotate090Button.Left := PreviewPanel.Left + PreviewPanel.Width + MARGIN_WIDTH;
+  Rotate000Button.Left := Rotate090Button.Left + 50;
+  Rotate180Button.Left := Rotate000Button.Left;
+  Rotate270Button.Left := Rotate090Button.Left + Rotate090Button.Width + MARGIN_WIDTH;
+end;
 
+procedure TOperationForm.SetZoomButtonsPosition;
+begin
+  FitWindowButton.Left := Rotate090Button.Left;
+  ViewAllButton.Left := FitWindowButton.Left + FitWindowButton.Width + MARGIN_WIDTH;
+  ZoomInButton.Left := Rotate090Button.Left + 25;
+  ZoomOutButton.Left := ZoomInButton.Left + ZoomInButton.Width + MARGIN_WIDTH;
+  ZoomRateLabel.Left := Rotate000Button.Left + 25;
+end;
+
+procedure TOperationForm.SetPageNavigationButtonsPosition;
+begin
+  FirstPageButton.Left := Rotate090Button.Left;
+  PreviousButton.Left := FirstPageButton.Left + FirstPageButton.Width + MARGIN_WIDTH;
+  NextButton.Left := PreviousButton.Left + PreviousButton.Width + MARGIN_WIDTH;
+  LastPageButton.Left := NextButton.Left + NextButton.Width + MARGIN_WIDTH;
+end;
+
+procedure TOperationForm.SetPreviewPanelWidth;
+begin
   if Width < OPERATIONFORM_SLIM_WIDTH then
   begin
-      PreviewPanel.Width:= Width;
-  end else begin
-      PreviewPanel.Width:= DEF_PREVIEW_WIDTH;
+    PreviewPanel.Width := Width;
+  end else
+  begin
+    PreviewPanel.Width := DEF_PREVIEW_WIDTH;
   end;
 end;
 
