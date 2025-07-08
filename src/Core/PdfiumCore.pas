@@ -26,7 +26,7 @@ uses
   ExtCtrls, // for TTimer
   {$ENDIF MSWINDOWS}
   Types, SysUtils, Classes, Contnrs,
-  PdfiumLib;
+  PdfiumLib, LoggerUnit;
 
 const
   // DIN A4
@@ -1756,17 +1756,32 @@ var
   OldCurDoc: TPdfDocument;
   Utf8FileName: UTF8String;
 begin
+  Logger.BeginSection('PDFファイル読み込み');
+  Logger.Info(Format('ファイル名: %s', [FileName]));
+  Logger.StartTimer('PDFファイル読み込み');
+  
+  Logger.Debug('1. UTF8エンコード開始');
   Utf8FileName := UTF8Encode(FileName);
+  Logger.Debug('2. UTF8エンコード完了');
+  
+  Logger.Debug('3. PDFiumドキュメント読み込み開始 (最も時間がかかる可能性)');
   OldCurDoc := UnsupportedFeatureCurrentDocument;
   try
     UnsupportedFeatureCurrentDocument := Self;
     // UTF8 now works with LoadDocument and it can handle large PDF files (2 GB+) what
     // FPDF_LoadCustomDocument can't because of the data types in FPDF_FILEACCESS.
     FDocument := FPDF_LoadDocument(PAnsiChar(Utf8FileName), PAnsiChar(Pointer(Password)));
+    Logger.Debug('4. PDFiumドキュメント読み込み完了');
   finally
     UnsupportedFeatureCurrentDocument := OldCurDoc;
   end;
+  
+  Logger.Debug('5. ドキュメント後処理開始');
   DocumentLoaded;
+  Logger.Debug('6. ドキュメント後処理完了');
+  
+  Logger.EndTimer('PDFファイル読み込み');
+  Logger.EndSection('PDFファイル読み込み');
 end;
 
 procedure TPdfDocument.DocumentLoaded;
@@ -2466,9 +2481,28 @@ end;
 
 procedure TPdfPage.DrawToPdfBitmap(APdfBitmap: TPdfBitmap; X, Y, Width, Height: Integer;
   Rotate: TPdfPageRotation; const Options: TPdfPageRenderOptions);
+var
+  DrawFlags: Integer;
 begin
+  Logger.BeginSection('PDFium描画');
+  Logger.Info(Format('描画サイズ: %dx%d ピクセル', [Width, Height]));
+  Logger.Info(Format('回転: %d', [Ord(Rotate)]));
+  Logger.StartTimer('PDFium描画');
+  
+  Logger.Debug('1. ページオープン開始');
   Open;
-  FPDF_RenderPageBitmap(APdfBitmap.FBitmap, FPage, X, Y, Width, Height, Ord(Rotate), GetDrawFlags(Options));
+  Logger.Debug('2. ページオープン完了');
+  
+  Logger.Debug('3. 描画フラグ計算開始');
+  DrawFlags := GetDrawFlags(Options);
+  Logger.Debug(Format('4. 描画フラグ計算完了: %d', [DrawFlags]));
+  
+  Logger.Debug('5. FPDF_RenderPageBitmap呼び出し開始 (最も時間がかかる処理)');
+  FPDF_RenderPageBitmap(APdfBitmap.FBitmap, FPage, X, Y, Width, Height, Ord(Rotate), DrawFlags);
+  Logger.Debug('6. FPDF_RenderPageBitmap呼び出し完了');
+  
+  Logger.EndTimer('PDFium描画');
+  Logger.EndSection('PDFium描画');
 end;
 
 procedure TPdfPage.DrawFormToPdfBitmap(APdfBitmap: TPdfBitmap; X, Y, Width, Height: Integer;

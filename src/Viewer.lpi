@@ -185,6 +185,10 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="MessageFormUnit"/>
       </Unit>
+      <Unit>
+        <Filename Value="Utils\LoggerUnit.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

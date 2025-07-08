@@ -5,7 +5,7 @@ unit ViewerModel;
 interface
 
 uses
-  Classes, SysUtils, Graphics, PdfImageCreator, Generics.Collections, ZoomUnit, RotateImageCreatorUnit, FilesParam, Background, RepogitoryUnit, ViewerBy2ndFileTypes;
+  Classes, SysUtils, Graphics, PdfImageCreator, Generics.Collections, ZoomUnit, RotateImageCreatorUnit, FilesParam, Background, RepogitoryUnit, ViewerBy2ndFileTypes, LoggerUnit;
 
 type
   TViewerModel = class
@@ -253,23 +253,55 @@ end;
 
 function TViewerModel.GetViewBitmap(Width, Height: Integer): TBitmap;
 begin
+  Logger.BeginSection('GetViewBitmap');
+  Logger.Info(Format('要求サイズ: %dx%d', [Width, Height]));
+  Logger.StartTimer('GetViewBitmap');
+
   If not Assigned(Repogitory) Then
   begin
+    Logger.Warning('リポジトリが割り当てられていません');
     Result := nil;
     Exit;
   end;
+  
   if Assigned(Repogitory.ViewFile) and Assigned(Repogitory.ViewFile.Zoom) then
-    Result := Repogitory.ViewFile.Zoom.GetBitmap(Width, Height)
+  begin
+    Logger.Debug('1. Zoom.GetBitmap呼び出し開始');
+    Result := Repogitory.ViewFile.Zoom.GetBitmap(Width, Height);
+    Logger.Debug('2. Zoom.GetBitmap呼び出し完了');
+  end
   else
+  begin
+    Logger.Debug('1. Background.GetBitmap呼び出し開始');
     Result := FBackground.GetBitmap(Width, Height);
+    Logger.Debug('2. Background.GetBitmap呼び出し完了');
+  end;
+
+  Logger.EndTimer('GetViewBitmap');
+  Logger.EndSection('GetViewBitmap');
 end;
 
 function TViewerModel.GetThumbnailBitmap(Width, Height: Integer): TBitmap;
 begin
+  Logger.BeginSection('GetThumbnailBitmap');
+  Logger.Info(Format('要求サイズ: %dx%d', [Width, Height]));
+  Logger.StartTimer('GetThumbnailBitmap');
+
   if Assigned(OperationFile) and Assigned(OperationFile.Zoom) then
-    Result := OperationFile.Zoom.GetBitmap(Width, Height)
+  begin
+    Logger.Debug('1. OperationFile.Zoom.GetBitmap呼び出し開始');
+    Result := OperationFile.Zoom.GetBitmap(Width, Height);
+    Logger.Debug('2. OperationFile.Zoom.GetBitmap呼び出し完了');
+  end
   else
+  begin
+    Logger.Debug('1. Background.GetBitmap呼び出し開始');
     Result := FBackground.GetBitmap(Width, Height);
+    Logger.Debug('2. Background.GetBitmap呼び出し完了');
+  end;
+
+  Logger.EndTimer('GetThumbnailBitmap');
+  Logger.EndSection('GetThumbnailBitmap');
 end;
 
 function TViewerModel.GetViewRatio: Double;

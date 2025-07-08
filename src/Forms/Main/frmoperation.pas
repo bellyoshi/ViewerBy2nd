@@ -9,7 +9,7 @@ uses
   Menus, ComCtrls, ViewerModel,
   FormSizeCustomizerUnit, IViewUnit,
   SettingLoaderUnit,  LCLType, LCLIntf, ViewerBy2ndFileTypes,
-  ViewerBy2ndPlayer, FormDispatcherUnit, FilesParam;
+  ViewerBy2ndPlayer, FormDispatcherUnit, FilesParam, LoggerUnit;
 
 const
   OPERATIONFORM_DEFAULT_WIDTH = 900;
@@ -512,22 +512,37 @@ procedure TOperationForm.LoadBitmap;
 var
   Bitmap : TBitmap;
 begin
+  Logger.BeginSection('オペレーションフォーム画像読み込み');
+  Logger.Info(Format('要求サイズ: %dx%d', [ThumbnailPanel.Width, ThumbnailPanel.Height]));
+  Logger.StartTimer('オペレーションフォーム画像読み込み');
+
   try
     // PDFium ページを Delphi ビットマップに描画
+    Logger.Debug('1. GetThumbnailBitmap呼び出し開始 (最も時間がかかる可能性)');
     Bitmap := model.GetThumbnailBitmap(ThumbnailPanel.Width, ThumbnailPanel.Height);
+    Logger.Debug('2. GetThumbnailBitmap呼び出し完了');
+
     if Assigned(Bitmap) then
     begin
+      Logger.Debug('3. 画像表示設定開始');
       Image1.Width := Bitmap.Width;
       Image1.Height := Bitmap.Height;
       Image1.Left := (ThumbnailPanel.Width - Bitmap.Width) div 2;
       Image1.Top := (ThumbnailPanel.Height - Bitmap.Height) div 2;
 
       Image1.Picture.Assign(Bitmap);
+      Logger.Debug('4. 画像表示設定完了');
     end;
   finally
     if Assigned(Bitmap) then
+    begin
       Bitmap.Free;
+      Logger.Debug('5. ビットマップ解放完了');
+    end;
   end;
+
+  Logger.EndTimer('オペレーションフォーム画像読み込み');
+  Logger.EndSection('オペレーションフォーム画像読み込み');
 end;
 procedure TOperationForm.ListMenuChileClick(Sender: TObject);
 var

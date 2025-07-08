@@ -7,7 +7,7 @@ interface
 uses
   Classes, SysUtils, Forms, Controls, Graphics, Dialogs, ExtCtrls, Menus,
    ViewerModel, FormSizeCustomizerUnit, IViewUnit, UFormController,
-   ViewerBy2ndPlayer;
+   ViewerBy2ndPlayer, LoggerUnit;
 
 type
 
@@ -88,27 +88,39 @@ procedure TViewerForm.LoadBitmap();
 var
   Bitmap: TBitmap;
 begin
-
-
+  Logger.BeginSection('ビューアーフォーム画像読み込み');
+  Logger.Info(Format('要求サイズ: %dx%d', [ClientWidth, ClientHeight]));
+  Logger.StartTimer('ビューアーフォーム画像読み込み');
 
   try
     // ViewerPanelのサイズ変更
+    Logger.Debug('1. パネルサイズ調整開始');
     ViewerPanel.Width := ClientWidth;
     ViewerPanel.Height := ClientHeight;
     ViewerPanel.Left := 0;
     ViewerPanel.Top := 0;
+    Logger.Debug('2. パネルサイズ調整完了');
 
     // PDFium ページを Delphi ビットマップに描画
+    Logger.Debug('3. GetViewBitmap呼び出し開始 (最も時間がかかる可能性)');
     Bitmap := model.GetViewBitmap(ClientWidth, ClientHeight);
+    Logger.Debug('4. GetViewBitmap呼び出し完了');
+
+    Logger.Debug('5. 画像表示設定開始');
     ViewerImage.Width := Bitmap.Width;
     ViewerImage.Height := Bitmap.Height;
     ViewerImage.Left := (ClientWidth - Bitmap.Width) div 2;
     ViewerImage.Top := (ClientHeight - Bitmap.Height) div 2;
 
     ViewerImage.Picture.Bitmap.Assign(Bitmap);
+    Logger.Debug('6. 画像表示設定完了');
   finally
     Bitmap.Free;
+    Logger.Debug('7. ビットマップ解放完了');
   end;
+
+  Logger.EndTimer('ビューアーフォーム画像読み込み');
+  Logger.EndSection('ビューアーフォーム画像読み込み');
 end;
 
 procedure TViewerForm.FormResize(Sender: TObject);
