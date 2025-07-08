@@ -5,7 +5,7 @@ unit LoggerUnit;
 interface
 
 uses
-  Classes, SysUtils, DateUtils, TypInfo;
+  Classes, SysUtils, DateUtils, TypInfo, SyncObjs;
 
 type
   TLogLevel = (llDebug, llInfo, llWarning, llError);
@@ -15,12 +15,19 @@ type
     FLogLevel: TLogLevel;
     FLogFile: string;
     FLogToFile: Boolean;
-    FLogToConsole: Boolean;
     FIndentLevel: Integer;
     FIndentString: string;
+    FLogStream: TFileStream;
+    FCriticalSection: TCriticalSection;
+    FLogBuffer: TStringList;
+    FBufferSize: Integer;
+    FMaxBufferSize: Integer;
     
     procedure WriteLog(const AMessage: string; ALevel: TLogLevel);
     function GetIndentString: string;
+    procedure FlushBuffer;
+    procedure OpenLogFile;
+    procedure CloseLogFile;
   public
     constructor Create;
     destructor Destroy; override;
@@ -44,12 +51,10 @@ type
     procedure SetLogLevel(ALevel: TLogLevel);
     procedure SetLogFile(const AFileName: string);
     procedure SetLogToFile(AEnabled: Boolean);
-    procedure SetLogToConsole(AEnabled: Boolean);
     
     property LogLevel: TLogLevel read FLogLevel write SetLogLevel;
     property LogFile: string read FLogFile write SetLogFile;
     property LogToFile: Boolean read FLogToFile write SetLogToFile;
-    property LogToConsole: Boolean read FLogToConsole write SetLogToConsole;
   end;
 
 var
@@ -74,48 +79,114 @@ begin
   inherited Create;
   FLogLevel := llInfo;
   FLogToFile := True;
-  FLogToConsole := True;
   FIndentLevel := 0;
   FIndentString := '';
+  FLogStream := nil;
+  FCriticalSection := TCriticalSection.Create;
+  FLogBuffer := TStringList.Create;
+  FBufferSize := 0;
+  FMaxBufferSize := 8192; // 8KB
   SetLength(FTimers, 0);
 end;
 
 destructor TLogger.Destroy;
 begin
+  FlushBuffer;
+  CloseLogFile;
+  if Assigned(FCriticalSection) then
+    FCriticalSection.Free;
+  if Assigned(FLogBuffer) then
+    FLogBuffer.Free;
   inherited Destroy;
+end;
+
+procedure TLogger.OpenLogFile;
+begin
+  if (FLogFile = '') or (FLogStream <> nil) then
+    Exit;
+    
+  try
+    if FileExists(FLogFile) then
+      FLogStream := TFileStream.Create(FLogFile, fmOpenReadWrite or fmShareDenyNone)
+    else
+      FLogStream := TFileStream.Create(FLogFile, fmCreate or fmShareDenyNone);
+    FLogStream.Seek(0, soEnd);
+  except
+    FLogStream := nil;
+  end;
+end;
+
+procedure TLogger.CloseLogFile;
+begin
+  if Assigned(FLogStream) then
+  begin
+    try
+      FlushBuffer;
+      FLogStream.Free;
+    except
+      // ファイルハンドルエラーは無視
+    end;
+    FLogStream := nil;
+  end;
+end;
+
+procedure TLogger.FlushBuffer;
+var
+  i: Integer;
+  BufferText: string;
+begin
+  if (not Assigned(FLogBuffer)) or (FLogBuffer.Count = 0) or (FLogStream = nil) then
+    Exit;
+    
+  try
+    BufferText := FLogBuffer.Text;
+    FLogStream.WriteBuffer(PChar(BufferText)^, Length(BufferText));
+    // FPCではTFileStreamにFlushメソッドがないため削除
+    FLogBuffer.Clear;
+    FBufferSize := 0;
+  except
+    // ファイル書き込みエラーは無視
+  end;
 end;
 
 procedure TLogger.WriteLog(const AMessage: string; ALevel: TLogLevel);
 var
   LogMessage: string;
-  LogStream: TFileStream;
 begin
+
   if ALevel < FLogLevel then
     Exit;
     
-  LogMessage := Format('[%s] [%s] %s%s', [
+  LogMessage := Format('[%s] [%s] %s%s' + LineEnding, [
     FormatDateTime('yyyy-mm-dd hh:nn:ss.zzz', Now),
     Copy(GetEnumName(TypeInfo(TLogLevel), Ord(ALevel)), 3, MaxInt),
     GetIndentString,
     AMessage
   ]);
     
+  // Windowsアプリケーションではコンソール出力は使用しない
+  // ファイル出力のみ
+    
   // ファイル出力
   if FLogToFile and (FLogFile <> '') then
   begin
+    FCriticalSection.Enter;
     try
-      if FileExists(FLogFile) then
-        LogStream := TFileStream.Create(FLogFile, fmOpenWrite or fmShareDenyWrite)
-      else
-        LogStream := TFileStream.Create(FLogFile, fmCreate);
-      try
-        LogStream.Seek(0, soEnd);
-        LogStream.WriteBuffer(PChar(LogMessage + LineEnding)^, Length(LogMessage + LineEnding));
-      finally
-        LogStream.Free;
+      if FLogStream = nil then
+        OpenLogFile;
+        
+      if FLogStream <> nil then
+      begin
+        // バッファに追加
+        FLogBuffer.Add(Copy(LogMessage, 1, Length(LogMessage) - Length(LineEnding)));
+        FBufferSize := FBufferSize + Length(LogMessage);
+        
+        // バッファサイズが上限に達したらフラッシュ
+        if FBufferSize >= FMaxBufferSize then
+          FlushBuffer;
       end;
-    except
-      // ファイル書き込みエラーは無視
+    finally
+      FCriticalSection.Leave;
     end;
   end;
 end;
@@ -216,24 +287,55 @@ end;
 
 procedure TLogger.SetLogFile(const AFileName: string);
 begin
-  FLogFile := AFileName;
+  FCriticalSection.Enter;
+  try
+    if FLogFile <> AFileName then
+    begin
+      FlushBuffer;
+      CloseLogFile;
+      FLogFile := AFileName;
+      if FLogToFile and (FLogFile <> '') then
+        OpenLogFile;
+    end;
+  finally
+    FCriticalSection.Leave;
+  end;
 end;
 
 procedure TLogger.SetLogToFile(AEnabled: Boolean);
 begin
-  FLogToFile := AEnabled;
+  FCriticalSection.Enter;
+  try
+    if FLogToFile <> AEnabled then
+    begin
+      FlushBuffer;
+      if AEnabled then
+      begin
+        FLogToFile := True;
+        if FLogFile <> '' then
+          OpenLogFile;
+      end
+      else
+      begin
+        FLogToFile := False;
+        CloseLogFile;
+      end;
+    end;
+  finally
+    FCriticalSection.Leave;
+  end;
 end;
 
-procedure TLogger.SetLogToConsole(AEnabled: Boolean);
-begin
-  FLogToConsole := AEnabled;
-end;
+
 
 initialization
   Logger := TLogger.Create;
 
 finalization
   if Assigned(Logger) then
+  begin
     Logger.Free;
+    Logger := nil;
+  end;
 
 end. 

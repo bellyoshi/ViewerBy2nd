@@ -27,6 +27,7 @@ object ViewerForm: TViewerForm
       Top = 200
       Width = 240
       PopupMenu = PopupMenu1
+      OnMouseWheel = ViewerImageMouseWheel
     end
   end
   object PopupMenu1: TPopupMenu

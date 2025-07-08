@@ -4,7 +4,7 @@ unit PdfImageCreator;
 
 interface
 uses
-  Classes, SysUtils, PdfiumCore, Graphics, ImageCreatorUnit, LoggerUnit;
+  Classes, SysUtils, PdfiumCore, Graphics, ImageCreatorUnit, LoggerUnit, ImageCacheUnit, AsyncImageGeneratorUnit;
 
 procedure DrawToBitmap(Page: TPdfPage; Bitmap: TBitmap; w,h : Integer);
 
@@ -16,16 +16,24 @@ type
   private
     FPdfDocument: TPdfDocument;
     FPageIndex: Integer;
+    FFilePath: string;
+    FUseAsync: Boolean;
+    FUseCache: Boolean;
 
   public
     constructor Create(const Filename: string; PageIndex: Integer = 0);  // コンストラクタ
     destructor Destroy; override;  // デストラクタ
     function GetBitmap(Width, Height: Integer): TBitmap;  // ビットマップ取得
+    function GetBitmapAsync(Width, Height: Integer; Callback: TAsyncImageCallback): Boolean;  // 非同期ビットマップ取得
     function GetRatio(): Double;
     procedure SetPageIndex(AValue : Integer);
     function GetPageIndex() : Integer;
     function GetPageCount : Integer ;
+    procedure SetUseAsync(AValue: Boolean);
+    procedure SetUseCache(AValue: Boolean);
     property PageCount : Integer read GetPageCount;
+    property UseAsync: Boolean read FUseAsync write SetUseAsync;
+    property UseCache: Boolean read FUseCache write SetUseCache;
   end;
 
 
@@ -86,6 +94,7 @@ begin
 
     // バイト配列を初期化
     Logger.Debug('6. バイト配列初期化開始');
+    AIMarge := nil; // 明示的に初期化
     SetLength(AIMarge, SizeInt);
     Logger.Debug('7. バイト配列初期化完了');
 
@@ -121,6 +130,10 @@ begin
   inherited Create;
   Logger.BeginSection('PDFドキュメント初期化');
   Logger.StartTimer('PDFドキュメント初期化');
+
+  FFilePath := Filename;
+  FUseAsync := True;  // デフォルトで非同期を有効
+  FUseCache := True;  // デフォルトでキャッシュを有効
 
   {initialize}
     {$IFDEF CPUX64}
@@ -169,6 +182,7 @@ function TPdfImageCreator.GetBitmap(Width, Height: Integer): TBitmap;
 var
   PdfPage: TPdfPage;
   Bitmap: TBitmap;
+  CachedBitmap: TBitmap;
 begin
   Logger.BeginSection('GetBitmap');
   Logger.Info(Format('要求サイズ: %dx%d', [Width, Height]));
@@ -176,6 +190,20 @@ begin
 
   if not Assigned(FPdfDocument) then
     raise Exception.Create('PDF document not loaded');
+
+  // キャッシュをチェック
+  if FUseCache and Assigned(ImageCache) then
+  begin
+    CachedBitmap := ImageCache.Get(FFilePath, FPageIndex, Width, Height);
+    if Assigned(CachedBitmap) then
+    begin
+      Logger.Debug('キャッシュから画像を取得');
+      Logger.EndTimer('GetBitmap');
+      Logger.EndSection('GetBitmap');
+      Result := CachedBitmap;
+      Exit;
+    end;
+  end;
 
   Logger.Debug('1. PDFページ取得開始');
   PdfPage := FPdfDocument.Pages[FPageIndex];  // 指定されたページを取得
@@ -192,10 +220,48 @@ begin
   DrawToBitmap(PdfPage, Bitmap, Width, Height);
   Logger.Debug('6. DrawToBitmap呼び出し完了');
 
+  // キャッシュに保存
+  if FUseCache and Assigned(ImageCache) then
+  begin
+    ImageCache.Put(FFilePath, FPageIndex, Width, Height, Bitmap);
+    Logger.Debug('画像をキャッシュに保存');
+  end;
+
   Logger.EndTimer('GetBitmap');
   Logger.EndSection('GetBitmap');
 
   Result := Bitmap;
+end;
+
+function TPdfImageCreator.GetBitmapAsync(Width, Height: Integer; Callback: TAsyncImageCallback): Boolean;
+begin
+  Result := False;
+  
+  if not Assigned(FPdfDocument) then
+    Exit;
+    
+  if FUseAsync and Assigned(AsyncImageGenerator) then
+  begin
+    AsyncImageGenerator.QueueTask(FFilePath, FPageIndex, Width, Height, Callback);
+    Result := True;
+    Logger.Debug('非同期画像生成をキューに追加');
+  end
+  else
+  begin
+    Logger.Debug('非同期処理が無効またはAsyncImageGeneratorが利用できません');
+  end;
+end;
+
+procedure TPdfImageCreator.SetUseAsync(AValue: Boolean);
+begin
+  FUseAsync := AValue;
+  Logger.Debug('非同期処理設定: ' + BoolToStr(AValue, True));
+end;
+
+procedure TPdfImageCreator.SetUseCache(AValue: Boolean);
+begin
+  FUseCache := AValue;
+  Logger.Debug('キャッシュ設定: ' + BoolToStr(AValue, True));
 end;
 
 

@@ -30,6 +30,8 @@ type
     function GetOperationFile: TFilesParam;
     function GetZoom: TZoom;
     property OperationFile : TFilesParam read GetOperationFile;
+    function GetIsPDF : Boolean;
+    function GetCurrentFileName : String;
   public
     procedure Next;
     procedure SetPageIndex(Value: Integer);
@@ -65,6 +67,9 @@ type
     property Background: TBackground read FBackground;
     property Zoom: TZoom read GetZoom;
     property Updated: Boolean read FUpdated;
+
+
+    property IsPDF: Boolean read GetIsPDF;
     procedure Rotate(Angle: Integer);
     property CanRotate: Boolean read GetCanRotate;
     procedure LastPage;
@@ -74,12 +79,14 @@ type
     procedure SelectAllFiles;
     procedure AddFile(const Filename: string);
     function GetSelectedFile: TFilesParam;
+    property CurrentFile: TFilesParam read GetSelectedFile;
     function GetFileNames: TStringList;
     procedure SetFileSelected(Index: Integer; Selected: Boolean);
     function GetFileSelected(Index: Integer): Boolean;
     function GetFileCount: Integer;
     function GetFileName(Index: Integer): String;
     procedure ShowBackGround();
+    property CurrentFileName: string read GetCurrentFileName;
   end;
 
 var
@@ -465,5 +472,22 @@ function TViewerModel.GetFileName(Index: Integer): String;
 begin
   Result := Repogitory.GetFileName(Index);
 end;
+
+function TViewerModel.GetCurrentFileName: string;
+begin
+  if Assigned(GetSelectedFile) then
+    Result := GetSelectedFile.Filename
+  else
+    Result := '';
+end;
+
+function TViewerModel.GetIsPDF: Boolean;
+begin
+  if Assigned(GetSelectedFile) then
+    Result := IsPDFFile(GetSelectedFile.Filename)
+  else
+    Result := False;
+end;
+
 end.
 

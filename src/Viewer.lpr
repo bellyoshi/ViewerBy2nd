@@ -26,7 +26,7 @@ uses
   TMovieImageCreatorUnit,
   UFormController,
   FormDispatcherUnit, ViewerModel,
-  libloaderunit, LoggerUnit, MessageFormUnit
+  libloaderunit, LoggerUnit, MessageFormUnit, ImageCacheUnit, AsyncImageGeneratorUnit
   { you can add units after this };
 
 {$R *.res}
@@ -91,5 +91,5 @@ begin
   Logger.Info('アプリケーション実行開始');
   Application.Run;
   Logger.Info('アプリケーション終了');
-  Logger.Free;
+
 end. 
