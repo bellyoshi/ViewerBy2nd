@@ -452,16 +452,17 @@ object OperationForm: TOperationForm
     end
     object HelpMenu: TMenuItem
       Caption = 'ヘルプ(&H)'
+      OnClick = HelpMenuClick
       object AboutMenu: TMenuItem
         Caption = 'このアプリについて(&A)'
         OnClick = AboutMenuClick
       end
     end
   end
-  object Timer1: TTimer
+  object UpdateTimer: TTimer
     Enabled = False
     Interval = 100
-    OnTimer = Timer1Timer
+    OnTimer = UpdateTimerTimer
     Left = 824
     Top = 368
   end

@@ -35,7 +35,7 @@ type
     SelectAllButton: TButton;
     StatusBar1: TStatusBar;
     StopButton: TButton;
-    Timer1: TTimer;
+    UpdateTimer: TTimer;
     VideoPositionTrackBar: TTrackBar;
     ZoomRateMenuItem: TMenuItem;
     ZoomOutMenuItem: TMenuItem;
@@ -106,6 +106,7 @@ type
     procedure FitWindowButtonClick(Sender: TObject);
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
     procedure FormResize(Sender: TObject);
+    procedure HelpMenuClick(Sender: TObject);
     procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
     procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
@@ -160,7 +161,7 @@ type
     procedure ZoomRateLabelClick(Sender: TObject);
     procedure ZoomRateMenuItemClick(Sender: TObject);
     procedure ZoomInMenuItemClick(Sender: TObject);
-    procedure Timer1Timer(Sender: TObject);
+    procedure UpdateTimerTimer(Sender: TObject);
     procedure VideoPositionTrackBarMouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     function IsSizeDefault: Boolean;
     function IsSizeSlim: Boolean;
@@ -294,7 +295,7 @@ begin
   Height := OPERATIONFORM_DEFAULT_HEIGHT;
   model := TViewerModel.Create;
   player.RegisterThumbnail(Self, ThumbnailPanel);
-  Timer1.Enabled := True;
+  UpdateTimer.Enabled := True;
 end;
 
 procedure TOperationForm.LoadSavedSettings;
@@ -699,6 +700,11 @@ begin
    SetCtlEnabled();
 end;
 
+procedure TOperationForm.HelpMenuClick(Sender: TObject);
+begin
+
+end;
+
 procedure TOperationForm.Image1MouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
@@ -919,7 +925,7 @@ begin
   model.Free;
 end;
 
-procedure TOperationForm.Timer1Timer(Sender: TObject);
+procedure TOperationForm.UpdateTimerTimer(Sender: TObject);
 begin
   ProcessAutoUpdate;
   ProcessVideoPosition;
@@ -927,7 +933,7 @@ end;
 
 procedure TOperationForm.ProcessAutoUpdate;
 begin
-  // AutoUpdateをTimer1で実行
+  // AutoUpdateをUpdateTimerで実行
   if model.Updated then
   begin
     UpdateAuto;
