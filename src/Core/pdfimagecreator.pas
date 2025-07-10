@@ -31,6 +31,7 @@ type
     function GetPageCount : Integer ;
     procedure SetUseAsync(AValue: Boolean);
     procedure SetUseCache(AValue: Boolean);
+    function GetUseCache: Boolean;
     property PageCount : Integer read GetPageCount;
     property UseAsync: Boolean read FUseAsync write SetUseAsync;
     property UseCache: Boolean read FUseCache write SetUseCache;
@@ -264,6 +265,10 @@ begin
   Logger.Debug('キャッシュ設定: ' + BoolToStr(AValue, True));
 end;
 
+function TPdfImageCreator.GetUseCache: Boolean;
+begin
+  Result := FUseCache;
+end;
 
 end.
 

@@ -21,6 +21,9 @@ type
         function GetPageIndex: Integer ;
     procedure SetPageIndex(AValue : Integer);
     function GetPageCount : Integer ;
+    function GetUseCache: Boolean;
+    procedure SetUseCache(AValue: Boolean);
+    property UseCache: Boolean read GetUseCache write SetUseCache;
   end;
 
 implementation

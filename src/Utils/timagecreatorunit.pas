@@ -5,12 +5,14 @@ unit TImageCreatorUnit;
 interface
 
 uses
-  Classes, SysUtils, Graphics,ImageCreatorUnit, FPImage, FPReadJPEG, FPReadPNG, FPReadBMP, ReSizeBilinearUnit, ViewerBy2ndFileTypes;
+  Classes, SysUtils, Graphics,ImageCreatorUnit, FPImage, FPReadJPEG, FPReadPNG, FPReadBMP, ReSizeBilinearUnit, ViewerBy2ndFileTypes, ImageCacheUnit, LoggerUnit;
 
 type
   TImageCreator = class(TInterfacedObject, IDocmentImageCreator)
   private
     FBitmap: TBitmap;
+    FFilePath: string;
+    FUseCache: Boolean;
     procedure LoadFromFile(const AFileName: string);
   public
     constructor Create(const AFileName: string);
@@ -21,6 +23,9 @@ type
     function GetPageIndex: Integer ;
     procedure SetPageIndex(AValue : Integer);
     function GetPageCount : Integer ;
+    procedure SetUseCache(AValue: Boolean);
+    function GetUseCache: Boolean;
+    property UseCache: Boolean read FUseCache write SetUseCache;
   end;
 
 implementation
@@ -29,6 +34,8 @@ constructor TImageCreator.Create(const AFileName : String);
 begin
   inherited Create;
   FBitmap := TBitmap.Create;
+  FFilePath := AFileName;
+  FUseCache := True;  // デフォルトでキャッシュを有効
   LoadFromFile(AFileName);
 end;
 
@@ -39,14 +46,34 @@ begin
 end;
 
 function TImageCreator.GetBitmap(Width, Height: Integer): TBitmap;
+var
+  CachedBitmap: TBitmap;
 begin
   if (FBitmap.Width = 0) or (FBitmap.Height = 0) then
     raise Exception.Create('No image loaded.');
 
+  // キャッシュをチェック
+  if FUseCache and Assigned(ImageCache) then
+  begin
+    CachedBitmap := ImageCache.Get(FFilePath, 0, Width, Height);
+    if Assigned(CachedBitmap) then
+    begin
+      Logger.Debug('画像キャッシュから取得: ' + FFilePath);
+      Result := CachedBitmap;
+      Exit;
+    end;
+  end;
 
-
+  // キャッシュにない場合は新しく生成
+  Logger.Debug('画像を新規生成: ' + FFilePath);
   Result := ReSizeBilinear(FBitmap, Width, Height);
 
+  // キャッシュに保存
+  if FUseCache and Assigned(ImageCache) then
+  begin
+    ImageCache.Put(FFilePath, 0, Width, Height, Result);
+    Logger.Debug('画像をキャッシュに保存: ' + FFilePath);
+  end;
 end;
 
 function TImageCreator.GetRatio(): Double;
@@ -91,6 +118,17 @@ end;
 function TImageCreator.GetPageCount : Integer ;
 begin
   Result := 1;
+end;
+
+procedure TImageCreator.SetUseCache(AValue: Boolean);
+begin
+  FUseCache := AValue;
+  Logger.Debug('画像キャッシュ設定: ' + BoolToStr(AValue, True));
+end;
+
+function TImageCreator.GetUseCache: Boolean;
+begin
+  Result := FUseCache;
 end;
 
 end.

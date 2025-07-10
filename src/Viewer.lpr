@@ -10,23 +10,12 @@ uses
   athreads,
   {$ENDIF}
   Interfaces, // this includes the LCL widgetset
-  Forms,
-  frmViewer, frmOperation,
-  RepogitoryUnit,
-  FormSizeCustomizerUnit,
-  PageFormUnit,
-  SettingFormUnit,
-  IViewUnit,
-  ZoomUnit,
-  AboutUnit,
-  ZoomRateFormUnit,
-  SettingLoaderUnit,
-  ViewerBy2ndFileTypes,
-  ViewerBy2ndPlayer,
-  TMovieImageCreatorUnit,
-  UFormController,
-  FormDispatcherUnit, ViewerModel,
-  libloaderunit, LoggerUnit, MessageFormUnit, ImageCacheUnit, AsyncImageGeneratorUnit
+  Forms, frmViewer, frmOperation, RepogitoryUnit, FormSizeCustomizerUnit,
+  PageFormUnit, SettingFormUnit, IViewUnit, ZoomUnit, AboutUnit,
+  ZoomRateFormUnit, SettingLoaderUnit, ViewerBy2ndFileTypes, ViewerBy2ndPlayer,
+  UFormController, FormDispatcherUnit, ViewerModel, libloaderunit, LoggerUnit,
+  MessageFormUnit, ImageCacheUnit, AsyncImageGeneratorUnit,
+  TMovieImageCreatorUnit
   { you can add units after this };
 
 {$R *.res}
