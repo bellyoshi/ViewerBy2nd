@@ -1,16 +1,15 @@
 object OperationForm: TOperationForm
   Left = 721
-  Height = 0
+  Height = 535
   Top = 169
-  Width = 0
+  Width = 1073
   AllowDropFiles = True
   Caption = 'Viewer By 2nd Monitor 操作画面'
-  ClientHeight = 0
-  ClientWidth = 0
+  ClientHeight = 535
+  ClientWidth = 1073
   DesignTimePPI = 120
   Font.Height = -15
   Menu = MainMenu
-  LCLVersion = '4.0.0.4'
   OnClose = FormClose
   OnCreate = FormCreate
   OnDropFiles = FormDropFiles
@@ -187,8 +186,8 @@ object OperationForm: TOperationForm
   object StatusBar1: TStatusBar
     Left = 0
     Height = 29
-    Top = 580
-    Width = 1051
+    Top = 506
+    Width = 1073
     Panels = <>
   end
   object PreviewPanel: TPanel
@@ -213,15 +212,15 @@ object OperationForm: TOperationForm
       ParentBackground = False
       ParentColor = False
       TabOrder = 0
-      object Image1: TImage
+      object ThumbnailImage: TImage
         Left = 64
         Height = 184
         Top = 8
         Width = 188
-        OnMouseDown = Image1MouseDown
-        OnMouseMove = Image1MouseMove
-        OnMouseUp = Image1MouseUp
-        OnMouseWheel = Image1MouseWheel
+        OnMouseDown = ThumbnailImageMouseDown
+        OnMouseMove = ThumbnailImageMouseMove
+        OnMouseUp = ThumbnailImageMouseUp
+        OnMouseWheel = ThumbnailImageMouseWheel
       end
     end
     object Label1: TLabel

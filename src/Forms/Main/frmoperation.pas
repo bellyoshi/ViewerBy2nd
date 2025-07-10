@@ -93,7 +93,7 @@ type
     PageCountLabel: TLabel;
     NextButton: TButton;
     PreviousButton: TButton;
-    Image1: TImage;
+    ThumbnailImage: TImage;
     OpenDialog1: TOpenDialog;
     ThumbnailPanel: TPanel;
     procedure AboutMenuClick(Sender: TObject);
@@ -107,13 +107,13 @@ type
     procedure FormDropFiles(Sender: TObject; const FileNames: array of string);
     procedure FormResize(Sender: TObject);
     procedure HelpMenuClick(Sender: TObject);
-    procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
+    procedure ThumbnailImageMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure Image1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
+    procedure ThumbnailImageMouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer
       );
-    procedure Image1MouseUp(Sender: TObject; Button: TMouseButton;
+    procedure ThumbnailImageMouseUp(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
-    procedure Image1MouseWheel(Sender: TObject; Shift: TShiftState;
+    procedure ThumbnailImageMouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
     procedure LastPageMenuClick(Sender: TObject);
     procedure MinimumSizeMenuClick(Sender: TObject);
@@ -258,7 +258,7 @@ begin
   PlayButton.Visible := model.IsMovieFile;
   StopButton.Visible := model.IsMovieFile;
   VideoPositionTrackBar.Visible := model.IsMovieFile;
-  Image1.Visible := not model.IsMovieFile;
+  ThumbnailImage.Visible := not model.IsMovieFile;
   PlayButton.Enabled := model.IsMovieFile;
   StopButton.Enabled := model.IsMovieFile;
 end;
@@ -525,12 +525,12 @@ begin
     if Assigned(Bitmap) then
     begin
       Logger.Debug('3. 画像表示設定開始');
-      Image1.Width := Bitmap.Width;
-      Image1.Height := Bitmap.Height;
-      Image1.Left := (ThumbnailPanel.Width - Bitmap.Width) div 2;
-      Image1.Top := (ThumbnailPanel.Height - Bitmap.Height) div 2;
+      ThumbnailImage.Width := Bitmap.Width;
+      ThumbnailImage.Height := Bitmap.Height;
+      ThumbnailImage.Left := (ThumbnailPanel.Width - Bitmap.Width) div 2;
+      ThumbnailImage.Top := (ThumbnailPanel.Height - Bitmap.Height) div 2;
 
-      Image1.Picture.Assign(Bitmap);
+      ThumbnailImage.Picture.Assign(Bitmap);
       Logger.Debug('4. 画像表示設定完了');
     end;
   finally
@@ -720,7 +720,7 @@ begin
 
 end;
 
-procedure TOperationForm.Image1MouseDown(Sender: TObject; Button: TMouseButton;
+procedure TOperationForm.ThumbnailImageMouseDown(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if Button = TMouseButton.mbLeft then
@@ -730,7 +730,7 @@ begin
   end;
 end;
 
-procedure TOperationForm.Image1MouseMove(Sender: TObject; Shift: TShiftState;
+procedure TOperationForm.ThumbnailImageMouseMove(Sender: TObject; Shift: TShiftState;
   X, Y: Integer);
 begin
   if IsMouseDown Then
@@ -739,7 +739,7 @@ begin
   end;
 end;
 
-procedure TOperationForm.Image1MouseUp(Sender: TObject; Button: TMouseButton;
+procedure TOperationForm.ThumbnailImageMouseUp(Sender: TObject; Button: TMouseButton;
   Shift: TShiftState; X, Y: Integer);
 begin
   if IsMouseDown And (Button = TMouseButton.mbLeft) then
@@ -748,7 +748,7 @@ begin
   end;
 end;
 
-procedure TOperationForm.Image1MouseWheel(Sender: TObject; Shift: TShiftState;
+procedure TOperationForm.ThumbnailImageMouseWheel(Sender: TObject; Shift: TShiftState;
   WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
 begin
   model.MouseWheel(WheelDelta, MousePos.X, MousePos.Y, Shift);
