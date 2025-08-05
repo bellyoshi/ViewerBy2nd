@@ -21,11 +21,13 @@ type
     FParentPanel: TPanel;
     FViewerForm: TForm;
     FFileName: string;
+    FThumbnailTimer: TTimer;
     procedure InitializeThumbnailPlayer;
     procedure InitializeViewerPlayer(AViewerPanel: TPanel);
     function GetVideoLength: Int64;
     function GetVideoPosition: Int64;
     procedure SetVideoPosition(const Value: Int64);
+    procedure OnThumbnailTimer(Sender: TObject);
   public
     constructor Create;
     destructor Destroy; override;
@@ -37,6 +39,7 @@ type
     procedure Pause;
     procedure Stop;
     procedure SetPosition(Position: Int64);
+    procedure DispThumbnail(const FileName: string; Duration: Integer = 2000);
     
     property ThumbnailPlayer: TLCLVlcPlayer read FThumbnailPlayer;
     property ViewerPlayer: TLCLVlcPlayer read FViewerPlayer;
@@ -56,10 +59,17 @@ implementation
 constructor TViewerBy2ndPlayer.Create;
 begin
   inherited Create;
+  
+  // サムネイル用タイマーの初期化
+  FThumbnailTimer := TTimer.Create(nil);
+  FThumbnailTimer.Enabled := False;
+  FThumbnailTimer.OnTimer := @OnThumbnailTimer;
 end;
 
 destructor TViewerBy2ndPlayer.Destroy;
 begin
+  if Assigned(FThumbnailTimer) then
+    FreeAndNil(FThumbnailTimer);
   if Assigned(FThumbnailPlayer) then
     FreeAndNil(FThumbnailPlayer);
   if Assigned(FViewerPlayer) then
@@ -173,6 +183,35 @@ begin
     FThumbnailPlayer.VideoPosition := Value;
   if Assigned(FViewerPlayer) then
     FViewerPlayer.VideoPosition := Value;
+end;
+
+procedure TViewerBy2ndPlayer.DispThumbnail(const FileName: string; Duration: Integer = 2000);
+begin
+  if not Assigned(FThumbnailPlayer) then Exit;
+  
+  // 既存のタイマーを停止
+  FThumbnailTimer.Enabled := False;
+  
+  // 既存の再生を停止
+  FThumbnailPlayer.Stop;
+  
+  // ファイルを再生
+  FThumbnailPlayer.PlayFile(FileName);
+  FThumbnailPlayer.Play;
+  
+  // タイマーを設定して指定時間後に停止
+  FThumbnailTimer.Interval := Duration;
+  FThumbnailTimer.Enabled := True;
+end;
+
+procedure TViewerBy2ndPlayer.OnThumbnailTimer(Sender: TObject);
+begin
+  // タイマーが発火したらサムネイルプレーヤーを停止
+  if Assigned(FThumbnailPlayer) then
+    FThumbnailPlayer.Stop;
+  
+  // タイマーを無効化
+  FThumbnailTimer.Enabled := False;
 end;
 
 end.

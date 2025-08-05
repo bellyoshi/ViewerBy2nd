@@ -406,13 +406,7 @@ begin
   // 動画ファイルの場合、新しいファイルを読み込んで再生を開始
   if model.IsMovieFile then
   begin
-    // 現在選択されているファイルをプレーヤーに読み込む
-    if Assigned(model.GetSelectedFile) then
-    begin
-      player.PlayFile(model.GetSelectedFile.Filename);
-    end;
-    PlayButton.Enabled := True;
-    StopButton.Enabled := True;
+    player.DispThumbnail(model.GetSelectedFile.Filename);
   end;
   
   UpdateFileInfoLabel;
