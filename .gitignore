@@ -22,6 +22,7 @@ mono_crash.*
 [Rr]elease/
 [Rr]eleases/
 x64/
+!x64/pdfium.dll
 x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
@@ -375,6 +376,7 @@ MigrationBackup/
 *.compiled~
 *.exe
 *.dll
+!x64/pdfium.dll
 *.so
 *.dylib
 *.a
