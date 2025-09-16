@@ -5,7 +5,10 @@ unit libloaderunit;
 interface
 
 uses
-  Classes, SysUtils, Windows;
+  Classes, SysUtils
+  {$IFDEF MSWINDOWS}
+  , Windows
+  {$ENDIF};
 
 type
   TLibLoader = class
@@ -52,16 +55,28 @@ end;
 
 function TLibLoader.GetArchitectureFolder: string;
 begin
-  {$IFDEF CPU64}
-  Result := 'x64';
+  {$IFDEF MSWINDOWS}
+    {$IFDEF CPU64}
+    Result := 'x64';
+    {$ELSE}
+    Result := 'x86';
+    {$ENDIF}
   {$ELSE}
-  Result := 'x86';
+    {$IFDEF CPU64}
+    Result := 'x64';
+    {$ELSE}
+    Result := 'x86';
+    {$ENDIF}
   {$ENDIF}
 end;
 
 function TLibLoader.IsPdfiumDllAvailable: Boolean;
 begin
+  {$IFDEF MSWINDOWS}
   Result := IsDllAvailable('pdfium.dll');
+  {$ELSE}
+  Result := IsDllAvailable('libpdfium.so');
+  {$ENDIF}
 end;
 
 function TLibLoader.IsDllAvailable(const DllName: string): Boolean;
@@ -77,7 +92,25 @@ begin
     Result := True;
     Exit;
   end;
-
+  
+  // アプリケーションの実行ファイルと同じディレクトリをチェック
+  DllPath := ExtractFilePath(ParamStr(0)) + DllName;
+  if FileExists(DllPath) then
+  begin
+    Result := True;
+    Exit;
+  end;
+  
+  {$IFDEF UNIX}
+  // Linux環境ではシステムパスもチェック
+  if IsDllAvailableInPath(DllName, '/usr/lib') or
+     IsDllAvailableInPath(DllName, '/usr/local/lib') or
+     IsDllAvailableInPath(DllName, '/usr/lib/x86_64-linux-gnu') then
+  begin
+    Result := True;
+    Exit;
+  end;
+  {$ENDIF}
 end;
 
 function TLibLoader.IsDllAvailableInPath(const DllName, Path: string): Boolean;
